@@ -535,6 +535,26 @@ Bu dosya yalnızca kullanıcı tarafından açıkça onaylanmış kalıcı karar
 - Ödünleşimler: Gerçek mod, kullanıcı onayı gelene kadar yeni fırsatları kaçırabilir; buna karşılık bilinmeyen hesap durumunda otomatik risk alınmaz.
 - Önceki karar: DEC-0015, DEC-0025 ve DEC-0026 ile birlikte uygulanır
 
+### DEC-0028 — Kullanıcı içinde benzersiz strateji adları
+
+- Tarih: 2026-07-23
+- Durum: ONAYLANDI
+- Karar sahibi: Hikmet Esentimur
+- İlgili sorular: Q-001, Q-053, Q-057, Q-074; DEC-0001, DEC-0003
+- Karar: Her kullanıcının strateji adları benzersiz olacak; aynı kullanıcı aynı adla ikinci bir strateji kaydedemeyecek.
+- Uygulama sonuçları:
+  - Ad karşılaştırılırken baştaki/sondaki boşluklar kaldırılır, birden fazla gereksiz boşluk düzenlenir ve büyük-küçük harf farkı aynı ad kabul edilir.
+  - Türkçe ve diğer dil karakterleri desteklenir; teknik güvenlik için denetim karakterleri ve görünmez yanıltıcı karakterler engellenir veya düzeltilir.
+  - Benzersizlik yalnız arayüzde değil, veri tabanında kullanıcı kimliği + düzeltilmiş ad üzerinde güvenli kısıtlamayla uygulanır.
+  - Eşzamanlı iki kaydetme isteği aynı adı oluşturmaya çalışırsa yalnız biri başarılı olur; diğerine Türkçe ve anlaşılır hata gösterilir.
+  - Strateji kopyalandığında sistem “Ad Kopyası”, “Ad Kopyası 2” gibi ilk uygun benzersiz adı önerir; kullanıcı kaydetmeden önce değiştirebilir.
+  - Strateji adı değiştirilebilir fakat her değişiklik benzersizlik kontrolünden geçer ve geçmiş kayıtlar değişmez strateji kimliğiyle bağlı kalır.
+  - Arşivlenmiş stratejiler de aynı kullanıcı ad alanını korur; kullanıcı eski adı yeniden kullanmak isterse önce arşivdeki stratejiyi yeniden adlandırmalı veya kalıcı silme kurallarını uygulamalıdır.
+  - Kesin en az/en çok karakter sınırı arayüz ve veri tabanı gereksinimleriyle ayrıca belirlenecek; boş ad kabul edilmeyecek.
+- Gerekçe: Uyarı, rapor, seçim listesi ve işlem kayıtlarında stratejilerin adla karışmasını önlemek.
+- Ödünleşimler: Arşivlenmiş adların da ayrılmış kalması bazı adların yeniden kullanımını sınırlar; kalıcı kimlik yine ad değil sistem numarasıdır.
+- Önceki karar: DEC-0001 ve DEC-0003 ile birlikte uygulanır
+
 <!--
 ### DEC-XXXX — Karar başlığı
 

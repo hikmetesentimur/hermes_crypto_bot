@@ -535,10 +535,12 @@ Bu dosya, özgün senaryodaki belirsizlikleri, çelişkileri ve eklenmesi öneri
 - Önerilen varsayılan: İki ayrı seçenek; Taslak Olarak Kaydet ve Kaydet ve Başlat.
 
 ### Q-074 — Strateji adı kuralları nedir?
-- Durum: AÇIK
+- Durum: CEVAPLANDI
 - Öncelik: P1
-- Soru: Ad zorunlu ve kullanıcı/borsa kapsamında benzersiz mi; uzunluk/karakter sınırı nedir?
-- Önerilen varsayılan: Zorunlu, trim edilmiş 3–80 karakter; kullanıcı kapsamında case-insensitive benzersiz; kopya adına güvenli sıra numarası eklenir.
+- Karar: `DEC-0028`
+- Cevap: Her kullanıcının strateji adları benzersiz olacak; aynı ad ikinci kez kullanılamayacak.
+- Soru: Aynı kullanıcıda ad benzersiz mi, uzunluk/karakter sınırı ne, büyük-küçük harf duyarlı mı? Kopya adı nasıl üretilir?
+- Önerilen varsayılan: Kullanıcı içinde büyük-küçük harfe duyarsız benzersiz ad; boşluklar düzeltilir; kopyaya benzersiz sayı eklenir.
 
 ### Q-075 — Borsa veya işlem tipi değişince bağımlı alanlar ne olacak?
 - Durum: AÇIK
