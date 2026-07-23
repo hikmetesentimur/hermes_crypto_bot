@@ -295,6 +295,26 @@ Bu dosya yalnızca kullanıcı tarafından açıkça onaylanmış kalıcı karar
 - Ödünleşimler: Zorunlu paper kanıtı ve düşük limitli canary olmadan kullanıcı finansal riski artar; teknik hard güvenlik kapıları bu kararla kaldırılamaz.
 - Önceki karar: DEC-0003 ve proje canlı işlem güvenlik kapısıyla birlikte uygulanır
 
+### DEC-0016 — Risk limitlerinde kullanıcı seçilebilir kapsam katmanları
+
+- Tarih: 2026-07-23
+- Durum: ONAYLANDI
+- Karar sahibi: Hikmet Esentimur
+- İlgili sorular: Q-046, Q-047, Q-048, Q-049, Q-050, Q-065, Q-076
+- Karar: Kullanıcı her risk limiti için kapsam seviyesini seçebilecek. Desteklenen kapsamlar Global, borsa hesabı, strateji ve sembol olacak; aynı işlem veya risk üzerinde birden fazla limit varsa en sıkı sonuç uygulanacak.
+- Uygulama sonuçları:
+  - Risk kuralı tür, kapsam, scope kimliği, eşik, ölçüm birimi, zaman penceresi, aksiyon, etkinlik ve sürüm alanlarını taşıyacak.
+  - Global kapsam tek kullanıcı MVP'de tüm bağlı hesapları; SaaS fazında tenant/kullanıcı sınırını ifade edecek. Platform operatörü hard cap'i kullanıcı Global limitinden ayrı tutulacak.
+  - Borsa hesabı kapsamı belirli credential/sub-account ve Spot/Futures ürün ayrımını açıkça kaydedecek.
+  - Strateji kapsamı immutable strateji deployment/sürüm ilişkisiyle; sembol kapsamı borsa+ürün+sembol anahtarıyla uygulanacak.
+  - Aynı emir niyetini etkileyen limitler atomik risk değerlendirmesinde birlikte hesaplanacak; limit yarışıyla eşzamanlı worker'ların sınırı aşması engellenecek.
+  - En sıkı limit/aksiyon kazanacak; kullanıcıya hangi kapsam ve kuralın işlemi engellediği reason code ile gösterilecek.
+  - Limit kapsamı değiştirilirken mevcut açık risk üzerinde etki önizlemesi, validasyon ve audit kaydı oluşturulacak.
+  - Kullanıcı seçimi platformun atlanamayan maksimum kaldıraç, notional, drawdown, stale-data, emir frekansı ve diğer hard safety cap'lerini gevşetemez.
+- Gerekçe: Kullanıcının farklı strateji ve hesaplar için esnek sermaye/risk yönetimi yapabilmesi.
+- Ödünleşimler: Çok katmanlı limit birleştirme, atomik rezervasyon ve açıklanabilirlik tek kapsamlı modele göre daha karmaşıktır.
+- Önceki karar: DEC-0006 ve DEC-0015 ile birlikte uygulanır
+
 <!--
 ### DEC-XXXX — Karar başlığı
 

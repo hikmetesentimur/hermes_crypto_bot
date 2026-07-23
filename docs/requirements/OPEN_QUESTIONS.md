@@ -327,8 +327,10 @@ Bu dosya, özgün senaryodaki belirsizlikleri, çelişkileri ve eklenmesi öneri
 - Önerilen varsayılan: Realized/unrealized ayrı; risk limitleri için ikisini içeren equity drawdown ve ayrıca realized günlük zarar.
 
 ### Q-046 — Risk limitlerinin kapsamı nedir?
-- Durum: AÇIK
+- Durum: CEVAPLANDI
 - Öncelik: P0
+- Karar: `DEC-0016`
+- Cevap: Kullanıcı her risk limiti için kapsamı Global, borsa hesabı, strateji veya sembol seviyesinde seçebilecek; çakışan limitlerde en sıkı olan uygulanacak. Platform hard cap'leri atlanamayacak.
 - Soru: Maksimum eşzamanlı işlem ve zarar limitleri kullanıcı, borsa hesabı, strateji veya tüm sistem seviyesinde mi?
 - Önerilen varsayılan: Global hard limit + hesap ve strateji alt limitleri; en dar limit kazanır.
 
