@@ -1061,6 +1061,31 @@ Bu dosya yalnızca kullanıcı tarafından açıkça onaylanmış kalıcı karar
 - Ödünleşimler: En uzun zaman aralığından daha sık birleşik değerlendirme yapılır; işlem gücü ve zaman uyumlu veri görüntüsü yönetimi gerekir.
 - Önceki karar: DEC-0007, DEC-0008, DEC-0024, DEC-0045, DEC-0048 ve DEC-0049 ile birlikte uygulanır
 
+### DEC-0052 — Canlı Mum için seçilebilir aralıklı ve birleştirilmiş değerlendirme
+
+- Tarih: 2026-07-23
+- Durum: ONAYLANDI
+- Karar sahibi: Hikmet Esentimur
+- İlgili sorular: Q-010, Q-014, Q-018–Q-020, Q-052, Q-065, Q-081, Q-083, Q-089, Q-093; DEC-0007, DEC-0029, DEC-0035, DEC-0037, DEC-0045, DEC-0048–DEC-0051
+- Karar: Canlı Mum modunda kullanıcı strateji için kısa bir değerlendirme aralığı seçecek; aradaki piyasa verisi değişiklikleri birleştirilip aralık sonunda en güncel zaman uyumlu görüntüyle koşul ağı bir kez değerlendirilecek. İlk sürüm seçenekleri 1, 2, 5, 10 ve 30 saniye, hazır değer 5 saniyedir.
+- Uygulama sonuçları:
+  - Değerlendirme aralığı strateji sürümünün zorunlu ve sürümlenen alanıdır; kullanıcı değiştirdiğinde yeni sürüm oluşturulur.
+  - Arayüz 1, 2, 5, 10 ve 30 saniye seçeneklerini sunar; sessizce 1 saniyenin altına inilmez. Hazır başlangıç değeri 5 saniyedir.
+  - Borsa veri akışındaki her değişiklik ayrı koşul hesabı başlatmaz. Her kaynak için en güncel geçerli veri tutulur ve seçilen aralık geldiğinde tek zaman uyumlu görüntü oluşturulur.
+  - Bir aralıkta çok sayıda güncelleme gelse bile eski ara değerler için sıra sıra koşul değerlendirmesi yapılmaz; yalnız aralık sonundaki en güncel görüntü kullanılır.
+  - İlgili hiçbir veri değişmediyse yalnız zamanlayıcı çalıştı diye yeni değerlendirme veya sinyal oluşturulmaz.
+  - Her koşul kendi zaman aralığındaki güncel canlı mum veya karar gereği kapanmış son mum değeriyle hesaplanır; kullanılan mum zamanları ve veri zaman damgaları değerlendirme kaydında saklanır.
+  - Aynı anda birden fazla zaman aralığı güncellendiyse hepsi önce görüntüye alınır, ardından koşul ağı bir kez değerlendirilir; geliş sırası sonucu değiştirmez.
+  - `DEC-0048` Tek Geçiş ve aynı canlı mum/veri anahtarı başına en fazla bir giriş sinyali kuralı korunur. Aralık değiştirmek koşulun önceki kesin durumunu yapay biçimde sıfırlamaz.
+  - Sistem yük altında gecikirse kaçırılan her aralık için art arda geçmiş değerlendirmeler çalıştırıp yinelenen sinyal oluşturmaz; en yeni geçerli görüntüyle bir kez toparlanır ve gecikmeyi kaydeder.
+  - Gerekli kaynak güncelliğini yitirmiş, eksik veya zaman uyumsuzsa önceki değer sessizce kullanılarak giriş yapılmaz; `DEC-0045` uyarınca yeni giriş engellenir ve veri iyileştirme süreci çalışır.
+  - Geçmiş sınamada Canlı Mum davranışı yalnız yeterli zaman çözünürlüğünde veri varsa yeniden üretilebilir; yoksa yaklaşık veriyle kesin canlı sonuç iddiası yapılmaz ve sınırlama raporda gösterilir.
+  - Deneme ve gerçek mod aynı aralık/birleştirme algoritmasını kullanır; gerçek modda aralık seçimi teknik güvenlik ve yük sınırlarını aşamaz.
+  - İlk sürüm normal hız hedefindedir; 1 saniyenin altındaki yüksek hızlı değerlendirme `DEC-0035` gereği ayrı sonraki çalışmadır.
+- Gerekçe: Her fiyat değişiminde aşırı hesaplama ile yalnız ana zaman aralığını bekleme arasındaki dengeyi kurmak; kullanıcıya tepki süresi seçimi verirken zaman uyumunu ve yinelenmeme güvenliğini korumak.
+- Ödünleşimler: Aralık içinde çok kısa süre oluşup kaybolan bir koşul görülmeyebilir; daha kısa aralık daha fazla işlem gücü ve piyasa gürültüsü kullanır.
+- Önceki karar: DEC-0007, DEC-0029, DEC-0035, DEC-0037, DEC-0045, DEC-0048 ve DEC-0051 ile birlikte uygulanır
+
 <!--
 ### DEC-XXXX — Karar başlığı
 

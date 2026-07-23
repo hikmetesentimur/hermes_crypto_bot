@@ -705,10 +705,12 @@ Bu dosya, özgün senaryodaki belirsizlikleri, çelişkileri ve eklenmesi öneri
 - Önerilen varsayılan: İlk doğru durum yalnız başlangıç değeri olarak kaydedilir; gözlenmiş yanlış→doğru geçişi olmadan sinyal üretilmez.
 
 ### Q-093 — Canlı Mum modunda çoklu zaman aralıkları ne sıklıkta değerlendirilecek?
-- Durum: AÇIK
+- Durum: CEVAPLANDI
 - Öncelik: P0
-- Soru: Kapanmamış mumlar kullanılırken her piyasa verisi değişiminde mi, sabit bir kısa aralıkla mı, yoksa yalnız seçilmiş ana zaman aralığı güncellendiğinde mi bütün koşul ağacı yeniden değerlendirilecek?
-- Önerilen varsayılan: Borsa veri akışındaki değişiklikler kısa ve yapılandırılabilir bir değerlendirme aralığında birleştirilir; her koşul kendi canlı/kapanmış değerini aynı zaman görüntüsünde kullanır, veri adımı başına Tek Geçiş ve yinelenmeme kuralları korunur.
+- Karar: `DEC-0052`
+- Cevap: Kullanıcı strateji için 1, 2, 5, 10 veya 30 saniyelik değerlendirme aralığı seçecek; hazır değer 5 saniye olacak ve aradaki veri değişiklikleri en güncel görüntüde birleştirilecek.
+- Soru: Kapanmamış mumlar kullanılırken her veri değişimi ayrı mı, yoksa seçilen kısa aralıkta birleştirilerek mi değerlendirilecek?
+- Önerilen varsayılan: En düşük 1 saniye; hazır değer 5 saniye; aralık sonunda yalnız en güncel zaman uyumlu veri görüntüsü tek kez değerlendirilir.
 
 ---
 
