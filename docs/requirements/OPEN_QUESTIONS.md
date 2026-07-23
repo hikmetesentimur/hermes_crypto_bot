@@ -146,11 +146,13 @@ Bu dosya, özgün senaryodaki belirsizlikleri, çelişkileri ve eklenmesi öneri
 - Soru: Yön yalnız son iki değere mi, seçilen sayıda ardışık harekete mi, yoksa dönem boyunca en az değişim yüzdesine mi göre belirlenecek?
 - Önerilen varsayılan: Kullanıcı üç yöntemden birini ve yöntemin zorunlu alanlarını seçer; eşit değer yön üretmez.
 
-### Q-018 — Koşul gerçekleştikten sonra yeniden tetikleme politikası nedir?
-- Durum: AÇIK
+### Q-018 — Koşul doğru kaldığında yeniden sinyal üretilecek mi?
+- Durum: CEVAPLANDI
 - Öncelik: P0
-- Soru: Koşul true kaldığı her döngüde emir mi üretir, yalnızca false→true geçişinde mi, cooldown veya aynı sembolde tek pozisyon kuralı var mı?
-- Önerilen varsayılan: Kenar tetikleme, sembol/strateji başına idempotent sinyal kimliği ve yapılandırılabilir cooldown.
+- Karar: `DEC-0048`
+- Cevap: Tek Geçiş kullanılacak; koşul yalnız yanlış durumdan doğru duruma geçtiğinde bir kez sinyal üretecek ve yeniden sinyal için önce tekrar yanlış olmalıdır.
+- Soru: Koşul doğru kaldığı her değerlendirmede mi, yoksa yalnız yanlış→doğru geçişinde mi sinyal üretilecek?
+- Önerilen varsayılan: Yalnız yanlış→doğru geçişi; aynı veri adımı ve sinyal kimliği yeniden emir oluşturmaz.
 
 ### Q-019 — Fiyat ile kıyaslamada hangi fiyat kullanılacak?
 - Durum: AÇIK
@@ -687,6 +689,12 @@ Bu dosya, özgün senaryodaki belirsizlikleri, çelişkileri ve eklenmesi öneri
 - Cevap: Sahip rolü sabit olacak; diğer roller sayfa ve işlem yetkileri seçilerek özel oluşturulabilecek.
 - Soru: Çok kullanıcılı sürümde hangi yetkiler sabit sahip rolünde kalacak, özel roller hangi sayfa ve işlemlere erişebilecek?
 - Önerilen varsayılan: Tek sabit Sahip; diğer roller en az yetki ilkesiyle seçilebilir izinlerden oluşur.
+
+### Q-092 — Strateji başlatıldığında koşul zaten doğruysa sinyal üretilecek mi?
+- Durum: AÇIK
+- Öncelik: P0
+- Soru: Yeni strateji sürümü ilk değerlendirmesinde giriş koşulunu doğru bulursa bunu yanlış→doğru geçişi sayıp hemen sinyal mi üretmeli, yoksa önce koşulun en az bir kez yanlış olması mı beklenmeli?
+- Önerilen varsayılan: Güvenli başlangıç için ilk doğru durum yalnız kaydedilir; sinyal üretmek için daha sonra gözlenen yanlış→doğru geçişi beklenir.
 
 ---
 

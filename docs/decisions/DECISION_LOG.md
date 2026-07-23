@@ -968,6 +968,29 @@ Bu dosya yalnızca kullanıcı tarafından açıkça onaylanmış kalıcı karar
 - Ödünleşimler: Üç yöntem daha fazla arayüz alanı, doğrulama ve sınama birleşimi gerektirir.
 - Önceki karar: DEC-0007, DEC-0008, DEC-0044 ve DEC-0046 ile birlikte uygulanır
 
+### DEC-0048 — Koşullarda yalnız yanlış→doğru tek geçiş sinyali
+
+- Tarih: 2026-07-23
+- Durum: ONAYLANDI
+- Karar sahibi: Hikmet Esentimur
+- İlgili sorular: Q-010, Q-015–Q-020, Q-027, Q-034, Q-092; DEC-0007, DEC-0008, DEC-0046, DEC-0047
+- Karar: Stratejinin giriş koşulu yalnız yanlış durumdan doğru duruma geçtiğinde bir kez sinyal üretecek; koşul doğru kaldığı sürece yeniden sinyal üretmeyecek ve yeni sinyal için önce tekrar yanlış duruma dönmesi gerekecek.
+- Uygulama sonuçları:
+  - `DEC-0008` kapsamındaki tüm giriş koşulu ağacı tek bir kesin doğru/yanlış sonuç üretir; tek geçiş bu birleşik sonuç üzerinde değerlendirilir.
+  - İlk gözlenen durum, önceki kesin durum, son değerlendirme zamanı/veri anahtarı ve son sinyal kimliği strateji sürümü + borsa + ürün + işlem çifti kapsamında kalıcı saklanır.
+  - Önceki kesin sonuç Yanlış ve güncel kesin sonuç Doğru olduğunda bir sinyal niyeti oluşturulur; Doğru→Doğru, Doğru→Yanlış ve Yanlış→Yanlış yeni giriş sinyali üretmez.
+  - Doğru→Yanlış geçişi yalnız sistemi yeniden sinyal almaya hazırlar; kendi başına emir veya çıkış sinyali değildir.
+  - Aynı strateji sürümü, işlem çifti ve veri adımı için benzersiz sinyal kimliği kullanılır; yeniden hesaplama, bağlantı tekrarı, görev tekrarı veya sunucu yeniden başlatma ikinci sinyal/emir oluşturmaz.
+  - Canlı Mum modunda aynı mum içinde değerler değişse bile aynı mum/veri anahtarı en fazla bir giriş sinyali oluşturabilir; kapanmış mum modunda kapanmış veri adımı başına aynı kural uygulanır.
+  - Bir sinyal risk, bakiye, fiyat koruması veya borsa kuralı nedeniyle engellenirse aynı doğru dönemde sürekli yeniden denenmez; engel `DEC-0038` gereğince kaydedilir ve yeni giriş için koşulun yeniden yanlış→doğru olması gerekir.
+  - Açık işlem kapanmış olsa bile koşul hâlâ doğruysa yeni giriş sinyali oluşmaz; önce koşulun yanlış olarak gözlenip sonra yeniden doğru olması gerekir.
+  - Koşul durumu strateji sürümüne bağlıdır; strateji değişikliği yeni sürüm oluşturur. Yeni sürümün başlangıçta doğru koşulu nasıl ele alacağı Q-092 ile ayrıca kararlaştırılacaktır.
+  - Veri eksikliği veya geçersiz gösterge sonucu ne Yanlış ne Doğru sayılır; durumu sıfırlamaz ve sinyal üretmez. Veri iyileşince son kesin durumla karşılaştırılır.
+  - Geçmiş sınama, deneme ve gerçek mod aynı tek geçiş ve benzersiz sinyal kurallarını kullanır.
+- Gerekçe: Koşul doğru kaldığı sürece tekrarlanan sinyal ve yinelenen emir oluşmasını önlemek.
+- Ödünleşimler: Koşul uzun süre doğru kalır ve ilk sinyal engellenir/kapanırsa, koşul yeniden yanlış→doğru olmadan yeni fırsat üretilmez.
+- Önceki karar: DEC-0007, DEC-0008, DEC-0046 ve DEC-0047 ile birlikte uygulanır
+
 <!--
 ### DEC-XXXX — Karar başlığı
 
