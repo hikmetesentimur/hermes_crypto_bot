@@ -876,6 +876,31 @@ Bu dosya yalnızca kullanıcı tarafından açıkça onaylanmış kalıcı karar
 - Ödünleşimler: Özel rol sistemi sabit üç/beş rolden daha karmaşıktır ve izin birleşimleri için kapsamlı güvenlik sınaması gerektirir.
 - Önceki karar: DEC-0001, DEC-0003 ve DEC-0041 ile birlikte uygulanır
 
+### DEC-0044 — Göstergeleri yalnız Sahip yayımlar, kullanıcılar talep oluşturur
+
+- Tarih: 2026-07-23
+- Durum: ONAYLANDI
+- Karar sahibi: Hikmet Esentimur
+- İlgili sorular: Q-001, Q-012, Q-013, Q-019, Q-057, Q-059, Q-091; DEC-0001, DEC-0043
+- Karar: İlk sürümde göstergeleri yalnız Sahip ekleyip yayımlayacak. Çok kullanıcılı sürümde kullanıcılar gösterge adı ve isteğe bağlı kaynak bağlantısı, TradingView kodu, görsel veya ekran görüntüsüyle gösterge ekleme talebi oluşturabilecek; göstergeyi yine yalnız Sahip inceleyip sisteme ekleyecek.
+- Uygulama sonuçları:
+  - İlk sürümde gösterge yönetimi yalnız Sahip yetkisindedir; diğer özel roller gösterge kodu yükleme, değiştirme, etkinleştirme veya silme yetkisi alamaz.
+  - Kullanıcının talep formunda gösterge adı zorunlu; açıklama, kaynak bağlantısı, TradingView kodu, beklenen giriş/çıkışlar, örnek değerler, görseller ve ekran görüntüleri isteğe bağlıdır.
+  - Kullanıcı talebi yalnız inceleme girdisidir; gönderilen kod, dosya, bağlantı veya görsel sunucuda gösterge olarak doğrudan çalıştırılmaz ve otomatik yayımlanmaz.
+  - TradingView kodu referans olarak saklanır; sistem üzerinde doğrudan çalıştırılmaz. Sahip, davranışı projenin güvenli gösterge sözleşmesine uygun biçimde yeniden uygular veya denetlenmiş uyarlama yaptırır.
+  - Dış bağlantılar sunucu tarafından otomatik ziyaret edilmez/indirilmez; güvenli görüntüleme ve inceleme kurallarıyla ele alınır. Böylece iç ağ veya gizli hizmetlere istek gönderme riski önlenir.
+  - Yüklenen dosyalarda izin verilen tür, boyut ve adet sınırı; içerik türü doğrulama; zararlı dosya taraması; rastgele güvenli dosya adı ve kullanıcıdan ayrı saklama uygulanır.
+  - Gösterge paketi çalıştırılabilir ayar dosyalarını arayüzde doğrudan keşfetmek yerine sürümlü ve tipli bir tanım kullanır: kimlik, ad, sürüm, giriş alanları, çıktı alanları, veri ihtiyacı, izinler ve uyumluluk bilgisi.
+  - Yayımlanan gösterge varsayılan olarak ağ, dosya sistemi, işletim sistemi komutu, ortam değişkeni veya borsa gizli anahtarına erişemez; yalnız verilen piyasa verisi ve sınırlandırılmış hesaplama araçlarını kullanır.
+  - Sahip yayımından önce kod incelemesi, tekrarlanabilir örnek sonuçlar, sınır/değer testleri, gelecekteki veriyi kullanmama testi, işlem süresi/bellek sınırı ve güvenlik taraması zorunludur.
+  - Her gösterge sürümü değişmez kimlik ve kaynak kod sürümüyle kaydedilir; mevcut stratejiler eski sürüme bağlı kalır, yükseltme etki özeti ve yeni strateji sürümü gerektirir.
+  - Talep durumları en az Alındı, İnceleniyor, Ek Bilgi Bekliyor, Kabul Edildi, Geliştiriliyor, Yayımlandı ve Reddedildi olarak izlenebilir; Sahip Türkçe açıklama ekleyebilir.
+  - Talep sahibi, gönderdiği kod/görsel/bağlantıyı paylaşma hakkına sahip olduğunu onaylar; telif/lisans belirsizse gösterge yayımlanmaz.
+  - Gösterge kaldırılır veya güvenlik nedeniyle devre dışı bırakılırsa yeni stratejilerde seçilemez; çalışan stratejiler güvenli biçimde durdurulur ya da onaylı sürüme taşınır ve kullanıcı uyarılır.
+- Gerekçe: Kullanıcıların ihtiyaçlarını toplayıp yalnız güvenli ve denetlenmiş göstergeleri yayımlarken keyfî kod çalıştırma ve gizli bilgi erişimi riskini önlemek.
+- Ödünleşimler: Her talep Sahip incelemesi ve geliştirme gerektirdiği için yeni göstergenin yayımlanması anlık olmaz.
+- Önceki karar: DEC-0001 ve DEC-0043 ile birlikte uygulanır
+
 <!--
 ### DEC-XXXX — Karar başlığı
 

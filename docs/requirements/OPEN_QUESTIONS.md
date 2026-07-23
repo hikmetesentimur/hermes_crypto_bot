@@ -102,11 +102,13 @@ Bu dosya, özgün senaryodaki belirsizlikleri, çelişkileri ve eklenmesi öneri
 - Soru: Borsa verisinden istemci/sunucu tarafında mı türetilecek? Renko kutu boyutu ve çizgi kaynağı hangi ayarlara sahip olacak?
 - Önerilen varsayılan: Sunucuda deterministik üretim; Renko için ATR/sabit kutu seçimi ve parametreleri; çizgi için varsayılan kapanış.
 
-### Q-013 — İndikatör eklenti şeması nasıl tanımlanacak?
-- Durum: AÇIK
+### Q-013 — Gösterge ekleme ve kullanıcı talep süreci nasıl olacak?
+- Durum: CEVAPLANDI
 - Öncelik: P0
-- Soru: `settings.py` ve `parameters.py` içeriğinin güvenli, tipli ve UI tarafından okunabilir sözleşmesi nedir?
-- Önerilen varsayılan: Çalıştırılabilir Python dosyasını UI'dan doğrudan keşfetmek yerine sürümlü JSON/Pydantic şeması ve kayıtlı plugin manifesti.
+- Karar: `DEC-0044`
+- Cevap: İlk sürümde göstergeleri yalnız Sahip ekleyecek. Çok kullanıcılı sürümde kullanıcılar ad, isteğe bağlı bağlantı, TradingView kodu ve görsellerle gösterge talebi oluşturabilecek; göstergeyi yine yalnız Sahip inceleyip ekleyecek.
+- Soru: Gösterge kodunu kim ekleyip etkinleştirebilir; kullanıcıdan gelen kod ve dosyalar doğrudan çalıştırılabilir mi?
+- Önerilen varsayılan: Yalnız Sahip yayımlar; kullanıcı girdisi talep malzemesidir ve doğrudan çalıştırılmaz.
 
 ### Q-014 — Eksik/gecikmiş piyasa verisinde davranış nedir?
 - Durum: AÇIK
