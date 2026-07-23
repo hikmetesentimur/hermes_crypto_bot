@@ -29,8 +29,10 @@ Bu dosya, özgün senaryodaki belirsizlikleri, çelişkileri ve eklenmesi öneri
 - Önerilen varsayılan: TLS, kimlik doğrulama ve IP/VPN kısıtı olan özel dağıtım.
 
 ### Q-003 — İlk sürümde hangi borsalar ve ürünler desteklenecek?
-- Durum: AÇIK
+- Durum: CEVAPLANDI
 - Öncelik: P0
+- Karar: `DEC-0002`
+- Cevap: İlk çalışan sürüm Binance ve MEXC borsalarında hem Spot hem Futures işlemleri birlikte destekleyecek.
 - Soru: İlk adaptör Binance Spot + Binance USDT-M Futures mı olacak? MEXC veya başka borsa MVP kapsamına girecek mi?
 - Önerilen varsayılan: Bir borsa ve iki ürün türüyle başla; adaptör sözleşmesini çoklu borsaya hazır tasarla.
 
