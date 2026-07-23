@@ -110,11 +110,13 @@ Bu dosya, özgün senaryodaki belirsizlikleri, çelişkileri ve eklenmesi öneri
 - Soru: Gösterge kodunu kim ekleyip etkinleştirebilir; kullanıcıdan gelen kod ve dosyalar doğrudan çalıştırılabilir mi?
 - Önerilen varsayılan: Yalnız Sahip yayımlar; kullanıcı girdisi talep malzemesidir ve doğrudan çalıştırılmaz.
 
-### Q-014 — Eksik/gecikmiş piyasa verisinde davranış nedir?
-- Durum: AÇIK
+### Q-014 — Eksik veya gecikmiş piyasa verisinde ne yapılacak?
+- Durum: CEVAPLANDI
 - Öncelik: P0
-- Soru: WebSocket kopması, sıra boşluğu, geç gelen mum, saat farkı veya stale fiyat halinde strateji duracak mı?
-- Önerilen varsayılan: Fail-closed; yeni emirleri durdur, REST ile yeniden eşleştir, veri güncelliği doğrulanınca devam et ve alarm üret.
+- Karar: `DEC-0045`
+- Cevap: Yeni girişler hemen durdurulacak; eksik veri borsadan tamamlanıp doğrulanınca sistem otomatik devam edecek ve kullanıcıya bildirim gönderilecek.
+- Soru: Canlı veri bağlantısı koptuğunda, sıra boşluğu, geç mum, saat farkı veya eski fiyat algılandığında strateji nasıl davranacak?
+- Önerilen varsayılan: Güvenli duruş; aynı borsadan veri tamamlama ve doğrulama sonrası otomatik devam; kesinti/iyileşme bildirimi.
 
 ---
 

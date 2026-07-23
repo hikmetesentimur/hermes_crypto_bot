@@ -901,6 +901,29 @@ Bu dosya yalnızca kullanıcı tarafından açıkça onaylanmış kalıcı karar
 - Ödünleşimler: Her talep Sahip incelemesi ve geliştirme gerektirdiği için yeni göstergenin yayımlanması anlık olmaz.
 - Önceki karar: DEC-0001 ve DEC-0043 ile birlikte uygulanır
 
+### DEC-0045 — Veri boşluğunda girişleri durdur, doğrulama sonrası otomatik devam et
+
+- Tarih: 2026-07-23
+- Durum: ONAYLANDI
+- Karar sahibi: Hikmet Esentimur
+- İlgili sorular: Q-010, Q-014, Q-019, Q-050, Q-055, Q-065, Q-081, Q-089; DEC-0007, DEC-0020, DEC-0027, DEC-0035, DEC-0036
+- Karar: Piyasa verisi geciktiğinde, sıra boşluğu/eksik mum oluştuğunda veya bağlantı koptuğunda yeni girişler hemen durdurulacak; eksik veri aynı borsadan tamamlanıp doğrulanınca strateji otomatik devam edecek ve kullanıcıya bildirim gönderilecek.
+- Uygulama sonuçları:
+  - Her borsa/ürün/işlem çifti/zaman aralığı veri akışı son mesaj zamanı, borsa zamanı, sıra numarası veya mum bütünlüğüyle izlenir.
+  - Veri yaşı ya da sıra boşluğu güvenlik eşiğini aşınca etkilenen stratejiler yeni giriş sinyali ve giriş emri üretemez; eski fiyat “son geçerli fiyat” denilerek kullanılmaz.
+  - Etki yalnız sorunlu veri kapsamına uygulanır; ortak veri kaynağı bozuksa onu kullanan tüm stratejiler birlikte güvenli duruma geçer.
+  - Sistem eksik mum/işlemleri aynı yürütme borsasının resmî veri isteği üzerinden alır; `DEC-0036` gereğince başka borsa verisiyle boşluğu doldurmaz.
+  - Tamamlama sırasında zaman sırası, yinelenen kayıt, fiyat/miktar biçimi, mum kapanışı ve son canlı mesajla kesişim doğrulanır.
+  - İndikatörler gerekli geçmiş pencere eksiksiz ve veri güncel olmadan tekrar hesaplanıp yeni sinyal üretmez.
+  - Doğrulama başarılı olduğunda strateji son işlenmiş kesin noktadan yinelenen sinyal/emir üretmeden otomatik devam eder.
+  - Kesinti başlangıcı, etkilenen stratejiler/çiftler, neden, veri yaşı, tamamlama sonucu ve devam zamanı kullanıcıya Türkçe bildirim ve olay kaydı olarak sunulur.
+  - Otomatik tamamlama başarısızsa sistem yeni girişlere kapalı kalır, artan aralıklarla sınırlı yeniden deneme yapar ve acil uyarı üretir; sonsuz hızlı istekle borsa sınırını aşmaz.
+  - Açık işlemlerin borsadaki koruyucu emirleri çalışmaya devam eder. Sistem tarafından takip edilen koruma veri güvenilir değilse kullanıcıya yüksek öncelikli uyarı verilir ve önceden tanımlı acil risk davranışı uygulanır.
+  - Veri akışı geri geldiğinde kesinti sırasında geçmişte oluşmuş olabilecek giriş sinyalleri topluca geriye dönük emre çevrilmez; yeniden başlama kuralı strateji/sinyal sözleşmesinde açıkça tanımlanır.
+- Gerekçe: Eski veya eksik piyasa verisiyle yanlış işlem açmayı önlerken geçici kesintilerden doğrulanmış biçimde otomatik iyileşmek.
+- Ödünleşimler: Veri sorunu sırasında bazı giriş fırsatları kaçırılır; güvenilirlik hızdan öncelikli tutulur.
+- Önceki karar: DEC-0007, DEC-0020, DEC-0027, DEC-0035 ve DEC-0036 ile birlikte uygulanır
+
 <!--
 ### DEC-XXXX — Karar başlığı
 
