@@ -138,11 +138,13 @@ Bu dosya, özgün senaryodaki belirsizlikleri, çelişkileri ve eklenmesi öneri
 - Soru: Önceki ve güncel değerlerle kesişme hesaplanırken eşitlik geçerli taraf değişimi sayılacak mı?
 - Önerilen varsayılan: Hazır seçim yok; kullanıcı Eşitlik Dahil veya Eşitlik Hariç seçer; veri adımı başına en fazla bir olay.
 
-### Q-017 — “Yukarı Yönlü/Aşağı Yönlü” nasıl tanımlanacak?
-- Durum: AÇIK
+### Q-017 — “Yukarı Yönlü/Aşağı Yönlü” nasıl hesaplanacak?
+- Durum: CEVAPLANDI
 - Öncelik: P0
-- Soru: Bir önceki değere göre artış/azalış mı, belirli sayıda ardışık bar mı, yoksa eğim eşiği mi?
-- Önerilen varsayılan: Parametreli lookback ve minimum eğim; varsayılan 1 kapanmış bar kıyası.
+- Karar: `DEC-0047`
+- Cevap: Son İki Değer, Art Arda Yön ve Dönemsel Değişim Eşiği yöntemleri ayrı seçenekler olarak desteklenecek.
+- Soru: Yön yalnız son iki değere mi, seçilen sayıda ardışık harekete mi, yoksa dönem boyunca en az değişim yüzdesine mi göre belirlenecek?
+- Önerilen varsayılan: Kullanıcı üç yöntemden birini ve yöntemin zorunlu alanlarını seçer; eşit değer yön üretmez.
 
 ### Q-018 — Koşul gerçekleştikten sonra yeniden tetikleme politikası nedir?
 - Durum: AÇIK

@@ -946,6 +946,28 @@ Bu dosya yalnızca kullanıcı tarafından açıkça onaylanmış kalıcı karar
 - Ödünleşimler: Kullanıcı her kesişme koşulunda ek bir seçim yapmak zorundadır; strateji ayar ekranı ve sınama kapsamı büyür.
 - Önceki karar: DEC-0007 ve DEC-0008 ile birlikte uygulanır
 
+### DEC-0047 — Üç seçilebilir gösterge yönü yöntemi
+
+- Tarih: 2026-07-23
+- Durum: ONAYLANDI
+- Karar sahibi: Hikmet Esentimur
+- İlgili sorular: Q-010, Q-012, Q-013, Q-015–Q-020; DEC-0007, DEC-0008, DEC-0044, DEC-0046
+- Karar: “Yukarı Yönlü / Aşağı Yönlü” koşulu için Son İki Değer, Art Arda Yön ve Dönemsel Değişim Eşiği yöntemleri ayrı seçenekler olarak desteklenecek.
+- Uygulama sonuçları:
+  - Son İki Değer yönteminde güncel değer önceki değerden büyükse Yukarı Yönlü, küçükse Aşağı Yönlü olur; eşitse iki yön de oluşmaz.
+  - Art Arda Yön yönteminde kullanıcı gerekli ardışık değişim sayısını seçer; her komşu değer kesin artıyorsa Yukarı, kesin azalıyorsa Aşağı oluşur. Aradaki eşitlik diziyi keser.
+  - Dönemsel Değişim Eşiği yönteminde kullanıcı bakılacak adım sayısını ve en az mutlak değişim yüzdesini seçer; ilk ve son değer arasındaki yüzdelik değişim eşiğe ulaşırsa yön oluşur.
+  - Dönemsel yüzde hesabında başlangıç değeri sıfırsa sonuç geçersiz kabul edilir; sonsuz/uydurma yüzde üretilmez ve neden gösterilir.
+  - Her yön koşulunda yöntem zorunlu alandır; seçilen yönteme ait adım sayısı/eşik gibi alanlar doldurulmadan strateji kaydedilemez.
+  - Adım sayısı en az 1 ve göstergenin kullanılabilir geçmişiyle uyumlu olur; sistem aşırı değerleri yük/risk sınırına göre reddeder.
+  - Değerlerin sayısal hassasiyeti gösterge sözleşmesinden gelir; yalnız ekranda yapılan yuvarlama yön üretmez.
+  - `DEC-0007` uyarınca Kapanmış Mum ve Canlı Mum seçimleri aynen uygulanır; Canlı Mum yönü veri değiştikçe geri çekilebilir ve bu risk görünürdür.
+  - Geçmiş sınama, deneme ve gerçek mod aynı yöntem, parametre, gösterge sürümü ve veri noktalarını kullanır.
+  - Koşul özeti yöntemi ve parametreleri sade Türkçe gösterir; örneğin “RSI son 3 değişimde art arda yükseliyor”.
+- Gerekçe: Basit tek adımlı yön, kalıcı ardışık hareket ve anlamlı dönemsel değişim ihtiyaçlarını ayrı ve açık yöntemlerle karşılamak.
+- Ödünleşimler: Üç yöntem daha fazla arayüz alanı, doğrulama ve sınama birleşimi gerektirir.
+- Önceki karar: DEC-0007, DEC-0008, DEC-0044 ve DEC-0046 ile birlikte uygulanır
+
 <!--
 ### DEC-XXXX — Karar başlığı
 
