@@ -1037,6 +1037,30 @@ Bu dosya yalnızca kullanıcı tarafından açıkça onaylanmış kalıcı karar
 - Ödünleşimler: Kullanıcı fiyat kaynağını serbestçe değiştiremez; buna karşılık sonuçlar daha tutarlı, güvenli ve karşılaştırılabilir olur.
 - Önceki karar: DEC-0007, DEC-0009, DEC-0011, DEC-0020, DEC-0031 ve DEC-0045 ile birlikte uygulanır
 
+### DEC-0051 — Her ilgili mum kapanışında zaman uyumlu koşul değerlendirmesi
+
+- Tarih: 2026-07-23
+- Durum: ONAYLANDI
+- Karar sahibi: Hikmet Esentimur
+- İlgili sorular: Q-010, Q-014–Q-020, Q-052, Q-065, Q-093; DEC-0007, DEC-0008, DEC-0024, DEC-0045–DEC-0050
+- Karar: Kapanmış Mum modunda ilgili zaman aralıklarından herhangi birinde yeni mum kapanınca, bütün zaman aralıklarının o anda kesinleşmiş son değerleriyle koşul ağacı yeniden değerlendirilecek; aynı kapanış anındaki güncellemeler tek değerlendirmede birleştirilecek.
+- Uygulama sonuçları:
+  - Her koşul düğümü kendi seçilmiş zaman aralığı ve gösterge sürümüyle hesaplanır; farklı zaman aralıklarının değerleri tek zaman aralığına dönüştürülmez.
+  - Bir zaman aralığında yeni mum kapanması değerlendirme olayıdır. Değerlendirme anında diğer aralıklar için o zamana eşit veya daha önce kapanmış en son kesin değer kullanılır.
+  - Henüz kapanmamış daha uzun zaman aralığı değeri Kapanmış Mum modunda kullanılmaz; gelecekte bilinecek veri geçmiş karar anına taşınmaz.
+  - Örneğin 5 dakikalık mum kapanınca 5 dakikalık gösterge güncellenir ve son kapanmış 1 saatlik göstergeyle birlikte koşul ağacı değerlendirilir; 1 saatlik mum kapanınca bütün ağ tekrar değerlendirilir.
+  - Aynı zaman damgasında 5 dakika, 15 dakika ve 1 saat mumları kapanıyorsa sistem önce tüm ilgili mumları/göstergeleri günceller, ardından tek zaman uyumlu görüntüyle yalnız bir değerlendirme yapar.
+  - Aynı kapanış anına ait veriler borsadan farklı sırada gelirse kısa ve sınırlı bir birleştirme penceresi kullanılır; veri eksik kalırsa tahmin yapılmaz ve `DEC-0045` davranışı uygulanır.
+  - Değerlendirme görüntüsü her koşulun zaman aralığını, kullandığı mumun açılış/kapanış zamanını, gösterge sürümünü ve değerini saklar; geçmiş sonuç yeniden üretilebilir olur.
+  - Koşul ağacının birleşik sonucu `DEC-0048` Tek Geçiş kuralına tabidir; farklı zaman aralığı kapanışları koşul doğru kaldığı sürece tekrar sinyal üretmez.
+  - Aynı kapanış/veri görüntüsü yeniden işlendiğinde benzersiz değerlendirme ve sinyal kimliği yinelenen sinyal/emri önler.
+  - Geçmiş sınama, deneme ve gerçek mod aynı zaman hizalama algoritmasını kullanır; mum zamanları borsa kaynağının tanımlı sınırlarına göre doğrulanır ve saklamada evrensel zaman kullanılır.
+  - Bir göstergenin daha uzun başlangıç geçmişi gerekiyorsa yeterli tüm zaman aralığı verileri oluşmadan birleşik sonuç kesin sayılmaz ve sinyal üretilmez.
+  - Bu karar Kapanmış Mum modunu kesinleştirir; Canlı Mum modunda çoklu zaman aralığı güncelleme sıklığı ve birleştirme davranışı Q-093 ile ayrıca belirlenecektir.
+- Gerekçe: Kısa zaman aralığı fırsatlarını en uzun mumun kapanışına kadar geciktirmeden, her göstergenin kendi zaman aralığını ve yalnız karar anında bilinen verileri kullanmak.
+- Ödünleşimler: En uzun zaman aralığından daha sık birleşik değerlendirme yapılır; işlem gücü ve zaman uyumlu veri görüntüsü yönetimi gerekir.
+- Önceki karar: DEC-0007, DEC-0008, DEC-0024, DEC-0045, DEC-0048 ve DEC-0049 ile birlikte uygulanır
+
 <!--
 ### DEC-XXXX — Karar başlığı
 

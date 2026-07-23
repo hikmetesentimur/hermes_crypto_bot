@@ -162,11 +162,13 @@ Bu dosya, özgün senaryodaki belirsizlikleri, çelişkileri ve eklenmesi öneri
 - Soru: Mum/gösterge koşulu, emir yürütme, vadeli işlem riski ve kâr-zarar hesabında hangi fiyat kullanılacak?
 - Önerilen varsayılan: Mum koşulunda ilgili mum fiyatı; alış yürütmede en iyi satış, satış yürütmede en iyi alış; vadeli riskte adil fiyat; gerçekleşmiş sonuçta gerçek emir gerçekleşmeleri.
 
-### Q-020 — Çoklu zaman dilimleri nasıl hizalanacak?
-- Durum: AÇIK
+### Q-020 — Çoklu zaman aralıkları nasıl hizalanacak?
+- Durum: CEVAPLANDI
 - Öncelik: P1
-- Soru: Farklı periyotlarda iki indikatör karşılaştırılırsa hangi bar zamanında değerlendirme yapılacak ve look-ahead nasıl engellenecek?
-- Önerilen varsayılan: Son ortak kapanmış zaman; yalnızca o anda bilinen değerlerle değerlendirme.
+- Karar: `DEC-0051`
+- Cevap: İlgili zaman aralıklarından herhangi birinde yeni mum kapanınca, bütün zaman aralıklarının o anda kesinleşmiş son değerleriyle koşul ağacı yeniden değerlendirilecek; aynı anda kapanan mumlar tek değerlendirmede birleştirilecek.
+- Soru: Farklı zaman aralıklarındaki göstergeler hangi anda ve hangi kesinleşmiş veriyle birlikte değerlendirilecek?
+- Önerilen varsayılan: Her ilgili mum kapanışı değerlendirme olayıdır; her koşul kendi aralığının o anda kapanmış son değerini kullanır; gelecekteki veri kullanılmaz.
 
 ---
 
@@ -701,6 +703,12 @@ Bu dosya, özgün senaryodaki belirsizlikleri, çelişkileri ve eklenmesi öneri
 - Cevap: İlk doğru durum sinyal üretmeyecek; önce koşulun yanlış olması, sonra doğruya geçmesi beklenecek.
 - Soru: Yeni strateji sürümü ilk değerlendirmesinde giriş koşulunu doğru bulursa bunu yanlış→doğru geçişi sayıp hemen sinyal mi üretmeli, yoksa önce koşulun en az bir kez yanlış olması mı beklenmeli?
 - Önerilen varsayılan: İlk doğru durum yalnız başlangıç değeri olarak kaydedilir; gözlenmiş yanlış→doğru geçişi olmadan sinyal üretilmez.
+
+### Q-093 — Canlı Mum modunda çoklu zaman aralıkları ne sıklıkta değerlendirilecek?
+- Durum: AÇIK
+- Öncelik: P0
+- Soru: Kapanmamış mumlar kullanılırken her piyasa verisi değişiminde mi, sabit bir kısa aralıkla mı, yoksa yalnız seçilmiş ana zaman aralığı güncellendiğinde mi bütün koşul ağacı yeniden değerlendirilecek?
+- Önerilen varsayılan: Borsa veri akışındaki değişiklikler kısa ve yapılandırılabilir bir değerlendirme aralığında birleştirilir; her koşul kendi canlı/kapanmış değerini aynı zaman görüntüsünde kullanır, veri adımı başına Tek Geçiş ve yinelenmeme kuralları korunur.
 
 ---
 
