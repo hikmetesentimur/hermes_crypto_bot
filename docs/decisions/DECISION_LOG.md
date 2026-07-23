@@ -515,6 +515,26 @@ Bu dosya yalnızca kullanıcı tarafından açıkça onaylanmış kalıcı karar
 - Ödünleşimler: Durdurulmuş stratejiye bağlı açık işlemler kapanana kadar koruyucu yönetim hizmetinin çalışması gerekir.
 - Önceki karar: DEC-0014, DEC-0017 ve DEC-0025 ile birlikte uygulanır
 
+### DEC-0027 — Yeniden başlatmada deneme otomatik, gerçek mod onaylı devam eder
+
+- Tarih: 2026-07-23
+- Durum: ONAYLANDI
+- Karar sahibi: Hikmet Esentimur
+- İlgili sorular: Q-037, Q-055, Q-065, Q-073, Q-087, Q-088; DEC-0015, DEC-0026
+- Karar: Sunucu yeniden açıldığında deneme modundaki çalışan stratejiler kayıtlı durumları doğrulandıktan sonra otomatik devam edecek. Gerçek moddaki stratejiler borsa hesabı karşılaştırması tamamlandıktan sonra kullanıcı onayı bekleyecek.
+- Uygulama sonuçları:
+  - Deneme modunda sanal bakiye, açık sanal işlemler, bekleyen sanal emirler, strateji sürümü ve son işlenen piyasa verisi geri yüklenir; yinelenen sinyal/emir oluşmadan devam edilir.
+  - Gerçek moddaki stratejiler başlangıçta “Karşılaştırma Bekliyor” durumuna geçer ve yeni giriş üretemez.
+  - Sistem borsadaki bakiye, açık emir, gerçekleşen emir ve açık işlemleri yerel kayıtlarla karşılaştırır; bilinmeyen veya eksik kayıtları kullanıcıya Türkçe bildirir.
+  - Açık işlemlerin borsadaki koruyucu emirleri önce doğrulanır. Koruma eksikse yeni girişlerden önce güvenli yeniden kurma veya acil uyarı işlemi uygulanır.
+  - Karşılaştırma temiz olsa bile gerçek strateji kullanıcı açıkça “Devam Et” onayı vermeden yeni giriş üretmez.
+  - Fark varsa kullanıcıya otomatik düzeltme yapılmadan önce ayrıntılı etki özeti ve güvenli seçenekler sunulur; belirsiz durumda sistem kapalı kalır.
+  - Devam onayı çok aşamalı kimlik doğrulama gerektirebilir ve strateji sürümü, hesap, karşılaştırma sonucu ve kullanıcı kimliğiyle kayıt altına alınır.
+  - Sistem açılışında bağlantı veya borsa verisi alınamıyorsa gerçek mod güvenli biçimde bekler; deneme modu veri akışı sağlanmadan ilerlemez.
+- Gerekçe: Deneme çalışmalarını kolayca sürdürürken gerçek para işlemlerinde kesinti sonrası kayıt farkı ve çift emir riskini önlemek.
+- Ödünleşimler: Gerçek mod, kullanıcı onayı gelene kadar yeni fırsatları kaçırabilir; buna karşılık bilinmeyen hesap durumunda otomatik risk alınmaz.
+- Önceki karar: DEC-0015, DEC-0025 ve DEC-0026 ile birlikte uygulanır
+
 <!--
 ### DEC-XXXX — Karar başlığı
 

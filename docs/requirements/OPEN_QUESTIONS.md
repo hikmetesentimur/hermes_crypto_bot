@@ -623,10 +623,12 @@ Bu dosya, özgün senaryodaki belirsizlikleri, çelişkileri ve eklenmesi öneri
 - Önerilen varsayılan: Duraklatma yeni girişleri keser ve koruyucu yönetimi sürdürür; durdurma için kullanıcı açık işlemleri koru veya kapat seçer.
 
 ### Q-088 — Sunucu yeniden başladığında çalışan stratejiler nasıl devam edecek?
-- Durum: AÇIK
+- Durum: CEVAPLANDI
 - Öncelik: P0
+- Karar: `DEC-0027`
+- Cevap: Deneme modundaki stratejiler kayıtlı durumdan otomatik devam edecek. Gerçek moddakiler borsa hesabı karşılaştırıldıktan sonra kullanıcı onayı bekleyecek.
 - Soru: Deneme ve gerçek moddaki stratejiler sunucu yeniden açıldığında otomatik devam mı etmeli, yoksa emirler, işlemler ve bakiyeler borsayla karşılaştırılıp kullanıcı onayı mı beklenmeli?
-- Önerilen varsayılan: Deneme modu kayıtlı durumdan devam edebilir; gerçek modda borsa hesabı karşılaştırması tamamlanmadan yeni giriş üretilmez, açık işlemlerin koruyucu yönetimi öncelikle yeniden kurulur.
+- Önerilen varsayılan: Deneme modu kayıtlı durumdan devam eder; gerçek modda borsa hesabı karşılaştırması ve kullanıcı onayı tamamlanmadan yeni giriş üretilmez.
 
 ---
 
