@@ -614,11 +614,13 @@ Bu dosya, özgün senaryodaki belirsizlikleri, çelişkileri ve eklenmesi öneri
 - Soru: İlk sürüm aynı anda kaç kullanıcı, çalışan strateji ve strateji başına kaç işlem çiftini desteklemeli?
 - Önerilen varsayılan: 1 kullanıcı; 50 çalışan strateji; strateji başına 200 işlem çifti; ortak piyasa verisi bağlantıları paylaşılır.
 
-### Q-084 — Kullanıcıya “neden işlem açılmadı?” kaydı gösterilecek mi?
-- Durum: AÇIK
+### Q-084 — “Neden işlem açılmadı?” kaydı ne zaman tutulacak?
+- Durum: CEVAPLANDI
 - Öncelik: P1
-- Soru: Her değerlendirmede koşul, risk veya borsa kuralı nedeniyle engellenen işlemin açıklaması saklanıp gösterilsin mi?
-- Önerilen varsayılan: Evet; maskelenmiş, insan tarafından okunabilir reason code + detay + timestamp + veri sürümü.
+- Karar: `DEC-0038`
+- Cevap: Yalnız sinyal oluştuğu hâlde risk, bakiye, borsa, veri veya emir kuralı nedeniyle açılamayan işlemler saklanacak.
+- Soru: Her gösterge değerlendirmesi mi, yoksa yalnız geçerli giriş sinyali sonrasındaki engelleme nedenleri mi kaydedilecek?
+- Önerilen varsayılan: Sinyal sonrası engellemeler neden kodu ve karar anı özetiyle saklanır; her başarısız koşul hesabı süresiz tutulmaz.
 
 ### Q-085 — Açık/kısmi işlemler detay sayfasında nasıl gösterilecek?
 - Durum: AÇIK

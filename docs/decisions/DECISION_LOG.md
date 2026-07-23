@@ -744,6 +744,27 @@ Bu dosya yalnızca kullanıcı tarafından açıkça onaylanmış kalıcı karar
 - Ödünleşimler: 10.000 değerlendirme birleşimi önemli veri ve işlem gücü gerektirebilir; barındırma boyutu gerçek yük sınamasıyla belirlenecektir.
 - Önceki karar: DEC-0001 ve DEC-0035 ile birlikte uygulanır
 
+### DEC-0038 — Yalnız sinyal sonrası engellenen işlemler için açıklama kaydı
+
+- Tarih: 2026-07-23
+- Durum: ONAYLANDI
+- Karar sahibi: Hikmet Esentimur
+- İlgili sorular: Q-010, Q-015, Q-038, Q-046–Q-050, Q-065, Q-084; DEC-0007, DEC-0016–DEC-0020
+- Karar: “Neden işlem açılmadı?” kaydı yalnız geçerli giriş sinyali oluştuğu hâlde risk, bakiye, borsa, veri veya emir kuralı nedeniyle işlem açılamadığında oluşturulacak.
+- Uygulama sonuçları:
+  - Koşul ağacı giriş sinyali üretmediyse her olağan değerlendirme için kalıcı ayrıntılı kayıt oluşturulmaz.
+  - Giriş sinyali oluştuktan sonra risk sınırı, kullanılabilir bakiye, açık işlem sınırı, eski veri, fiyat farkı, desteklenmeyen borsa özelliği, yinelenen sinyal/emir veya borsa reddi işlemi engellerse açıklama kaydı oluşur.
+  - Kayıt en az zaman, strateji ve sürüm, borsa/ürün/işlem çifti, yön, sinyal kimliği, engel aşaması, Türkçe neden kodu, kullanıcıya açıklama ve ilgili kural kimliğini içerir.
+  - Karar anındaki yalnız gerekli değerler saklanır: örneğin istenen/kullanılabilir tutar, eşik/ölçülen risk, veri yaşı, izin verilen/ölçülen fiyat farkı. API anahtarı ve hassas bilgiler kayda girmez.
+  - Bir sinyal birden fazla nedenle engellendiyse birincil neden ve güvenle hesaplanabilen diğer nedenler ayrı gösterilir; kontrol sırası sonucu gizlenmez.
+  - Aynı sinyal için yeniden deneme/karşılaştırma olayları tek karar zincirine bağlanır; kullanıcıya yinelenen bağımsız işlem gibi gösterilmez.
+  - Borsanın ret kodu değişmeden saklanabilir fakat kullanıcı ekranında sade Türkçe açıklaması ve önerilen düzeltme gösterilir.
+  - Sinyal öncesi koşul incelemesine gerek duyulursa geçici teknik günlük veya tanılama oturumu kullanılabilir; bu, varsayılan kalıcı kullanıcı kaydı değildir.
+  - Saklama süresi ve dışa aktarma kuralları veri saklama kararında ayrıca belirlenir.
+- Gerekçe: Kullanıcının gerçek bir fırsatın neden işleme dönüşmediğini anlayabilmesini sağlarken 10.000'e kadar değerlendirme birleşiminde gereksiz veri büyümesini önlemek.
+- Ödünleşimler: Sinyal hiç oluşmadığında kullanıcı geçmişte her koşulun neden yanlış olduğunu kalıcı kayıttan göremez; bunun için geçici tanılama gerekir.
+- Önceki karar: DEC-0007 ve DEC-0016–DEC-0020 ile birlikte uygulanır
+
 <!--
 ### DEC-XXXX — Karar başlığı
 
