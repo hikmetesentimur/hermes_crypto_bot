@@ -221,8 +221,10 @@ Bu dosya, özgün senaryodaki belirsizlikleri, çelişkileri ve eklenmesi öneri
 - Önerilen varsayılan: Girilen tutar marjin; notional=tutar×kaldıraç; ücret ve rezerv ayrıca hesaba katılır.
 
 ### Q-032 — Yüzdelik boyutlandırma hangi bakiyeyi kullanacak?
-- Durum: AÇIK
+- Durum: CEVAPLANDI
 - Öncelik: P0
+- Karar: `DEC-0006`
+- Cevap: Kullanıcı yüzde hesabının tabanını “Toplam Bakiye”, “Kullanılabilir Bakiye” veya “Strateji Bütçesi” olarak seçebilecek.
 - Soru: Toplam bakiye, kullanılabilir bakiye, serbest marjin veya belirlenmiş strateji bütçesi mi? Açık emir rezervleri düşülecek mi?
 - Önerilen varsayılan: Stratejiye ayrılmış bütçe içindeki kullanılabilir bakiye; açık emirler ve güvenlik rezervi düşülür.
 
