@@ -415,6 +415,23 @@ Bu dosya yalnızca kullanıcı tarafından açıkça onaylanmış kalıcı karar
 - Ödünleşimler: Equity valuation, çoklu para birimi ve ledger olaylarının doğru zamanlanması risk motorunu karmaşıklaştırır.
 - Önceki karar: DEC-0011, DEC-0016, DEC-0017 ve DEC-0018 ile birlikte uygulanır
 
+### DEC-0022 — Kullanıcı iletişimi tamamen Türkçe olacak
+
+- Tarih: 2026-07-23
+- Durum: ONAYLANDI
+- Karar sahibi: Hikmet Esentimur
+- İlgili alanlar: Tüm gereksinim soruları, seçenekler, açıklamalar, uyarılar, raporlar ve kullanıcı arayüzü metinleri
+- Karar: Kullanıcı İngilizce anlamadığı için proje iletişimi açık ve sade Türkçe yürütülecek.
+- Uygulama sonuçları:
+  - Bütün sorular ve cevap seçenekleri Türkçe hazırlanacak.
+  - Teknik İngilizce terimlerin önce Türkçe karşılığı kullanılacak; özgün terim gerekliyse yalnız parantez içinde verilecek.
+  - Açıklanmamış İngilizce kısaltma ve jargon kullanıcıya gösterilmeyecek.
+  - Kod, API ve veri şemasının zorunlu İngilizce adları korunabilir; arayüzde Türkçe açıklamaları bulunacak.
+  - Örnek karşılıklar: `slippage` → “emir fiyat kayması”, `drawdown` → “sermayenin zirveden düşüşü”, `fill` → “emir gerçekleşmesi”, `paper trading` → “sanal bakiyeyle deneme işlemleri”.
+- Gerekçe: Kullanıcının bütün ürün kararlarını eksiksiz anlayıp bilinçli biçimde onaylayabilmesi.
+- Ödünleşimler: Zorunlu teknik adların Türkçe açıklamalarının tutarlı bir terim sözlüğüyle yönetilmesi gerekir.
+- Önceki karar: Yok
+
 <!--
 ### DEC-XXXX — Karar başlığı
 

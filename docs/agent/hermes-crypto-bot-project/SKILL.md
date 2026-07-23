@@ -29,6 +29,13 @@ Remote: `git@github.com:hikmetesentimur/hermes_crypto_bot.git`
 
 Completion criterion: current approved decisions, unresolved blockers, and local Git state are known before proposing or changing behavior.
 
+## Turkish Communication Protocol
+
+1. Ask every user-facing question and present every choice in clear, plain Turkish.
+2. Translate technical English terminology into Turkish. If the original English term is necessary, place it after the Turkish explanation in parentheses.
+3. Do not present unexplained English jargon or abbreviations. Examples: use “emir fiyat kayması” for slippage, “sermayenin zirveden düşüşü” for drawdown, and “emir gerçekleşmesi” for fill.
+4. Keep code, API, schema, and protocol identifiers in their required original form, but explain their meaning to the user in Turkish.
+
 ## Decision and Requirements Protocol
 
 1. Preserve original user files unchanged under `docs/source/`.

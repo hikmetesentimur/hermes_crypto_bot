@@ -9,6 +9,13 @@ Kalıcı proje gerçekliği sohbet hafızası değil, Git deposudur. Çalışmay
 3. `docs/requirements/OPEN_QUESTIONS.md`
 4. İlgili normalize gereksinim, mimari ve güvenlik belgeleri
 
+## İletişim dili
+
+- Kullanıcıyla bütün soruları, seçenekleri, açıklamaları, uyarıları ve sonuçları açık ve sade Türkçe yaz.
+- İngilizce teknik terim kullanmak zorunluysa önce Türkçe karşılığını ver; İngilizce terimi yalnız gerektiğinde parantez içinde belirt.
+- Yalnız İngilizce kısaltma veya jargonla seçenek sunma. Örnek: `slippage` yerine “emir fiyat kayması”, `drawdown` yerine “sermayenin zirveden düşüşü”, `fill` yerine “emir gerçekleşmesi”.
+- Kod/API tarafından zorunlu İngilizce adları değiştirme; bunları kullanıcıya Türkçe açıklamayla göster.
+
 ## Zorunlu çalışma disiplini
 
 - Onaylanmamış varsayımı kesin ürün kararı gibi uygulama.
