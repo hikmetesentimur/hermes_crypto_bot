@@ -853,6 +853,29 @@ Bu dosya yalnızca kullanıcı tarafından açıkça onaylanmış kalıcı karar
 - Ödünleşimler: Tarayıcı uzun süre açık bırakılırsa görüntüleme erişimi de açık kalır; ortak cihaz kullanımı için daha yüksek risk taşır.
 - Önceki karar: DEC-0015 ve DEC-0041 ile birlikte uygulanır
 
+### DEC-0043 — Sabit Sahip ve özel oluşturulabilir yetki rolleri
+
+- Tarih: 2026-07-23
+- Durum: ONAYLANDI
+- Karar sahibi: Hikmet Esentimur
+- İlgili sorular: Q-001, Q-005, Q-057–Q-059, Q-071, Q-091; DEC-0001, DEC-0003, DEC-0041
+- Karar: Çok kullanıcılı sürümde Sahip rolü sabit olacak; diğer roller sayfa ve işlem yetkileri seçilerek özel oluşturulabilecek.
+- Uygulama sonuçları:
+  - İlk tek kullanıcılı sürümde kullanıcı Sahip olarak çalışır; özel rol yönetim ekranının tamamlanması ilk sürüm için zorunlu değildir.
+  - Veri modeli kullanıcı, hesap/kuruluş, rol, izin, rol-izin ve kullanıcı-rol bağlarını gelecekte çok kullanıcıya açılabilecek biçimde ayırır.
+  - Sahip; sahiplik devri, borsa anahtarı yönetimi, güvenlik yöntemleri, rol/izin yönetimi, gerçek mod yetkisi, faturalandırma ve kuruluş silme gibi en yüksek yetkilere sahiptir.
+  - Özel roller görüntüleme, strateji oluşturma/düzenleme, deneme çalıştırma, gerçek modu başlatma, manuel emir/pozisyon işlemleri, risk ayarı, rapor dışa aktarma ve kullanıcı yönetimi gibi küçük izinlerden oluşturulur.
+  - İzinler varsayılan kapalıdır; rol yalnız açıkça seçilen işlemleri yapabilir ve yalnız ihtiyaç duyduğu hesap/strateji kapsamına sınırlandırılabilir.
+  - Hiçbir özel rol Sahip rolünü değiştiremez, sahipliği devredemez veya kendisinin/atayan kullanıcının sahip olmadığı yetkiyi veremez.
+  - Borsa gizli anahtarının açık değerini hiçbir rol arayüzde göremez; yetkili rol yalnız bağlantı ekleme, değiştirme, sınama veya iptal işlevlerini kullanabilir.
+  - Gerçek para etkili izinler ayrı ve açık olur; “strateji düzenleyebilir” izni kendiliğinden “gerçek modu açabilir” veya “pozisyon kapatabilir” anlamına gelmez.
+  - Rol ve izin değişiklikleri güçlü yeniden doğrulama, etki özeti, değişmez denetim kaydı ve etkilenen kullanıcıya bildirim gerektirir.
+  - Son Sahip kaldırılamaz; sahiplik devri yeni sahibin güçlü doğrulaması ve açık kabulünden sonra tamamlanır.
+  - Sunucu tarafı her istekte yetkiyi denetler; arayüzde düğmenin gizlenmesi güvenlik kontrolü sayılmaz.
+- Gerekçe: Gelecekte farklı ekip görevlerine uygun esneklik sağlarken sahiplik ve gerçek para yetkilerini açıkça ayırmak.
+- Ödünleşimler: Özel rol sistemi sabit üç/beş rolden daha karmaşıktır ve izin birleşimleri için kapsamlı güvenlik sınaması gerektirir.
+- Önceki karar: DEC-0001, DEC-0003 ve DEC-0041 ile birlikte uygulanır
+
 <!--
 ### DEC-XXXX — Karar başlığı
 

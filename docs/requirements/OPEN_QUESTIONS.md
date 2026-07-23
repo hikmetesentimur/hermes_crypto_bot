@@ -673,10 +673,12 @@ Bu dosya, özgün senaryodaki belirsizlikleri, çelişkileri ve eklenmesi öneri
 - Önerilen varsayılan: Kalıcı olmayan tarayıcı oturumu; para/güvenlik etkili işlemlerde yakın zamanda yapılmış güçlü doğrulama zorunlu.
 
 ### Q-091 — Gelecekteki çok kullanıcılı sürümde roller nasıl ayrılacak?
-- Durum: AÇIK
+- Durum: CEVAPLANDI
 - Öncelik: P1
-- Soru: Yönetici, işlem yapabilen kullanıcı ve yalnız izleyici hangi sayfa ve işlemlere erişebilecek? Borsa anahtarlarını kim ekleyebilecek, gerçek modu kim açabilecek?
-- Önerilen varsayılan: İlk sürüm tek sahip; veri modeli gelecekte Sahip, İşlem Yetkilisi ve İzleyici rollerine hazırlanır; en az yetki ilkesi uygulanır.
+- Karar: `DEC-0043`
+- Cevap: Sahip rolü sabit olacak; diğer roller sayfa ve işlem yetkileri seçilerek özel oluşturulabilecek.
+- Soru: Çok kullanıcılı sürümde hangi yetkiler sabit sahip rolünde kalacak, özel roller hangi sayfa ve işlemlere erişebilecek?
+- Önerilen varsayılan: Tek sabit Sahip; diğer roller en az yetki ilkesiyle seçilebilir izinlerden oluşur.
 
 ---
 
