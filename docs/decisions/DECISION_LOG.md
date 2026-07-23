@@ -395,6 +395,26 @@ Bu dosya yalnızca kullanıcı tarafından açıkça onaylanmış kalıcı karar
 - Ödünleşimler: Kural kapalıyken beklenmedik kötü fiyat ve likidite kaybı riski artar; market emirlerde sonuç fiyatı garanti edilemez.
 - Önceki karar: DEC-0009, DEC-0010, DEC-0016 ve DEC-0017 ile birlikte uygulanır
 
+### DEC-0021 — Risk kuralı bazında seçilebilir PnL/equity ölçümü
+
+- Tarih: 2026-07-23
+- Durum: ONAYLANDI
+- Karar sahibi: Hikmet Esentimur
+- İlgili sorular: Q-043, Q-044, Q-045, Q-046, Q-048, Q-049; DEC-0011
+- Karar: Her risk kuralında ölçüm kaynağı Realized Net PnL, Unrealized Net PnL veya Toplam Equity Değişimi olarak seçilebilecek.
+- Uygulama sonuçları:
+  - Realized Net PnL ölçümü kapanan/kısmen kapanan fill'lerden gerçekleşen brüt PnL, fee, funding, faiz ve rebate ledger kayıtlarını kullanacak.
+  - Unrealized Net PnL açık miktarın seçilen mark/valuation fiyatıyla değerlenmesini, tahakkuk etmiş maliyetleri ve ürün kurallarını kullanacak; gerçekleşmiş tutar gibi raporlanmayacak.
+  - Toplam Equity Değişimi realized + unrealized sonuç ve ilgili bakiye varlıklarını kapsayacak; yatırma/çekme/iç transferler getiri veya zarar sayılmayacak şekilde normalize edilecek.
+  - Her kural ölçüm kaynağına ek olarak kapsam, pencere, referans başlangıç/high-water mark, para birimi ve DEC-0017 aksiyonunu saklayacak.
+  - Çoklu para birimleri seçilen raporlama para birimine timestamp'li kur kaynağıyla çevrilecek; kur yok/stale ise kuralın fail-closed/uyarı davranışı açıkça tanımlanacak.
+  - Kısmi fill, fee'nin farklı varlıkta tahsili ve funding olayları ledger sırasıyla deterministik işlenecek; aynı olay iki kez sayılmayacak.
+  - Kullanıcı arayüzü ölçülen değer, eşik, pencere ve bileşen dökümünü gösterecek; “zarar limiti” etiketi altında farklı ölçümler gizlenmeyecek.
+  - Platform hard drawdown/capital-preservation kuralı kullanıcı seçimine bağlı olmadan Toplam Equity veya tanımlı daha muhafazakâr ölçümü kullanabilir.
+- Gerekçe: Farklı risk hedefleri için gerçekleşmiş kayıp, açık piyasa riski ve toplam sermaye düşüşünü ayrı yönetebilmek.
+- Ödünleşimler: Equity valuation, çoklu para birimi ve ledger olaylarının doğru zamanlanması risk motorunu karmaşıklaştırır.
+- Önceki karar: DEC-0011, DEC-0016, DEC-0017 ve DEC-0018 ile birlikte uygulanır
+
 <!--
 ### DEC-XXXX — Karar başlığı
 

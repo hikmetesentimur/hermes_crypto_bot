@@ -321,8 +321,10 @@ Bu dosya, özgün senaryodaki belirsizlikleri, çelişkileri ve eklenmesi öneri
 - Önerilen varsayılan: Net PnL'a ücret/funding/slippage dahil; vergi tavsiyesi yok, yalnız dışa aktarılabilir işlem kaydı.
 
 ### Q-045 — Gerçekleşmemiş ve gerçekleşmiş PnL nasıl ayrılacak?
-- Durum: AÇIK
+- Durum: CEVAPLANDI
 - Öncelik: P1
+- Karar: `DEC-0021`
+- Cevap: Her risk kuralında ölçüm kaynağı Realized Net PnL, Unrealized Net PnL veya Toplam Equity Değişimi olarak seçilebilecek.
 - Soru: Açık ve kısmen kapanmış pozisyonlarda rapor ve limit hesapları hangi değerleri kullanacak?
 - Önerilen varsayılan: Realized/unrealized ayrı; risk limitleri için ikisini içeren equity drawdown ve ayrıca realized günlük zarar.
 
