@@ -119,6 +119,25 @@ Bu dosya yalnızca kullanıcı tarafından açıkça onaylanmış kalıcı karar
 - Ödünleşimler: Üç seçeneğin tutarlı açıklanması ve eşzamanlı stratejilerde atomik bütçe rezervasyonu gerekir.
 - Önceki karar: DEC-0005 ile birlikte uygulanır
 
+### DEC-0007 — Strateji bazında Kapanmış Mum veya Canlı Mum sinyali
+
+- Tarih: 2026-07-23
+- Durum: ONAYLANDI
+- Karar sahibi: Hikmet Esentimur
+- İlgili sorular: Q-010, Q-016, Q-017, Q-018, Q-020
+- Karar: Her stratejide sinyal değerlendirme kaynağı “Kapanmış Mum” veya “Canlı Mum” olarak seçilebilecek. Yeni stratejilerin varsayılanı “Kapanmış Mum” olacak.
+- Uygulama sonuçları:
+  - Kapanmış Mum modunda yalnız borsa/adaptör tarafından kapanışı doğrulanmış barlar sinyal üretir; bar başına veri revizyonu ve duplicate olaylar idempotent ele alınır.
+  - Canlı Mum modunda indikatör ve koşullar bar kapanmadan değişebilir/repaint edebilir; UI kaydetme ve canlıya alma sırasında görünür risk uyarısı gösterir.
+  - Strateji sürümü seçilen modu saklar; sinyal, emir niyeti, backtest/paper/live işlem ve audit kayıtları kullanılan bar kimliği, kapanış durumu ve veri timestamp'ini taşır.
+  - Canlı mum değerlendirme frekansı ve aynı mumda tekrar tetikleme Q-018 kapsamında ayrıca kesinleştirilecek; bu karar sınırsız emir üretimine izin vermez.
+  - Backtest/replay, karar anında erişilemeyecek gelecekteki mum verisini kullanmayacak; look-ahead bias testleri zorunlu olacak.
+  - Farklı zaman dilimleri son ortak kullanılabilir veri noktasında hizalanacak; ayrıntılı hizalama Q-020 kararıyla tamamlanacak.
+  - Kullanıcı açıkça değiştirmedikçe kopyalanan/yeni stratejiler güvenli varsayılan olan Kapanmış Mum modunda çalışacak.
+- Gerekçe: Güvenli ve tekrarlanabilir varsayılanı korurken, daha hızlı intrabar stratejilere kontrollü esneklik sağlamak.
+- Ödünleşimler: Canlı Mum modu simülasyon ve üretim davranışını karmaşıklaştırır; repaint, duplicate ve gecikme yönetimi gerekir.
+- Önceki karar: Yok
+
 <!--
 ### DEC-XXXX — Karar başlığı
 

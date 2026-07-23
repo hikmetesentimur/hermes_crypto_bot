@@ -79,8 +79,10 @@ Bu dosya, özgün senaryodaki belirsizlikleri, çelişkileri ve eklenmesi öneri
 - Önerilen varsayılan: İkisi de opsiyonel, sınırlar dahil, negatif reddedilir, minimum maksimumdan büyük olamaz.
 
 ### Q-010 — Sinyaller yalnızca kapanmış mumdan mı üretilecek?
-- Durum: AÇIK
+- Durum: CEVAPLANDI
 - Öncelik: P0
+- Karar: `DEC-0007`
+- Cevap: Strateji ayarında “Kapanmış Mum” veya “Canlı Mum” seçilebilecek; varsayılan “Kapanmış Mum” olacak.
 - Soru: Devam eden mumdaki değişen indikatör değerleri emir tetikleyebilir mi?
 - Önerilen varsayılan: Varsayılan yalnızca kapanmış mum; kullanıcı açıkça seçerse intrabar ve repaint uyarısı.
 
