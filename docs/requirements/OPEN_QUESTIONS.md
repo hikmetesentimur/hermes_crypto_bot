@@ -526,11 +526,13 @@ Bu dosya, özgün senaryodaki belirsizlikleri, çelişkileri ve eklenmesi öneri
 
 ## J. Strateji yaşam döngüsü, validasyon ve performans
 
-### Q-073 — Strateji yaşam döngüsü nasıl olacak?
-- Durum: AÇIK
+### Q-073 — Strateji kaydedildiğinde çalışma nasıl başlatılacak?
+- Durum: CEVAPLANDI
 - Öncelik: P0
-- Soru: Kaydetmek stratejiyi yalnız taslak mı yapar? Ayrı Başlat, Duraklat, Durdur ve Arşivle eylemleri olacak mı? Restart sonrası otomatik devam edilecek mi?
-- Önerilen varsayılan: Taslak → Doğrulanıyor → Hazır → Çalışıyor ↔ Duraklatıldı → Durduruldu/Arşivlendi; hata durumu ayrı; restart sonrası canlı strateji fail-closed ve mutabakat/onay sonrası devam.
+- Karar: `DEC-0025`
+- Cevap: Kaydederken “Taslak Olarak Kaydet” veya “Kaydet ve Başlat” seçenekleri sunulacak. Başlatma, zorunlu doğrulamalar geçildikten sonra gerçekleşecek.
+- Soru: Kaydetmek yalnız taslak mı oluşturur, yoksa kullanıcı isterse aynı işlemde stratejiyi başlatabilir mi?
+- Önerilen varsayılan: İki ayrı seçenek; Taslak Olarak Kaydet ve Kaydet ve Başlat.
 
 ### Q-074 — Strateji adı kuralları nedir?
 - Durum: AÇIK
@@ -611,6 +613,12 @@ Bu dosya, özgün senaryodaki belirsizlikleri, çelişkileri ve eklenmesi öneri
 - Cevap: MVP raporu bilgilendirme ve mali müşavir çalışma dosyası niteliğinde olacak; resmî beyanname veya vergi tavsiyesi olarak sunulmayacak.
 - Soru: Rapor yalnız bilgilendirme/mali müşavire veri hazırlama amacıyla mı, yoksa uzman onayından sonra beyanname hazırlığına doğrudan esas olacak doğrulanmış rapor olarak mı hedefleniyor?
 - Önerilen varsayılan: MVP'de bilgilendirme ve mali müşavir çalışma dosyası; uzman tarafından onaylanmış kural seti olmadan resmî beyanname iddiası yok.
+
+### Q-087 — Duraklatma, durdurma ve sunucu yeniden başlatma davranışı nasıl olacak?
+- Durum: AÇIK
+- Öncelik: P0
+- Soru: Duraklatma ve durdurma sırasında yeni sinyaller, bekleyen giriş emirleri, açık pozisyonlar ve koruyucu çıkış emirleri ne olacak? Sunucu yeniden başladığında strateji otomatik devam edecek mi?
+- Önerilen varsayılan: Duraklatma yeni girişleri keser ve koruyucu yönetimi sürdürür; durdurma için kullanıcı açık emir/pozisyon davranışını seçer; gerçek mod sunucu yeniden başladığında hesap ve emirler karşılaştırılmadan yeni giriş üretmez.
 
 ---
 

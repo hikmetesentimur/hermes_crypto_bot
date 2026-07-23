@@ -474,6 +474,26 @@ Bu dosya yalnızca kullanıcı tarafından açıkça onaylanmış kalıcı karar
 - Ödünleşimler: Piyasa verisi temini, saklama, hesaplama gücü, veri sürümleme ve yanlılık önleme ilk sürüm kapsamını büyütür.
 - Önceki karar: DEC-0007, DEC-0011 ve DEC-0023 ile birlikte uygulanır
 
+### DEC-0025 — Taslak Olarak Kaydet veya Kaydet ve Başlat seçenekleri
+
+- Tarih: 2026-07-23
+- Durum: ONAYLANDI
+- Karar sahibi: Hikmet Esentimur
+- İlgili sorular: Q-053, Q-054, Q-073, Q-075, Q-087; DEC-0014, DEC-0015
+- Karar: Strateji kaydedilirken kullanıcı “Taslak Olarak Kaydet” veya “Kaydet ve Başlat” seçeneklerinden birini seçebilecek.
+- Uygulama sonuçları:
+  - “Taslak Olarak Kaydet” strateji sürümünü saklar fakat piyasa verisi izleme, sinyal üretimi veya emir oluşturma başlatmaz.
+  - “Kaydet ve Başlat” önce değişmez strateji sürümünü oluşturur, ardından doğrulama ve başlatma işlemini ayrı ve izlenebilir bir adım olarak yürütür.
+  - Eksik/zıt ayar, borsa desteği, işlem çifti kuralı, bakiye, risk sınırı veya güvenlik kontrolü hatasında kayıt korunabilir fakat strateji çalışmaya başlamaz; Türkçe hata nedenleri gösterilir.
+  - Deneme modu ve gerçek mod aynı başlatma düğmesini paylaşsa bile gerçek modda `DEC-0015` kapsamındaki risk uyarısı, çok aşamalı kimlik doğrulama ve atlanamayan teknik kontroller uygulanır.
+  - Kullanıcı düğmeye birden fazla kez bassa veya ağ yanıtı kesilse bile aynı strateji sürümü için yinelenen çalışma örneği/emir oluşmayacak.
+  - Başlatma durumu en az Taslak, Doğrulanıyor, Hazır, Başlatılıyor, Çalışıyor ve Hatalı aşamalarını ayırt edecek.
+  - Kaydetme başarılı fakat başlatma başarısızsa kullanıcıya iki sonuç ayrı gösterilecek; “strateji kayboldu” veya “çalışıyor” izlenimi verilmeyecek.
+  - Duraklatma, durdurma, arşivleme, açık emir/pozisyon davranışı ve sunucu yeniden başlatma kuralları Q-087 ile ayrıca kesinleştirilecek.
+- Gerekçe: Hızlı başlatma kolaylığı sunarken taslak hazırlama ve güvenli doğrulama ihtiyacını korumak.
+- Ödünleşimler: Tek düğme arkasında kayıt ve başlatma iki ayrı güvenilir işlem olarak yönetilmelidir.
+- Önceki karar: DEC-0014 ve DEC-0015 ile birlikte uygulanır
+
 <!--
 ### DEC-XXXX — Karar başlığı
 
