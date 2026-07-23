@@ -808,6 +808,29 @@ Bu dosya yalnızca kullanıcı tarafından açıkça onaylanmış kalıcı karar
 - Ödünleşimler: Resmî deneme ortamlarının gerçek piyasa davranışını tam yansıtmaması veya bazı ürünlerde bulunmaması ek plan ve süre gerektirebilir.
 - Önceki karar: DEC-0002, DEC-0015, DEC-0023, DEC-0024 ve DEC-0033 ile birlikte uygulanır
 
+### DEC-0041 — Seçilebilir iki güçlü giriş yöntemi
+
+- Tarih: 2026-07-23
+- Durum: ONAYLANDI
+- Karar sahibi: Hikmet Esentimur
+- İlgili sorular: Q-001, Q-002, Q-005, Q-054, Q-058, Q-090, Q-091; DEC-0001, DEC-0003, DEC-0015
+- Karar: Kullanıcı uygulamaya parola + doğrulama uygulaması koduyla veya cihaz parmak izi/yüz tanıma ya da fiziksel güvenlik anahtarıyla giriş yöntemlerinden birini seçebilecek.
+- Uygulama sonuçları:
+  - Parola ile girişte telefondaki doğrulama uygulamasının süreli tek kullanımlık kodu zorunludur; yalnız parola ile girişe izin verilmez.
+  - Parolalar geri döndürülemeyen, güçlü ve güncel bir parola türetme yöntemiyle tuzlanarak saklanır; düz metin veya çözülebilir biçimde tutulmaz.
+  - Cihazla giriş, tarayıcı/işletim sisteminin alan adına bağlı güçlü kimlik doğrulama standardını kullanır; biyometrik veri sunucuya veya projeye gelmez.
+  - Kullanıcı birden fazla güvenilir cihaz veya fiziksel güvenlik anahtarı kaydedebilir; her kaydın adı, oluşturulma ve son kullanım zamanı görünür olur.
+  - Kurtarma kodları yalnız oluşturulurken bir kez gösterilir, tek kullanımlıdır ve sunucuda geri okunabilir biçimde saklanmaz.
+  - Yeni cihaz/anahtar ekleme, mevcut yöntemi kaldırma, borsa anahtarı değiştirme ve gerçek modu açma gibi hassas işlemler yeniden güçlü doğrulama gerektirir.
+  - Son çalışan giriş yöntemi, doğrulanmış ikinci yöntem veya güvenli kurtarma süreci olmadan kaldırılamaz; kullanıcı yanlışlıkla hesabını erişilemez yapamaz.
+  - Başarısız girişlerde hız sınırlama, artan bekleme, güvenlik kaydı ve kullanıcı uyarısı uygulanır; hata mesajı hangi alanın doğru olduğunu saldırgana açıklamaz.
+  - Kimlik doğrulama çerezi güvenli, yalnız şifreli bağlantıda, betik erişimine kapalı ve istek sahteciliğine dayanıklı ayarlarla tutulur.
+  - İlk kullanıcı oluşturma ve hesap kurtarma akışı dağıtım/hosting güvenliğiyle birlikte ayrıca belgelenecektir; arka kapı niteliğinde varsayılan parola olmayacaktır.
+  - Oturum süresi/yeniden doğrulama Q-090, gelecekteki çok kullanıcılı roller Q-091 ile ayrıca kesinleştirilecektir.
+- Gerekçe: Kullanıcıya seçim sunarken parola çalınmasına ve sahte giriş sayfalarına karşı güçlü koruma sağlamak.
+- Ödünleşimler: İki giriş yöntemi, cihaz yönetimi ve kurtarma akışı geliştirme/sınama kapsamını büyütür.
+- Önceki karar: DEC-0001, DEC-0003 ve DEC-0015 ile birlikte uygulanır
+
 <!--
 ### DEC-XXXX — Karar başlığı
 

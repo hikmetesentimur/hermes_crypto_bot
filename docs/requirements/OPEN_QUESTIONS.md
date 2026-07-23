@@ -46,11 +46,13 @@ Bu dosya, özgün senaryodaki belirsizlikleri, çelişkileri ve eklenmesi öneri
 - Soru: Geliştirme ve kabul sınamaları hangi sırada ve hangi borsa ortamlarında yapılacak?
 - Önerilen varsayılan: Yerel benzetim → resmî borsa deneme ortamı → ayrı onaylı gerçek hesap aşaması.
 
-### Q-005 — Kullanıcı, rol ve oturum modeli nasıl olmalı?
-- Durum: AÇIK
+### Q-005 — İlk sürümde uygulamaya giriş nasıl korunacak?
+- Durum: CEVAPLANDI
 - Öncelik: P0
-- Soru: Tek kullanıcıda bile parola, 2FA, oturum süresi ve yeniden doğrulama gerekecek mi? Çok kullanıcıda admin/operatör/izleyici rolleri olacak mı?
-- Önerilen varsayılan: Parola + TOTP 2FA; canlı mod ve anahtar değişiminde yeniden doğrulama.
+- Karar: `DEC-0041`
+- Cevap: Kullanıcı parola + doğrulama uygulaması kodu veya cihaz parmak izi/yüz tanıma/fiziksel güvenlik anahtarıyla giriş yöntemini seçebilecek.
+- Soru: İlk sürümde hangi güçlü kimlik doğrulama yöntemleri desteklenecek?
+- Önerilen varsayılan: Parola yolu ikinci doğrulama kodunu zorunlu kılar; cihaz/güvenlik anahtarı yolu ve tek kullanımlık kurtarma kodları da desteklenir.
 
 ### Q-006 — Dil, saat dilimi ve sayı biçimi nedir?
 - Durum: AÇIK
@@ -661,6 +663,18 @@ Bu dosya, özgün senaryodaki belirsizlikleri, çelişkileri ve eklenmesi öneri
 - Öncelik: P1
 - Soru: Gerçek hosting ve Binance/MEXC denemelerinde kabul edilecek en yüksek piyasa verisi yaşı, sinyal hesaplama süresi, sistem içi emir hazırlama süresi, borsa yanıt bekleme süresi ve aylık hizmet sürekliliği hedefleri ne olmalı?
 - Önerilen varsayılan: Önce ölçüm yapılır; normal hız kapsamına uygun gerçekçi sınırlar ölçüm sonuçlarıyla önerilir ve canlı işlem açılmadan önce kullanıcı tarafından ayrıca onaylanır. Eski veri güvenlik sınırı performans hedefinden bağımsız ve atlanamaz olur.
+
+### Q-090 — Oturum süresi ve hassas işlemlerde yeniden doğrulama nasıl olacak?
+- Durum: AÇIK
+- Öncelik: P0
+- Soru: Kullanıcı hareketsiz kaldığında oturum ne kadar sürede kapanacak; borsa anahtarı, gerçek mod, para/risk ayarı ve güvenlik yöntemi değişikliklerinde ne kadar yakın zamanda yeniden doğrulama istenecek?
+- Önerilen varsayılan: Ayarlanabilir kısa hareketsizlik süresi; hassas işlemlerde son birkaç dakika içinde güçlü doğrulama zorunlu; tüm cihaz oturumları kullanıcı tarafından görülebilir ve kapatılabilir.
+
+### Q-091 — Gelecekteki çok kullanıcılı sürümde roller nasıl ayrılacak?
+- Durum: AÇIK
+- Öncelik: P1
+- Soru: Yönetici, işlem yapabilen kullanıcı ve yalnız izleyici hangi sayfa ve işlemlere erişebilecek? Borsa anahtarlarını kim ekleyebilecek, gerçek modu kim açabilecek?
+- Önerilen varsayılan: İlk sürüm tek sahip; veri modeli gelecekte Sahip, İşlem Yetkilisi ve İzleyici rollerine hazırlanır; en az yetki ilkesi uygulanır.
 
 ---
 
