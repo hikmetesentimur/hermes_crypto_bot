@@ -597,6 +597,27 @@ Bu dosya yalnızca kullanıcı tarafından açıkça onaylanmış kalıcı karar
 - Ödünleşimler: Strateji oluşturma daha uzun sürer ve hızlı başlangıç azalır; yanlışlıkla varsayılan risk alınması önlenir.
 - Önceki karar: DEC-0005, DEC-0006, DEC-0015, DEC-0016 ve DEC-0019 ile birlikte uygulanır
 
+### DEC-0031 — Ayrıntılı strateji başarı ve risk ölçümleri
+
+- Tarih: 2026-07-23
+- Durum: ONAYLANDI
+- Karar sahibi: Hikmet Esentimur
+- İlgili sorular: Q-043, Q-044, Q-045, Q-051, Q-052, Q-077, Q-080; DEC-0011, DEC-0023, DEC-0024
+- Karar: Strateji sonuçlarında temel ölçümlere ek olarak ayrıntılı başarı, maliyet ve risk ölçümleri gösterilecek.
+- Uygulama sonuçları:
+  - Zorunlu ölçümler: net kâr/zarar, brüt kâr/zarar, başarı oranı, toplam işlem sayısı, sermayenin en yüksek noktadan düşüşü, kazanç-kayıp oranı, ortalama işlem sonucu, toplam işlem ücretleri, toplam fonlama maliyeti, ortalama/aşırı açık kalma süresi ve en uzun art arda kayıp dizisi.
+  - `DEC-0011` gereğince fiyat getirisi, brüt/net kâr-zarar, kullanılan marjine göre getiri ve strateji sermayesi getirisi ayrı gösterilir.
+  - Tam kapanmış, kısmen kapanmış, başabaş ve açık işlemler ayrı sayılır; başarı oranının pay/paydasında hangi sınıfların kullanıldığı raporda açıklanır.
+  - Deneme modu, geçmiş veri sınaması ve gerçek işlemler ayrı raporlanır; kullanıcı açıkça karşılaştırma istemedikçe sonuçlar birleştirilmez.
+  - Her ölçüm dönem başlangıcı/bitişi, raporlama para birimi, borsa/hesap, strateji sürümü, işlem türü ve kullanılan benzetim düzeyiyle birlikte gösterilir.
+  - Para yatırma, çekme ve hesaplar arası aktarım strateji getirisi sayılmaz; sermaye değişimleri düzeltilmiş hesaplamayla ele alınır.
+  - Ücret ve fonlama maliyetleri hem toplam hem işlem bazında görülebilir; eksik borsa maliyet verisi varsa net sonuç “eksik veri” uyarısıyla işaretlenir.
+  - Ölçümlerin kesin matematiksel tanımları, yuvarlama kuralları ve örnekleri gereksinim/hesaplama belgesinde yazılacak ve otomatik testlerle doğrulanacaktır.
+  - Sonuç ekranındaki bütün ölçüm adları ve açıklamaları sade Türkçe olacaktır.
+- Gerekçe: Yalnız kâr ve başarı oranına bakarak risk, maliyet ve sürdürülebilirlik hakkında yanıltıcı sonuç çıkarılmasını önlemek.
+- Ödünleşimler: Ayrıntılı rapor daha fazla veri, hesaplama, açıklama ve kullanıcı arayüzü alanı gerektirir.
+- Önceki karar: DEC-0011, DEC-0023 ve DEC-0024 ile birlikte uygulanır
+
 <!--
 ### DEC-XXXX — Karar başlığı
 

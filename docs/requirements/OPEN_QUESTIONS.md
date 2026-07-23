@@ -558,11 +558,13 @@ Bu dosya, özgün senaryodaki belirsizlikleri, çelişkileri ve eklenmesi öneri
 - Soru: Sistem kullanıcı adına pozisyon tutarı, kaldıraç, zarar durdurma veya risk sınırı seçmeli mi? Gerçek modda hangi alanlar boş bırakılamaz?
 - Önerilen varsayılan: Riskli finansal alanlarda hazır değer yok; kullanıcı açıkça girer ve sunucu tarafı denetimden geçer.
 
-### Q-077 — Performans istatistiklerinin kesin tanımı nedir?
-- Durum: AÇIK
+### Q-077 — Başarı ve risk ölçümlerinin kesin kapsamı nedir?
+- Durum: CEVAPLANDI
 - Öncelik: P1
-- Soru: Kısmi kapanış, break-even, komisyon sonrası sonuç, test/live ayrımı, strateji düzenleme ve kopyalama sayaçları nasıl ele alınacak?
-- Önerilen varsayılan: İşlem kapanışı position lifecycle bazlı; net PnL sonrası kârlı/zararlı/break-even ayrı; paper/live kesin ayrılır; yeni strateji sürümü aynı strateji ailesinde fakat sürüm bazlı raporlanır; kopya sıfırdan başlar.
+- Karar: `DEC-0031`
+- Cevap: Net kâr/zarar, başarı oranı, işlem sayısı, sermayenin en yüksek noktadan düşüşü, kazanç-kayıp oranı, ortalama işlem sonucu, ücretler, fonlama maliyeti, açık kalma süresi ve art arda kayıplar gösterilecek.
+- Soru: Sonuç ekranında hangi ölçümler zorunlu olacak ve bunların dönem/para birimi/işlem kümesi nasıl belirtilecek?
+- Önerilen varsayılan: Ayrıntılı ölçüm kümesi; hesaplama kapsamı ve yöntemi her raporda açıkça belirtilir.
 
 ### Q-078 — Emir durum makinesi hangi durumları destekleyecek?
 - Durum: AÇIK
