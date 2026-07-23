@@ -213,8 +213,10 @@ Bu dosya, özgün senaryodaki belirsizlikleri, çelişkileri ve eklenmesi öneri
 - Önerilen varsayılan: UI ve sunucu etkin maksimumu borsa verisinden alır; sabit 100'e güvenmez.
 
 ### Q-031 — Pozisyon büyüklüğündeki “tutar” marjin mi, notional mı?
-- Durum: AÇIK
+- Durum: CEVAPLANDI
 - Öncelik: P0
+- Karar: `DEC-0005`
+- Cevap: Kullanıcı Futures işlemlerde tutar türünü “Marjin Tutarı” veya “Notional Pozisyon Tutarı” olarak seçebilecek; sistem diğer değeri ve maliyetleri hesaplayıp gösterecek.
 - Soru: Futures örneğinde 10 USDT × 5 = 50 USDT pozisyon deniyor. Cüzdandan 10 USDT marjin ayrılıp 50 USDT notional mı açılacak, yoksa 50 USDT cüzdandan mı düşecek?
 - Önerilen varsayılan: Girilen tutar marjin; notional=tutar×kaldıraç; ücret ve rezerv ayrıca hesaba katılır.
 
