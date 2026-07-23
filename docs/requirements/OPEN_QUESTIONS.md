@@ -614,11 +614,19 @@ Bu dosya, özgün senaryodaki belirsizlikleri, çelişkileri ve eklenmesi öneri
 - Soru: Rapor yalnız bilgilendirme/mali müşavire veri hazırlama amacıyla mı, yoksa uzman onayından sonra beyanname hazırlığına doğrudan esas olacak doğrulanmış rapor olarak mı hedefleniyor?
 - Önerilen varsayılan: MVP'de bilgilendirme ve mali müşavir çalışma dosyası; uzman tarafından onaylanmış kural seti olmadan resmî beyanname iddiası yok.
 
-### Q-087 — Duraklatma, durdurma ve sunucu yeniden başlatma davranışı nasıl olacak?
+### Q-087 — Duraklatma ve durdurma sırasında emirler ve açık işlemler ne olacak?
+- Durum: CEVAPLANDI
+- Öncelik: P0
+- Karar: `DEC-0026`
+- Cevap: Duraklatma yeni girişleri durduracak ve bekleyen giriş emirlerini iptal edecek; açık işlemlerin kâr alma ve zarar durdurma korumaları devam edecek. Durdururken kullanıcı açık işlemleri korumayı veya kapatmayı seçecek.
+- Soru: Duraklatma ve durdurma sırasında yeni sinyaller, bekleyen giriş emirleri, açık işlemler ve koruyucu çıkış emirleri ne olacak?
+- Önerilen varsayılan: Duraklatma yeni girişleri keser ve koruyucu yönetimi sürdürür; durdurma için kullanıcı açık işlemleri koru veya kapat seçer.
+
+### Q-088 — Sunucu yeniden başladığında çalışan stratejiler nasıl devam edecek?
 - Durum: AÇIK
 - Öncelik: P0
-- Soru: Duraklatma ve durdurma sırasında yeni sinyaller, bekleyen giriş emirleri, açık pozisyonlar ve koruyucu çıkış emirleri ne olacak? Sunucu yeniden başladığında strateji otomatik devam edecek mi?
-- Önerilen varsayılan: Duraklatma yeni girişleri keser ve koruyucu yönetimi sürdürür; durdurma için kullanıcı açık emir/pozisyon davranışını seçer; gerçek mod sunucu yeniden başladığında hesap ve emirler karşılaştırılmadan yeni giriş üretmez.
+- Soru: Deneme ve gerçek moddaki stratejiler sunucu yeniden açıldığında otomatik devam mı etmeli, yoksa emirler, işlemler ve bakiyeler borsayla karşılaştırılıp kullanıcı onayı mı beklenmeli?
+- Önerilen varsayılan: Deneme modu kayıtlı durumdan devam edebilir; gerçek modda borsa hesabı karşılaştırması tamamlanmadan yeni giriş üretilmez, açık işlemlerin koruyucu yönetimi öncelikle yeniden kurulur.
 
 ---
 

@@ -494,6 +494,27 @@ Bu dosya yalnızca kullanıcı tarafından açıkça onaylanmış kalıcı karar
 - Ödünleşimler: Tek düğme arkasında kayıt ve başlatma iki ayrı güvenilir işlem olarak yönetilmelidir.
 - Önceki karar: DEC-0014 ve DEC-0015 ile birlikte uygulanır
 
+### DEC-0026 — Duraklatma korumayı sürdürür, durdurma açık işlem seçimi sunar
+
+- Tarih: 2026-07-23
+- Durum: ONAYLANDI
+- Karar sahibi: Hikmet Esentimur
+- İlgili sorular: Q-037, Q-053, Q-056, Q-073, Q-087, Q-088; DEC-0014, DEC-0017, DEC-0025
+- Karar: Strateji duraklatıldığında yeni girişler duracak ve bekleyen giriş emirleri iptal edilecek; açık işlemlerin kâr alma, zarar durdurma ve diğer koruyucu çıkış yönetimi devam edecek. Strateji durdurulurken kullanıcı açık işlemleri korumayı veya güvenli biçimde kapatmayı seçecek.
+- Uygulama sonuçları:
+  - Duraklatma başlar başlamaz yeni sinyalden giriş emri üretimi engellenir ve henüz gerçekleşmemiş giriş ile kademeli ek alım emirleri güvenli biçimde iptal edilir.
+  - Açık işlemlerin borsadaki kâr alma, zarar durdurma, hareketli zarar durdurma ve azaltıcı çıkış emirleri iptal edilmez; yönetim hizmeti bunları izlemeyi sürdürür.
+  - Duraklatma sırasında yeni kademeli alım yapılmaz; yalnız pozisyon riskini azaltan çıkış davranışlarına izin verilir.
+  - Durdurma ekranı “Açık İşlemleri Koru” ve “Açık İşlemleri Kapat” seçeneklerini, etkilenecek emir/işlem sayısını ve tahmini riskleri gösterir.
+  - “Açık İşlemleri Koru” seçilirse yeni girişler kalıcı olarak kapanır fakat koruyucu yönetim, işlemler tamamen kapanana kadar ayrı bir yönetim durumu olarak devam eder.
+  - “Açık İşlemleri Kapat” seçilirse bekleyen girişler iptal edilir; pozisyonlar borsanın yalnız azaltma/pozisyon kapatma özelliğiyle kapatılır ve parçalı gerçekleşme bitene kadar izlenir.
+  - Koruyucu emirler, pozisyonun kapandığı doğrulanmadan kaldırılmaz. Kapatma başarısız veya kısmi kalırsa sistem kullanıcıyı uyarır ve kalan riski görünür tutar.
+  - Duraklatma, devam ettirme ve durdurma işlemleri tekrar gönderildiğinde yinelenen emir üretmeyecek ve tamamı kayıt altına alınacaktır.
+  - Sunucu yeniden başlatma sonrası devam davranışı bu karara dahil değildir; Q-088 ile ayrıca belirlenecektir.
+- Gerekçe: Yeni riski hemen keserken açık işlemleri korumasız bırakmamak ve durdurma anında kullanıcıya açık işlem tercihi vermek.
+- Ödünleşimler: Durdurulmuş stratejiye bağlı açık işlemler kapanana kadar koruyucu yönetim hizmetinin çalışması gerekir.
+- Önceki karar: DEC-0014, DEC-0017 ve DEC-0025 ile birlikte uygulanır
+
 <!--
 ### DEC-XXXX — Karar başlığı
 
