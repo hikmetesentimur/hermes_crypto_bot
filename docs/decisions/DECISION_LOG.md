@@ -681,6 +681,27 @@ Bu dosya yalnızca kullanıcı tarafından açıkça onaylanmış kalıcı karar
 - Ödünleşimler: Ayrı kayıt kümeleri ve karşılaştırma eşleştirmesi daha fazla veri modeli ve arayüz işi gerektirir.
 - Önceki karar: DEC-0011, DEC-0023, DEC-0024 ve DEC-0031 ile birlikte uygulanır
 
+### DEC-0035 — İlk sürüm normal hız, yüksek hız sonraki çalışma
+
+- Tarih: 2026-07-23
+- Durum: ONAYLANDI
+- Karar sahibi: Hikmet Esentimur
+- İlgili sorular: Q-010, Q-051, Q-052, Q-065, Q-081, Q-089; DEC-0007, DEC-0023, DEC-0024
+- Karar: İlk sürüm normal işlem hızına göre tasarlanacak; yüksek hızlı işlemler daha sonraki ayrı bir çalışma ve sürüm kapsamında ele alınacak.
+- Uygulama sonuçları:
+  - İlk sürüm 1 dakika ve üzeri mum/strateji aralıklarına ve normal borsa uygulama bağlantılarına odaklanır.
+  - Saniyenin çok küçük bölümlerinde emir yarışına, borsaya çok yakın özel sunuculara veya özel ağ bağlantısına dayalı yüksek hızlı işlem ilk sürüm kapsamında değildir.
+  - Öncelik sırası: doğru piyasa verisi, güvenilir sinyal hesabı, güvenli risk denetimi, yinelenmeyen emir gönderimi, borsa hesabı karşılaştırması ve ölçülebilir gecikmedir.
+  - Piyasa verisi alma, sinyal değerlendirme, risk denetimi, emir gönderme ve borsa yanıtı süreleri ayrı ayrı ölçülür ve izlenir.
+  - Veri yaşı güvenlik sınırı olarak kalır; veri belirlenen sınırdan eskiyse hızlı davranmak yerine yeni emir güvenli biçimde engellenir.
+  - Ağ/borsa gecikmesi sistem işlem süresinden ayrı raporlanır; borsanın yavaş yanıtı uygulamanın kendi süresi gibi gizlenmez.
+  - Mimari ileride yüksek hız çalışmasını engellemeyecek açık arayüzler ve ölçüm noktaları kullanır; fakat ilk sürüm gereksiz düşük gecikme karmaşıklığı ve maliyeti taşımaz.
+  - Yüksek hız çalışması başlatıldığında veri kaynağı, sunucu konumu, özel bağlantı, işletim sistemi ayarı, emir yolu, risk denetimi ve yeni sayısal hedefler ayrı mimari/karar kaydı gerektirir.
+  - İlk sürümün kesin sayısal gecikme, veri yaşı ve hizmet sürekliliği kabul sınırları gerçek hosting ve borsa denemeleriyle ölçülüp Q-089 kapsamında onaylanacaktır.
+- Gerekçe: İlk sürümü güvenli ve gerçekçi kapsamda tamamlamak; yüksek hızlı işlem için gereken farklı altyapı ve maliyeti sonraki aşamaya bırakmak.
+- Ödünleşimler: İlk sürüm saniyelik veya daha hızlı fiyat fırsatlarını hedeflemez; buna karşılık geliştirme ve işletim karmaşıklığı azalır.
+- Önceki karar: DEC-0007, DEC-0023 ve DEC-0024 ile birlikte uygulanır
+
 <!--
 ### DEC-XXXX — Karar başlığı
 

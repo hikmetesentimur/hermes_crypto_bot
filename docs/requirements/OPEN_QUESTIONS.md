@@ -590,11 +590,13 @@ Bu dosya, özgün senaryodaki belirsizlikleri, çelişkileri ve eklenmesi öneri
 - Soru: Geçmiş sınama, sanal bakiyeyle deneme ve gerçek para sonuçları tek toplamda birleşecek mi?
 - Önerilen varsayılan: Ayrı kayıt ve rapor; aynı dönem/sürüm için yan yana karşılaştırma, birleşik finansal toplam yok.
 
-### Q-081 — Performans ve gecikme hedefleri nedir?
-- Durum: AÇIK
+### Q-081 — İlk sürümün işlem hızı sınıfı nedir?
+- Durum: CEVAPLANDI
 - Öncelik: P1
-- Soru: Kabul edilen maksimum piyasa verisi yaşı, sinyal değerlendirme gecikmesi, emir ACK süresi ve API uptime hedefi nedir?
-- Önerilen varsayılan: İlk yük/sandbox testlerinde ölçülüp borsa ve strateji sınıfına göre SLO belirlenir; stale-data eşiği ayrı hard safety limitidir.
+- Karar: `DEC-0035`
+- Cevap: İlk sürüm normal hızda olacak; yüksek hızlı işlemler daha sonra ayrı bir çalışma olarak eklenecek.
+- Soru: İlk sürüm 1 dakika ve üzeri strateji aralıklarına mı odaklanacak, yoksa saniyenin çok küçük bölümlerinde emir yarışına dayalı yüksek hızlı işlemler mi hedeflenecek?
+- Önerilen varsayılan: İlk sürüm normal hız ve güvenilirlik odaklı; yüksek hız sonraki sürüm kapsamı.
 
 ### Q-082 — Sinyal verisi ile emir borsası aynı olmak zorunda mı?
 - Durum: AÇIK
@@ -643,6 +645,12 @@ Bu dosya, özgün senaryodaki belirsizlikleri, çelişkileri ve eklenmesi öneri
 - Cevap: Deneme modundaki stratejiler kayıtlı durumdan otomatik devam edecek. Gerçek moddakiler borsa hesabı karşılaştırıldıktan sonra kullanıcı onayı bekleyecek.
 - Soru: Deneme ve gerçek moddaki stratejiler sunucu yeniden açıldığında otomatik devam mı etmeli, yoksa emirler, işlemler ve bakiyeler borsayla karşılaştırılıp kullanıcı onayı mı beklenmeli?
 - Önerilen varsayılan: Deneme modu kayıtlı durumdan devam eder; gerçek modda borsa hesabı karşılaştırması ve kullanıcı onayı tamamlanmadan yeni giriş üretilmez.
+
+### Q-089 — İlk sürümün sayısal hız ve hizmet sürekliliği sınırları nedir?
+- Durum: AÇIK
+- Öncelik: P1
+- Soru: Gerçek hosting ve Binance/MEXC denemelerinde kabul edilecek en yüksek piyasa verisi yaşı, sinyal hesaplama süresi, sistem içi emir hazırlama süresi, borsa yanıt bekleme süresi ve aylık hizmet sürekliliği hedefleri ne olmalı?
+- Önerilen varsayılan: Önce ölçüm yapılır; normal hız kapsamına uygun gerçekçi sınırlar ölçüm sonuçlarıyla önerilir ve canlı işlem açılmadan önce kullanıcı tarafından ayrıca onaylanır. Eski veri güvenlik sınırı performans hedefinden bağımsız ve atlanamaz olur.
 
 ---
 
