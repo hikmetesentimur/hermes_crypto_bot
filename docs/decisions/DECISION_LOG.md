@@ -924,6 +924,28 @@ Bu dosya yalnızca kullanıcı tarafından açıkça onaylanmış kalıcı karar
 - Ödünleşimler: Veri sorunu sırasında bazı giriş fırsatları kaçırılır; güvenilirlik hızdan öncelikli tutulur.
 - Önceki karar: DEC-0007, DEC-0020, DEC-0027, DEC-0035 ve DEC-0036 ile birlikte uygulanır
 
+### DEC-0046 — Kesişme koşulunda seçilebilir eşitlik davranışı
+
+- Tarih: 2026-07-23
+- Durum: ONAYLANDI
+- Karar sahibi: Hikmet Esentimur
+- İlgili sorular: Q-010, Q-015–Q-020; DEC-0007, DEC-0008
+- Karar: Her “Yukarı Keser” ve “Aşağı Keser” koşulunda eşitliğin kesişmeye dahil veya hariç olduğu kullanıcı tarafından seçilecek.
+- Uygulama sonuçları:
+  - “Eşitlik Dahil” seçeneğinde Yukarı Keser: önceki sol değer sağ değerden küçük veya eşit ve güncel sol değer sağ değerden büyük olduğunda oluşur.
+  - “Eşitlik Dahil” seçeneğinde Aşağı Keser: önceki sol değer sağ değerden büyük veya eşit ve güncel sol değer sağ değerden küçük olduğunda oluşur.
+  - “Eşitlik Hariç” seçeneğinde Yukarı Keser: önceki sol değer sağ değerden kesin küçük ve güncel sol değer sağ değerden kesin büyük olduğunda oluşur.
+  - “Eşitlik Hariç” seçeneğinde Aşağı Keser: önceki sol değer sağ değerden kesin büyük ve güncel sol değer sağ değerden kesin küçük olduğunda oluşur.
+  - Eşitlik davranışı her kesişme koşulunun zorunlu alanıdır; kullanıcı seçmeden koşul/strateji kaydedilemez ve sessiz hazır değer uygulanmaz.
+  - Kesişme iki ardışık kesin veri noktasıyla hesaplanır. `DEC-0007` uyarınca Kapanmış Mum modunda iki kapanmış veri noktası, Canlı Mum modunda değişebilen güncel değer kullanılır ve geri çekilme riski gösterilir.
+  - Aynı koşul aynı veri adımı için en fazla bir kesişme olayı üretir; yeniden hesaplama, sayfa yenileme veya bağlantı tekrarı yeni olay sayılmaz.
+  - Hesaplamada parasal/gösterge değerleri ikili kayan sayı yerine kesin ondalık veya göstergenin tanımlı sayısal hassasiyetiyle karşılaştırılır; yalnız görüntü yuvarlaması kesişme oluşturmaz.
+  - Eksik, geçersiz veya henüz yeterli geçmişi olmayan değer kesişme üretmez; neden tanılama kaydında gösterilebilir.
+  - Geçmiş sınama, deneme ve gerçek mod aynı kesişme tanımını ve gösterge sürümünü kullanır.
+- Gerekçe: Farklı stratejilerin eşitlik noktasını farklı yorumlayabilmesini sağlarken kesişmeyi kesin ve yeniden üretilebilir tanımlamak.
+- Ödünleşimler: Kullanıcı her kesişme koşulunda ek bir seçim yapmak zorundadır; strateji ayar ekranı ve sınama kapsamı büyür.
+- Önceki karar: DEC-0007 ve DEC-0008 ile birlikte uygulanır
+
 <!--
 ### DEC-XXXX — Karar başlığı
 

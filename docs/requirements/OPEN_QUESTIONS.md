@@ -130,11 +130,13 @@ Bu dosya, özgün senaryodaki belirsizlikleri, çelişkileri ve eklenmesi öneri
 - Soru: Yalnızca düz bir koşul listesi mi, yoksa iç içe gruplar ve parantezler mi desteklenmeli? `A VE B VEYA C` nasıl yorumlanacak?
 - Önerilen varsayılan: Açık koşul ağacı; grup bazlı ALL/ANY, UI'da parantezli özet.
 
-### Q-016 — “Yukarı/Aşağı Keser” tam olarak ne zaman true olur?
-- Durum: AÇIK
+### Q-016 — “Yukarı/Aşağı Keser” eşitliği nasıl ele alacak?
+- Durum: CEVAPLANDI
 - Öncelik: P0
-- Soru: Önceki ve güncel kapanmış mum değerleriyle tek olay mı üretir; eşitlik nasıl ele alınır?
-- Önerilen varsayılan: Önceki ve güncel kapanmış bar üzerinden formal iki-nokta tanımı; bar başına en fazla bir olay.
+- Karar: `DEC-0046`
+- Cevap: Her kesişme koşulunda eşitliğin dahil veya hariç olduğu kullanıcı tarafından seçilecek.
+- Soru: Önceki ve güncel değerlerle kesişme hesaplanırken eşitlik geçerli taraf değişimi sayılacak mı?
+- Önerilen varsayılan: Hazır seçim yok; kullanıcı Eşitlik Dahil veya Eşitlik Hariç seçer; veri adımı başına en fazla bir olay.
 
 ### Q-017 — “Yukarı Yönlü/Aşağı Yönlü” nasıl tanımlanacak?
 - Durum: AÇIK
