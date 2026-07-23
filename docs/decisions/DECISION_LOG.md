@@ -432,6 +432,27 @@ Bu dosya yalnızca kullanıcı tarafından açıkça onaylanmış kalıcı karar
 - Ödünleşimler: Zorunlu teknik adların Türkçe açıklamalarının tutarlı bir terim sözlüğüyle yönetilmesi gerekir.
 - Önceki karar: Yok
 
+### DEC-0023 — Kullanıcı seçilebilir üç benzetim düzeyi
+
+- Tarih: 2026-07-23
+- Durum: ONAYLANDI
+- Karar sahibi: Hikmet Esentimur
+- İlgili sorular: Q-051, Q-052, Q-066; DEC-0009, DEC-0010, DEC-0011, DEC-0020
+- Karar: Deneme modunda kullanıcı Temel, Orta veya İleri emir gerçekleşme benzetimi düzeyini seçebilecek.
+- Uygulama sonuçları:
+  - Temel düzey; alış-satış fiyat farkı, işlem ücreti ve yapılandırılabilir sabit fiyat kaymasını hesaba katar.
+  - Orta düzey; Temel düzeye ek olarak piyasa derinliği, emrin parça parça gerçekleşmesi, işlem gecikmesi ve vadeli işlemlerde fonlama maliyetini hesaba katar.
+  - İleri düzey; Orta düzeye ek olarak emir defterindeki sıra olasılığı, fiyatın emrin içinden geçmesi, borsa retleri, zaman aşımı, yeniden deneme ve daha ayrıntılı piyasa verisi davranışlarını canlandırır.
+  - Yeni stratejiler için varsayılan düzey Orta olacaktır; kullanıcı isterse değiştirebilir.
+  - Her çalışma seçilen düzeyi, ücret/fiyat kayması/gecikme varsayımlarını, veri kaynağını ve benzetim sürümünü değişmez sonuç kaydında saklar.
+  - Düzeyler aynı strateji ve veri üzerinde karşılaştırılabilir olacak; sonuç ekranı aradaki farkların nedenlerini gösterecek.
+  - Benzetim hiçbir düzeyde canlı piyasada aynı sonucun gerçekleşeceği garantisini vermeyecek; bu uyarı görünür olacaktır.
+  - İleri düzey için yeterli piyasa derinliği veya işlem verisi yoksa sistem sessizce daha basit düzeye düşmeyecek; kullanıcıya eksik veriyi ve kullanılabilen düzeyi bildirecek.
+  - Kullanıcı arayüzündeki bütün düzey adları ve açıklamalar sade Türkçe olacaktır.
+- Gerekçe: Hızlı deneme ile gerçeğe daha yakın sınama arasında kullanıcıya açık seçim sunmak.
+- Ödünleşimler: İleri düzey daha fazla piyasa verisi, işlem gücü, saklama alanı ve doğrulama testi gerektirir.
+- Önceki karar: DEC-0009, DEC-0010, DEC-0011 ve DEC-0020 ile birlikte uygulanır
+
 <!--
 ### DEC-XXXX — Karar başlığı
 

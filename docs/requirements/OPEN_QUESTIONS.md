@@ -372,11 +372,13 @@ Bu dosya, özgün senaryodaki belirsizlikleri, çelişkileri ve eklenmesi öneri
 
 ## G. Simülasyon, backtest ve strateji yaşam döngüsü
 
-### Q-051 — Simülasyon dolum modeli ne kadar gerçekçi olacak?
-- Durum: AÇIK
+### Q-051 — Deneme benzetiminde emir gerçekleşmesi ne kadar gerçekçi olacak?
+- Durum: CEVAPLANDI
 - Öncelik: P0
-- Soru: Last price dokunması yeterli mi; order-book, gecikme, kısmi fill, maker queue, ücret ve slippage modellenmeli mi?
-- Önerilen varsayılan: MVP'de muhafazakâr bid/ask + ücret + slippage + kısmi fill modeli; sonuçlarda simülasyon varsayımları açıkça gösterilir.
+- Karar: `DEC-0023`
+- Cevap: Kullanıcı Temel, Orta veya İleri benzetim düzeyini kendisi seçebilecek. Sonuçlarda seçilen düzey ve kullanılan varsayımlar açıkça gösterilecek.
+- Soru: Yalnız son fiyatın emre dokunması yeterli mi; piyasa derinliği, gecikme, emrin parça parça gerçekleşmesi, emir sırası, işlem ücreti ve fiyat kayması hesaba katılmalı mı?
+- Önerilen varsayılan: Orta düzey; alış-satış fiyatları, işlem ücreti, fiyat kayması, piyasa derinliği, gecikme ve parçalı gerçekleşme hesaba katılır.
 
 ### Q-052 — Tarihsel backtest eklensin mi?
 - Durum: AÇIK

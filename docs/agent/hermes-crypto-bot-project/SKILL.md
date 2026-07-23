@@ -78,7 +78,7 @@ Never enable or deploy live order submission until all of these are documented, 
 - kill switch and safe startup/shutdown behavior;
 - immutable audit log, monitoring, alerting, backups, and recovery runbooks;
 - sandbox/testnet and failure-injection acceptance tests;
-- an explicitly approved, tightly capped live pilot.
+- explicit live activation approval after a clear risk warning and MFA; no minimum paper-performance period is required, but every technical safety check above remains mandatory.
 
 If any item is missing, remain in simulation/test mode and record the blocker.
 
