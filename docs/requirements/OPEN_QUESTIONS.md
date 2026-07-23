@@ -23,8 +23,10 @@ Bu dosya, özgün senaryodaki belirsizlikleri, çelişkileri ve eklenmesi öneri
 - Önerilen varsayılan: İlk sürüm tek kullanıcı ve özel erişim; çok kullanıcılı SaaS sonraki faz.
 
 ### Q-002 — Uygulama nasıl erişilebilir olacak?
-- Durum: AÇIK
+- Durum: ERTELENDİ
 - Öncelik: P0
+- Karar: `DEC-0004`
+- Erteleme gerekçesi: Erişim modeli, hosting altyapısı ve güvenlik yetenekleri görüldükten sonra belirlenecek.
 - Soru: Yalnızca özel ağ/VPN üzerinden mi, internete açık alan adı üzerinden mi, yoksa yerel bilgisayarda mı çalışacak?
 - Önerilen varsayılan: TLS, kimlik doğrulama ve IP/VPN kısıtı olan özel dağıtım.
 
