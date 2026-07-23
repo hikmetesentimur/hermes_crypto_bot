@@ -691,10 +691,12 @@ Bu dosya, özgün senaryodaki belirsizlikleri, çelişkileri ve eklenmesi öneri
 - Önerilen varsayılan: Tek sabit Sahip; diğer roller en az yetki ilkesiyle seçilebilir izinlerden oluşur.
 
 ### Q-092 — Strateji başlatıldığında koşul zaten doğruysa sinyal üretilecek mi?
-- Durum: AÇIK
+- Durum: CEVAPLANDI
 - Öncelik: P0
+- Karar: `DEC-0049`
+- Cevap: İlk doğru durum sinyal üretmeyecek; önce koşulun yanlış olması, sonra doğruya geçmesi beklenecek.
 - Soru: Yeni strateji sürümü ilk değerlendirmesinde giriş koşulunu doğru bulursa bunu yanlış→doğru geçişi sayıp hemen sinyal mi üretmeli, yoksa önce koşulun en az bir kez yanlış olması mı beklenmeli?
-- Önerilen varsayılan: Güvenli başlangıç için ilk doğru durum yalnız kaydedilir; sinyal üretmek için daha sonra gözlenen yanlış→doğru geçişi beklenir.
+- Önerilen varsayılan: İlk doğru durum yalnız başlangıç değeri olarak kaydedilir; gözlenmiş yanlış→doğru geçişi olmadan sinyal üretilmez.
 
 ---
 

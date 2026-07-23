@@ -991,6 +991,27 @@ Bu dosya yalnızca kullanıcı tarafından açıkça onaylanmış kalıcı karar
 - Ödünleşimler: Koşul uzun süre doğru kalır ve ilk sinyal engellenir/kapanırsa, koşul yeniden yanlış→doğru olmadan yeni fırsat üretilmez.
 - Önceki karar: DEC-0007, DEC-0008, DEC-0046 ve DEC-0047 ile birlikte uygulanır
 
+### DEC-0049 — İlk doğru durum sinyal üretmez
+
+- Tarih: 2026-07-23
+- Durum: ONAYLANDI
+- Karar sahibi: Hikmet Esentimur
+- İlgili sorular: Q-010, Q-018, Q-053, Q-073, Q-088, Q-092; DEC-0007, DEC-0014, DEC-0025, DEC-0027, DEC-0048
+- Karar: Strateji veya yeni strateji sürümü ilk değerlendirmesinde giriş koşulunu doğru bulursa sinyal üretmeyecek; yeni sinyal için koşulun önce yanlış, sonra yeniden doğru olarak gözlenmesi gerekecek.
+- Uygulama sonuçları:
+  - İlk kesin değerlendirme Doğru ise durum “Doğru, Geçiş Bekliyor” olarak saklanır; giriş sinyali veya emir niyeti oluşturulmaz.
+  - İlk kesin değerlendirme Yanlış ise strateji sinyale hazır duruma geçer; daha sonraki ilk Yanlış→Doğru geçişi `DEC-0048` kapsamında sinyal üretir.
+  - İlk değerlendirme eksik/geçersiz veri nedeniyle kesin değilse başlangıç tamamlanmış sayılmaz; geçerli ilk kesin sonuç gelene kadar sinyal üretilmez.
+  - Strateji duraklatılıp devam ettirildiğinde veya sunucu yeniden başladığında kalıcı geçiş durumu geri yüklenir; bu olaylar “yeni başlangıç” sayılarak sinyal üretmez.
+  - Strateji değişikliği yeni sürüm oluşturduğunda yeni sürüm kendi başlangıç durumunu kurar; önceki sürümün Yanlış durumu yeni sürüme yapay geçiş üretmek için taşınmaz.
+  - Açık işlemlere yeni sürüm yönetim kuralları uygulanması giriş sinyali durumunu yeniden başlatmaz veya yeni giriş oluşturmaz.
+  - Geçmiş sınamada seçilen başlangıç tarihindeki ilk doğru durum işlem açmaz; sonuçlar bu kuralı rapor varsayımlarında gösterir.
+  - Deneme ve gerçek mod aynı başlangıç kuralını kullanır; gerçek moda geçmek mevcut doğru koşulu anlık girişe dönüştürmez.
+  - Kullanıcı arayüzü “Koşul şu anda doğru; yeni sinyal için önce yanlış→doğru geçişi bekleniyor” durumunu açık Türkçe gösterir.
+- Gerekçe: Strateji açma, sürüm değiştirme veya sistem yeniden başlatma anını yapay bir piyasa geçişi gibi yorumlayıp beklenmeyen işlem açılmasını önlemek.
+- Ödünleşimler: Strateji başlatıldığında zaten geçerli olan bir fırsat bilinçli olarak kaçırılabilir.
+- Önceki karar: DEC-0014, DEC-0025, DEC-0027 ve DEC-0048 ile birlikte uygulanır
+
 <!--
 ### DEC-XXXX — Karar başlığı
 
