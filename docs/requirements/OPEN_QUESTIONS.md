@@ -471,8 +471,10 @@ Bu dosya, özgün senaryodaki belirsizlikleri, çelişkileri ve eklenmesi öneri
 - Önerilen varsayılan: Lisansı doğrulanmış açık kaynak grafik; TradingView kullanılacaksa lisans kararı kaydedilir.
 
 ### Q-071 — Ürün kişisel araç mı, üçüncü kişilere hizmet mi?
-- Durum: AÇIK
+- Durum: CEVAPLANDI
 - Öncelik: P0
+- Karar: `DEC-0003`
+- Cevap: MVP tek kullanıcıyla başlayacak; uzun vadede kullanıcıların kendi borsa hesaplarını bağladığı abonelik/SaaS ürünü olacak. Platform kullanıcı fonlarını saklamayacak ve para çekme yetkisi almayacak.
 - Soru: Başkaları adına işlem, sinyal satışı, saklama/custody veya fon yönetimi hedefleniyor mu?
 - Önerilen varsayılan: Yalnız kullanıcının kendi hesabında kişisel araç; üçüncü kişi fonu/saklama/yatırım tavsiyesi kapsam dışı.
 
