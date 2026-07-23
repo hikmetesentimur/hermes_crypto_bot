@@ -158,6 +158,25 @@ Bu dosya yalnızca kullanıcı tarafından açıkça onaylanmış kalıcı karar
 - Ödünleşimler: UI, validasyon, açıklama ve test matrisi düz listeye göre daha karmaşıktır.
 - Önceki karar: Yok
 
+### DEC-0009 — Market Emir ve Fiyat Korumalı Tetikleyici ayrı seçenekler
+
+- Tarih: 2026-07-23
+- Durum: ONAYLANDI
+- Karar sahibi: Hikmet Esentimur
+- İlgili sorular: Q-021, Q-022, Q-023, Q-024, Q-050
+- Karar: Sinyal sonrası derhal gönderilen Market Emir ile sinyal fiyatına göre uygun fiyat koşulunu bekleyen Fiyat Korumalı Tetikleyici iki ayrı giriş davranışı olarak desteklenecek.
+- Uygulama sonuçları:
+  - Market Emir, risk ve veri güncelliği kontrolleri geçince beklemeden execution katmanına gönderilecek; sinyal fiyatına geri dönüşü süresiz beklemeyecek.
+  - Market Emir için kullanıcı/strateji bazlı maksimum spread ve slippage/fiyat sapması hard guard uygulanacak; guard aşıldığında emir gönderilmeyecek veya güvenli marketable-limit politikası uygulanacak. Kesin seçenek Q-050 ile tamamlanacak.
+  - Fiyat Korumalı Tetikleyici, Long için tanımlanmış üst fiyat koşulunu; Short için tanımlanmış alt fiyat koşulunu sonlu süre izleyecek. Referans fiyat, tolerans ve yön semantiği ayrı alanlar olacak.
+  - Fiyat Korumalı Tetikleyici zorunlu TTL/son kullanma, iptal nedeni ve tekil sinyal kimliği taşıyacak; süre dolunca sessizce Market Emre dönüşmeyecek.
+  - Bekleme sırasında koşul ağacının hâlâ geçerli olması gerekip gerekmediği, yeniden değerlendirme ve fiyat kaynağı emir spesifikasyonunda açıkça tanımlanacak.
+  - Paper ve live motorları aynı emir niyeti ve expiry semantiğini kullanacak; simülasyon sonucu bu iki davranışı ayrı raporlayacak.
+  - UI emir adını, bekleme durumunu, kalan süreyi ve gönderilmeme/iptal nedenini gösterecek.
+- Gerekçe: Kullanıcının hem hızlı market yürütmeyi hem de daha iyi fiyatı bekleyen davranışı kullanabilmesi; teknik olarak farklı semantikleri aynı “Market” adı altında karıştırmamak.
+- Ödünleşimler: Emir türü ve durum makinesi genişler; fiyat korumalı tetikleyici için kalıcı scheduler, stale-data ve restart yönetimi gerekir.
+- Önceki karar: Yok
+
 <!--
 ### DEC-XXXX — Karar başlığı
 

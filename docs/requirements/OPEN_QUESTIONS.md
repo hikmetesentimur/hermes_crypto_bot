@@ -169,8 +169,10 @@ Bu dosya, özgün senaryodaki belirsizlikleri, çelişkileri ve eklenmesi öneri
 - Önerilen varsayılan: Yürütülebilir yön fiyatı (alış=best ask, satış=best bid), timestamp ve maksimum yaş kontrolüyle.
 
 ### Q-023 — Market emir kuralı gerçekten bekleyen bir fiyat filtresi mi?
-- Durum: AÇIK
+- Durum: CEVAPLANDI
 - Öncelik: P0
+- Karar: `DEC-0009`
+- Cevap: Derhal gönderilen korumalı Market Emir ile fiyat koşulunu sonlu süre bekleyen Fiyat Korumalı Tetikleyici iki ayrı emir seçeneği olarak desteklenecek.
 - Soru: Belgede Long için emir anı fiyatının sinyal fiyatına eşit/düşük, Short için eşit/yüksek olması bekleniyor. Koşul sağlanmazsa ne kadar beklenecek, sinyal ne zaman iptal olacak? Bu davranış market emrinden çok fiyat korumalı tetikleyiciye benziyor.
 - Önerilen varsayılan: Maksimum bekleme süresi ve sapma toleranslı “protected market”; süre dolarsa iptal.
 
