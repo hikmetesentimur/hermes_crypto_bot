@@ -585,8 +585,10 @@ Bu dosya, özgün senaryodaki belirsizlikleri, çelişkileri ve eklenmesi öneri
 - Önerilen varsayılan: Position üst satırı + giriş/çıkış fill alt satırları; durum, kalan miktar, realized/unrealized PnL, fee, funding, mod, borsa ve yön görünür.
 
 ### Q-086 — Türkiye vergi raporunun hukuki niteliği nedir?
-- Durum: AÇIK
+- Durum: CEVAPLANDI
 - Öncelik: P0
+- Karar: `DEC-0013`
+- Cevap: MVP raporu bilgilendirme ve mali müşavir çalışma dosyası niteliğinde olacak; resmî beyanname veya vergi tavsiyesi olarak sunulmayacak.
 - Soru: Rapor yalnız bilgilendirme/mali müşavire veri hazırlama amacıyla mı, yoksa uzman onayından sonra beyanname hazırlığına doğrudan esas olacak doğrulanmış rapor olarak mı hedefleniyor?
 - Önerilen varsayılan: MVP'de bilgilendirme ve mali müşavir çalışma dosyası; uzman tarafından onaylanmış kural seti olmadan resmî beyanname iddiası yok.
 

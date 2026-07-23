@@ -237,6 +237,24 @@ Bu dosya yalnızca kullanıcı tarafından açıkça onaylanmış kalıcı karar
 - Ödünleşimler: Mevzuat takibi, uzman doğrulaması, kur/maliyet tabanı verisi ve sürümlü hesaplama motoru MVP kapsamını önemli ölçüde büyütür.
 - Önceki karar: DEC-0011 temel finansal kayıt modelini sağlar
 
+### DEC-0013 — Vergi raporu bilgilendirme ve mali müşavir çalışma dosyasıdır
+
+- Tarih: 2026-07-23
+- Durum: ONAYLANDI
+- Karar sahibi: Hikmet Esentimur
+- İlgili sorular: Q-044, Q-069, Q-072, Q-086; DEC-0012
+- Karar: MVP'deki Türkiye'ye özel vergi raporu bilgilendirme ve mali müşavir çalışma dosyası niteliğinde olacak; resmî beyanname veya kişiye özel vergi tavsiyesi olarak sunulmayacak.
+- Uygulama sonuçları:
+  - Rapor ve indirmelerde görünür kapsam/sorumluluk açıklaması bulunacak.
+  - Rapor ham fill, fee, funding, transfer ve kur dönüşüm kayıtlarıyla birlikte denetlenebilir çalışma dosyası sağlayacak.
+  - Eksik maliyet tabanı, borsa dışı transfer, eksik kur veya sınıflandırılamayan olaylar sessizce tahmin edilmeyecek; kullanıcı/mali müşavir incelemesi için işaretlenecek.
+  - Kural seti sürümü ve kaynak tarihi gösterilecek; güncel mevzuat uygunluğu garantisi verilmeyecek.
+  - Kullanıcı raporu mali müşavirine iletebilecek; CSV ve insan tarafından okunabilir özet asgari çıktılar olacak.
+  - Resmî beyannameye esas doğrulanmış mod ileride istenirse ayrı kapsam, uzman onayı, test ve hukuki değerlendirme ile etkinleştirilecek.
+- Gerekçe: Kullanışlı vergi görünürlüğü sağlarken doğrulanmamış mevzuat yorumunun resmî beyan gibi sunulmasını önlemek.
+- Ödünleşimler: Kullanıcı/mali müşavir nihai sınıflandırma ve beyan sorumluluğunu korur; ürün otomatik beyanname üretmez.
+- Önceki karar: DEC-0012'yi sınırlar ve açıklar
+
 <!--
 ### DEC-XXXX — Karar başlığı
 
