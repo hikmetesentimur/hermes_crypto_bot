@@ -639,6 +639,27 @@ Bu dosya yalnızca kullanıcı tarafından açıkça onaylanmış kalıcı karar
 - Ödünleşimler: Durum geçişleri, olay kaydı ve borsa karşılaştırması basit bir “başarılı/başarısız” alanından daha karmaşıktır.
 - Önceki karar: DEC-0009, DEC-0010 ve DEC-0027 ile birlikte uygulanır
 
+### DEC-0033 — Önce borsada koruma, destek yoksa açık uyarılı sistem takibi
+
+- Tarih: 2026-07-23
+- Durum: ONAYLANDI
+- Karar sahibi: Hikmet Esentimur
+- İlgili sorular: Q-028–Q-030, Q-034, Q-037, Q-055, Q-065, Q-079; DEC-0015, DEC-0026, DEC-0027
+- Karar: Kâr alma, zarar durdurma ve diğer koruyucu çıkış emirleri öncelikle doğrudan borsaya yerleştirilecek. Borsa ilgili korumayı desteklemiyorsa kullanıcıya açık kesinti riski gösterilerek sistem tarafından takip seçeneği sunulacak.
+- Uygulama sonuçları:
+  - Borsa desteği; borsa, Spot/Vadeli ürün, emir türü ve hesap modu için güncel yetenek kaydından doğrulanır; destek varsayılmaz.
+  - Borsaya yerleştirilen koruyucu emrin kabul edildiği, doğru miktar/yön/fiyatla açık olduğu doğrulanmadan işlem “korunuyor” olarak gösterilmez.
+  - Vadeli işlemlerde koruyucu çıkışlar yalnız pozisyon azaltma veya pozisyon kapatma özelliğini kullanır; yanlışlıkla ters yeni pozisyon açamaz.
+  - Borsa desteği yoksa arayüz sistem takibinin sunucu, ağ, veri akışı veya borsa bağlantısı kesilirse çalışmayabileceğini açık Türkçe uyarıyla anlatır.
+  - Sistem takibi kullanıcı tarafından ayrıca seçilip onaylanır; sessizce veya otomatik olarak borsa korumasının yerine geçmez.
+  - Gerçek modda sistem takibi için güncel piyasa verisi, zaman uyumu, sürekli izleme, alarm, yedek çalışma süreci ve kesinti davranışı zorunlu teknik kontroldür.
+  - Veri eski, bağlantı kopuk veya sistem sağlığı yetersizse yeni korumasız giriş güvenli biçimde engellenir; mevcut açık risk için acil uyarı üretilir.
+  - Koruma türü, borsadaki emir numarası veya sistem takip kuralı, son doğrulama zamanı ve koruma durumu işlem ayrıntısında gösterilir.
+  - Koruyucu emir değiştirilirken yeni koruma doğrulanmadan eski koruma kaldırılmaz; eşzamanlı iki çıkışın pozisyonu tersine çevirmemesi için miktar ve yalnız azaltma denetimi yapılır.
+- Gerekçe: Borsa tarafındaki koruma ile kesintiye dayanıklılığı artırırken borsanın desteklemediği durumlarda kullanıcıya bilinçli bir seçenek sunmak.
+- Ödünleşimler: Sistem takibi borsa üzerindeki koruma kadar güvenli değildir ve yüksek erişilebilirlik, izleme, uyarı ve kullanıcı onayı gerektirir.
+- Önceki karar: DEC-0015, DEC-0026 ve DEC-0027 ile birlikte uygulanır
+
 <!--
 ### DEC-XXXX — Karar başlığı
 

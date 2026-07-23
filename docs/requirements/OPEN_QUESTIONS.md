@@ -574,11 +574,13 @@ Bu dosya, özgün senaryodaki belirsizlikleri, çelişkileri ve eklenmesi öneri
 - Soru: Gönderilmeden önceki hazırlık, borsa kabulü, parçalı gerçekleşme, iptal bekleme, ret, zaman aşımı ve durumu araştırma ayrı tutulacak mı?
 - Önerilen varsayılan: Ayrıntılı iç kayıt; ana ekranda sade özet, ayrıntıda zaman sıralı tam geçmiş.
 
-### Q-079 — Koruyucu emirler borsada native mi tutulacak?
-- Durum: AÇIK
+### Q-079 — Koruyucu emirler borsada mı, sistemde mi tutulacak?
+- Durum: CEVAPLANDI
 - Öncelik: P0
-- Soru: Borsa desteklediğinde TP/SL/OCO/bracket ve reduce-only kullanılacak mı? Native destek yoksa yalnız site takibine izin verilecek mi?
-- Önerilen varsayılan: Native koruma öncelikli; destek yoksa bu sınırlama açıkça gösterilir, yüksek erişilebilir takip ve acil politika olmadan live'a izin verilmez.
+- Karar: `DEC-0033`
+- Cevap: Öncelik borsadaki koruyucu emirler olacak; borsa desteklemiyorsa açık kesinti uyarısıyla sistem tarafından takip seçeneği sunulacak.
+- Soru: Kâr alma ve zarar durdurma emirleri mümkün olduğunda doğrudan borsaya mı yerleştirilecek? Destek yoksa gerçek işlem engellenecek mi, sistem takibi seçilebilir mi?
+- Önerilen varsayılan: Önce borsa; destek yoksa kullanıcı açıkça onaylarsa yüksek görünürlüklü sistem takibi.
 
 ### Q-080 — Test ve canlı istatistikleri tamamen ayrı mı tutulacak?
 - Durum: AÇIK
