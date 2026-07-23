@@ -356,6 +356,25 @@ Bu dosya yalnızca kullanıcı tarafından açıkça onaylanmış kalıcı karar
 - Ödünleşimler: Timezone/DST, snapshot ve yüksek hacimli kayan pencere hesapları ek veri ve test karmaşıklığı getirir.
 - Önceki karar: DEC-0016 ve DEC-0017 ile birlikte uygulanır
 
+### DEC-0019 — Kullanıcı drawdown/liquidation kuralları varsayılan aktif ve kapatılabilir
+
+- Tarih: 2026-07-23
+- Durum: ONAYLANDI
+- Karar sahibi: Hikmet Esentimur
+- İlgili sorular: Q-046, Q-047, Q-049, Q-076; DEC-0015–DEC-0018
+- Karar: Kullanıcı düzeyindeki Maksimum Drawdown ve Futures Liquidation Mesafesi risk kuralları varsayılan aktif olacak fakat kullanıcı tarafından kapatılabilecek.
+- Uygulama sonuçları:
+  - Yeni live strateji/hesap konfigürasyonunda iki kural da güvenli varsayılan eşiklerle etkin başlar; kesin eşikler ayrı risk kararı/ortam ayarıyla belirlenir.
+  - Kapatma işlemi MFA/step-up, etki özeti, açık risk önizlemesi ve audit kaydı gerektirir; sessiz veya toplu varsayılan değişiklik yapılamaz.
+  - Kullanıcı kuralı kapatmak yalnız kendi yapılandırılabilir kuralını devre dışı bırakır; platformun atlanamayan maksimum kaldıraç/notional, stale-data, borsa liquidation bütünlüğü ve operasyonel hard safety cap'lerini kaldırmaz.
+  - Drawdown ölçümü seçilen kapsam, pencere, equity kaynağı ve PnL bileşenleriyle sürümlü tanımlanır; high-water mark ve transfer düzeltmeleri kaydedilir.
+  - Liquidation Mesafesi kuralı yalnız Futures'ta uygulanır; borsa mark price, maintenance margin/bracket ve gerçek liquidation verisiyle hesaplanır.
+  - Cross marjinde hesap düzeyi etkiler; izole marjinde pozisyon düzeyi etkiler. Değer hesaplanamıyorsa live yeni giriş fail-closed olur.
+  - Kural yeniden açıldığında mevcut risk hemen değerlendirilir; ihlal varsa seçilen DEC-0017 aksiyonu uygulanır.
+- Gerekçe: Kullanıcıya strateji esnekliği verirken güvenli varsayılan ve platform bütünlüğünü korumak.
+- Ödünleşimler: Kullanıcı kuralı kapatmak finansal kayıp/likidasyon riskini artırır; UI bu riski açıkça göstermelidir.
+- Önceki karar: DEC-0015, DEC-0016, DEC-0017 ve DEC-0018 ile birlikte uygulanır
+
 <!--
 ### DEC-XXXX — Karar başlığı
 

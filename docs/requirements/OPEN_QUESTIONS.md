@@ -351,8 +351,10 @@ Bu dosya, özgün senaryodaki belirsizlikleri, çelişkileri ve eklenmesi öneri
 - Önerilen varsayılan: Europe/Istanbul takvim dönemleri; dönem başı equity snapshot; transferler PnL'dan ayrılır.
 
 ### Q-049 — Maksimum drawdown ve liquidation güvenliği eklensin mi?
-- Durum: AÇIK
+- Durum: CEVAPLANDI
 - Öncelik: P0
+- Karar: `DEC-0019`
+- Cevap: Maksimum Drawdown ve Liquidation Mesafesi kuralları kullanıcı tarafından açılıp kapatılabilecek; varsayılan aktif olacak. Platformun atlanamayan hard safety cap'leri ayrı kalacak.
 - Soru: Belgede doğrudan yer almıyor. Peak equity drawdown, maksimum hesap kullanımı ve liquidation mesafesi limitleri zorunlu olacak mı?
 - Önerilen varsayılan: Evet; canlı modun zorunlu hard limitleri.
 
