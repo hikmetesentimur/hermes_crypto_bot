@@ -14,8 +14,10 @@ Bu dosya, özgün senaryodaki belirsizlikleri, çelişkileri ve eklenmesi öneri
 ## A. Ürün kapsamı ve kullanıcı modeli
 
 ### Q-001 — Ürün kimin kullanımına açık olacak?
-- Durum: AÇIK
+- Durum: CEVAPLANDI
 - Öncelik: P0
+- Karar: `DEC-0001`
+- Cevap: İlk sürüm tek kullanıcı için geliştirilecek; mimari ve veri modeli gelecekte çoklu kullanıcıya genişlemeye hazır olacak.
 - Soru: Sistem yalnızca Hikmet Esentimur'un kendi hesapları için kişisel/özel bir uygulama mı, yoksa birden fazla müşterinin kayıt olup kendi borsa anahtarlarını bağlayacağı SaaS ürünü mü olacak?
 - Neden gerekli: Kimlik doğrulama, tenant izolasyonu, mevzuat, destek, faturalandırma ve güvenlik mimarisini değiştirir.
 - Önerilen varsayılan: İlk sürüm tek kullanıcı ve özel erişim; çok kullanıcılı SaaS sonraki faz.
