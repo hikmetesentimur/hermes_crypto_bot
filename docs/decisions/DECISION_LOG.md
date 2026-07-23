@@ -1012,6 +1012,31 @@ Bu dosya yalnızca kullanıcı tarafından açıkça onaylanmış kalıcı karar
 - Ödünleşimler: Strateji başlatıldığında zaten geçerli olan bir fırsat bilinçli olarak kaçırılabilir.
 - Önceki karar: DEC-0014, DEC-0025, DEC-0027 ve DEC-0048 ile birlikte uygulanır
 
+### DEC-0050 — Koşul amacına göre otomatik ve görünür güvenli fiyat kaynağı
+
+- Tarih: 2026-07-23
+- Durum: ONAYLANDI
+- Karar sahibi: Hikmet Esentimur
+- İlgili sorular: Q-010, Q-019, Q-022–Q-024, Q-037, Q-043, Q-050, Q-077, Q-089; DEC-0007, DEC-0009, DEC-0011, DEC-0020, DEC-0031
+- Karar: Sistem fiyat kaynağını koşulun veya hesabın amacına göre güvenli biçimde otomatik seçecek; kullanılan fiyat türünü ve zamanını kullanıcıya açıkça gösterecek.
+- Uygulama sonuçları:
+  - Mum ve mum tabanlı gösterge koşullarında seçilen zaman aralığı/grafik türünün ilgili mum değeri kullanılır. Varsayılan fiyat alanı kapanıştır; göstergenin sözleşmesi farklı açık/yüksek/düşük/kapanış girdisi gerektiriyorsa bu açıkça gösterilir.
+  - `DEC-0007` kapsamındaki Kapanmış Mum modunda son kesin kapanmış mum; Canlı Mum modunda henüz kapanmamış mumun güncel değeri kullanılır ve geri çekilme/değişme riski görünür olur.
+  - Emir yürütme öncesi kullanılabilir yön fiyatı alış için emir defterindeki en iyi satış, satış için en iyi alış fiyatıdır. Son işlem veya iki fiyatın ortalaması gerçekleşebilir fiyat gibi kullanılmaz.
+  - Piyasa ve Fiyat Korumalı Tetikleyici emirlerinde yön fiyatının zamanı, veri yaşı, alış-satış farkı ve sinyal fiyatından sapma `DEC-0020` sınırlarına göre denetlenir.
+  - Limit ve Stop-Limit emirlerinde kullanıcı hedef/tetik değerini belirler; sistem emir defteri yön fiyatını yalnız geçerlilik, hemen gerçekleşme, yalnız emir defterine eklenme ve tahmini etki kontrolünde kullanır.
+  - Vadeli işlemlerde tasfiye mesafesi, marjin riski ve gerçekleşmemiş kâr-zarar için borsanın adil fiyatı kullanılır; borsa ürünü başka zorunlu risk kaynağı tanımlıyorsa yetenek kaydında açıkça belirtilir.
+  - Gerçekleşmiş kâr-zarar yalnız gerçek emir gerçekleşme fiyatları ve miktarlarından hesaplanır; sinyal, orta veya adil fiyat gerçekleşmiş sonuç yerine kullanılmaz.
+  - Spot gerçekleşmemiş değerleme için satılabilir en iyi alış fiyatı temel alınır; rapor isterse son işlem/orta fiyatı ayrıca bilgi amaçlı gösterebilir fakat net gerçekleşmiş sonuçla karıştırmaz.
+  - Geçmiş sınama ve deneme, seçilen benzetim düzeyine göre alış/satış farkı ve emir defteri davranışını canlandırır; gerçek yön fiyatı verisi yoksa kullanılan yaklaşım ve sınırlama raporda görünür olur.
+  - Her koşul özeti, sinyal kararı, engelleme kaydı, emir niyeti ve sonuç raporu kullanılan fiyat kaynağını, borsayı, ürün/çifti ve zaman damgasını saklar.
+  - Kullanıcı bu otomatik eşlemeyi sıradan strateji ayarıyla değiştiremez; böylece geçmiş sınama ile gerçek yürütme arasında iyimser veya uyumsuz fiyat seçimi yapılamaz.
+  - Gerekli fiyat kaynağı yok, geçersiz veya güvenlik sınırından eskiyse başka bir fiyat sessizce yerine konmaz; yeni giriş engellenir ve `DEC-0045` veri iyileştirme davranışı uygulanır.
+  - Kesin sayısal veri yaşı ve gecikme sınırları gerçek ölçümlerden sonra Q-089 kapsamında ayrıca onaylanacaktır.
+- Gerekçe: Her amaç için ekonomik olarak anlamlı ve ulaşılabilir fiyatı kullanarak yanıltıcı sinyal, iyimser emir hesabı ve yanlış risk ölçümü ihtimalini azaltmak.
+- Ödünleşimler: Kullanıcı fiyat kaynağını serbestçe değiştiremez; buna karşılık sonuçlar daha tutarlı, güvenli ve karşılaştırılabilir olur.
+- Önceki karar: DEC-0007, DEC-0009, DEC-0011, DEC-0020, DEC-0031 ve DEC-0045 ile birlikte uygulanır
+
 <!--
 ### DEC-XXXX — Karar başlığı
 

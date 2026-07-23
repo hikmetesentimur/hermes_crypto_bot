@@ -154,11 +154,13 @@ Bu dosya, özgün senaryodaki belirsizlikleri, çelişkileri ve eklenmesi öneri
 - Soru: Koşul doğru kaldığı her değerlendirmede mi, yoksa yalnız yanlış→doğru geçişinde mi sinyal üretilecek?
 - Önerilen varsayılan: Yalnız yanlış→doğru geçişi; aynı veri adımı ve sinyal kimliği yeniden emir oluşturmaz.
 
-### Q-019 — Fiyat ile kıyaslamada hangi fiyat kullanılacak?
-- Durum: AÇIK
+### Q-019 — Fiyatla kıyaslamada fiyat kaynağı nasıl seçilecek?
+- Durum: CEVAPLANDI
 - Öncelik: P0
-- Soru: Son işlem, mark, index, bid, ask, mid veya mum kapanışı mı?
-- Önerilen varsayılan: İndikatör koşulunda ilgili kapanmış mumun close değeri; yürütmede yön bazlı gerçek order-book fiyatı.
+- Karar: `DEC-0050`
+- Cevap: Sistem koşulun amacına göre güvenli fiyat kaynağını otomatik seçecek ve kullanılan fiyat türünü kullanıcıya açıkça gösterecek.
+- Soru: Mum/gösterge koşulu, emir yürütme, vadeli işlem riski ve kâr-zarar hesabında hangi fiyat kullanılacak?
+- Önerilen varsayılan: Mum koşulunda ilgili mum fiyatı; alış yürütmede en iyi satış, satış yürütmede en iyi alış; vadeli riskte adil fiyat; gerçekleşmiş sonuçta gerçek emir gerçekleşmeleri.
 
 ### Q-020 — Çoklu zaman dilimleri nasıl hizalanacak?
 - Durum: AÇIK
@@ -178,11 +180,13 @@ Bu dosya, özgün senaryodaki belirsizlikleri, çelişkileri ve eklenmesi öneri
 - Soru: “Tetikleme Sapması” ile “Tetiklemeli Limit Order” aynı seçenek mi?
 - Önerilen varsayılan: Tek ad: “Sinyal Fiyatından Sapmalı Limit Emir”.
 
-### Q-022 — “Koşullar gerçekleştiği andaki gerçek tahta fiyatı” hangi fiyat?
-- Durum: AÇIK
+### Q-022 — Koşullar gerçekleştiği andaki kullanılabilir emir fiyatı nedir?
+- Durum: CEVAPLANDI
 - Öncelik: P0
-- Soru: Long için best ask, short için best bid, son işlem veya mid fiyat mı? Snapshot gecikmesi için tolerans nedir?
-- Önerilen varsayılan: Yürütülebilir yön fiyatı (alış=best ask, satış=best bid), timestamp ve maksimum yaş kontrolüyle.
+- Karar: `DEC-0050`
+- Cevap: Alış için emir defterindeki en iyi satış fiyatı, satış için en iyi alış fiyatı kullanılacak; kaynak ve zamanı kullanıcıya gösterilecek.
+- Soru: Sinyalden emir kararına geçerken o anda gerçekten ulaşılabilir yön fiyatı nasıl belirlenecek?
+- Önerilen varsayılan: Alışta en iyi satış, satışta en iyi alış; güncellik ve fiyat farkı güvenlik denetimi zorunlu.
 
 ### Q-023 — Market emir kuralı gerçekten bekleyen bir fiyat filtresi mi?
 - Durum: CEVAPLANDI
