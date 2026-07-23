@@ -313,8 +313,10 @@ Bu dosya, özgün senaryodaki belirsizlikleri, çelişkileri ve eklenmesi öneri
 - Önerilen varsayılan: Ayrı metrikler göster: fiyat getirisi, gerçekleşmiş PnL tutarı, kullanılan marjine göre ROE ve strateji sermayesine göre getiri.
 
 ### Q-044 — Komisyon, funding, slippage ve vergi nasıl ele alınacak?
-- Durum: AÇIK
+- Durum: CEVAPLANDI
 - Öncelik: P0
+- Karar: `DEC-0011`, `DEC-0012`
+- Cevap: Net PnL komisyon, funding, slippage ve ilgili gerçekleşmiş maliyetleri içerecek; MVP ayrıca Türkiye'ye özel vergi raporu üretecek. Vergi raporunun resmî/bilgilendirme niteliği ve uzman onay süreci ayrıca kesinleştirilecek.
 - Soru: Net PnL hesaplarında maker/taker ücretleri, funding, borç faizi ve gerçekleşen kayma dahil mi? Vergi raporu kapsamda mı?
 - Önerilen varsayılan: Net PnL'a ücret/funding/slippage dahil; vergi tavsiyesi yok, yalnız dışa aktarılabilir işlem kaydı.
 
@@ -581,6 +583,12 @@ Bu dosya, özgün senaryodaki belirsizlikleri, çelişkileri ve eklenmesi öneri
 - Öncelik: P1
 - Soru: Fill'ler alt satırlarda mı; kapanmamış alanlar boş mu; unrealized PnL ve kalan miktar gösterilsin mi?
 - Önerilen varsayılan: Position üst satırı + giriş/çıkış fill alt satırları; durum, kalan miktar, realized/unrealized PnL, fee, funding, mod, borsa ve yön görünür.
+
+### Q-086 — Türkiye vergi raporunun hukuki niteliği nedir?
+- Durum: AÇIK
+- Öncelik: P0
+- Soru: Rapor yalnız bilgilendirme/mali müşavire veri hazırlama amacıyla mı, yoksa uzman onayından sonra beyanname hazırlığına doğrudan esas olacak doğrulanmış rapor olarak mı hedefleniyor?
+- Önerilen varsayılan: MVP'de bilgilendirme ve mali müşavir çalışma dosyası; uzman tarafından onaylanmış kural seti olmadan resmî beyanname iddiası yok.
 
 ---
 

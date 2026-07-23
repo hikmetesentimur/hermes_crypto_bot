@@ -217,6 +217,26 @@ Bu dosya yalnızca kullanıcı tarafından açıkça onaylanmış kalıcı karar
 - Ödünleşimler: Fill ve maliyet ledger'ı ile ürün bazlı hesaplama daha kapsamlı veri modeli ve test gerektirir.
 - Önceki karar: DEC-0005 ve DEC-0006 ile birlikte uygulanır
 
+### DEC-0012 — MVP Türkiye'ye özel vergi raporu üretir
+
+- Tarih: 2026-07-23
+- Durum: ONAYLANDI
+- Karar sahibi: Hikmet Esentimur
+- İlgili sorular: Q-044, Q-061, Q-062, Q-069, Q-072; takip sorusu gerekli
+- Karar: MVP, fill-ledger ve net PnL kayıtlarından Türkiye'ye özel vergi raporu üretecek.
+- Uygulama sonuçları:
+  - Vergi raporu yalnız özet PnL ekranından değil; immutable işlem, fill, fee, funding, transfer ve varlık hareketi kayıtlarından üretilecek.
+  - Her rapor dönem, para birimi/kur dönüşüm kaynağı, kullanılan maliyet yöntemi, kural seti sürümü, mevzuat/kaynak tarihi ve oluşturulma timestamp'ini taşıyacak.
+  - Vergi kuralları kod içine dağınık sabitler olarak gömülmeyecek; sürümlü, test edilmiş ve geçmiş raporu yeniden üretebilir kural seti olacak.
+  - Kullanıcıya ham kayıt, hesaplama adımı ve özet sonuç CSV/uygun formatlarda dışa aktarılacak; yuvarlama ve eksik veri açıkça işaretlenecek.
+  - Borsa dışı transferler, başka cüzdan/borsa maliyet tabanı ve kayıp geçmiş veri kullanıcı doğrulaması olmadan varsayılmayacak.
+  - Kural seti Türkiye'deki güncel mevzuat ve yetkin mali müşavir/vergi hukukçusu görüşüyle doğrulanmadan rapor “resmî beyanname” veya “vergi tavsiyesi” olarak etiketlenmeyecek.
+  - Mevzuat değişikliğinde eski raporlar kendi kural sürümüyle yeniden üretilebilir kalacak; yeni kural geçmiş raporu sessizce değiştirmeyecek.
+  - Kişisel/finansal rapor verileri erişim kontrolü, şifreleme, audit ve saklama-imha politikasına tabi olacak.
+- Gerekçe: Kullanıcı MVP'den itibaren Türkiye'ye özel vergi görünürlüğü istiyor.
+- Ödünleşimler: Mevzuat takibi, uzman doğrulaması, kur/maliyet tabanı verisi ve sürümlü hesaplama motoru MVP kapsamını önemli ölçüde büyütür.
+- Önceki karar: DEC-0011 temel finansal kayıt modelini sağlar
+
 <!--
 ### DEC-XXXX — Karar başlığı
 
