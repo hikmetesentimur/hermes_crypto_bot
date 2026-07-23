@@ -550,11 +550,13 @@ Bu dosya, özgün senaryodaki belirsizlikleri, çelişkileri ve eklenmesi öneri
 - Soru: Eski işlem çifti, emir türü, marjin, kaldıraç, yön ve borsaya özel ayarlar sessizce korunacak mı, sıfırlanacak mı?
 - Önerilen varsayılan: Önce etki özeti ve onay; yalnız uyumsuz alanlar temizlenir, çalışan stratejide yeni sürüm oluşur.
 
-### Q-076 — Varsayılan değerler ve canlı mod validasyonu nedir?
-- Durum: AÇIK
+### Q-076 — Riskli alanların hazır değerleri ve gerçek mod denetimi nedir?
+- Durum: CEVAPLANDI
 - Öncelik: P0
-- Soru: Mod, yön, marjin, kaldıraç, emir, TP/SL ve risk alanlarının başlangıç değerleri ne olacak? Canlı modda stop/risk alanları boş bırakılabilir mi?
-- Önerilen varsayılan: Paper mode; Spot/Long; kaldıraç 1; canlı modda pozisyon/risk hard cap ve koruyucu çıkış zorunlu; boş değer sınırsız sayılmaz.
+- Karar: `DEC-0030`
+- Cevap: Pozisyon tutarı, kaldıraç, zarar durdurma ve risk sınırları boş gelecek; kullanıcı bu alanları zorunlu olarak dolduracak.
+- Soru: Sistem kullanıcı adına pozisyon tutarı, kaldıraç, zarar durdurma veya risk sınırı seçmeli mi? Gerçek modda hangi alanlar boş bırakılamaz?
+- Önerilen varsayılan: Riskli finansal alanlarda hazır değer yok; kullanıcı açıkça girer ve sunucu tarafı denetimden geçer.
 
 ### Q-077 — Performans istatistiklerinin kesin tanımı nedir?
 - Durum: AÇIK

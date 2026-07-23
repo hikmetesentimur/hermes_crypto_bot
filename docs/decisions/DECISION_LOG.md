@@ -576,6 +576,27 @@ Bu dosya yalnızca kullanıcı tarafından açıkça onaylanmış kalıcı karar
 - Ödünleşimler: Her ana seçim değişikliğinde kullanıcıya ek onay adımı ve ayrıntılı bağlılık haritası gerekir.
 - Önceki karar: DEC-0002 ve DEC-0014 ile birlikte uygulanır
 
+### DEC-0030 — Riskli finansal alanlar boş ve zorunlu gelir
+
+- Tarih: 2026-07-23
+- Durum: ONAYLANDI
+- Karar sahibi: Hikmet Esentimur
+- İlgili sorular: Q-031, Q-032, Q-033, Q-034, Q-046, Q-049, Q-054, Q-076; DEC-0005, DEC-0006, DEC-0015–DEC-0019
+- Karar: Yeni stratejide pozisyon tutarı, kaldıraç, zarar durdurma ve risk sınırları hazır değerle doldurulmayacak; kullanıcı bu alanları zorunlu olarak kendisi girecek.
+- Uygulama sonuçları:
+  - Arayüz riskli alanlarda örnek açıklama gösterebilir fakat örnek sayı gerçek değer olarak kaydedilmez veya sessizce emre dönüşmez.
+  - Spot işlemlerde kaldıraç alanı gösterilmez; Vadeli işlemlerde kullanıcı açıkça kaldıraç seçmeden strateji başlatılamaz.
+  - Pozisyon tutarı, `DEC-0005` ve `DEC-0006` kapsamındaki tutar türü ve bakiye tabanıyla birlikte açıkça seçilir.
+  - Zarar durdurma zorunlu alan olur; kullanıcı fiyat/yüzde türünü ve değeri seçer. Borsada desteklenen koruyucu emir kurulmadan gerçek giriş güvenli kabul edilmez.
+  - En az bir risk kuralı tanımlanmadan strateji başlatılamaz; kapsam, ölçüm, eşik, zaman penceresi ve aksiyon alanları eksiksiz olmalıdır.
+  - Kullanıcı değerleri borsanın en az/en çok miktar, fiyat adımı, kaldıraç dilimi, kullanılabilir bakiye ve platform hard sınırlarına göre sunucu tarafında denetlenir.
+  - Deneme ve geçmiş veri sınamasında da aynı zorunlu alanlar kullanılır; böylece eksik risk ayarıyla iyimser sonuç üretilmez.
+  - Strateji kopyalanırken değerler kopyalanabilir fakat kullanıcı yeni borsa/hesapta başlatmadan önce etki özetini ve risk değerlerini yeniden onaylar.
+  - Hazır değer bulunmaması, platformun atlanamayan hard güvenlik sınırları olmadığı anlamına gelmez.
+- Gerekçe: Sistem kullanıcının haberi olmadan finansal risk seçmesin; kullanıcı kritik değerleri bilinçli ve açık biçimde belirlesin.
+- Ödünleşimler: Strateji oluşturma daha uzun sürer ve hızlı başlangıç azalır; yanlışlıkla varsayılan risk alınması önlenir.
+- Önceki karar: DEC-0005, DEC-0006, DEC-0015, DEC-0016 ve DEC-0019 ile birlikte uygulanır
+
 <!--
 ### DEC-XXXX — Karar başlığı
 
