@@ -275,6 +275,26 @@ Bu dosya yalnızca kullanıcı tarafından açıkça onaylanmış kalıcı karar
 - Ödünleşimler: Açık pozisyona güvenli policy migrasyonu, yalnız yeni işlemlere uygulamaya göre çok daha karmaşık ve yüksek risklidir.
 - Önceki karar: DEC-0007, DEC-0008 ve DEC-0010 ile birlikte uygulanır
 
+### DEC-0015 — Paper performans şartı olmadan uyarı + MFA ile canlı geçiş
+
+- Tarih: 2026-07-23
+- Durum: ONAYLANDI
+- Karar sahibi: Hikmet Esentimur
+- İlgili sorular: Q-005, Q-046, Q-049, Q-054, Q-058, Q-059, Q-065, Q-076
+- Karar: Kullanıcının canlı moda geçmesi için minimum paper süresi, minimum işlem sayısı veya performans eşiği zorunlu olmayacak. Kullanıcı risk uyarısını onaylayıp MFA/re-auth tamamladıktan sonra canlı geçiş talep edebilecek.
+- Uygulama sonuçları:
+  - UI toggle doğrudan mod değiştirmez; sunucuda doğrulanan bir canlıya alma talebi başlatır.
+  - Kullanıcıya borsa/hesap, strateji sürümü, ürün, sembol evreni, maksimum kaldıraç, boyutlandırma, TP/SL, DCA ve hard risk limitlerini içeren etki özeti gösterilir.
+  - MFA veya yakın zamanda yapılmış step-up authentication ve açık risk onayı olmadan talep kabul edilmez.
+  - Aşağıdaki teknik kontroller atlanamaz: trade-only/withdrawal kapalı API yetkisi, doğru live credential, borsa/simge capability, precision/min-notional, kullanılabilir bakiye/marjin, stale-data ve clock kontrolü, açık emir/pozisyon reconciliation, idempotency altyapısı, kill switch, zorunlu platform risk sınırları ve audit/monitoring sağlığı.
+  - Herhangi bir hard kontrol başarısızsa strateji live olmaz; paper/test durumunda kalır ve neden kullanıcıya gösterilir.
+  - Paper/backtest emirleri, pozisyonları ve bakiyeleri canlı hesaba taşınmaz; live deployment yeni ayrı çalışma örneği oluşturur.
+  - Canlıya geçiş ve geri dönüş kullanıcı, zaman, MFA olayı, strateji sürümü ve kontrol sonuçlarıyla append-only audit log'a yazılır.
+  - Kullanıcı paper performans şartını atlayabilse de ürün simülasyonun canlı sonuç garantisi olmadığını açıkça belirtir.
+- Gerekçe: Kullanıcı stratejiyi ne zaman canlıya alacağına kendisi karar vermek istiyor.
+- Ödünleşimler: Zorunlu paper kanıtı ve düşük limitli canary olmadan kullanıcı finansal riski artar; teknik hard güvenlik kapıları bu kararla kaldırılamaz.
+- Önceki karar: DEC-0003 ve proje canlı işlem güvenlik kapısıyla birlikte uygulanır
+
 <!--
 ### DEC-XXXX — Karar başlığı
 

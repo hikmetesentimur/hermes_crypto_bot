@@ -381,8 +381,10 @@ Bu dosya, özgün senaryodaki belirsizlikleri, çelişkileri ve eklenmesi öneri
 - Önerilen varsayılan: Immutable strategy version; kaydetme yeni taslak/sürüm üretir, explicit activate ile devreye alınır.
 
 ### Q-054 — Testten gerçeğe geçişte hangi kontroller zorunlu?
-- Durum: AÇIK
+- Durum: CEVAPLANDI
 - Öncelik: P0
+- Karar: `DEC-0015`
+- Cevap: Zorunlu paper süresi/işlem sayısı/performans eşiği olmayacak; kullanıcı risk uyarısı ve MFA sonrası istediği zaman canlıya geçebilecek. Atlanamayan teknik güvenlik ve risk kontrolleri yine zorunlu olacak.
 - Soru: Minimum test süresi/işlem sayısı, max drawdown, API yetkisi, bakiye, açık emir ve risk kontrolü eşikleri nedir?
 - Önerilen varsayılan: Sunucu taraflı checklist, 2FA/re-auth, özet risk ekranı, yazılı onay ve başlangıçta capped pilot.
 
