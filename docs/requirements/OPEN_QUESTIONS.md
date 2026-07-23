@@ -157,8 +157,10 @@ Bu dosya, özgün senaryodaki belirsizlikleri, çelişkileri ve eklenmesi öneri
 ## D. Emir yürütme ve pozisyon yönetimi
 
 ### Q-021 — Belgede geçen üçüncü emir tipinin adı nedir?
-- Durum: AÇIK
+- Durum: CEVAPLANDI
 - Öncelik: P1
+- Karar: `DEC-0010`
+- Cevap: “Geri Çekilme Limit Emri” ile gerçek “Stop-Limit Emir” iki ayrı seçenek olarak desteklenecek; “Tetikleme Sapması” ve belirsiz “Tetiklemeli Limit” adları kullanılmayacak.
 - Soru: “Tetikleme Sapması” ile “Tetiklemeli Limit Order” aynı seçenek mi?
 - Önerilen varsayılan: Tek ad: “Sinyal Fiyatından Sapmalı Limit Emir”.
 

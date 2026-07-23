@@ -177,6 +177,25 @@ Bu dosya yalnızca kullanıcı tarafından açıkça onaylanmış kalıcı karar
 - Ödünleşimler: Emir türü ve durum makinesi genişler; fiyat korumalı tetikleyici için kalıcı scheduler, stale-data ve restart yönetimi gerekir.
 - Önceki karar: Yok
 
+### DEC-0010 — Geri Çekilme Limit ve Stop-Limit ayrı emir türleri
+
+- Tarih: 2026-07-23
+- Durum: ONAYLANDI
+- Karar sahibi: Hikmet Esentimur
+- İlgili sorular: Q-021, Q-022, Q-024, Q-025; DEC-0009
+- Karar: Belgedeki belirsiz “Tetikleme Sapması/Tetiklemeli Limit Order” tek bir emir olarak uygulanmayacak. “Geri Çekilme Limit Emri” ve gerçek “Stop-Limit Emir” iki ayrı seçenek olacak.
+- Uygulama sonuçları:
+  - Geri Çekilme Limit Emri, koşul sinyalinden sonra referans fiyatın Long için belirlenen yüzde altında, Short için belirlenen yüzde üstünde pasif limit giriş oluşturur.
+  - Geri Çekilme Limit Emrinin limit fiyatı sinyal/reference snapshot'ından Decimal ile hesaplanır, tick size'a riski artırmayacak yönde normalize edilir ve seçilen time-in-force/expiry ile yönetilir.
+  - Stop-Limit Emir iki ayrı fiyat taşır: tetik fiyatı ve tetik sonrası gönderilecek limit fiyatı/offset'i. Tetiklenmek dolum garantisi değildir.
+  - Native stop-limit desteği borsa/ürün capability'sinden alınır. Native destek yoksa site-side emülasyon varsayılan olarak eşdeğer sayılmaz; live kullanım için gecikme, kesinti ve fail-closed politikası ayrıca onaylanır.
+  - Geri Çekilme Limit, Stop-Limit, Market, Fiyat Korumalı Tetikleyici ve standart Limit seçenekleri UI'da ayrı ad, açıklama, risk ve durumlarla gösterilecek.
+  - Post-only yalnız borsanın ve ilgili emir türünün desteklediği yerde gösterilecek; cross edecek fiyat için Q-025 politikası uygulanacak.
+  - Paper engine her iki türü ayrı semantikle, spread/order-book/partial fill/latency varsayımlarıyla simüle edecek.
+- Gerekçe: Kullanıcının hem pasif geri çekilme girişi hem de gerçek koşullu stop-limit davranışını kullanabilmesi; yanlış emir adı kaynaklı finansal riski kaldırmak.
+- Ödünleşimler: Emir capability matrisi ve test kapsamı büyür; MEXC/Binance ürünleri arasında feature parity varsayılamaz.
+- Önceki karar: DEC-0009 ile birlikte uygulanır
+
 <!--
 ### DEC-XXXX — Karar başlığı
 
