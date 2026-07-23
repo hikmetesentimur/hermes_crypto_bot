@@ -336,6 +336,26 @@ Bu dosya yalnızca kullanıcı tarafından açıkça onaylanmış kalıcı karar
 - Ödünleşimler: Acil kapatma slippage ve likidite riski taşır; seçilebilir aksiyonlar kapsam/öncelik ve recovery state machine gerektirir.
 - Önceki karar: DEC-0015 ve DEC-0016 ile birlikte uygulanır
 
+### DEC-0018 — Risk kuralı bazında takvim/kayan pencere ve saat dilimi
+
+- Tarih: 2026-07-23
+- Durum: ONAYLANDI
+- Karar sahibi: Hikmet Esentimur
+- İlgili sorular: Q-006, Q-045, Q-048; DEC-0011, DEC-0016, DEC-0017
+- Karar: Her dönemsel risk kuralında Takvim Penceresi veya Kayan Pencere seçilebilecek ve pencerenin IANA saat dilimi yapılandırılabilecek.
+- Uygulama sonuçları:
+  - Kalıcı olay ve ledger timestamp'leri UTC saklanacak; seçilen IANA timezone yalnız takvim pencere sınırlarını üretmek için kullanılacak.
+  - Takvim penceresi günlük, haftalık veya aylık olabilir. Haftalık kurallarda hafta başlangıç günü açıkça saklanacak; aylık pencereler gerçek takvim ayı kullanacak.
+  - Kayan pencerede süre ISO-8601/normalize edilmiş duration olarak saklanacak; örneğin 24 saat, 7 gün veya 30 gün takvim döneminden farklıdır.
+  - Gün ışığından yararlanma değişimleri timezone kütüphanesiyle ele alınacak; sabit UTC offset metni timezone yerine kullanılmayacak.
+  - Her değerlendirme ölçüm aralığının başlangıç/bitiş timestamp'ini, timezone/pencere sürümünü ve kullanılan ledger olaylarını denetlenebilir biçimde kaydedecek.
+  - Dönem başı equity gereken kurallarda immutable snapshot oluşturulacak; yatırma/çekme ve hesaplar arası transferler PnL'dan ayrılacak.
+  - Risk kuralının timezone veya pencere tipi değişirse geçmiş olaylar yeniden yazılmayacak; yeni kural sürümü belirlenmiş etkinleşme anından itibaren uygulanacak.
+  - Birden fazla pencere aynı riski etkilerse DEC-0016 ve DEC-0017'ye göre en sıkı sonuç/aksiyon kazanacak.
+- Gerekçe: Kullanıcının yerel takvim bazlı ve sürekli kayan risk denetimlerini birlikte tanımlayabilmesi.
+- Ödünleşimler: Timezone/DST, snapshot ve yüksek hacimli kayan pencere hesapları ek veri ve test karmaşıklığı getirir.
+- Önceki karar: DEC-0016 ve DEC-0017 ile birlikte uygulanır
+
 <!--
 ### DEC-XXXX — Karar başlığı
 

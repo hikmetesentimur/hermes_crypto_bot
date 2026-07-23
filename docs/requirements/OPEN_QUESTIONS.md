@@ -343,8 +343,10 @@ Bu dosya, özgün senaryodaki belirsizlikleri, çelişkileri ve eklenmesi öneri
 - Önerilen varsayılan: Yeni girişleri durdur, bekleyen girişleri iptal et, koruyucu çıkış yönetimini sürdür, alarm üret; otomatik piyasa kapatma ayrı acil politika.
 
 ### Q-048 — Günlük/haftalık/aylık limitlerin sıfırlanması nasıl olacak?
-- Durum: AÇIK
+- Durum: CEVAPLANDI
 - Öncelik: P0
+- Karar: `DEC-0018`
+- Cevap: Her risk kuralında Takvim Penceresi veya Kayan Pencere ile IANA saat dilimi seçilebilecek; takvim haftası başlangıcı ve kayan süre açıkça yapılandırılacak.
 - Soru: Europe/Istanbul takvim dönemi mi, kayan pencere mi? Dönem başı equity nasıl sabitlenecek?
 - Önerilen varsayılan: Europe/Istanbul takvim dönemleri; dönem başı equity snapshot; transferler PnL'dan ayrılır.
 
