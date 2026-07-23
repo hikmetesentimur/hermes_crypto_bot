@@ -359,8 +359,10 @@ Bu dosya, özgün senaryodaki belirsizlikleri, çelişkileri ve eklenmesi öneri
 - Önerilen varsayılan: Evet; canlı modun zorunlu hard limitleri.
 
 ### Q-050 — Fiyat sapması ve spread limiti eklensin mi?
-- Durum: AÇIK
+- Durum: CEVAPLANDI
 - Öncelik: P0
+- Karar: `DEC-0020`
+- Cevap: Maksimum spread ve slippage/fiyat sapması limitleri varsayılan aktif olacak; kullanıcı uyarı/MFA/audit ile kapatabilecek. Borsa ve platform hard fiyat/veri güvenliği ayrı kalacak.
 - Soru: Sinyalden yürütmeye kadar maksimum slippage/spread aşıldığında emir iptal edilmeli mi?
 - Önerilen varsayılan: Evet; sembol/strateji bazlı maksimum bps toleransı.
 

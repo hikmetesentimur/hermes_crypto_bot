@@ -375,6 +375,26 @@ Bu dosya yalnızca kullanıcı tarafından açıkça onaylanmış kalıcı karar
 - Ödünleşimler: Kullanıcı kuralı kapatmak finansal kayıp/likidasyon riskini artırır; UI bu riski açıkça göstermelidir.
 - Önceki karar: DEC-0015, DEC-0016, DEC-0017 ve DEC-0018 ile birlikte uygulanır
 
+### DEC-0020 — Spread/slippage koruması varsayılan aktif ve kapatılabilir
+
+- Tarih: 2026-07-23
+- Durum: ONAYLANDI
+- Karar sahibi: Hikmet Esentimur
+- İlgili sorular: Q-022, Q-023, Q-047, Q-050; DEC-0009, DEC-0010
+- Karar: Maksimum spread ve slippage/fiyat sapması risk limitleri varsayılan aktif olacak; kullanıcı bunları kapatabilecek.
+- Uygulama sonuçları:
+  - Spread ve slippage ayrı ölçülür: spread karar anındaki yürütülebilir best bid/ask farkı; slippage tahmini/gerçekleşen yürütme fiyatının tanımlı referanstan sapmasıdır.
+  - Eşikler bps/yüzde ve gerektiğinde mutlak quote değeriyle strateji/emir türü bazında yapılandırılabilir; güvenli varsayılanlar likidite/ürün sınıfına göre belirlenir.
+  - Varsayılan davranış eşik aşımında yeni emir göndermemektir; kullanıcıya ölçüm, eşik, veri timestamp'i ve reason code gösterilir.
+  - Kural kapatma veya eşiği önemli ölçüde gevşetme risk özeti, MFA/step-up ve audit kaydı gerektirir.
+  - Kapatma kullanıcı limitini kaldırır; borsanın price band/percent-price/min-max kuralları, stale/invalid order-book kontrolü ve platformun olağan dışı piyasa/veri hard cap'leri devam eder.
+  - Market, marketable-limit, Fiyat Korumalı Tetikleyici, Geri Çekilme Limit ve Stop-Limit için ölçüm/referans semantiği ayrı tanımlanır; tek metrik tüm emir türlerine körlemesine uygulanmaz.
+  - Paper engine gerçek/varsayılan spread, order-book depth ve latency ile beklenen/gerçekleşen slippage'ı ayrı raporlar.
+  - Limit kapalıyken oluşan emir ve fill'ler, korumanın devre dışı olduğu bilgisiyle audit/rapora işaretlenir.
+- Gerekçe: Varsayılan korumayı sağlarken kullanıcıya yüksek volatilite veya özel stratejilerde kontrollü esneklik vermek.
+- Ödünleşimler: Kural kapalıyken beklenmedik kötü fiyat ve likidite kaybı riski artar; market emirlerde sonuç fiyatı garanti edilemez.
+- Önceki karar: DEC-0009, DEC-0010, DEC-0016 ve DEC-0017 ile birlikte uygulanır
+
 <!--
 ### DEC-XXXX — Karar başlığı
 
