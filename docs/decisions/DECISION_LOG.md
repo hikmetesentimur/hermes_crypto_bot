@@ -722,6 +722,28 @@ Bu dosya yalnızca kullanıcı tarafından açıkça onaylanmış kalıcı karar
 - Ödünleşimler: Kullanıcı bir borsadaki göstergeden yararlanıp başka borsada emir veremez; buna karşılık ilk sürüm daha tutarlı ve güvenli olur.
 - Önceki karar: DEC-0002 ve DEC-0007 ile birlikte uygulanır
 
+### DEC-0037 — Geniş kişisel kullanım için 50 strateji ve strateji başına 200 çift
+
+- Tarih: 2026-07-23
+- Durum: ONAYLANDI
+- Karar sahibi: Hikmet Esentimur
+- İlgili sorular: Q-001, Q-006, Q-009, Q-019, Q-065, Q-081, Q-083; DEC-0001, DEC-0035
+- Karar: İlk sürüm geniş kişisel kullanım için 1 kullanıcı, en fazla 50 eşzamanlı çalışan strateji ve strateji başına en fazla 200 işlem çiftini destekleyecek.
+- Uygulama sonuçları:
+  - En yüksek kuramsal çalışma yükü 10.000 strateji–işlem çifti birleşimidir; bu sayı yük ve dayanıklılık sınamasının üst senaryosu olarak kullanılır.
+  - Aynı borsa, Spot/Vadeli ürün, işlem çifti ve zaman aralığı birden fazla stratejide kullanılıyorsa piyasa verisi bağlantısı ve temel mum verisi paylaşılır; her strateji ayrı bağlantı açmaz.
+  - Stratejilerin koşul hesapları ve durumları birbirinden ayrılır; bir stratejinin hatası diğer stratejilerin emir veya risk durumunu bozamaz.
+  - Borsa bağlantı ve istek sınırları merkezi olarak izlenir; 50×200 sınırı borsanın izin verdiği bağlantı/istek sayısını aşma hakkı vermez.
+  - Yüksek yükte yeni abonelik ve istekler kontrollü sıraya alınır; güncel olmayan veriyle sinyal üretmek yerine güvenli biçimde gecikme/engelleme uygulanır.
+  - Yük sınamaları en az piyasa verisi işleme, gösterge hesabı, sinyal değerlendirme, veri tabanı yazımı, emir kuyruğu, yeniden bağlanma ve toplu borsa kesintisi senaryolarını kapsar.
+  - Kabul raporu işlemci, bellek, ağ, veri tabanı, veri yaşı, sinyal gecikmesi ve hata oranını ayrı gösterir; ölçüm yapılan donanım/hosting açıkça kaydedilir.
+  - Kullanıcı 50 çalışan strateji veya strateji başına 200 çift sınırına ulaştığında yeni çalışma başlatılamaz; anlaşılır Türkçe sınır mesajı gösterilir.
+  - Taslak, durdurulmuş ve arşivlenmiş stratejiler 50 çalışan strateji sınırına dahil edilmez; koruyucu yönetimi süren açık işlemler kaynak kullanımında ayrıca sayılır.
+  - Çok kullanıcılı hizmet mimarisi `DEC-0001` gereğince geleceğe hazırlanır fakat ilk sürüm kabul yükü tek kullanıcı içindir.
+- Gerekçe: Tek kullanıcı için geniş tarama/strateji kapasitesi sağlarken ilk sürümü ölçülebilir bir üst sınırla tasarlamak.
+- Ödünleşimler: 10.000 değerlendirme birleşimi önemli veri ve işlem gücü gerektirebilir; barındırma boyutu gerçek yük sınamasıyla belirlenecektir.
+- Önceki karar: DEC-0001 ve DEC-0035 ile birlikte uygulanır
+
 <!--
 ### DEC-XXXX — Karar başlığı
 

@@ -606,11 +606,13 @@ Bu dosya, özgün senaryodaki belirsizlikleri, çelişkileri ve eklenmesi öneri
 - Soru: Fiyat ve gösterge verisi bir borsadan alınırken emir başka bir borsaya gönderilebilecek mi?
 - Önerilen varsayılan: Hayır; her stratejide piyasa verisi, gösterge hesabı ve emir yürütme aynı borsa/ürün/işlem çifti kaynağına bağlıdır.
 
-### Q-083 — Hedef ölçek nedir?
-- Durum: AÇIK
+### Q-083 — İlk sürümün hedef çalışma ölçeği nedir?
+- Durum: CEVAPLANDI
 - Öncelik: P1
-- Soru: Eşzamanlı kullanıcı, aktif strateji, takip edilen sembol ve indikatör sayısı için ilk yıl hedefi nedir?
-- Önerilen varsayılan: Tek kullanıcı MVP ölçümleriyle başla; mimari sınırlar yük testiyle belgelenir, gereksiz erken mikroservisleşme yapılmaz.
+- Karar: `DEC-0037`
+- Cevap: Geniş kişisel kullanım hedeflenecek: 1 kullanıcı, en fazla 50 çalışan strateji ve strateji başına 200 işlem çifti.
+- Soru: İlk sürüm aynı anda kaç kullanıcı, çalışan strateji ve strateji başına kaç işlem çiftini desteklemeli?
+- Önerilen varsayılan: 1 kullanıcı; 50 çalışan strateji; strateji başına 200 işlem çifti; ortak piyasa verisi bağlantıları paylaşılır.
 
 ### Q-084 — Kullanıcıya “neden işlem açılmadı?” kaydı gösterilecek mi?
 - Durum: AÇIK
