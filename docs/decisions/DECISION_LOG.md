@@ -660,6 +660,27 @@ Bu dosya yalnızca kullanıcı tarafından açıkça onaylanmış kalıcı karar
 - Ödünleşimler: Sistem takibi borsa üzerindeki koruma kadar güvenli değildir ve yüksek erişilebilirlik, izleme, uyarı ve kullanıcı onayı gerektirir.
 - Önceki karar: DEC-0015, DEC-0026 ve DEC-0027 ile birlikte uygulanır
 
+### DEC-0034 — Üç işlem sonucu ayrı tutulur, yan yana karşılaştırılabilir
+
+- Tarih: 2026-07-23
+- Durum: ONAYLANDI
+- Karar sahibi: Hikmet Esentimur
+- İlgili sorular: Q-043, Q-051, Q-052, Q-054, Q-077, Q-080, Q-085; DEC-0011, DEC-0023, DEC-0024, DEC-0031
+- Karar: Geçmiş veri sınaması, sanal bakiyeyle deneme ve gerçek para işlem sonuçları ayrı kayıt ve raporlarda tutulacak; kullanıcı isterse bunları yan yana karşılaştırabilecek.
+- Uygulama sonuçları:
+  - Her emir, gerçekleşme, işlem, bakiye hareketi ve ölçüm kaydı kaynak türünü değişmez biçimde taşır: Geçmiş Sınama, Deneme veya Gerçek.
+  - Bir kaynak türündeki sanal bakiye, emir veya açık işlem başka kaynak türüne aktarılmaz; gerçek mod finansal sonuçları sıfırdan ve gerçek borsa kayıtlarından oluşur.
+  - Ana raporlar kaynak türüne göre ayrı sekme/filtre sunar; toplam net kâr gibi finansal değerler üç tür arasında toplanmaz.
+  - Karşılaştırma ekranında aynı strateji ailesi/sürümü, aynı veya açıkça farklı dönem, borsa, işlem çifti ve para birimi yan yana gösterilir.
+  - Dönem, strateji sürümü, veri kaynağı veya ayarlar farklıysa karşılaştırma ekranı farkları görünür biçimde işaretler; eşdeğer sonuç izlenimi vermez.
+  - Karşılaştırmada net kâr/zarar, başarı oranı, sermayenin en yüksek noktadan düşüşü, işlem sayısı, ücret/fonlama ve emir gerçekleşme farkları ayrı sütunlarda gösterilir.
+  - Geçmiş sınama ve deneme sonuçlarında kullanılan benzetim düzeyi ve varsayımlar; gerçek sonuçlarda gerçekleşen ücret/fiyat kayması açıkça gösterilir.
+  - Dışa aktarılan dosyalar kaynak türünü her satırda veya değişmez rapor üst bilgisinde taşır.
+  - Erişim ve saklama kuralları ayrı uygulanabilse de denetim izi üç kaynak türünde de korunur.
+- Gerekçe: Sanal veya geçmiş sonuçların gerçek kazanç gibi görünmesini önlerken strateji davranışındaki farkları inceleme olanağı vermek.
+- Ödünleşimler: Ayrı kayıt kümeleri ve karşılaştırma eşleştirmesi daha fazla veri modeli ve arayüz işi gerektirir.
+- Önceki karar: DEC-0011, DEC-0023, DEC-0024 ve DEC-0031 ile birlikte uygulanır
+
 <!--
 ### DEC-XXXX — Karar başlığı
 

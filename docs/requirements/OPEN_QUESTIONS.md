@@ -582,11 +582,13 @@ Bu dosya, özgün senaryodaki belirsizlikleri, çelişkileri ve eklenmesi öneri
 - Soru: Kâr alma ve zarar durdurma emirleri mümkün olduğunda doğrudan borsaya mı yerleştirilecek? Destek yoksa gerçek işlem engellenecek mi, sistem takibi seçilebilir mi?
 - Önerilen varsayılan: Önce borsa; destek yoksa kullanıcı açıkça onaylarsa yüksek görünürlüklü sistem takibi.
 
-### Q-080 — Test ve canlı istatistikleri tamamen ayrı mı tutulacak?
-- Durum: AÇIK
-- Öncelik: P1
-- Soru: Aynı strateji mod değiştirdiğinde geçmiş paper işlemleri canlı performans özetine dahil edilecek mi?
-- Önerilen varsayılan: Hayır; paper/backtest/live portföyleri ve performans metrikleri ayrı, yalnız karşılaştırma ekranında yan yana.
+### Q-080 — Geçmiş sınama, deneme ve gerçek işlem sonuçları ayrı mı tutulacak?
+- Durum: CEVAPLANDI
+- Öncelik: P0
+- Karar: `DEC-0034`
+- Cevap: Üç sonuç türü kesin biçimde ayrı tutulacak; kullanıcı isterse yan yana karşılaştırabilecek.
+- Soru: Geçmiş sınama, sanal bakiyeyle deneme ve gerçek para sonuçları tek toplamda birleşecek mi?
+- Önerilen varsayılan: Ayrı kayıt ve rapor; aynı dönem/sürüm için yan yana karşılaştırma, birleşik finansal toplam yok.
 
 ### Q-081 — Performans ve gecikme hedefleri nedir?
 - Durum: AÇIK
