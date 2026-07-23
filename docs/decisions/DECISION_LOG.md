@@ -315,6 +315,27 @@ Bu dosya yalnızca kullanıcı tarafından açıkça onaylanmış kalıcı karar
 - Ödünleşimler: Çok katmanlı limit birleştirme, atomik rezervasyon ve açıklanabilirlik tek kapsamlı modele göre daha karmaşıktır.
 - Önceki karar: DEC-0006 ve DEC-0015 ile birlikte uygulanır
 
+### DEC-0017 — Risk kuralı bazında seçilebilir aksiyonlar
+
+- Tarih: 2026-07-23
+- Durum: ONAYLANDI
+- Karar sahibi: Hikmet Esentimur
+- İlgili sorular: Q-047, Q-049, Q-050, Q-065, Q-076; DEC-0016
+- Karar: Her risk kuralı “Uyar”, “Yeni Girişleri Durdur”, “Bekleyen Giriş Emirlerini İptal Et” veya “Pozisyonları Acil Kapat” aksiyonlarından birini taşıyabilecek.
+- Uygulama sonuçları:
+  - `WARN`: alarm, UI olayı ve audit üretir; tek başına yeni emirleri engellemez. Platform hard safety ihlallerinde izin verilen minimum aksiyon daha güçlü olabilir.
+  - `BLOCK_ENTRIES`: ilgili kapsamda yeni giriş order intent'lerini atomik olarak reddeder; mevcut koruyucu pozisyon yönetimini sürdürür.
+  - `CANCEL_PENDING_ENTRIES`: yeni girişleri bloklamaya ek olarak bekleyen giriş ve add-to-position/DCA emirlerini idempotent iptal eder; koruyucu çıkış emirlerini körlemesine iptal etmez.
+  - `EMERGENCY_CLOSE`: bekleyen girişleri iptal eder, açık pozisyonları borsanın desteklediği reduce-only/close-position semantiğiyle kapatmayı dener ve kısmi fill/kalan risk tamamlanana kadar izler.
+  - Acil kapatma market veya güvenli marketable-limit politikasını, maksimum sapma ve timeout davranışını açıkça tanımlar; tam dolum garantisi verilmez.
+  - Birden fazla kural aynı anda tetiklenirse en güçlü aksiyon uygulanır; kapsam birleştirme DEC-0016'ya göre yapılır.
+  - Koruyucu emirler, pozisyon kapandığı doğrulanmadan veya atomik güvenli replacement olmadan kaldırılmaz.
+  - Tetiklenen kural, ölçülen değer, eşik, seçilen/gerçekte uygulanan aksiyon, borsa sonuçları ve yeniden başlatma şartı audit log'da saklanır.
+  - Risk durdurmasından çıkış otomatik süre dolumu veya yetkili manuel reset olarak kural bazında ayrıca tanımlanır; hard incident reset'i MFA ve reconciliation gerektirir.
+- Gerekçe: Farklı risk olayları için uyarıdan acil kapatmaya kadar esnek ve açıklanabilir müdahale sağlamak.
+- Ödünleşimler: Acil kapatma slippage ve likidite riski taşır; seçilebilir aksiyonlar kapsam/öncelik ve recovery state machine gerektirir.
+- Önceki karar: DEC-0015 ve DEC-0016 ile birlikte uygulanır
+
 <!--
 ### DEC-XXXX — Karar başlığı
 

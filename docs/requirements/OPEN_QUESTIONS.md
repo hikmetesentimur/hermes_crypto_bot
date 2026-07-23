@@ -335,8 +335,10 @@ Bu dosya, özgün senaryodaki belirsizlikleri, çelişkileri ve eklenmesi öneri
 - Önerilen varsayılan: Global hard limit + hesap ve strateji alt limitleri; en dar limit kazanır.
 
 ### Q-047 — Zarar limiti aşılınca tam olarak ne olur?
-- Durum: AÇIK
+- Durum: CEVAPLANDI
 - Öncelik: P0
+- Karar: `DEC-0017`
+- Cevap: Her risk kuralında “Uyar”, “Yeni Girişleri Durdur”, “Bekleyen Giriş Emirlerini İptal Et” veya “Pozisyonları Acil Kapat” aksiyonu seçilebilecek. Platform hard limitleri minimum güvenli aksiyonu zorunlu kılabilecek.
 - Soru: Yalnız yeni girişler mi durur, açık emirler iptal mi, pozisyonlar otomatik kapanır mı? Manuel yeniden başlatma mı gerekir?
 - Önerilen varsayılan: Yeni girişleri durdur, bekleyen girişleri iptal et, koruyucu çıkış yönetimini sürdür, alarm üret; otomatik piyasa kapatma ayrı acil politika.
 
