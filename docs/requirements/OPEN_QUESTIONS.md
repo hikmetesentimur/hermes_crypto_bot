@@ -373,8 +373,10 @@ Bu dosya, özgün senaryodaki belirsizlikleri, çelişkileri ve eklenmesi öneri
 - Önerilen varsayılan: Evet; canlı pilot öncesi zorunlu fakat MVP'nin ilk dikey diliminden sonra.
 
 ### Q-053 — Strateji düzenlenirken çalışan sürüm ne olacak?
-- Durum: AÇIK
+- Durum: CEVAPLANDI
 - Öncelik: P0
+- Karar: `DEC-0014`
+- Cevap: Her düzenleme yeni değişmez sürüm oluşturacak; kaydederken “Yalnız Yeni İşlemler” veya “Eski Pozisyonlara Uygula” seçilebilecek. Eski pozisyon uygulaması yalnız güvenli ve ileriye dönük yönetim ayarlarını kontrollü migrate edecek.
 - Soru: Ayarlar anında çalışan örneğe mi uygulanacak, yoksa yeni sürüm oluşturulup kontrollü yeniden başlatma mı yapılacak?
 - Önerilen varsayılan: Immutable strategy version; kaydetme yeni taslak/sürüm üretir, explicit activate ile devreye alınır.
 

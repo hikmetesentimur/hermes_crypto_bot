@@ -255,6 +255,26 @@ Bu dosya yalnızca kullanıcı tarafından açıkça onaylanmış kalıcı karar
 - Ödünleşimler: Kullanıcı/mali müşavir nihai sınıflandırma ve beyan sorumluluğunu korur; ürün otomatik beyanname üretmez.
 - Önceki karar: DEC-0012'yi sınırlar ve açıklar
 
+### DEC-0014 — Strateji sürümü ve seçilebilir açık pozisyon migrasyonu
+
+- Tarih: 2026-07-23
+- Durum: ONAYLANDI
+- Karar sahibi: Hikmet Esentimur
+- İlgili sorular: Q-035, Q-037, Q-053, Q-056, Q-073
+- Karar: Her strateji düzenlemesi yeni ve değişmez bir sürüm oluşturacak. Kullanıcı kaydederken “Yalnız Yeni İşlemler” veya “Eski Pozisyonlara Uygula” seçebilecek.
+- Uygulama sonuçları:
+  - Yeni sürüm eski strateji sürümünü veya geçmiş sinyal/emir/fill kayıtlarını yerinde değiştirmeyecek.
+  - “Yalnız Yeni İşlemler” seçildiğinde mevcut açık pozisyonlar ve onların koruyucu yönetimi bağlı oldukları önceki sürüm/policy ile devam eder; yeni girişler aktive edilen sürümü kullanır.
+  - “Eski Pozisyonlara Uygula” seçildiğinde sistem etkilenen pozisyonları, değişecek TP/SL/trailing/DCA/risk emirlerini ve olası iptal-yeniden kurma etkisini önizler ve açık onay ister.
+  - Geçmiş giriş fiyatı, fill, realized PnL veya audit verisi yeniden yazılamaz. Borsada değiştirilemeyen kaldıraç/marjin/ürün/yön gibi alanlar migrate edilemez ve UI'da nedenleri gösterilir.
+  - Koruyucu emir değişimi position bazında kalıcı migration state machine ile yürütülür; yeni koruma doğrulanmadan eski koruma körlemesine kaldırılmaz. Kısmi başarısızlık alarm ve manuel müdahale gerektirir.
+  - Her pozisyon `entry_strategy_version` ve zaman içinde uygulanan `management_policy_version` geçmişini taşır.
+  - Migrasyon risk limitlerini veya borsa capability'sini ihlal ederse o pozisyon için uygulanmaz; diğer pozisyonların sonucu ayrı raporlanır.
+  - Paper ve live pozisyonları ayrı migrate edilir; paper durumu live pozisyona aktarılmaz.
+- Gerekçe: Kullanıcıya açık pozisyon yönetimini güncelleme esnekliği verirken geçmişi ve finansal denetlenebilirliği korumak.
+- Ödünleşimler: Açık pozisyona güvenli policy migrasyonu, yalnız yeni işlemlere uygulamaya göre çok daha karmaşık ve yüksek risklidir.
+- Önceki karar: DEC-0007, DEC-0008 ve DEC-0010 ile birlikte uygulanır
+
 <!--
 ### DEC-XXXX — Karar başlığı
 
