@@ -566,11 +566,13 @@ Bu dosya, özgün senaryodaki belirsizlikleri, çelişkileri ve eklenmesi öneri
 - Soru: Sonuç ekranında hangi ölçümler zorunlu olacak ve bunların dönem/para birimi/işlem kümesi nasıl belirtilecek?
 - Önerilen varsayılan: Ayrıntılı ölçüm kümesi; hesaplama kapsamı ve yöntemi her raporda açıkça belirtilir.
 
-### Q-078 — Emir durum makinesi hangi durumları destekleyecek?
-- Durum: AÇIK
+### Q-078 — Emir işlem aşamaları nasıl kaydedilip gösterilecek?
+- Durum: CEVAPLANDI
 - Öncelik: P0
-- Soru: Created, risk-approved, submitting, acknowledged, partial, filled, cancel-pending, cancelled, rejected, expired ve unknown durumları ile geçiş/retry kuralları onaylanıyor mu?
-- Önerilen varsayılan: Bu durumların tamamı kalıcı state machine; bilinmeyen durumda yeni emir yok, önce reconcile.
+- Karar: `DEC-0032`
+- Cevap: Sistem bütün ayrıntılı emir aşamalarını kaydedecek; ana ekranda sade durum, ayrıntı sayfasında tüm aşamalar gösterilecek.
+- Soru: Gönderilmeden önceki hazırlık, borsa kabulü, parçalı gerçekleşme, iptal bekleme, ret, zaman aşımı ve durumu araştırma ayrı tutulacak mı?
+- Önerilen varsayılan: Ayrıntılı iç kayıt; ana ekranda sade özet, ayrıntıda zaman sıralı tam geçmiş.
 
 ### Q-079 — Koruyucu emirler borsada native mi tutulacak?
 - Durum: AÇIK

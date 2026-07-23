@@ -618,6 +618,27 @@ Bu dosya yalnızca kullanıcı tarafından açıkça onaylanmış kalıcı karar
 - Ödünleşimler: Ayrıntılı rapor daha fazla veri, hesaplama, açıklama ve kullanıcı arayüzü alanı gerektirir.
 - Önceki karar: DEC-0011, DEC-0023 ve DEC-0024 ile birlikte uygulanır
 
+### DEC-0032 — Ayrıntılı emir aşamaları, sade ana ekran ve tam ayrıntı geçmişi
+
+- Tarih: 2026-07-23
+- Durum: ONAYLANDI
+- Karar sahibi: Hikmet Esentimur
+- İlgili sorular: Q-021–Q-027, Q-055, Q-065, Q-078, Q-085; DEC-0009, DEC-0010, DEC-0027
+- Karar: Sistem emirlerin bütün ayrıntılı işlem aşamalarını ve geçişlerini kaydedecek; ana ekranda sade durum, emir ayrıntısında zaman sıralı tüm aşamalar gösterilecek.
+- Uygulama sonuçları:
+  - İç durumlar en az Hazırlanıyor, Gönderiliyor, Borsa Kabul Etti, Kısmen Gerçekleşti, Tamamlandı, İptal Bekliyor, İptal Edildi, Süresi Doldu, Reddedildi, Durumu Belirsiz ve Durumu Araştırılıyor aşamalarını ayırt eder.
+  - Ana ekranda bu durumlar Bekliyor, Kısmen Gerçekleşti, Tamamlandı, İptal Edildi, Başarısız ve İnceleniyor gibi anlaşılır Türkçe özetlere dönüştürülür.
+  - Ayrıntı sayfası her geçişin zamanı, gerçekleşen/kalan miktar, ortalama fiyat, ücret, borsa emir numarası, neden açıklaması ve ilgili sistem olayını gösterir.
+  - Her durum değişikliği sona eklenen değişmez olay kaydına yazılır; geçmiş durumlar yerinde değiştirilmez veya silinmez.
+  - “Durumu Belirsiz” emir otomatik olarak yeniden gönderilmez; önce borsada emir numarası veya benzersiz istem numarasıyla araştırılır. Böylece çift emir önlenir.
+  - Parçalı gerçekleşmeler ayrı ayrı kaydedilir ve toplam emir durumu bunlardan hesaplanır; kalan miktar hiçbir zaman varsayımla sıfırlanmaz.
+  - İptal isteği gönderilmesi emrin iptal edildiği anlamına gelmez; borsa onayı veya karşılaştırma sonucu gelene kadar “İptal Bekliyor” gösterilir.
+  - Borsadan gelen ret/hata kodu korunur fakat kullanıcıya sade Türkçe açıklama ve yapılabilecek işlem gösterilir.
+  - Deneme, geçmiş sınama ve gerçek işlem aynı temel durum modelini kullanır; kaynak modu açıkça etiketlenir.
+- Gerekçe: Kullanıcıya sade görünüm sunarken finansal işlem geçmişini eksiksiz, araştırılabilir ve çift emir riskine dayanıklı tutmak.
+- Ödünleşimler: Durum geçişleri, olay kaydı ve borsa karşılaştırması basit bir “başarılı/başarısız” alanından daha karmaşıktır.
+- Önceki karar: DEC-0009, DEC-0010 ve DEC-0027 ile birlikte uygulanır
+
 <!--
 ### DEC-XXXX — Karar başlığı
 
