@@ -453,6 +453,27 @@ Bu dosya yalnızca kullanıcı tarafından açıkça onaylanmış kalıcı karar
 - Ödünleşimler: İleri düzey daha fazla piyasa verisi, işlem gücü, saklama alanı ve doğrulama testi gerektirir.
 - Önceki karar: DEC-0009, DEC-0010, DEC-0011 ve DEC-0020 ile birlikte uygulanır
 
+### DEC-0024 — İlk sürümde ayrıntılı geçmiş veri sınaması
+
+- Tarih: 2026-07-23
+- Durum: ONAYLANDI
+- Karar sahibi: Hikmet Esentimur
+- İlgili sorular: Q-010, Q-020, Q-043, Q-051, Q-052, Q-066, Q-077; DEC-0007, DEC-0011, DEC-0023
+- Karar: İlk sürümde stratejileri geçmiş piyasa verileri üzerinde ayrıntılı biçimde sınama özelliği bulunacak.
+- Uygulama sonuçları:
+  - Kullanıcı borsa, işlem türü, işlem çifti veya işlem çifti evreni, başlangıç-bitiş tarihi, başlangıç sermayesi ve benzetim düzeyini seçecek.
+  - Sistem gelecekteki veriyi geçmiş karar anında kullanmayacak; mum kapanışı, farklı zaman aralıklarının hizalanması ve indikatörlerin başlangıç veri ihtiyacı açık kurallarla uygulanacak.
+  - İşlem ücretleri, fonlama maliyeti, fiyat kayması, alış-satış fiyat farkı, emrin parça parça gerçekleşmesi ve borsa kuralları seçilen benzetim düzeyine göre hesaba katılacak.
+  - Veri eksikleri, sonradan listelenen veya işlemden kaldırılan varlıklar ve seçime göre değişen varlık evreni sonuçları yapay biçimde iyileştirmeyecek; tüm eksikler raporlanacak.
+  - Aynı stratejiyi geliştirme, doğrulama ve ileri dönem parçalarında sınama desteği olacak; kullanıcı yalnız iyi görünen dönemi seçmenin yanıltıcı olabileceği konusunda uyarılacak.
+  - Rapor en az net kâr/zarar, sermayenin zirveden düşüşü, başarı oranı, kazanç-kayıp oranı, işlem sayısı, ücret/fonlama toplamı, açık kalma süresi ve ölçüm yöntemlerini gösterecek.
+  - Her sınama strateji sürümü, veri kümesi kimliği/sürümü, benzetim düzeyi, bütün varsayımlar ve yazılım sürümüyle yeniden üretilebilir kayıt oluşturacak.
+  - Geçmiş sınama sonucu canlı piyasada aynı sonucun gerçekleşeceği garantisi olarak sunulmayacak.
+  - Büyük veri işleri arka planda çalışacak; ilerleme, iptal, başarısızlık nedeni ve tamamlanmış rapor kullanıcıya Türkçe gösterilecek.
+- Gerekçe: Kullanıcı ilk sürümden itibaren stratejileri farklı geçmiş piyasa koşullarında ayrıntılı biçimde değerlendirmek istiyor.
+- Ödünleşimler: Piyasa verisi temini, saklama, hesaplama gücü, veri sürümleme ve yanlılık önleme ilk sürüm kapsamını büyütür.
+- Önceki karar: DEC-0007, DEC-0011 ve DEC-0023 ile birlikte uygulanır
+
 <!--
 ### DEC-XXXX — Karar başlığı
 

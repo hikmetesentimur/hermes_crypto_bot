@@ -380,11 +380,13 @@ Bu dosya, özgün senaryodaki belirsizlikleri, çelişkileri ve eklenmesi öneri
 - Soru: Yalnız son fiyatın emre dokunması yeterli mi; piyasa derinliği, gecikme, emrin parça parça gerçekleşmesi, emir sırası, işlem ücreti ve fiyat kayması hesaba katılmalı mı?
 - Önerilen varsayılan: Orta düzey; alış-satış fiyatları, işlem ücreti, fiyat kayması, piyasa derinliği, gecikme ve parçalı gerçekleşme hesaba katılır.
 
-### Q-052 — Tarihsel backtest eklensin mi?
-- Durum: AÇIK
-- Öncelik: P1
-- Soru: Belgede yalnız canlı piyasa verili test modu var. Stratejiyi geçmiş veride çalıştırma, walk-forward ve performans raporu isteniyor mu?
-- Önerilen varsayılan: Evet; canlı pilot öncesi zorunlu fakat MVP'nin ilk dikey diliminden sonra.
+### Q-052 — Geçmiş piyasa verileriyle sınama eklensin mi?
+- Durum: CEVAPLANDI
+- Öncelik: P0
+- Karar: `DEC-0024`
+- Cevap: İlk sürümde ayrıntılı geçmiş veri sınaması bulunacak.
+- Soru: Strateji geçmiş veriler üzerinde çalıştırılsın mı; farklı dönemlerde tekrar sınama, alışılmamış piyasa koşulları ve ayrıntılı başarı/risk raporu isteniyor mu?
+- Önerilen varsayılan: Evet; ilk sürümde ayrıntılı geçmiş veri sınaması ve açık varsayım raporu.
 
 ### Q-053 — Strateji düzenlenirken çalışan sürüm ne olacak?
 - Durum: CEVAPLANDI
