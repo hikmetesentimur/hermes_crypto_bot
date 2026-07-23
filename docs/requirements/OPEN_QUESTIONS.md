@@ -38,11 +38,13 @@ Bu dosya, özgün senaryodaki belirsizlikleri, çelişkileri ve eklenmesi öneri
 - Soru: İlk adaptör Binance Spot + Binance USDT-M Futures mı olacak? MEXC veya başka borsa MVP kapsamına girecek mi?
 - Önerilen varsayılan: Bir borsa ve iki ürün türüyle başla; adaptör sözleşmesini çoklu borsaya hazır tasarla.
 
-### Q-004 — Testnet/sandbox ve canlı hesap sırası nedir?
-- Durum: AÇIK
+### Q-004 — Deneme ortamı ve gerçek hesap sırası nedir?
+- Durum: CEVAPLANDI
 - Öncelik: P0
-- Soru: Geliştirme ve kabul testleri hangi borsanın testnet/sandbox ortamında yapılacak?
-- Önerilen varsayılan: Önce yerel simülasyon, sonra Binance testnet, en son limitli canlı pilot.
+- Karar: `DEC-0040`
+- Cevap: Önce yerel benzetim, sonra her borsanın resmî deneme ortamı, en son gerçek hesap kullanılacak.
+- Soru: Geliştirme ve kabul sınamaları hangi sırada ve hangi borsa ortamlarında yapılacak?
+- Önerilen varsayılan: Yerel benzetim → resmî borsa deneme ortamı → ayrı onaylı gerçek hesap aşaması.
 
 ### Q-005 — Kullanıcı, rol ve oturum modeli nasıl olmalı?
 - Durum: AÇIK

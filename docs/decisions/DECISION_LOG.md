@@ -787,6 +787,27 @@ Bu dosya yalnızca kullanıcı tarafından açıkça onaylanmış kalıcı karar
 - Ödünleşimler: Özetlerin çok sayıda gerçekleşmeden doğru hesaplanması ve büyük listelerin hızlı açılması için dikkatli veri modeli/sorgu tasarımı gerekir.
 - Önceki karar: DEC-0011, DEC-0031, DEC-0032 ve DEC-0034 ile birlikte uygulanır
 
+### DEC-0040 — Yerel benzetim, resmî borsa denemesi, ardından gerçek hesap
+
+- Tarih: 2026-07-23
+- Durum: ONAYLANDI
+- Karar sahibi: Hikmet Esentimur
+- İlgili sorular: Q-003, Q-004, Q-051, Q-052, Q-054, Q-058, Q-079; DEC-0002, DEC-0015, DEC-0023, DEC-0024, DEC-0033
+- Karar: Borsa bağlantısı ve emir davranışı önce yerel benzetimde, sonra ilgili borsanın resmî deneme ortamında, en son gerçek hesapta sınanacak.
+- Uygulama sonuçları:
+  - Yerel benzetim; başarı, ret, zaman aşımı, bağlantı kopması, parçalı gerçekleşme, yinelenen yanıt, eski veri ve borsa kural hatalarını tekrarlanabilir senaryolarla kapsar.
+  - Binance ve MEXC için Spot/Vadeli her ürünün resmî deneme ortamı ve desteklediği özellikler ayrı doğrulanır; bir ürünün deneme desteği diğerine varsayılmaz.
+  - Resmî deneme ortamı sınamaları gerçek bağlantı imzalama, saat uyumu, miktar/fiyat adımı, en az işlem tutarı, emir aşamaları, iptal ve hesap karşılaştırmasını kapsar.
+  - Deneme ortamındaki sonuçlar gerçek para sonucu olarak raporlanmaz ve gerçek hesap kayıtlarıyla birleştirilmez.
+  - Bir borsanın/ürünün resmî deneme ortamı yoksa veya gerekli emir davranışını desteklemiyorsa aşama sessizce geçilmiş sayılmaz; eksik kabul sınaması ve risk açıkça kaydedilir.
+  - Böyle bir eksiklikte gerçek hesapta sınama, ayrı kullanıcı onayı, tutar/risk tavanı, geri dönüş planı, sürekli izleme ve acil durdurma hazırlığı olmadan başlatılmaz.
+  - Resmî deneme ortamından gerçek hesaba anahtar, hesap numarası, bakiye veya açık emir taşınmaz; ortamlar ayrı gizli bilgiler ve veri kayıtları kullanır.
+  - Gerçek hesap aşaması `DEC-0015` kapsamındaki risk uyarısı, çok aşamalı kimlik doğrulama ve atlanamayan teknik kontrollerden sonra açılır.
+  - Her aşamanın kabul ölçütleri ve gerçek çıktıları repoda sürümlü sınama raporuna yazılır.
+- Gerekçe: Gerçek para riski almadan önce emir yolunu kademeli ve borsaya özgü biçimde doğrulamak.
+- Ödünleşimler: Resmî deneme ortamlarının gerçek piyasa davranışını tam yansıtmaması veya bazı ürünlerde bulunmaması ek plan ve süre gerektirebilir.
+- Önceki karar: DEC-0002, DEC-0015, DEC-0023, DEC-0024 ve DEC-0033 ile birlikte uygulanır
+
 <!--
 ### DEC-XXXX — Karar başlığı
 
