@@ -542,11 +542,13 @@ Bu dosya, özgün senaryodaki belirsizlikleri, çelişkileri ve eklenmesi öneri
 - Soru: Aynı kullanıcıda ad benzersiz mi, uzunluk/karakter sınırı ne, büyük-küçük harf duyarlı mı? Kopya adı nasıl üretilir?
 - Önerilen varsayılan: Kullanıcı içinde büyük-küçük harfe duyarsız benzersiz ad; boşluklar düzeltilir; kopyaya benzersiz sayı eklenir.
 
-### Q-075 — Borsa veya işlem tipi değişince bağımlı alanlar ne olacak?
-- Durum: AÇIK
+### Q-075 — Borsa veya işlem türü değişince bağlı ayarlar ne olacak?
+- Durum: CEVAPLANDI
 - Öncelik: P1
-- Soru: Önceki quote asset, sembol, yön, marjin, kaldıraç ve boyut ayarları otomatik temizlenecek mi?
-- Önerilen varsayılan: Geçersiz hale gelen alanlar atomik sıfırlanır; kullanıcıya değişiklik özeti gösterilir; sessizce eski değer kullanılmaz.
+- Karar: `DEC-0029`
+- Cevap: Değişiklikten önce etkilenecek ayarlar kullanıcıya gösterilecek; kullanıcı onayladığında uyumsuz ayarlar temizlenecek.
+- Soru: Eski işlem çifti, emir türü, marjin, kaldıraç, yön ve borsaya özel ayarlar sessizce korunacak mı, sıfırlanacak mı?
+- Önerilen varsayılan: Önce etki özeti ve onay; yalnız uyumsuz alanlar temizlenir, çalışan stratejide yeni sürüm oluşur.
 
 ### Q-076 — Varsayılan değerler ve canlı mod validasyonu nedir?
 - Durum: AÇIK

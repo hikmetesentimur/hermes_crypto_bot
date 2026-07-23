@@ -555,6 +555,27 @@ Bu dosya yalnızca kullanıcı tarafından açıkça onaylanmış kalıcı karar
 - Ödünleşimler: Arşivlenmiş adların da ayrılmış kalması bazı adların yeniden kullanımını sınırlar; kalıcı kimlik yine ad değil sistem numarasıdır.
 - Önceki karar: DEC-0001 ve DEC-0003 ile birlikte uygulanır
 
+### DEC-0029 — Bağlı ayarlar etki özeti ve onay sonrası temizlenir
+
+- Tarih: 2026-07-23
+- Durum: ONAYLANDI
+- Karar sahibi: Hikmet Esentimur
+- İlgili sorular: Q-003, Q-004, Q-005, Q-053, Q-075, Q-076; DEC-0002, DEC-0014
+- Karar: Kullanıcı borsa, Spot/Vadeli işlem türü veya işlem yönünü değiştirmeden önce etkilenecek bağlı ayarlar gösterilecek; kullanıcı onayladığında yalnız uyumsuz ayarlar temizlenecek.
+- Uygulama sonuçları:
+  - Etki özeti temizlenecek, değişmeden kalacak ve yeniden seçilmesi gerekecek alanları ayrı listeler.
+  - Bağlı alanlara en az işlem çiftleri, emir türleri, yalnız azaltma ve yalnız pasif emir özellikleri, marjin türü, kaldıraç, Long/Short yönü, pozisyon büyüklüğü, kâr alma/zarar durdurma ve borsaya özel ayarlar dahildir.
+  - Kullanıcı onaylamazsa ana değişiklik ve bağlı alan temizliği uygulanmaz; mevcut taslak aynen korunur.
+  - Onay sonrası yalnız yeni seçimin desteklemediği veya anlamını kaybeden alanlar temizlenir; uyumlu ortak ayarlar korunur.
+  - Temizlenen her alan kullanıcıya Türkçe neden ve yeniden seçim gereksinimiyle gösterilir; gizli eski değer çalıştırma sırasında kullanılmaz.
+  - Çalışan bir stratejide değişiklik doğrudan mevcut sürümü değiştirmez; `DEC-0014` gereğince yeni ve değişmez strateji sürümü oluşturur.
+  - Açık işlemlere uygulanmak istenirse ayrıca `DEC-0014` kapsamındaki etki önizlemesi ve güvenli taşıma kuralları uygulanır; borsada değiştirilemeyen alanlar reddedilir.
+  - Borsa yetenek bilgisi alınamıyor veya güncel değilse sistem uyumluluk varsaymaz; kaydetme/başlatma güvenli biçimde engellenir.
+  - Sunucu tarafı doğrulama, arayüz önizlemesinden bağımsız olarak tüm uyumsuz alanları tekrar kontrol eder.
+- Gerekçe: Eski ve görünmeyen ayarların yeni borsa/işlem türünde yanlış emir üretmesini önlemek.
+- Ödünleşimler: Her ana seçim değişikliğinde kullanıcıya ek onay adımı ve ayrıntılı bağlılık haritası gerekir.
+- Önceki karar: DEC-0002 ve DEC-0014 ile birlikte uygulanır
+
 <!--
 ### DEC-XXXX — Karar başlığı
 
