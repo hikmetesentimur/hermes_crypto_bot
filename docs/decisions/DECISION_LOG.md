@@ -765,6 +765,28 @@ Bu dosya yalnızca kullanıcı tarafından açıkça onaylanmış kalıcı karar
 - Ödünleşimler: Sinyal hiç oluşmadığında kullanıcı geçmişte her koşulun neden yanlış olduğunu kalıcı kayıttan göremez; bunun için geçici tanılama gerekir.
 - Önceki karar: DEC-0007 ve DEC-0016–DEC-0020 ile birlikte uygulanır
 
+### DEC-0039 — İşlem özet satırı ve açılır gerçekleşme alt satırları
+
+- Tarih: 2026-07-23
+- Durum: ONAYLANDI
+- Karar sahibi: Hikmet Esentimur
+- İlgili sorular: Q-036–Q-045, Q-077, Q-078, Q-080, Q-085; DEC-0011, DEC-0031, DEC-0032, DEC-0034
+- Karar: Her işlem ana listede tek bir özet satırında gösterilecek; kullanıcı satırı açtığında giriş ve çıkış emir gerçekleşmeleri zaman sırasıyla alt satırlarda görülecek.
+- Uygulama sonuçları:
+  - Özet satırı en az strateji adı/sürümü, kaynak türü, borsa, Spot/Vadeli, işlem çifti, yön, durum, ilk giriş zamanı, toplam giriş/çıkış miktarı, kalan miktar ve ortalama fiyatları gösterir.
+  - Gerçekleşmiş ve gerçekleşmemiş net kâr-zarar ayrı alanlardır; açık veya kısmi işlemde toplam sonuç kesinleşmiş gibi gösterilmez.
+  - Ücret, fonlama maliyeti ve diğer maliyetler özet toplamlarında ayrı görünür; ayrıntıda ilgili gerçekleşme veya zaman olayına bağlanır.
+  - Açılır alt satırlar her giriş/çıkış gerçekleşmesinin zamanı, miktarı, fiyatı, ücreti, emir numarası ve gerçekleşme numarasını gösterir.
+  - Kısmi gerçekleşme, kısmi kapanış, kâr alma, zarar durdurma, kullanıcı kapatması ve acil risk kapatması anlaşılır Türkçe neden etiketi taşır.
+  - Henüz oluşmamış çıkış zamanı/fiyatı gibi alanlar sıfır veya uydurma değerle doldurulmaz; “Henüz gerçekleşmedi” olarak gösterilir.
+  - Bir işlemde birden fazla emir ve gerçekleşme varsa özet değerler değişmez gerçekleşme kayıtlarından hesaplanır; elle tutulan ayrı toplamlar nedeniyle sapma oluşmaz.
+  - İşlem ayrıntısından `DEC-0032` kapsamındaki tam emir aşaması geçmişine geçiş yapılabilir.
+  - Liste kaynak türüne göre Geçmiş Sınama, Deneme ve Gerçek olarak ayrı tutulur; `DEC-0034` karşılaştırması dışında finansal toplamlar birleşmez.
+  - Büyük listelerde sayfalama, tarih/strateji/borsa/çift/durum filtreleri ve dışa aktarma bulunur; parasal hassasiyet yuvarlama nedeniyle kaybedilmez.
+- Gerekçe: Kullanıcıya hızlı okunabilir tek işlem özeti verirken parçalı emir gerçekleşmelerinin denetlenebilir ayrıntısını korumak.
+- Ödünleşimler: Özetlerin çok sayıda gerçekleşmeden doğru hesaplanması ve büyük listelerin hızlı açılması için dikkatli veri modeli/sorgu tasarımı gerekir.
+- Önceki karar: DEC-0011, DEC-0031, DEC-0032 ve DEC-0034 ile birlikte uygulanır
+
 <!--
 ### DEC-XXXX — Karar başlığı
 

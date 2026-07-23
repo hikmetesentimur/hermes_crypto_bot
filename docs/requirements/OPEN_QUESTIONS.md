@@ -622,11 +622,13 @@ Bu dosya, özgün senaryodaki belirsizlikleri, çelişkileri ve eklenmesi öneri
 - Soru: Her gösterge değerlendirmesi mi, yoksa yalnız geçerli giriş sinyali sonrasındaki engelleme nedenleri mi kaydedilecek?
 - Önerilen varsayılan: Sinyal sonrası engellemeler neden kodu ve karar anı özetiyle saklanır; her başarısız koşul hesabı süresiz tutulmaz.
 
-### Q-085 — Açık/kısmi işlemler detay sayfasında nasıl gösterilecek?
-- Durum: AÇIK
+### Q-085 — Açık ve kısmi işlemler ayrıntı sayfasında nasıl gösterilecek?
+- Durum: CEVAPLANDI
 - Öncelik: P1
-- Soru: Fill'ler alt satırlarda mı; kapanmamış alanlar boş mu; unrealized PnL ve kalan miktar gösterilsin mi?
-- Önerilen varsayılan: Position üst satırı + giriş/çıkış fill alt satırları; durum, kalan miktar, realized/unrealized PnL, fee, funding, mod, borsa ve yön görünür.
+- Karar: `DEC-0039`
+- Cevap: Her işlem tek özet satırında gösterilecek; açıldığında giriş ve çıkış gerçekleşmeleri alt satırlarda görülecek.
+- Soru: Açık, kısmen gerçekleşmiş ve kapanmış işlemlerde özet, emirler ve her gerçekleşme nasıl sıralanmalı?
+- Önerilen varsayılan: İşlem özet satırı + açılır zaman sıralı giriş/çıkış gerçekleşme alt satırları; kalan miktar ve kâr-zarar ayrımı görünür.
 
 ### Q-086 — Türkiye vergi raporunun hukuki niteliği nedir?
 - Durum: CEVAPLANDI
