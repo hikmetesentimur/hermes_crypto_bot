@@ -665,10 +665,12 @@ Bu dosya, özgün senaryodaki belirsizlikleri, çelişkileri ve eklenmesi öneri
 - Önerilen varsayılan: Önce ölçüm yapılır; normal hız kapsamına uygun gerçekçi sınırlar ölçüm sonuçlarıyla önerilir ve canlı işlem açılmadan önce kullanıcı tarafından ayrıca onaylanır. Eski veri güvenlik sınırı performans hedefinden bağımsız ve atlanamaz olur.
 
 ### Q-090 — Oturum süresi ve hassas işlemlerde yeniden doğrulama nasıl olacak?
-- Durum: AÇIK
+- Durum: CEVAPLANDI
 - Öncelik: P0
-- Soru: Kullanıcı hareketsiz kaldığında oturum ne kadar sürede kapanacak; borsa anahtarı, gerçek mod, para/risk ayarı ve güvenlik yöntemi değişikliklerinde ne kadar yakın zamanda yeniden doğrulama istenecek?
-- Önerilen varsayılan: Ayarlanabilir kısa hareketsizlik süresi; hassas işlemlerde son birkaç dakika içinde güçlü doğrulama zorunlu; tüm cihaz oturumları kullanıcı tarafından görülebilir ve kapatılabilir.
+- Karar: `DEC-0042`
+- Cevap: Oturum kullanıcı tarayıcıyı kapatana kadar açık kalacak; yalnız hassas işlemlerde yeniden güçlü doğrulama istenecek.
+- Soru: Oturum ne zaman sona erecek ve hangi işlemler yeni doğrulama gerektirecek?
+- Önerilen varsayılan: Kalıcı olmayan tarayıcı oturumu; para/güvenlik etkili işlemlerde yakın zamanda yapılmış güçlü doğrulama zorunlu.
 
 ### Q-091 — Gelecekteki çok kullanıcılı sürümde roller nasıl ayrılacak?
 - Durum: AÇIK

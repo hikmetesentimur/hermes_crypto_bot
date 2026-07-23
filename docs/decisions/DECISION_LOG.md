@@ -831,6 +831,28 @@ Bu dosya yalnızca kullanıcı tarafından açıkça onaylanmış kalıcı karar
 - Ödünleşimler: İki giriş yöntemi, cihaz yönetimi ve kurtarma akışı geliştirme/sınama kapsamını büyütür.
 - Önceki karar: DEC-0001, DEC-0003 ve DEC-0015 ile birlikte uygulanır
 
+### DEC-0042 — Tarayıcı kapanana kadar oturum, hassas işlemlerde yeniden doğrulama
+
+- Tarih: 2026-07-23
+- Durum: ONAYLANDI
+- Karar sahibi: Hikmet Esentimur
+- İlgili sorular: Q-002, Q-005, Q-054, Q-058, Q-090; DEC-0004, DEC-0015, DEC-0041
+- Karar: Kullanıcı oturumu tarayıcı kapanana kadar açık kalacak; hassas işlemler gerçekleştirilmeden önce yeniden güçlü doğrulama istenecek.
+- Uygulama sonuçları:
+  - Oturum kimliği kalıcı “beni hatırla” kaydı olarak saklanmaz; tarayıcı oturumu çerezi kullanılır ve normal tarayıcı kapanışında istemci tarafında sona erer.
+  - Sunucu oturum kaydını güvenli biçimde doğrular, döndürür ve kullanıcı çıkış yaptığında veya tüm oturumları kapattığında derhal geçersiz kılar.
+  - Yalnız sayfa görüntüleme için hareketsizlik nedeniyle otomatik çıkış uygulanmaz; kullanıcı ortak/başkasına ait cihaz kullanmaması konusunda açıkça uyarılır.
+  - Hassas işlemler en az gerçek modu açma/devam ettirme, gerçek emir verme/iptal etme/pozisyon kapatma, borsa anahtarı ekleme/değiştirme/silme, risk veya pozisyon tutarı değiştirme, giriş yöntemi/cihaz/kurtarma kodu değiştirme ve veri dışa aktarma işlemlerini kapsar.
+  - Hassas işlem anında kullanıcı mevcut güçlü yöntemlerinden biriyle yeniden doğrulanır; yalnız açık oturumun varlığı yeterli sayılmaz.
+  - Bir doğrulamanın birden fazla hassas işlem için ne kadar kısa süre geçerli olacağı güvenlik yapılandırmasında üst sınırla tutulur; gerçek para etkili kritik onaylar gerekirse her seferinde istenir.
+  - Tarayıcıların “önceki sekmeleri/oturumu geri yükleme” davranışı sınanır; oturum çerezi geri yüklenebiliyorsa bu risk kullanıcıya açıklanır ve sunucu tarafı ek koruma uygulanır.
+  - Kullanıcı aktif cihaz/oturum listesini, son kullanım zamanını ve yaklaşık bağlantı bilgisini görebilir; tek oturumu veya tüm diğer oturumları kapatabilir.
+  - Parola/giriş yöntemi değişikliği, hesap kurtarma veya şüpheli girişte mevcut oturumların tamamını geçersiz kılma seçeneği sunulur.
+  - Oturum çalınması şüphesinde para etkili işlemler yeniden doğrulama olmadan yapılamaz; güvenlik olayları değişmez kayda ve kullanıcı uyarısına dönüşür.
+- Gerekçe: Kullanıcının tarayıcı açıkken tekrar tekrar giriş yapmasını önlerken gerçek para ve hesap güvenliği etkili işlemleri ek doğrulamayla korumak.
+- Ödünleşimler: Tarayıcı uzun süre açık bırakılırsa görüntüleme erişimi de açık kalır; ortak cihaz kullanımı için daha yüksek risk taşır.
+- Önceki karar: DEC-0015 ve DEC-0041 ile birlikte uygulanır
+
 <!--
 ### DEC-XXXX — Karar başlığı
 
