@@ -702,6 +702,26 @@ Bu dosya yalnızca kullanıcı tarafından açıkça onaylanmış kalıcı karar
 - Ödünleşimler: İlk sürüm saniyelik veya daha hızlı fiyat fırsatlarını hedeflemez; buna karşılık geliştirme ve işletim karmaşıklığı azalır.
 - Önceki karar: DEC-0007, DEC-0023 ve DEC-0024 ile birlikte uygulanır
 
+### DEC-0036 — Sinyal verisi ve emir aynı borsada
+
+- Tarih: 2026-07-23
+- Durum: ONAYLANDI
+- Karar sahibi: Hikmet Esentimur
+- İlgili sorular: Q-003–Q-006, Q-010, Q-019, Q-022, Q-082; DEC-0002, DEC-0007
+- Karar: Her stratejide sinyal verisinin alındığı borsa ile emrin gönderildiği borsa aynı olacak.
+- Uygulama sonuçları:
+  - Binance stratejisi Binance piyasa verisi ve mumlarıyla sinyal üretip Binance hesabına emir gönderir; MEXC için aynı ilke uygulanır.
+  - Gösterge hesapları, sinyal fiyatı, emir koruma fiyatları, kâr alma ve zarar durdurma aynı borsa, Spot/Vadeli ürün ve işlem çifti kaynağına bağlanır.
+  - Kullanıcı arayüzünde ayrı “Sinyal Borsası” ve “Emir Borsası” alanları bulunmaz; tek borsa seçimi tüm bağlı alanları belirler.
+  - Strateji sürümü borsa, ürün türü ve işlem çifti kimliğini değişmez biçimde saklar; çalışma anında başka borsa verisine sessizce geçilmez.
+  - Seçilen borsanın piyasa verisi kesilir veya eski kalırsa başka borsa fiyatı yedek olarak kullanılıp emir üretilmez; strateji güvenli biçimde yeni girişleri durdurur ve uyarı verir.
+  - Borsalar arasındaki fiyat, mum oluşumu, işlem hacmi, fonlama ve işlem çifti kuralları tek bir ortak fiyatmış gibi karıştırılmaz.
+  - Geçmiş veri sınaması ve sanal bakiyeyle deneme de seçilen yürütme borsasının verisini kullanır; kullanılan veri kaynağı raporda gösterilir.
+  - İleride borsalar arası sinyal istenirse fiyat farkı, zaman uyumu, likidite, ücret, veri yaşı ve risk modeli için yeni kullanıcı kararı ve ayrı özellik gerekir.
+- Gerekçe: Borsalar arası fiyat ve mum farklarının yanlış sinyal, koruma ve performans hesabı üretmesini önlemek.
+- Ödünleşimler: Kullanıcı bir borsadaki göstergeden yararlanıp başka borsada emir veremez; buna karşılık ilk sürüm daha tutarlı ve güvenli olur.
+- Önceki karar: DEC-0002 ve DEC-0007 ile birlikte uygulanır
+
 <!--
 ### DEC-XXXX — Karar başlığı
 

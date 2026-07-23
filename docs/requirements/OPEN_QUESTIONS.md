@@ -598,11 +598,13 @@ Bu dosya, özgün senaryodaki belirsizlikleri, çelişkileri ve eklenmesi öneri
 - Soru: İlk sürüm 1 dakika ve üzeri strateji aralıklarına mı odaklanacak, yoksa saniyenin çok küçük bölümlerinde emir yarışına dayalı yüksek hızlı işlemler mi hedeflenecek?
 - Önerilen varsayılan: İlk sürüm normal hız ve güvenilirlik odaklı; yüksek hız sonraki sürüm kapsamı.
 
-### Q-082 — Sinyal verisi ile emir borsası aynı olmak zorunda mı?
-- Durum: AÇIK
+### Q-082 — Sinyal verisi ile emir borsası aynı mı olacak?
+- Durum: CEVAPLANDI
 - Öncelik: P0
-- Soru: Bir borsanın verisiyle başka borsada işlem açmaya izin verilecek mi?
-- Önerilen varsayılan: MVP'de hayır; sinyal ve execution aynı borsa/ürün/sembol verisini kullanır. Cross-exchange sonraki faz ve ayrı basis/latency riski gerektirir.
+- Karar: `DEC-0036`
+- Cevap: Sinyal ve emir aynı borsada olacak.
+- Soru: Fiyat ve gösterge verisi bir borsadan alınırken emir başka bir borsaya gönderilebilecek mi?
+- Önerilen varsayılan: Hayır; her stratejide piyasa verisi, gösterge hesabı ve emir yürütme aynı borsa/ürün/işlem çifti kaynağına bağlıdır.
 
 ### Q-083 — Hedef ölçek nedir?
 - Durum: AÇIK
