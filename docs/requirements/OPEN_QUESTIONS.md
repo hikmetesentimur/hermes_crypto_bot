@@ -305,8 +305,10 @@ Bu dosya, özgün senaryodaki belirsizlikleri, çelişkileri ve eklenmesi öneri
 ## F. PnL, ücretler ve risk
 
 ### Q-043 — Kâr/zarar oranının paydası nedir?
-- Durum: AÇIK
+- Durum: CEVAPLANDI
 - Öncelik: P0
+- Karar: `DEC-0011`
+- Cevap: Fiyat getirisi, brüt PnL, net PnL, kullanılan marjine göre ROE ve strateji sermayesine göre getiri ayrı hesaplanıp gösterilecek.
 - Soru: Belgede fiyat değişimi yüzdesi kaldıraçla çarpılıyor. Gösterilecek getiri notional'a göre mi, başlangıç marjinine göre mi, yoksa toplam sermayeye göre mi?
 - Önerilen varsayılan: Ayrı metrikler göster: fiyat getirisi, gerçekleşmiş PnL tutarı, kullanılan marjine göre ROE ve strateji sermayesine göre getiri.
 

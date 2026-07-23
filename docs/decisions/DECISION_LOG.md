@@ -196,6 +196,27 @@ Bu dosya yalnızca kullanıcı tarafından açıkça onaylanmış kalıcı karar
 - Ödünleşimler: Emir capability matrisi ve test kapsamı büyür; MEXC/Binance ürünleri arasında feature parity varsayılamaz.
 - Önceki karar: DEC-0009 ile birlikte uygulanır
 
+### DEC-0011 — Ayrı fiyat getirisi, brüt/net PnL, ROE ve strateji getirisi
+
+- Tarih: 2026-07-23
+- Durum: ONAYLANDI
+- Karar sahibi: Hikmet Esentimur
+- İlgili sorular: Q-043, Q-044, Q-045, Q-047, Q-077
+- Karar: Fiyat getirisi, brüt PnL, net PnL, kullanılan marjine göre ROE ve strateji sermayesine göre getiri ayrı metrikler olarak hesaplanacak ve gösterilecek.
+- Uygulama sonuçları:
+  - PnL'nin kayıt kaynağı order/fill ledger olacak; yalnız ortalama açılış-kapanış fiyatından türetilen rapor finansal gerçek kabul edilmeyecek.
+  - Fiyat getirisi Long/Short yönüne göre fiyat hareketini gösterir ve kaldıraç içermez.
+  - Brüt PnL, gerçekleşen fill miktarları ve ürünün linear/inverse/contract-size formülüne göre ücretlerden önce hesaplanır.
+  - Net PnL, brüt PnL'den gerçekleşmiş maker/taker komisyonu, funding, borç faizi ve diğer borsa maliyetlerini düşer; rebate/indirimler ayrı ledger kaydıyla eklenir.
+  - Realized ve unrealized PnL ayrı tutulur; kısmi kapanışlarda her fill'in realized PnL'si ve kalan pozisyon maliyeti korunur.
+  - ROE'nin paydası kullanılan/atanan marjindir; hesapta payda, dönem ve sıfır/negatif marjin edge-case'i açıkça kaydedilir.
+  - Strateji getirisi, seçilen strateji bütçesi/dönem başı sermayesi ve nakit transferlerinden arındırılmış zaman aralığıyla raporlanır.
+  - “Fiyat değişimi × kaldıraç” yalnız açıkça etiketlenmiş yaklaşık teorik brüt ROE önizlemesi olabilir; net PnL veya muhasebe gerçeği olarak kullanılmaz.
+  - Paper/backtest/live metrikleri ayrı tutulur ve kullanılan ücret/slippage/funding modeli raporda görünür.
+- Gerekçe: Kaldıracı iki kez saymayı, maliyetleri gizlemeyi ve risk limitlerini yanlış PnL ile tetiklemeyi önlemek.
+- Ödünleşimler: Fill ve maliyet ledger'ı ile ürün bazlı hesaplama daha kapsamlı veri modeli ve test gerektirir.
+- Önceki karar: DEC-0005 ve DEC-0006 ile birlikte uygulanır
+
 <!--
 ### DEC-XXXX — Karar başlığı
 
