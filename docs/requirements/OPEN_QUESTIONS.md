@@ -115,8 +115,10 @@ Bu dosya, özgün senaryodaki belirsizlikleri, çelişkileri ve eklenmesi öneri
 ## C. Kıyaslama koşulları ve sinyal semantiği
 
 ### Q-015 — VE/VEYA gruplama ve öncelik nasıl olacak?
-- Durum: AÇIK
+- Durum: CEVAPLANDI
 - Öncelik: P0
+- Karar: `DEC-0008`
+- Cevap: İç içe koşul grupları/parantezler desteklenecek; her grup “TÜMÜ (AND)” veya “EN AZ BİRİ (OR)” operatörü kullanacak.
 - Soru: Yalnızca düz bir koşul listesi mi, yoksa iç içe gruplar ve parantezler mi desteklenmeli? `A VE B VEYA C` nasıl yorumlanacak?
 - Önerilen varsayılan: Açık koşul ağacı; grup bazlı ALL/ANY, UI'da parantezli özet.
 

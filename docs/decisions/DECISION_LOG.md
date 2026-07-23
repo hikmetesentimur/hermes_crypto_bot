@@ -138,6 +138,26 @@ Bu dosya yalnızca kullanıcı tarafından açıkça onaylanmış kalıcı karar
 - Ödünleşimler: Canlı Mum modu simülasyon ve üretim davranışını karmaşıklaştırır; repaint, duplicate ve gecikme yönetimi gerekir.
 - Önceki karar: Yok
 
+### DEC-0008 — İç içe TÜMÜ/EN AZ BİRİ koşul ağacı
+
+- Tarih: 2026-07-23
+- Durum: ONAYLANDI
+- Karar sahibi: Hikmet Esentimur
+- İlgili sorular: Q-015, Q-016, Q-017, Q-018, Q-020
+- Karar: Strateji kıyaslama koşulları iç içe grup/parantez yapısını destekleyecek. Her grup çocuklarını “TÜMÜ (AND)” veya “EN AZ BİRİ (OR)” mantığıyla değerlendirecek.
+- Uygulama sonuçları:
+  - Koşullar sıralı metin olarak değil, sürümlü ve tip güvenli bir JSON AST olarak saklanacak.
+  - Grup düğümü `ALL` veya `ANY`; yaprak düğümü tipli sol operand, uyumlu operatör ve operatörün gerektirdiği sağ operandı içerecek.
+  - Unary operatörler sağ operand istemeyecek; binary operatörler uyumlu sağ operand olmadan kaydedilemeyecek.
+  - UI drag/drop veya açık grup kontrolleriyle parantez yapısını görünür kılacak ve insan tarafından okunabilir özet üretecek.
+  - Boş grup, döngüsel referans, kayıp indikatör, uyumsuz zaman serisi veya tip hatası olan ağaç aktive edilemeyecek.
+  - Değerlendirme kısa devre yapabilse bile her sonuç kullanılan veri sürümleri ve reason kodlarıyla denetlenebilir olacak.
+  - Kaydetme/çalıştırma sırasında maksimum derinlik ve düğüm sayısı için güvenli sistem sınırı uygulanacak; kesin limit performans testleriyle belirlenecek.
+  - “Tüm koşullardan ortak sinyal” ifadesi artık kök grubun seçilen `ALL/ANY` semantiğine göre yorumlanacak; gizli operatör önceliği olmayacak.
+- Gerekçe: Karmaşık stratejileri belirsiz operatör önceliği olmadan ifade etmek ve test edilebilir hale getirmek.
+- Ödünleşimler: UI, validasyon, açıklama ve test matrisi düz listeye göre daha karmaşıktır.
+- Önceki karar: Yok
+
 <!--
 ### DEC-XXXX — Karar başlığı
 
