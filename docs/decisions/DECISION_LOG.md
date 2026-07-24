@@ -1233,6 +1233,32 @@ Bu dosya yalnızca kullanıcı tarafından açıkça onaylanmış kalıcı karar
 - Ödünleşimler: Son çare piyasa emri olağan dışı koşullarda çok kötü fiyattan gerçekleşebilir ve büyük zarar oluşturabilir; buna karşılık pozisyonu açık bırakmak özellikle kaldıraçta daha büyük kayıp veya tasfiye riski taşır.
 - Önceki karar: DEC-0001, DEC-0009, DEC-0015–DEC-0017, DEC-0020, DEC-0031–DEC-0033, DEC-0041, DEC-0042, DEC-0050 ve DEC-0055–DEC-0057 ile birlikte uygulanır
 
+### DEC-0059 — Sıfır gerçekleşen çıkışlarda borsa kabulünden başlayan 30/5 saniye
+
+- Tarih: 2026-07-23
+- Durum: ONAYLANDI
+- Karar sahibi: Hikmet Esentimur
+- İlgili sorular: Q-035–Q-038, Q-078, Q-095, Q-097–Q-101; DEC-0009, DEC-0010, DEC-0016, DEC-0017, DEC-0020, DEC-0032, DEC-0050, DEC-0055–DEC-0058
+- Karar: Hiç gerçekleşmeyen normal strateji çıkışında hazır süre 30 saniye ve kullanıcı sınırı 5–120 saniye; hiç gerçekleşmeyen zarar durdurma veya acil kapatmada hazır süre 5 saniye ve kullanıcı sınırı 1–15 saniye olacak. Sayaç, borsanın emri kabul ettiğini kesin olarak doğruladığı anda başlayacaktır.
+- Uygulama sonuçları:
+  - Normal çıkış için süre tam saniye olarak 5–120 arasında seçilir; hazır değer 30 saniyedir.
+  - Zarar durdurma ve acil kapatma için süre tam saniye olarak 1–15 arasında seçilir; hazır değer 5 saniyedir.
+  - Bu değerler kısmi çıkışların `DEC-0056` süreleriyle aynıdır; fark, hiç gerçekleşme yokken başlangıç olayının borsa emir kabulü olmasıdır.
+  - Yerel gönderim denemesi sayaç başlatmaz. Borsanın emir kimliği ve kabul durumu alınmadan emir açık kabul edilmez; sonuç belirsizse “Durumu Araştırılıyor” aşaması ve mutabakat çalışır.
+  - Borsa emri açıkça reddederse süre beklenmez; ret nedeni sınıflandırılır, pozisyon doğrulanır ve çıkış amacına uygun güvenli hata/izleme akışına geçilir.
+  - Emir kabulünden sonra ilk gerçekleşme gelirse aynı çıkış niyetinin sayacı sıfırlanmaz veya yeniden başlatılmaz; net açık miktar güncellenir ve aynı toplam süre korunur.
+  - Süre dolduğunda emir ve gerçek net pozisyon borsayla karşılaştırılır; iptal/değiştirme sırasında oluşan gerçekleşmeler hesaba katılır ve eski emir kesinleşmeden ikinci çıkış gönderilmez.
+  - Normal çıkışta süre dolunca `DEC-0057` uyarınca doğrulanmış kalan miktar yalnız pozisyonu azaltan, fiyat kayması korumalı yöntemle tamamen kapatılmaya çalışılır.
+  - Zarar durdurma veya acil kapatmada süre dolunca `DEC-0058` uyarınca kontrollü fiyat kayması basamakları ve gerekirse önceden onaylı son çare piyasa kapatması uygulanır.
+  - Süre boyunca kalan pozisyon koruması doğrulanmış net miktara göre sürer; çıkış emri ile koruyucu emirlerin toplamı ters veya fazla pozisyon oluşturamaz.
+  - Normal çıkış sinyali süre içinde yanlış duruma dönse bile kabul edilmiş tam kapatma niyeti sessizce geri alınmaz; yalnız açık, yetkili iptal eylemiyle değiştirilebilir.
+  - Kullanıcının seçtiği süre strateji sürümünde ve emir niyetinde saklanır; arayüz başlangıç zamanını, kalan süreyi, sıfır gerçekleşen miktarı ve takip politikasını açıkça gösterir.
+  - Sunucu yeniden başlarsa borsa kabul zamanı ve kalıcı emir niyeti üzerinden kalan süre yeniden kurulur; sayaç sıfırlanmaz ve önce borsa durumu doğrulanır.
+  - Geçmiş sınama, deneme ve gerçek mod aynı kabulden başlayan sayaç kuralını kullanır; borsa kabul gecikmesi modelde yoksa bu varsayım raporda görünür olur.
+- Gerekçe: İlk gerçekleşmeyi hiç üretmeyen bir emrin süresiz açık kalmasını önlemek ve kısmi/sıfır gerçekleşme sürelerini kullanıcı açısından tutarlı tutmak.
+- Ödünleşimler: Borsa kabul bildiriminin gecikmesi sayaç başlangıcını geciktirebilir; kısa risk süresi fiyat kaymasını, uzun normal çıkış süresi açık piyasa riskini artırabilir.
+- Önceki karar: DEC-0009, DEC-0010, DEC-0016, DEC-0017, DEC-0020, DEC-0032, DEC-0050 ve DEC-0055–DEC-0058 ile birlikte uygulanır
+
 <!--
 ### DEC-XXXX — Karar başlığı
 

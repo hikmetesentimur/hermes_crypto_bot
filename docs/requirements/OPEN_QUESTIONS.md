@@ -761,10 +761,12 @@ Bu dosya, özgün senaryodaki belirsizlikleri, çelişkileri ve eklenmesi öneri
 - Önerilen varsayılan: Basamaklı fiyat koruması; ardından önceden onaylı yalnız-azaltan piyasa kapatması; başarısızlıkta yeni girişleri durdur ve acil alarm üret.
 
 ### Q-100 — Hiç gerçekleşmeyen normal veya risk çıkışı ne kadar beklenecek?
-- Durum: AÇIK
+- Durum: CEVAPLANDI
 - Öncelik: P0
-- Soru: Normal çıkış, zarar durdurma veya acil kapatma emrinde sıfır miktar gerçekleşirse sayaç emir gönderiminde mi başlayacak ve hangi süre sonunda güvenli takip çıkışına geçilecek?
-- Önerilen varsayılan: Sayaç borsanın emir kabulünü doğruladığı anda başlar; normal çıkış için orta, zarar durdurma/acil kapatma için kısa hazır süre ve güvenli kullanıcı sınırları uygulanır.
+- Karar: `DEC-0059`
+- Cevap: Normal çıkışta 30 saniye (5–120), zarar durdurma/acil kapatmada 5 saniye (1–15) uygulanacak; sıfır gerçekleşmede sayaç borsanın emri kabul ettiğini doğruladığı anda başlayacak.
+- Soru: Normal çıkış, zarar durdurma veya acil kapatma emrinde sıfır miktar gerçekleşirse hangi süre ve başlangıç olayı uygulanacak?
+- Önerilen varsayılan: Kısmi çıkışlarla aynı süreler; başlangıç borsa kabulünün doğrulandığı an.
 
 ### Q-101 — Acil risk çıkışının fiyat kayması basamakları nedir?
 - Durum: AÇIK
