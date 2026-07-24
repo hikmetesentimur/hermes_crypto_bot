@@ -753,16 +753,24 @@ Bu dosya, özgün senaryodaki belirsizlikleri, çelişkileri ve eklenmesi öneri
 - Önerilen varsayılan: Normal çıkış pozisyonu bitirir; 30 saniye hazır süre (5–120) sonrasında güvenli tam kapatma uygulanır.
 
 ### Q-099 — Fiyat koruması risk çıkışını engellerse son çare ne olacak?
-- Durum: AÇIK
+- Durum: CEVAPLANDI
 - Öncelik: P0
-- Soru: Zarar durdurma veya acil kapatma sırasında fiyat kayması sınırı aşılırsa sistem pozisyonu açık mı bırakacak, sınırlı biçimde sınırı genişletecek mi, yoksa açık onaylı bir son çare piyasa kapatması mı uygulayacak?
-- Önerilen varsayılan: Önceden onaylı basamaklı sınır genişletme, yalnız-azaltan emir, kesin süre/deneme sınırı ve başarısızlıkta en yüksek öncelikli alarm; davranış kullanıcıya kapıdan önce açıkça gösterilir.
+- Karar: `DEC-0058`
+- Cevap: Zarar durdurma/acil kapatmada fiyat kayması sınırı kontrollü basamaklarla genişletilecek; yine kapanmazsa canlı işlem açılırken güçlü doğrulamayla önceden onaylanan, yalnız pozisyonu azaltan son çare piyasa kapatması uygulanacak.
+- Soru: Risk çıkışı fiyat korumasına takılırsa pozisyon açık mı bırakılacak, yoksa önceden onaylı son çareyle kapatılacak mı?
+- Önerilen varsayılan: Basamaklı fiyat koruması; ardından önceden onaylı yalnız-azaltan piyasa kapatması; başarısızlıkta yeni girişleri durdur ve acil alarm üret.
 
 ### Q-100 — Hiç gerçekleşmeyen normal veya risk çıkışı ne kadar beklenecek?
 - Durum: AÇIK
 - Öncelik: P0
 - Soru: Normal çıkış, zarar durdurma veya acil kapatma emrinde sıfır miktar gerçekleşirse sayaç emir gönderiminde mi başlayacak ve hangi süre sonunda güvenli takip çıkışına geçilecek?
 - Önerilen varsayılan: Sayaç borsanın emir kabulünü doğruladığı anda başlar; normal çıkış için orta, zarar durdurma/acil kapatma için kısa hazır süre ve güvenli kullanıcı sınırları uygulanır.
+
+### Q-101 — Acil risk çıkışının fiyat kayması basamakları nedir?
+- Durum: AÇIK
+- Öncelik: P0
+- Soru: Normal fiyat kayması sınırından son çare piyasa kapatmasına geçmeden önce kaç basamak, hangi bekleme aralıkları, hangi artış yöntemi ve hangi mutlak üst sınır uygulanacak?
+- Önerilen varsayılan: Borsa/ürün emir defteri ölçümlerine dayalı az sayıda kısa basamak; her basamakta mutabakat; platform düzeyinde aşılamaz üst sınır ve sonrasında yalnız önceden onaylı son çare piyasa kapatması.
 
 ---
 

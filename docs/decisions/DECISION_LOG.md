@@ -1207,6 +1207,32 @@ Bu dosya yalnızca kullanıcı tarafından açıkça onaylanmış kalıcı karar
 - Ödünleşimler: Bekleme süresince kalan pozisyon piyasa riskine maruz kalır; tam kapatma amacı fiyat koruması nedeniyle olağan dışı piyasada gecikebilir.
 - Önceki karar: DEC-0009, DEC-0010, DEC-0016, DEC-0017, DEC-0020, DEC-0032, DEC-0050, DEC-0055 ve DEC-0056 ile birlikte uygulanır
 
+### DEC-0058 — Risk çıkışında basamaklı koruma ve önceden onaylı son çare piyasa kapatması
+
+- Tarih: 2026-07-23
+- Durum: ONAYLANDI
+- Karar sahibi: Hikmet Esentimur
+- İlgili sorular: Q-012, Q-035–Q-038, Q-050, Q-078, Q-079, Q-089, Q-095, Q-097–Q-101; DEC-0001, DEC-0009, DEC-0015–DEC-0017, DEC-0020, DEC-0031–DEC-0033, DEC-0041, DEC-0042, DEC-0050, DEC-0055–DEC-0057
+- Karar: Zarar durdurma veya acil kapatma fiyat kayması korumasına takılırsa sınır önceden belirlenmiş kontrollü basamaklarla genişletilecek; pozisyon yine kapanmazsa canlı işlem etkinleştirilirken güçlü yeniden doğrulamayla önceden onaylanmış, yalnız pozisyonu azaltan son çare piyasa kapatması uygulanacaktır.
+- Uygulama sonuçları:
+  - Bu politika yalnız zarar durdurma ve acil kapatma amaçlarına uygulanır; kâr alma veya normal strateji çıkışına sessizce piyasa kapatması yetkisi vermez.
+  - İlk takip çıkışı strateji/hesap için geçerli normal fiyat kayması sınırıyla yapılır. Başarısızlıkta sınır yalnız Q-101 ile onaylanacak basamak, bekleme ve mutlak üst sınırlar içinde genişletilir.
+  - Her basamaktan önce eski emirlerin son durumu, yeni gerçekleşmeler ve borsadaki doğrulanmış net açık miktar karşılaştırılır; belirsiz durumda körlemesine yinelenen emir gönderilmez.
+  - Vadeli işlemlerde bütün basamaklar ve son çare emri yalnız pozisyonu azaltır; doğrulanmış net miktarı aşamaz ve ters pozisyon açamaz. Spotta yalnız doğrulanmış eldeki miktar satılabilir.
+  - Basamaklar başarısız olduğunda son çare piyasa kapatması, yalnız canlı işlem etkinleştirme sırasında risk açıklaması gösterilip kullanıcının güçlü yeniden doğrulamasıyla verdiği açık yetki varsa çalışır.
+  - Yetki hesap/borsa kapsamı, kullanıcı, zaman, risk metni sürümü ve doğrulama olayıyla denetlenebilir kayda yazılır. Açık pozisyon varken yetkinin geri alınması güvenli kapatma/engelleme akışı olmadan korumayı sessizce devre dışı bırakamaz.
+  - Son çare emri öncesinde pozisyon miktarı ve yönü son kez doğrulanır; emir aynı risk çıkış niyetine bağlı yinelenmeme anahtarıyla gönderilir.
+  - Son çare piyasa emri gerçekleşirse gerçek fiyat, fiyat kayması, ücretler ve olağan dışı çıkış nedeni görünür kayda alınır; en yüksek öncelikli bildirim gönderilir.
+  - Borsa reddi, bağlantı kesintisi veya likidite yokluğu nedeniyle son çare de pozisyonu kapatamazsa ilgili hesap/borsada bütün yeni risk artırıcı girişler durdurulur, açık risk görünür tutulur ve acil kullanıcı müdahale bildirimi yinelenmeyi önleyen olay kimliğiyle üretilir.
+  - Sistem başarısız çıkışı tam kapanmış göstermez; borsayla mutabakat pozisyonun net sıfır olduğunu doğrulayana kadar risk durumu açık kalır.
+  - Sunucu yeniden başlarsa onay, basamak ve emir niyeti kalıcı kayıttan yüklenir; süreç baştan körlemesine tekrarlanmaz ve önce borsa durumu alınır.
+  - Deneme ve resmî borsa deneme ortamında hızlı fiyat hareketi, kısmi gerçekleşme, emir reddi, zaman aşımı, iptal yarışı, yeniden başlatma ve son çare başarısızlığı sınanmadan bu özellik gerçek hesapta etkinleştirilemez.
+  - Kullanıcı arayüzü normal sınırı, o anki basamağı, mutlak üst sınırı, son çare yetki durumunu ve son deneme sonucunu açıkça gösterir.
+  - Kesin basamak sayısı, aralıkları, bekleme süreleri ve mutlak fiyat kayması üst sınırı ölçüm sonrası Q-101 ile ayrıca onaylanacaktır; bunlar belirlenmeden gerçek hesapta bu akış etkinleştirilemez.
+- Gerekçe: Fiyatı korumaya çalışırken zarar durdurma/acil kapatma niyetinin açık pozisyon olarak kalmasını önlemek; doğrudan piyasa emrine geçmeden önce kontrollü çıkış fırsatı tanımak.
+- Ödünleşimler: Son çare piyasa emri olağan dışı koşullarda çok kötü fiyattan gerçekleşebilir ve büyük zarar oluşturabilir; buna karşılık pozisyonu açık bırakmak özellikle kaldıraçta daha büyük kayıp veya tasfiye riski taşır.
+- Önceki karar: DEC-0001, DEC-0009, DEC-0015–DEC-0017, DEC-0020, DEC-0031–DEC-0033, DEC-0041, DEC-0042, DEC-0050 ve DEC-0055–DEC-0057 ile birlikte uygulanır
+
 <!--
 ### DEC-XXXX — Karar başlığı
 
