@@ -1133,6 +1133,30 @@ Bu dosya yalnızca kullanıcı tarafından açıkça onaylanmış kalıcı karar
 - Ödünleşimler: Kısa süre daha az gerçekleşme, uzun süre daha eski sinyal/fiyat riski doğurabilir; kullanıcı emir sınıfına uygun süre seçmelidir.
 - Önceki karar: DEC-0009, DEC-0010, DEC-0020, DEC-0032, DEC-0050 ve DEC-0053 ile birlikte uygulanır
 
+### DEC-0055 — Kısmi çıkışta amaca göre kâr koruma veya risk sonlandırma
+
+- Tarih: 2026-07-23
+- Durum: ONAYLANDI
+- Karar sahibi: Hikmet Esentimur
+- İlgili sorular: Q-026, Q-035–Q-038, Q-050, Q-078, Q-079, Q-095, Q-097–Q-099; DEC-0009, DEC-0010, DEC-0016, DEC-0017, DEC-0020, DEC-0032, DEC-0033, DEC-0050, DEC-0053
+- Karar: Kısmi kâr alma çıkışında gerçekleşmeyen kalan emir iptal edilip kalan pozisyon koruyucu emirlerle açık tutulacak; zarar durdurma veya acil kapatma kısmen gerçekleşirse doğrulanmış kalan açık miktar yalnız pozisyonu azaltan ve fiyat kayması korumalı emirle kapatılmaya çalışılacak.
+- Uygulama sonuçları:
+  - Her çıkış gerçekleşmesi pozisyonun net açık miktarını, gerçekleşmiş kâr-zararı, ortalama çıkış fiyatını ve kalan koruyucu emir miktarlarını anında günceller.
+  - Kâr alma emri kısmen gerçekleşip tanımlı bekleme süresi dolduğunda sistem son borsa durumunu alır ve yalnız gerçekleşmemiş kalan emir miktarını iptal eder; kalan pozisyon piyasa emriyle zorla kapatılmaz.
+  - Kısmi kâr alma sonrası kalan pozisyonun zarar durdurma koruması kesintisiz sürer; kalan kâr alma basamakları doğrulanmış net açık miktarı aşmayacak biçimde yeniden eşleştirilir.
+  - Zarar durdurma veya acil kapatma emri kısmen gerçekleştiğinde amaç açık riski sonlandırmaktır. Eski emrin son durumu borsayla karşılaştırılır, iptal/değiştirme güvenli biçimde tamamlanır ve doğrulanmış kalan net miktar için risk azaltan çıkış hazırlanır.
+  - Vadeli işlemlerde takip emri yalnız pozisyonu azaltan nitelikte olur ve hiçbir durumda ters yönde yeni pozisyon açamaz. Spotta yalnız borsada doğrulanmış eldeki miktar satılabilir.
+  - Takip çıkışı `DEC-0020` ve `DEC-0050` kapsamındaki güncel yön fiyatı, veri yaşı, alış-satış farkı ve fiyat kayması denetimleriyle gönderilir; son işlem veya iyimser orta fiyat kullanılmaz.
+  - Eski çıkışın iptali ya da kalan pozisyon miktarı kesin değilse ikinci çıkış körlemesine gönderilmez; emir “Durumu Araştırılıyor” aşamasına alınır, borsayla mutabakat yapılır ve yüksek öncelikli bildirim üretilir.
+  - İptal sırasında yeni gerçekleşme gelirse kalan miktar tekrar hesaplanır; takip çıkışı hiçbir zaman doğrulanmış net açık miktarı aşmaz.
+  - Kalan miktar borsa alt sınırının altındaysa mümkün olan güvenli kapatma denenir; kapatılamayan artık miktar gizlenmez, sonsuz yeniden deneme yapılmaz ve kullanıcıya açık risk olarak gösterilir.
+  - Kullanıcı arayüzü çıkış amacını, istenen/gerçekleşen/kalan miktarı, iptal ve mutabakat durumlarını, kullanılan fiyat kaynağını ve korunan açık miktarı zaman sırasıyla gösterir.
+  - Geçmiş sınama ve deneme kısmi kâr alma ile kısmi risk çıkışını ayrı olaylar olarak canlandırır; kısmi çıkış tam kapanmış sayılmaz.
+  - Bu karar kesin çıkış bekleme sürelerini, normal strateji çıkış sinyalinin hangi sınıfa gireceğini ve fiyat koruması nedeniyle risk çıkışı tamamlanamazsa son çare davranışını belirlemez; bunlar Q-097, Q-098 ve Q-099 kapsamında ayrıca kararlaştırılacaktır.
+- Gerekçe: Kâr alma fiyat kalitesini gereksiz piyasa kapatmasıyla bozmazken, zarar durdurma ve acil kapatmada açık riski korumasız bırakmamak.
+- Ödünleşimler: Fiyat kayması koruması olağan dışı piyasada risk çıkışını geciktirebilir; kalan küçük miktarlar borsa alt sınırları nedeniyle tamamen kapatılamayabilir.
+- Önceki karar: DEC-0009, DEC-0010, DEC-0016, DEC-0017, DEC-0020, DEC-0032, DEC-0033, DEC-0050 ve DEC-0053 ile birlikte uygulanır
+
 <!--
 ### DEC-XXXX — Karar başlığı
 

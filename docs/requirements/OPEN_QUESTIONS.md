@@ -722,17 +722,37 @@ Bu dosya, özgün senaryodaki belirsizlikleri, çelişkileri ve eklenmesi öneri
 - Soru: Kısmen gerçekleşen giriş emrinin kalan miktarı iptal edilmeden önce hangi süre ve sınırlar uygulanacak?
 - Önerilen varsayılan: Emir sınıfına göre 5/60 saniye; kullanıcı yalnız güvenli sınırlar içinde değiştirebilir.
 
-### Q-095 — Kısmi gerçekleşen çıkış emrinin kalan miktarı nasıl yönetilecek?
-- Durum: AÇIK
+### Q-095 — Kısmi kâr alma ile zarar durdurma/acil kapatma nasıl yönetilecek?
+- Durum: CEVAPLANDI
 - Öncelik: P0
-- Soru: Kâr alma, zarar durdurma veya kullanıcı kapatma emri kısmen gerçekleşirse kalan açık risk iptal mi edilecek, yeniden fiyatlanacak mı, yoksa fiyat korumalı piyasa emriyle mi kapatılacak?
-- Önerilen varsayılan: Risk azaltan çıkışlarda kalan miktar korumasız bırakılmaz; emir amacına göre sınırlı yeniden deneme ve fiyat korumalı yalnız-azaltan kapatma uygulanır.
+- Karar: `DEC-0055`
+- Cevap: Kısmi kâr almada kalan emir iptal edilip kalan pozisyonun koruması sürdürülecek; zarar durdurma veya acil kapatmada kalan açık miktar yalnız pozisyonu azaltan, fiyat kayması korumalı emirle kapatılmaya çalışılacak.
+- Soru: Kâr alma ve risk sonlandırma çıkışları kısmen gerçekleşirse kalan miktara aynı mı, amaca göre farklı mı davranılacak?
+- Önerilen varsayılan: Kâr almada fiyatı zorlamadan korumayı sürdür; zarar durdurma/acil kapatmada doğrulanmış kalan riski güvenli biçimde azalt.
 
 ### Q-096 — Hiç gerçekleşmeyen giriş emri ne kadar açık kalacak?
 - Durum: AÇIK
 - Öncelik: P0
 - Soru: Sıfır miktarı gerçekleşen giriş emri hangi süre veya sinyal geçerliliği sonunda iptal edilecek; bu süre emir türüne göre mi, kullanıcı ayarına göre mi belirlenecek?
 - Önerilen varsayılan: Emir türüne göre sınırlı yaşam süresi ve sinyal hâlâ geçerli mi denetimi; süre sonunda borsa durumunu doğrulayıp iptal et, otomatik piyasa tamamlaması yapma.
+
+### Q-097 — Kısmi çıkış emri için bekleme süreleri nedir?
+- Durum: AÇIK
+- Öncelik: P0
+- Soru: Kâr alma, zarar durdurma ve acil kapatma emirleri ilk kısmi gerçekleşmeden sonra ne kadar bekleyecek; süreler sabit mi, kullanıcı sınırlar içinde değiştirebilir mi?
+- Önerilen varsayılan: Kâr alma için daha uzun, zarar durdurma/acil kapatma için daha kısa hazır süre; kullanıcı yalnız güvenli sınırlar içinde değiştirebilir.
+
+### Q-098 — Normal strateji çıkış sinyali hangi kısmi çıkış politikasına girecek?
+- Durum: AÇIK
+- Öncelik: P0
+- Soru: Kâr alma veya zarar durdurma olmayan normal strateji çıkış sinyali kısmen gerçekleşirse kalan pozisyon açık ve korumalı mı tutulacak, yoksa risk sonlandırma gibi tamamen kapatılmaya mı çalışılacak?
+- Önerilen varsayılan: Strateji çıkış sinyalinin amacı pozisyonu bitirmekse, zarar durdurmadan daha geniş fiyat korumasıyla yalnız-azaltan tam kapatma politikası uygulanır.
+
+### Q-099 — Fiyat koruması risk çıkışını engellerse son çare ne olacak?
+- Durum: AÇIK
+- Öncelik: P0
+- Soru: Zarar durdurma veya acil kapatma sırasında fiyat kayması sınırı aşılırsa sistem pozisyonu açık mı bırakacak, sınırlı biçimde sınırı genişletecek mi, yoksa açık onaylı bir son çare piyasa kapatması mı uygulayacak?
+- Önerilen varsayılan: Önceden onaylı basamaklı sınır genişletme, yalnız-azaltan emir, kesin süre/deneme sınırı ve başarısızlıkta en yüksek öncelikli alarm; davranış kullanıcıya kapıdan önce açıkça gösterilir.
 
 ---
 
