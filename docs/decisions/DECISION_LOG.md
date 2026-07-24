@@ -1259,6 +1259,31 @@ Bu dosya yalnızca kullanıcı tarafından açıkça onaylanmış kalıcı karar
 - Ödünleşimler: Borsa kabul bildiriminin gecikmesi sayaç başlangıcını geciktirebilir; kısa risk süresi fiyat kaymasını, uzun normal çıkış süresi açık piyasa riskini artırabilir.
 - Önceki karar: DEC-0009, DEC-0010, DEC-0016, DEC-0017, DEC-0020, DEC-0032, DEC-0050 ve DEC-0055–DEC-0058 ile birlikte uygulanır
 
+### DEC-0060 — Sıfır gerçekleşen girişte 5/60 saniye ve sinyal geçersizliğinde erken iptal
+
+- Tarih: 2026-07-23
+- Durum: ONAYLANDI
+- Karar sahibi: Hikmet Esentimur
+- İlgili sorular: Q-007–Q-010, Q-018, Q-025, Q-026, Q-050, Q-094, Q-096; DEC-0007–DEC-0010, DEC-0020, DEC-0048, DEC-0050, DEC-0053, DEC-0054
+- Karar: Hiç gerçekleşmeyen hızlı giriş emrinde hazır süre 5 saniye ve kullanıcı sınırı 1–30 saniye; fiyat bekleyen limit türlerinde hazır süre 60 saniye ve kullanıcı sınırı 5–300 saniye olacak. Sayaç borsanın emri kabul ettiğini doğruladığı anda başlayacak; süre dolarsa veya giriş koşulu daha önce geçersizleşirse gerçekleşmemiş miktar güvenli biçimde iptal edilecek ve piyasa emriyle zorla giriş yapılmayacaktır.
+- Uygulama sonuçları:
+  - Hızlı gerçekleşmesi beklenen giriş sınıfında süre tam saniye olarak 1–30 arasında seçilir; hazır değer 5 saniyedir.
+  - Fiyat bekleyen Limit, Geri Çekilme Limit ve tetiklendikten sonra bekleyen Stop-Limit sınıflarında süre tam saniye olarak 5–300 arasında seçilir; hazır değer 60 saniyedir.
+  - Yerel gönderim denemesi sayaç başlatmaz. Sayaç için borsa emir kimliği ve açık kabul durumu kesin olarak doğrulanmalıdır; belirsiz sonuçta “Durumu Araştırılıyor” aşaması ve mutabakat uygulanır.
+  - Giriş koşulu, stratejinin onaylı Kapanmış Mum veya Canlı Mum değerlendirme düzeninde yeniden hesaplanır. Koşul ağacı yanlış duruma geçerse bekleme süresinin dolması beklenmeden iptal niyeti oluşturulur.
+  - Süre dolması ve koşul geçersizliği aynı anda oluşursa tek iptal niyeti/yinelenmeme anahtarı kullanılır; çift iptal veya ikinci giriş gönderilmez.
+  - İptal öncesinde ve iptal kesinleşirken emir durumu borsayla karşılaştırılır. İptal yarışında oluşan gerçekleşmeler kaybolmaz ve gerçek pozisyon miktarına katılır.
+  - Emir hiç gerçekleşmediyse iptal doğrulandıktan sonra giriş niyeti Sonlandı olarak kaydedilir; otomatik piyasa emri, fiyat kovalama veya aynı sinyal için yeni emir oluşturulmaz.
+  - Emir iptal öncesinde kısmen gerçekleşirse sıfır-gerçekleşme sayacı kapanır ve ilk kısmi gerçekleşme anından başlayan `DEC-0053`/`DEC-0054` politikası uygulanır. Giriş koşulu geçersizleşmişse kalan emir miktarı kısmi süreyi beklemeden iptal edilir; gerçekleşen kısım hemen koruyucu emirlerle yönetilir.
+  - Kullanıcının seçtiği süre strateji sürümünde ve emir niyetinde saklanır; arayüz emir sınıfını, borsa kabul zamanını, kalan süreyi, koşul geçerliliğini ve iptal nedenini gösterir.
+  - Sunucu yeniden başlarsa kabul zamanı, strateji sürümü ve kalıcı emir niyetinden kalan süre yeniden kurulur; sayaç sıfırlanmaz ve önce borsa durumu doğrulanır.
+  - Borsa emri süre dolmadan Tamamlandı, İptal Edildi, Süresi Doldu veya Reddedildi kesin durumuna geçirirse yerel sayaç beklenmez; gerçek durum işlenir.
+  - Süre dolduğunda ya da koşul geçersizleştiğinde borsa/bağlantı erişilemiyorsa emir iptal edilmiş varsayılmaz; yeni risk artırıcı girişler durdurulur, emir açık risk olarak gösterilir ve yüksek öncelikli bildirim oluşturulur.
+  - Geçmiş sınama, deneme ve gerçek mod aynı yaşam süresi ve koşul geçersizliği kuralını kullanır; borsa kabul gecikmesi veya iptal yarışı modellenemiyorsa sınırlama raporda açıkça belirtilir.
+- Gerekçe: Eski bir giriş sinyalinin daha sonra beklenmedik pozisyon açmasını ve giriş emrinin süresiz açık kalmasını önlerken daha önce onaylanan emir sınıfı sürelerini tutarlı tutmak.
+- Ödünleşimler: Canlı Mum modunda kısa süreli koşul değişimi emri erken iptal edebilir; limit emrin daha sonra iyi fiyattan gerçekleşme fırsatı kaçabilir.
+- Önceki karar: DEC-0007–DEC-0010, DEC-0020, DEC-0048, DEC-0050, DEC-0053 ve DEC-0054 ile birlikte uygulanır
+
 <!--
 ### DEC-XXXX — Karar başlığı
 

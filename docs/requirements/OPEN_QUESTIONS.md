@@ -731,10 +731,12 @@ Bu dosya, özgün senaryodaki belirsizlikleri, çelişkileri ve eklenmesi öneri
 - Önerilen varsayılan: Kâr almada fiyatı zorlamadan korumayı sürdür; zarar durdurma/acil kapatmada doğrulanmış kalan riski güvenli biçimde azalt.
 
 ### Q-096 — Hiç gerçekleşmeyen giriş emri ne kadar açık kalacak?
-- Durum: AÇIK
+- Durum: CEVAPLANDI
 - Öncelik: P0
-- Soru: Sıfır miktarı gerçekleşen giriş emri hangi süre veya sinyal geçerliliği sonunda iptal edilecek; bu süre emir türüne göre mi, kullanıcı ayarına göre mi belirlenecek?
-- Önerilen varsayılan: Emir türüne göre sınırlı yaşam süresi ve sinyal hâlâ geçerli mi denetimi; süre sonunda borsa durumunu doğrulayıp iptal et, otomatik piyasa tamamlaması yapma.
+- Karar: `DEC-0060`
+- Cevap: Hızlı girişte hazır süre 5 saniye (1–30), limit türlerinde 60 saniye (5–300) olacak; sayaç borsa kabulünde başlayacak ve süre dolarsa veya giriş koşulu daha önce geçersizleşirse gerçekleşmemiş kısım iptal edilecek.
+- Soru: Sıfır miktarı gerçekleşen giriş emrinin süre, başlangıç ve erken iptal kuralı nedir?
+- Önerilen varsayılan: Kısmi girişle aynı 5/60 saniye sınıfları; borsa kabulünde başlangıç; koşul geçersizliğinde erken iptal; piyasa emriyle tamamlama yok.
 
 ### Q-097 — Kısmi çıkış emri için bekleme süreleri nedir?
 - Durum: CEVAPLANDI
