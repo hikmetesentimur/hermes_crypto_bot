@@ -737,10 +737,12 @@ Bu dosya, özgün senaryodaki belirsizlikleri, çelişkileri ve eklenmesi öneri
 - Önerilen varsayılan: Emir türüne göre sınırlı yaşam süresi ve sinyal hâlâ geçerli mi denetimi; süre sonunda borsa durumunu doğrulayıp iptal et, otomatik piyasa tamamlaması yapma.
 
 ### Q-097 — Kısmi çıkış emri için bekleme süreleri nedir?
-- Durum: AÇIK
+- Durum: CEVAPLANDI
 - Öncelik: P0
-- Soru: Kâr alma, zarar durdurma ve acil kapatma emirleri ilk kısmi gerçekleşmeden sonra ne kadar bekleyecek; süreler sabit mi, kullanıcı sınırlar içinde değiştirebilir mi?
-- Önerilen varsayılan: Kâr alma için daha uzun, zarar durdurma/acil kapatma için daha kısa hazır süre; kullanıcı yalnız güvenli sınırlar içinde değiştirebilir.
+- Karar: `DEC-0056`
+- Cevap: Kâr almada hazır süre 60 saniye ve seçilebilir aralık 15–300 saniye; zarar durdurma/acil kapatmada hazır süre 5 saniye ve seçilebilir aralık 1–15 saniye olacak. Süre ilk doğrulanmış kısmi çıkışta başlayacak ve sonraki gerçekleşmelerle sıfırlanmayacak.
+- Soru: Kâr alma, zarar durdurma ve acil kapatma emirleri ilk kısmi gerçekleşmeden sonra hangi süre ve sınırlarla beklenecek?
+- Önerilen varsayılan: Kâr alma 60 saniye (15–300); zarar durdurma/acil kapatma 5 saniye (1–15).
 
 ### Q-098 — Normal strateji çıkış sinyali hangi kısmi çıkış politikasına girecek?
 - Durum: AÇIK

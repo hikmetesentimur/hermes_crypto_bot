@@ -1157,6 +1157,31 @@ Bu dosya yalnızca kullanıcı tarafından açıkça onaylanmış kalıcı karar
 - Ödünleşimler: Fiyat kayması koruması olağan dışı piyasada risk çıkışını geciktirebilir; kalan küçük miktarlar borsa alt sınırları nedeniyle tamamen kapatılamayabilir.
 - Önceki karar: DEC-0009, DEC-0010, DEC-0016, DEC-0017, DEC-0020, DEC-0032, DEC-0033, DEC-0050 ve DEC-0053 ile birlikte uygulanır
 
+### DEC-0056 — Kısmi çıkışta amaca göre 60/5 saniye hazır süre
+
+- Tarih: 2026-07-23
+- Durum: ONAYLANDI
+- Karar sahibi: Hikmet Esentimur
+- İlgili sorular: Q-035–Q-038, Q-078, Q-095, Q-097–Q-099; DEC-0010, DEC-0016, DEC-0017, DEC-0020, DEC-0032, DEC-0050, DEC-0055
+- Karar: Kısmi kâr alma çıkışında hazır bekleme süresi 60 saniye ve kullanıcı sınırı 15–300 saniye; kısmi zarar durdurma veya acil kapatmada hazır süre 5 saniye ve kullanıcı sınırı 1–15 saniye olacak. Süre ilk doğrulanmış kısmi çıkışta başlayacak ve sonraki gerçekleşmeler süreyi sıfırlamayacak.
+- Uygulama sonuçları:
+  - Kâr alma çıkışında süre tam saniye olarak 15–300 arasında seçilir; yeni stratejide hazır değer 60 saniyedir.
+  - Zarar durdurma ve acil kapatma çıkışında süre tam saniye olarak 1–15 arasında seçilir; hazır değer 5 saniyedir.
+  - Seçilen süre çıkış amacıyla birlikte strateji sürümünde saklanır; arayüz hazır değeri, seçilen değeri ve güvenli alt/üst sınırı açıkça gösterir.
+  - Süre, borsadan ilk kısmi çıkış gerçekleşmesi doğrulandığında başlar. Daha sonra gelen gerçekleşmeler net açık miktarı ve korumayı günceller ancak başlangıç zamanını değiştirmez.
+  - Borsa emri süre dolmadan kesin olarak Tamamlandı, İptal Edildi, Süresi Doldu veya Reddedildi durumuna geçirirse yerel sayaç sonucu beklenmez; borsanın kesin durumu işlenir.
+  - Kullanıcı aralık dışı süre kaydedemez. Borsa/emir türü daha dar zorunlu bir geçerlilik süresi dayatıyorsa emir gönderilmeden önce kullanıcıya gösterilir ve borsa sınırı uygulanır.
+  - Süre dolduğunda sistem önce çıkış emrinin ve pozisyonun son durumunu borsayla karşılaştırır; iptal/değiştirme sırasında oluşan yeni gerçekleşmeler net miktara katılır.
+  - Kâr alma süresi dolunca `DEC-0055` uyarınca gerçekleşmeyen kalan emir miktarı iptal edilir ve kalan pozisyonun zarar durdurma/kâr alma koruması doğrulanmış net miktara göre sürdürülür.
+  - Zarar durdurma veya acil kapatma süresi dolunca eski emir güvenli biçimde iptal/değiştirilir ve doğrulanmış kalan açık miktar yalnız pozisyonu azaltan, fiyat kayması korumalı yöntemle kapatılmaya çalışılır.
+  - Eski emir ya da net pozisyon durumu kesin değilse ikinci çıkış gönderilmez; “Durumu Araştırılıyor” aşaması, mutabakat ve yüksek öncelikli bildirim uygulanır.
+  - Süre güvenilir tekdüze ölçümle takip edilir; sunucu yeniden başlarsa kalıcı zaman damgaları ve borsa durumu üzerinden kalan süre yeniden kurulur, sayaç sıfırlanmaz.
+  - Geçmiş sınama ve deneme aynı süre/başlangıç kuralını kullanır; veri çözünürlüğü kısmi gerçekleşme zamanını desteklemiyorsa sınırlama raporda görünür olur.
+  - Normal strateji çıkış sinyalinin hangi süre/politikaya gireceği Q-098; fiyat korumasının risk çıkışını engellemesindeki son çare Q-099 ile ayrıca belirlenecektir.
+- Gerekçe: Kâr alma emirlerine hedef fiyatı bulmak için daha fazla zaman verirken zarar durdurma ve acil kapatmada açık riskin uzun süre taşınmasını önlemek.
+- Ödünleşimler: Kâr alma süresi boyunca kalan pozisyon piyasa riskine açıktır; daha kısa risk çıkışı süresi daha yüksek fiyat kaymasıyla karşılaşabilir.
+- Önceki karar: DEC-0010, DEC-0016, DEC-0017, DEC-0020, DEC-0032, DEC-0050 ve DEC-0055 ile birlikte uygulanır
+
 <!--
 ### DEC-XXXX — Karar başlığı
 
