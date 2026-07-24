@@ -1110,6 +1110,29 @@ Bu dosya yalnızca kullanıcı tarafından açıkça onaylanmış kalıcı karar
 - Ödünleşimler: Planlanan pozisyonun yalnız bir kısmı açılabilir; küçük gerçekleşmeler borsa alt sınırları nedeniyle yönetim zorluğu oluşturabilir.
 - Önceki karar: DEC-0009, DEC-0016, DEC-0032, DEC-0033 ve DEC-0039 ile birlikte uygulanır
 
+### DEC-0054 — Kısmi girişte emir sınıfına göre 5/60 saniye hazır süre
+
+- Tarih: 2026-07-23
+- Durum: ONAYLANDI
+- Karar sahibi: Hikmet Esentimur
+- İlgili sorular: Q-021–Q-026, Q-038, Q-078, Q-094, Q-096; DEC-0009, DEC-0010, DEC-0020, DEC-0032, DEC-0050, DEC-0053
+- Karar: Kısmi giriş emrinin kalan miktarı için emir sınıfına göre güvenli hazır süre uygulanacak ve kullanıcı yalnız tanımlı sınırlar içinde değiştirebilecek. Hızlı gerçekleşmesi beklenen emirlerde hazır süre 5 saniye, sınır 1–30 saniye; fiyat bekleyen limit türlerinde hazır süre 60 saniye, sınır 5–300 saniyedir. Süre ilk doğrulanmış kısmi gerçekleşmede başlar.
+- Uygulama sonuçları:
+  - Piyasa emri ve tetiklendikten sonra hemen gerçekleşmesi amaçlanan yürütülebilir emirler “hızlı gerçekleşmesi beklenen” sınıftadır; hazır süre 5 saniye, kullanıcı aralığı tam saniye olarak 1–30 saniyedir.
+  - Limit, Geri Çekilme Limit, yalnız emir defterine eklenen limit ve tetiklendikten sonra fiyat bekleyen Stop-Limit emirleri “fiyat bekleyen limit” sınıfındadır; hazır süre 60 saniye, kullanıcı aralığı tam saniye olarak 5–300 saniyedir.
+  - Borsa/emir yeteneği emri daha erken kesin olarak Tamamlandı, İptal Edildi, Süresi Doldu veya Reddedildi durumuna geçirirse yerel süre sonucu beklenmez; borsanın kesin durumu uygulanır.
+  - Süre, borsadan ilk kısmi gerçekleşmenin doğrulandığı anda başlar. Sonraki kısmi gerçekleşmeler süreyi baştan başlatmaz; kalan miktar ve koruyucu emirler güncellenir.
+  - Kullanıcının seçtiği süre strateji ve emir ayarının sürümlü alanıdır; arayüz emir sınıfının hazır değerini, seçilen değeri ve izin verilen alt/üst sınırı açıkça gösterir.
+  - Kullanıcı aralık dışı değer kaydedemez. Borsa daha dar bir geçerlilik sınırı dayatıyorsa kullanıcıya gösterilir ve emir borsa sınırına uymadan gönderilmez.
+  - Süre duvar saatiyle değil güvenilir tekdüze süre ölçümüyle izlenir; sunucu yeniden başlarsa kalıcı borsa/yerel zaman damgalarıyla kalan süre yeniden kurulur ve emir önce borsayla karşılaştırılır.
+  - Süre dolduğunda `DEC-0053` gereği son borsa durumu alınır, gerçekleşmeyen miktar iptal edilir ve doğrulanmış gerçekleşen miktar korunur; piyasa emriyle zorla tamamlama yapılmaz.
+  - İptal veya durum sorgusu zaman aşımına uğrarsa süre dolmuş olsa bile ikinci giriş emri gönderilmez; emir “Durumu Araştırılıyor” olarak mutabakat sürecine alınır.
+  - Geçmiş sınama ve deneme aynı süreyi kullanır; veri çözünürlüğü kısmi gerçekleşmenin zamanını desteklemiyorsa varsayım raporda açıkça gösterilir.
+  - Bu karar hiç gerçekleşmeyen giriş emrinin genel yaşam süresini belirlemez; o davranış Q-096 kapsamında ayrıca kararlaştırılacaktır.
+- Gerekçe: Hızlı emirlerin eski piyasa koşullarında beklemesini önlerken fiyat bekleyen limit emirlere makul gerçekleşme zamanı vermek ve kullanıcı esnekliğini güvenli sınırlarla sınırlamak.
+- Ödünleşimler: Kısa süre daha az gerçekleşme, uzun süre daha eski sinyal/fiyat riski doğurabilir; kullanıcı emir sınıfına uygun süre seçmelidir.
+- Önceki karar: DEC-0009, DEC-0010, DEC-0020, DEC-0032, DEC-0050 ve DEC-0053 ile birlikte uygulanır
+
 <!--
 ### DEC-XXXX — Karar başlığı
 

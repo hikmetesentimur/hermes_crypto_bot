@@ -715,16 +715,24 @@ Bu dosya, özgün senaryodaki belirsizlikleri, çelişkileri ve eklenmesi öneri
 - Önerilen varsayılan: En düşük 1 saniye; hazır değer 5 saniye; aralık sonunda yalnız en güncel zaman uyumlu veri görüntüsü tek kez değerlendirilir.
 
 ### Q-094 — Kısmi giriş emrinin kalan miktarı ne kadar beklenecek?
-- Durum: AÇIK
+- Durum: CEVAPLANDI
 - Öncelik: P0
-- Soru: Kısmen gerçekleşen giriş emrinin kalan miktarı iptal edilmeden önce sabit bir süre mi, emir türüne göre farklı süre mi, yoksa kullanıcı seçimi mi uygulanacak?
-- Önerilen varsayılan: Emir türüne ve ürün likiditesine göre güvenli hazır değer; kullanıcı sınırlar içinde süreyi değiştirebilir.
+- Karar: `DEC-0054`
+- Cevap: Hızlı gerçekleşmesi beklenen emirlerde hazır süre 5 saniye ve seçilebilir aralık 1–30 saniye; fiyat bekleyen limit türlerinde hazır süre 60 saniye ve seçilebilir aralık 5–300 saniye olacak. Süre ilk doğrulanmış kısmi gerçekleşmede başlayacak.
+- Soru: Kısmen gerçekleşen giriş emrinin kalan miktarı iptal edilmeden önce hangi süre ve sınırlar uygulanacak?
+- Önerilen varsayılan: Emir sınıfına göre 5/60 saniye; kullanıcı yalnız güvenli sınırlar içinde değiştirebilir.
 
 ### Q-095 — Kısmi gerçekleşen çıkış emrinin kalan miktarı nasıl yönetilecek?
 - Durum: AÇIK
 - Öncelik: P0
 - Soru: Kâr alma, zarar durdurma veya kullanıcı kapatma emri kısmen gerçekleşirse kalan açık risk iptal mi edilecek, yeniden fiyatlanacak mı, yoksa fiyat korumalı piyasa emriyle mi kapatılacak?
 - Önerilen varsayılan: Risk azaltan çıkışlarda kalan miktar korumasız bırakılmaz; emir amacına göre sınırlı yeniden deneme ve fiyat korumalı yalnız-azaltan kapatma uygulanır.
+
+### Q-096 — Hiç gerçekleşmeyen giriş emri ne kadar açık kalacak?
+- Durum: AÇIK
+- Öncelik: P0
+- Soru: Sıfır miktarı gerçekleşen giriş emri hangi süre veya sinyal geçerliliği sonunda iptal edilecek; bu süre emir türüne göre mi, kullanıcı ayarına göre mi belirlenecek?
+- Önerilen varsayılan: Emir türüne göre sınırlı yaşam süresi ve sinyal hâlâ geçerli mi denetimi; süre sonunda borsa durumunu doğrulayıp iptal et, otomatik piyasa tamamlaması yapma.
 
 ---
 
