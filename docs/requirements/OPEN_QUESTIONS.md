@@ -745,16 +745,24 @@ Bu dosya, özgün senaryodaki belirsizlikleri, çelişkileri ve eklenmesi öneri
 - Önerilen varsayılan: Kâr alma 60 saniye (15–300); zarar durdurma/acil kapatma 5 saniye (1–15).
 
 ### Q-098 — Normal strateji çıkış sinyali hangi kısmi çıkış politikasına girecek?
-- Durum: AÇIK
+- Durum: CEVAPLANDI
 - Öncelik: P0
-- Soru: Kâr alma veya zarar durdurma olmayan normal strateji çıkış sinyali kısmen gerçekleşirse kalan pozisyon açık ve korumalı mı tutulacak, yoksa risk sonlandırma gibi tamamen kapatılmaya mı çalışılacak?
-- Önerilen varsayılan: Strateji çıkış sinyalinin amacı pozisyonu bitirmekse, zarar durdurmadan daha geniş fiyat korumasıyla yalnız-azaltan tam kapatma politikası uygulanır.
+- Karar: `DEC-0057`
+- Cevap: Normal strateji çıkışı ayrı bir Tam Kapatma sınıfı olacak; hazır süre 30 saniye, seçilebilir aralık 5–120 saniye olacak ve süre sonunda kalan miktar yalnız pozisyonu azaltan, fiyat kayması korumalı emirle kapatılmaya çalışılacak.
+- Soru: Normal strateji çıkışı kısmen gerçekleşirse kalan pozisyon açık mı tutulacak, yoksa tamamen kapatılacak mı?
+- Önerilen varsayılan: Normal çıkış pozisyonu bitirir; 30 saniye hazır süre (5–120) sonrasında güvenli tam kapatma uygulanır.
 
 ### Q-099 — Fiyat koruması risk çıkışını engellerse son çare ne olacak?
 - Durum: AÇIK
 - Öncelik: P0
 - Soru: Zarar durdurma veya acil kapatma sırasında fiyat kayması sınırı aşılırsa sistem pozisyonu açık mı bırakacak, sınırlı biçimde sınırı genişletecek mi, yoksa açık onaylı bir son çare piyasa kapatması mı uygulayacak?
 - Önerilen varsayılan: Önceden onaylı basamaklı sınır genişletme, yalnız-azaltan emir, kesin süre/deneme sınırı ve başarısızlıkta en yüksek öncelikli alarm; davranış kullanıcıya kapıdan önce açıkça gösterilir.
+
+### Q-100 — Hiç gerçekleşmeyen normal veya risk çıkışı ne kadar beklenecek?
+- Durum: AÇIK
+- Öncelik: P0
+- Soru: Normal çıkış, zarar durdurma veya acil kapatma emrinde sıfır miktar gerçekleşirse sayaç emir gönderiminde mi başlayacak ve hangi süre sonunda güvenli takip çıkışına geçilecek?
+- Önerilen varsayılan: Sayaç borsanın emir kabulünü doğruladığı anda başlar; normal çıkış için orta, zarar durdurma/acil kapatma için kısa hazır süre ve güvenli kullanıcı sınırları uygulanır.
 
 ---
 

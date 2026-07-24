@@ -1182,6 +1182,31 @@ Bu dosya yalnızca kullanıcı tarafından açıkça onaylanmış kalıcı karar
 - Ödünleşimler: Kâr alma süresi boyunca kalan pozisyon piyasa riskine açıktır; daha kısa risk çıkışı süresi daha yüksek fiyat kaymasıyla karşılaşabilir.
 - Önceki karar: DEC-0010, DEC-0016, DEC-0017, DEC-0020, DEC-0032, DEC-0050 ve DEC-0055 ile birlikte uygulanır
 
+### DEC-0057 — Normal strateji çıkışında 30 saniye sonra güvenli tam kapatma
+
+- Tarih: 2026-07-23
+- Durum: ONAYLANDI
+- Karar sahibi: Hikmet Esentimur
+- İlgili sorular: Q-035–Q-038, Q-078, Q-095, Q-097–Q-100; DEC-0009, DEC-0010, DEC-0016, DEC-0017, DEC-0020, DEC-0032, DEC-0050, DEC-0055, DEC-0056
+- Karar: Kâr alma veya zarar durdurma olmayan normal strateji çıkışı ayrı bir Tam Kapatma sınıfıdır. Kısmi gerçekleşmede hazır bekleme süresi 30 saniye, kullanıcı sınırı 5–120 saniye olacak; süre sonunda doğrulanmış kalan miktar yalnız pozisyonu azaltan ve fiyat kayması korumalı emirle tamamen kapatılmaya çalışılacaktır.
+- Uygulama sonuçları:
+  - Normal strateji çıkış sinyali kabul edildiğinde amaç pozisyonun tamamını bitirmektir; bu sinyal kısmi kâr alma basamağına dönüştürülmez.
+  - Kısmi gerçekleşme sonrası süre tam saniye olarak 5–120 arasında seçilir; yeni stratejide hazır değer 30 saniyedir.
+  - Süre borsadan ilk kısmi normal çıkış gerçekleşmesi doğrulandığında başlar. Sonraki gerçekleşmeler net açık miktarı günceller ancak süreyi sıfırlamaz.
+  - Süre boyunca kalan açık miktarın zarar durdurma koruması net miktara göre devam eder; normal çıkış emriyle çakışabilecek koruyucu emirler miktar ve ters pozisyon riski yönünden eşleştirilir.
+  - Süre dolduğunda eski emir ve net pozisyon borsayla karşılaştırılır; iptal/değiştirme sırasında gelen yeni gerçekleşmeler hesaba katılır.
+  - Eski emrin iptali ve doğrulanmış kalan miktar kesinleştikten sonra takip çıkışı yalnız pozisyonu azaltan ve fiyat kayması korumalı nitelikte gönderilir.
+  - Vadeli işlemlerde takip çıkışı ters pozisyon açamaz. Spotta yalnız doğrulanmış eldeki miktar satılabilir.
+  - Normal çıkış sinyali daha sonra yanlış olsa bile kabul edilmiş tam kapatma niyeti sessizce geri alınmaz; kullanıcıya durum gösterilir ve yalnız açık, yetkili iptal eylemiyle değiştirilebilir.
+  - Kullanıcının seçtiği süre strateji sürümünde saklanır; arayüz Normal Çıkış sınıfını, Tam Kapatma amacını, hazır/seçilen süreyi, kalan miktarı ve kullanılan fiyat korumasını açıkça gösterir.
+  - Emir veya pozisyon durumu kesin değilse ikinci çıkış gönderilmez; “Durumu Araştırılıyor” aşaması, borsayla mutabakat ve yüksek öncelikli bildirim uygulanır.
+  - Kalan miktar borsa alt sınırının altındaysa mümkün olan güvenli kapatma denenir; kapatılamayan artık miktar gizlenmez ve sonsuz deneme döngüsü oluşturulmaz.
+  - Geçmiş sınama ve deneme aynı Tam Kapatma amacı ile 30 saniye hazır süreyi canlandırır; kısmi normal çıkış tam kapanmış sayılmaz.
+  - Fiyat koruması tam kapatmayı engellerse son çare Q-099; hiç gerçekleşmeyen normal/risk çıkışının yaşam süresi Q-100 kapsamında ayrıca belirlenecektir.
+- Gerekçe: Stratejinin çıkış kararını yerine getirirken zarar durdurma kadar acele edip gereksiz fiyat kayması oluşturmamak ve kalan pozisyonu yanlışlıkla açık bırakmamak.
+- Ödünleşimler: Bekleme süresince kalan pozisyon piyasa riskine maruz kalır; tam kapatma amacı fiyat koruması nedeniyle olağan dışı piyasada gecikebilir.
+- Önceki karar: DEC-0009, DEC-0010, DEC-0016, DEC-0017, DEC-0020, DEC-0032, DEC-0050, DEC-0055 ve DEC-0056 ile birlikte uygulanır
+
 <!--
 ### DEC-XXXX — Karar başlığı
 
