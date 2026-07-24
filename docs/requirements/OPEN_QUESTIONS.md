@@ -210,11 +210,13 @@ Bu dosya, özgün senaryodaki belirsizlikleri, çelişkileri ve eklenmesi öneri
 - Soru: Borsa emri piyasa alacak diye reddettiğinde iptal mi, bir tick geriden yeniden fiyatlama mı, post-only kapatma mı?
 - Önerilen varsayılan: Otomatik taker emrine dönüşme yok; sınırlı yeniden fiyatlama veya iptal, ikisi de açık ayar.
 
-### Q-026 — Kısmi dolumlar nasıl yönetilecek?
-- Durum: AÇIK
+### Q-026 — Kısmi gerçekleşen giriş emrinin kalan miktarı nasıl yönetilecek?
+- Durum: CEVAPLANDI
 - Öncelik: P0
-- Soru: Kısmen dolan giriş/çıkış emrinde timeout, kalan miktar, TP/SL miktarı ve kullanıcı görünümü nasıl olacak?
-- Önerilen varsayılan: Fill bazlı pozisyon muhasebesi; kalan miktar için açık politika; çıkışlar yalnızca gerçekleşmiş miktara göre.
+- Karar: `DEC-0053`
+- Cevap: Bekleme süresi dolunca gerçekleşmeyen miktar iptal edilecek; gerçekleşen kısım açık işlem olarak hemen koruyucu emirlerle yönetilecek ve kalan miktar piyasa emriyle tamamlanmayacak.
+- Soru: Giriş emri kısmen gerçekleşip kalan miktar bekleme süresini aşarsa ne yapılacak?
+- Önerilen varsayılan: Kalanı iptal et, iptali borsayla doğrula, gerçekleşen miktarı koru; belirsiz durumda ikinci emir gönderme.
 
 ### Q-027 — Emir tekrarları ve ağ hataları nasıl önlenecek?
 - Durum: AÇIK
@@ -711,6 +713,18 @@ Bu dosya, özgün senaryodaki belirsizlikleri, çelişkileri ve eklenmesi öneri
 - Cevap: Kullanıcı strateji için 1, 2, 5, 10 veya 30 saniyelik değerlendirme aralığı seçecek; hazır değer 5 saniye olacak ve aradaki veri değişiklikleri en güncel görüntüde birleştirilecek.
 - Soru: Kapanmamış mumlar kullanılırken her veri değişimi ayrı mı, yoksa seçilen kısa aralıkta birleştirilerek mi değerlendirilecek?
 - Önerilen varsayılan: En düşük 1 saniye; hazır değer 5 saniye; aralık sonunda yalnız en güncel zaman uyumlu veri görüntüsü tek kez değerlendirilir.
+
+### Q-094 — Kısmi giriş emrinin kalan miktarı ne kadar beklenecek?
+- Durum: AÇIK
+- Öncelik: P0
+- Soru: Kısmen gerçekleşen giriş emrinin kalan miktarı iptal edilmeden önce sabit bir süre mi, emir türüne göre farklı süre mi, yoksa kullanıcı seçimi mi uygulanacak?
+- Önerilen varsayılan: Emir türüne ve ürün likiditesine göre güvenli hazır değer; kullanıcı sınırlar içinde süreyi değiştirebilir.
+
+### Q-095 — Kısmi gerçekleşen çıkış emrinin kalan miktarı nasıl yönetilecek?
+- Durum: AÇIK
+- Öncelik: P0
+- Soru: Kâr alma, zarar durdurma veya kullanıcı kapatma emri kısmen gerçekleşirse kalan açık risk iptal mi edilecek, yeniden fiyatlanacak mı, yoksa fiyat korumalı piyasa emriyle mi kapatılacak?
+- Önerilen varsayılan: Risk azaltan çıkışlarda kalan miktar korumasız bırakılmaz; emir amacına göre sınırlı yeniden deneme ve fiyat korumalı yalnız-azaltan kapatma uygulanır.
 
 ---
 

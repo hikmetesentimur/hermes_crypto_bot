@@ -1086,6 +1086,30 @@ Bu dosya yalnızca kullanıcı tarafından açıkça onaylanmış kalıcı karar
 - Ödünleşimler: Aralık içinde çok kısa süre oluşup kaybolan bir koşul görülmeyebilir; daha kısa aralık daha fazla işlem gücü ve piyasa gürültüsü kullanır.
 - Önceki karar: DEC-0007, DEC-0029, DEC-0035, DEC-0037, DEC-0045, DEC-0048 ve DEC-0051 ile birlikte uygulanır
 
+### DEC-0053 — Kısmi girişte kalanı iptal et ve gerçekleşen kısmı koru
+
+- Tarih: 2026-07-23
+- Durum: ONAYLANDI
+- Karar sahibi: Hikmet Esentimur
+- İlgili sorular: Q-026, Q-035, Q-036, Q-078, Q-079, Q-085, Q-094, Q-095; DEC-0009, DEC-0016, DEC-0032, DEC-0033, DEC-0039
+- Karar: Giriş emri kısmen gerçekleşip belirlenen bekleme süresini aşarsa gerçekleşmeyen miktar iptal edilecek; gerçekleşen miktar açık işlem olarak koruyucu emirlerle yönetilecek ve kalan miktar piyasa emriyle zorla tamamlanmayacak.
+- Uygulama sonuçları:
+  - Pozisyon ve maliyet muhasebesi her doğrulanmış emir gerçekleşmesiyle anında güncellenir; yalnız istenen toplam miktar pozisyon sayılmaz.
+  - İlk kısmi gerçekleşme doğrulandığı anda gerçekleşen miktar için uygulanabilir zarar durdurma ve kâr alma koruması başlatılır; kalan giriş emrinin süresinin dolması beklenmez.
+  - Koruyucu emir miktarı yalnız borsada doğrulanmış net açık miktara göre oluşturulur ve yeni kısmi gerçekleşmeler geldikçe güvenli biçimde güncellenir.
+  - Giriş bekleme süresi dolunca sistem önce emrin son durumunu borsayla karşılaştırır, ardından yalnız gerçekleşmemiş kalan miktar için iptal ister.
+  - İptal isteği ile borsa onayı arasındaki yeni gerçekleşmeler ayrı olay olarak işlenir; pozisyon ve koruyucu miktarlar tekrar eşleştirilir.
+  - İptal kesin olarak doğrulanmadan aynı giriş niyeti için yeni emir veya kalan miktarı tamamlayacak piyasa emri gönderilmez.
+  - Emir durumu bilinmiyorsa `DEC-0032` kapsamındaki “Durumu Araştırılıyor” aşamasına geçilir; yeni risk artırıcı emirler engellenir ve kullanıcı uyarılır.
+  - Koruyucu emir için borsa alt sınırını karşılayan gerçekleşmiş miktar hemen korunur. Miktar koruyucu/çıkış emri alt sınırının altındaysa sistem destekleniyorsa yalnız açık işlemi azaltan güvenli kapatmayı dener; mümkün değilse durumu gizlemez, tekrar döngüsüne girmez ve kullanıcıya müdahale gerektiren artık miktarı bildirir.
+  - Borsadaki koruyucu emir desteklenmiyorsa `DEC-0033` uyarınca sistem takibi yalnız açık risk uyarısı ve önceden verilmiş izinle kullanılabilir; sessiz geçiş yapılmaz.
+  - Arayüz `DEC-0039` uyarınca istenen, gerçekleşen, iptal bekleyen ve iptal edilen miktarı; ortalama gerçekleşme fiyatını; korunan net miktarı ve her gerçekleşmeyi zaman sırasıyla gösterir.
+  - Deneme ve geçmiş sınama aynı kısmi gerçekleşme durumlarını canlandırır; kısmi giriş otomatik olarak tam gerçekleşmiş kabul edilmez.
+  - Bu karar yalnız giriş emrinin kalan miktar politikasını kesinleştirir. Süre Q-094, kısmi çıkış emri davranışı Q-095 kapsamında ayrıca kararlaştırılacaktır.
+- Gerekçe: Eski veya kötü fiyattan kontrolsüz piyasa tamamlamasını ve süresiz bekleyen giriş riskini önlerken gerçekten oluşmuş pozisyonu gecikmeden korumak.
+- Ödünleşimler: Planlanan pozisyonun yalnız bir kısmı açılabilir; küçük gerçekleşmeler borsa alt sınırları nedeniyle yönetim zorluğu oluşturabilir.
+- Önceki karar: DEC-0009, DEC-0016, DEC-0032, DEC-0033 ve DEC-0039 ile birlikte uygulanır
+
 <!--
 ### DEC-XXXX — Karar başlığı
 
