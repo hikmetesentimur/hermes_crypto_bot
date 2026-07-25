@@ -1284,6 +1284,34 @@ Bu dosya yalnızca kullanıcı tarafından açıkça onaylanmış kalıcı karar
 - Ödünleşimler: Canlı Mum modunda kısa süreli koşul değişimi emri erken iptal edebilir; limit emrin daha sonra iyi fiyattan gerçekleşme fırsatı kaçabilir.
 - Önceki karar: DEC-0007–DEC-0010, DEC-0020, DEC-0048, DEC-0050, DEC-0053 ve DEC-0054 ile birlikte uygulanır
 
+### DEC-0061 — Kalıcı emir niyeti, yinelenmeme ve borsayla mutabakat
+
+- Tarih: 2026-07-23
+- Durum: ONAYLANDI
+- Karar sahibi: Hikmet Esentimur
+- İlgili sorular: Q-025–Q-027, Q-045, Q-074, Q-078, Q-079, Q-089, Q-094–Q-101; DEC-0009, DEC-0010, DEC-0014–DEC-0017, DEC-0020, DEC-0021, DEC-0032, DEC-0033, DEC-0035, DEC-0041, DEC-0042, DEC-0053–DEC-0060
+- Karar: Her emir niyeti borsaya gönderilmeden önce kalıcı ve benzersiz bir kimlikle kaydedilecek. Ağ hatası, zaman aşımı veya belirsiz yanıt emir başarısızlığı sayılmayacak; borsadaki emir, gerçekleşmeler ve gerçek pozisyon/bakiye uzlaştırılmadan kör yeniden gönderim ve aynı riski artıran yeni emir yapılmayacaktır.
+- Uygulama sonuçları:
+  - Emir niyeti; hesap, borsa, işlem çifti, strateji sürümü, sinyal/çıkış olayı, amaç, yön, tür, fiyat, miktar ve oluşturma zamanı ile tek kalıcı işlem içinde yazılmadan dış borsa çağrısı yapılamaz.
+  - Her niyet sistem içinde değişmez bir yinelenmeme anahtarı ve borsa sınırlarına uygun benzersiz istemci emir kimliği taşır. Aynı iş olayı bu kimliği yeniden üretir; rastgele yeni emir kimliğiyle çoğaltılamaz.
+  - Yerel kayıt başarıyla tamamlanmadan borsaya gönderim yapılmaz. Borsaya gönderim sonrası yerel durum güncellenemese bile yeniden başlatma aynı niyeti bulur ve önce borsayı sorgular.
+  - Bağlantı kesilmesi, zaman aşımı, boş/bozuk yanıt veya sunucu hatası kesin Ret anlamına gelmez; niyet “Durumu Araştırılıyor” durumuna alınır.
+  - Mutabakat sırası borsanın istemci emir kimliğiyle sorgusu, borsa emir kimliği, açık emirler, gerçekleşme geçmişi ve amaç için gerekli gerçek pozisyon/bakiye karşılaştırmasını kapsar. Tek bir yerel duruma güvenilmez.
+  - Borsada emir veya gerçekleşme bulunursa mevcut niyet o sonuçla güncellenir; ikinci emir oluşturulmaz. Kısmi gerçekleşmeler net miktara ve ilgili koruyucu/çıkış politikasına anında katılır.
+  - Borsada emrin bulunmadığı ancak yeterli ve tutarlı sorgularla kesinleşirse aynı niyetin yeniden gönderilip gönderilmeyeceği emir amacı ve onaylı yeniden deneme politikasına göre ele alınır; yeni deneme önceki niyete bağlıdır ve çift pozisyon oluşturamaz.
+  - Sonuç kesinleşene kadar aynı hesap–işlem çifti–strateji kapsamındaki yeni risk artırıcı girişler engellenir. Bağımsız kapsamlar gereksiz yere durdurulmaz; ancak hesap düzeyi bakiye/pozisyon belirsizliği varsa engel hesap düzeyine yükselir.
+  - Risk azaltan çıkışlar körlemesine engellenmez fakat yalnız borsadan doğrulanmış net açık miktar ve yön üzerinden, yalnız-azaltan/yinelenmeyen çıkış niyetiyle ilerler. Net miktar belirsizse önce mutabakat ve acil bildirim uygulanır.
+  - Eski emri iptal/değiştirme sırasında yeni gerçekleşmeler son sorguda hesaba katılır; eski durum kesinleşmeden takip emri gönderilmez ve takip miktarı doğrulanmış net miktarı aşamaz.
+  - Kullanıcı arayüzü niyet kimliğini, borsa/istemci emir kimliğini, yerel ve borsa durumlarını, son mutabakat zamanını, engellenen işlemleri ve gerekli kullanıcı eylemini sade biçimde gösterir.
+  - Kullanıcı “tekrar gönder” düğmesiyle yeni kimlik oluşturarak korumayı aşamaz. Yetkili manuel müdahale bile önce mutabakat, açık risk özeti ve güçlü yeniden doğrulama gerektirir; olay denetim kaydına yazılır.
+  - Mutabakat yeniden başlatma sonrası otomatik devam eder; kalıcı niyetler kaybolmaz, sayaçlar körlemesine sıfırlanmaz ve açık emir yok varsayılmaz.
+  - Borsa istemci emir kimliğiyle güvenilir sorgu veya eşdeğer güvenli mutabakat sunmuyorsa ilgili emir türü/hesap gerçek işlem için desteklenmiş sayılmaz ve canlı işlem kapısı açılmaz.
+  - Deneme ve resmî borsa deneme ortamında gönderim öncesi/sonrası çökme, zaman aşımı, geç yanıt, yinelenen olay, kısmi gerçekleşme, iptal yarışı, yeniden başlatma ve tutarsız borsa sorgusu test edilmeden gerçek emir yolu etkinleştirilemez.
+  - Geçmiş sınama aynı niyet kimliği ve durum geçişlerini temsil eder; ağ belirsizliği canlandırılmıyorsa bu sınırlama raporda görünür olur.
+- Gerekçe: Belirsiz ağ sonucu yüzünden aynı emrin iki kez gönderilmesini, beklenenden büyük pozisyonu ve ters/fazla çıkışı önlemek; yerel kayıt ile borsa gerçeğini güvenli biçimde uzlaştırmak.
+- Ödünleşimler: Belirsiz durum çözülene kadar yeni işlemler gecikebilir veya engellenebilir; buna karşılık kör yeniden denemeden kaynaklanan çift emir ve kontrolsüz risk azaltılır.
+- Önceki karar: DEC-0009, DEC-0010, DEC-0014–DEC-0017, DEC-0020, DEC-0021, DEC-0032, DEC-0033, DEC-0035, DEC-0041, DEC-0042 ve DEC-0053–DEC-0060 ile birlikte uygulanır
+
 <!--
 ### DEC-XXXX — Karar başlığı
 

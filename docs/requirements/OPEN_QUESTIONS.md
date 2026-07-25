@@ -219,10 +219,12 @@ Bu dosya, özgün senaryodaki belirsizlikleri, çelişkileri ve eklenmesi öneri
 - Önerilen varsayılan: Kalanı iptal et, iptali borsayla doğrula, gerçekleşen miktarı koru; belirsiz durumda ikinci emir gönderme.
 
 ### Q-027 — Emir tekrarları ve ağ hataları nasıl önlenecek?
-- Durum: AÇIK
+- Durum: CEVAPLANDI
 - Öncelik: P0
-- Soru: Timeout sonrası emrin borsaya ulaşıp ulaşmadığı belirsizse nasıl mutabakat yapılacak?
-- Önerilen varsayılan: Kalıcı clientOrderId/idempotency key, sorgula-uzlaştır, kör yeniden gönderme yapma.
+- Karar: `DEC-0061`
+- Cevap: Her emir niyeti gönderilmeden önce kalıcı ve benzersiz kimlikle kaydedilecek; ağ hatası/zaman aşımında borsa sorgulanıp sonuç kesinleşmeden kör yeniden gönderim veya aynı riski artıran yeni emir yapılmayacak.
+- Soru: Zaman aşımı sonrası emrin borsaya ulaşıp ulaşmadığı belirsizse nasıl mutabakat yapılacak?
+- Önerilen varsayılan: Kalıcı istemci emir kimliği ve yinelenmeme anahtarı; sorgula-uzlaştır; belirsizlikte yeniden gönderme yapma.
 
 ### Q-028 — Spot işlemlerde satış/çıkış kapsamı nedir?
 - Durum: AÇIK
