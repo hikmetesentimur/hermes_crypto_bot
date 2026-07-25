@@ -1385,6 +1385,32 @@ Bu dosya yalnızca kullanıcı tarafından açıkça onaylanmış kalıcı karar
 - Ödünleşimler: Mevcut pozisyon kapanırken karşı yöndeki fiyat hareketinin bir kısmı kaçabilir; eşzamanlı koruma stratejileri ilk sürümde çalışmaz. Buna karşılık net pozisyon, çıkış ve mutabakat davranışı daha güvenilir olur.
 - Önceki karar: DEC-0002, DEC-0003, DEC-0009, DEC-0010, DEC-0012, DEC-0013, DEC-0020, DEC-0032 ve DEC-0055–DEC-0061 ile birlikte uygulanır
 
+### DEC-0065 — Her vadeli işlem çifti için tek sahip strateji
+
+- Tarih: 2026-07-23
+- Durum: ONAYLANDI
+- Karar sahibi: Hikmet Esentimur
+- İlgili sorular: Q-027, Q-029–Q-032, Q-037, Q-073, Q-074, Q-078–Q-080, Q-095–Q-101, Q-103, Q-104; DEC-0005, DEC-0006, DEC-0010, DEC-0016, DEC-0017, DEC-0032, DEC-0033, DEC-0061, DEC-0064
+- Karar: İlk sürümde aynı borsa hesabı ve vadeli işlem çiftinde tek bir etkin sahip strateji bulunacaktır. Sahiplik sürerken diğer stratejilerin aynı veya karşıt yöndeki giriş sinyalleri emir oluşturmayacak, sıraya alınmayacak ve sahip stratejinin pozisyonunu büyütemeyecek veya kapatamayacaktır. Alan tamamen boşaldıktan sonra diğer stratejinin girişi için yeni ve geçerli bir yanlış→doğru sinyal gerekir.
+- Uygulama sonuçları:
+  - Sahiplik kapsamı borsa, hesap, vadeli piyasa türü ve işlem çifti bileşimidir; farklı hesap veya işlem çiftleri gereksiz yere kilitlenmez.
+  - Sahiplik kilidi ilk risk artırıcı giriş niyeti kalıcı olarak oluşturulmadan önce tek işlem içinde alınır. Eşzamanlı iki stratejiden yalnız biri kilidi kazanabilir; diğeri borsaya emir gönderemez.
+  - Sahiplik, giriş emri beklerken, kısmi gerçekleşmede, açık pozisyonda, çıkış sırasında ve emir/pozisyon durumu araştırılırken korunur. Sıfır gerçekleşen giriş güvenli biçimde iptal edilip bütün emirler kesin son duruma gelirse serbest bırakılabilir.
+  - Sahiplik yalnız borsadaki net pozisyonun sıfır, ilgili bütün açık emirlerin kesin son durumda ve yerel/borsa mutabakatının tutarlı olduğu doğrulandıktan sonra bırakılır. Yerel “kapandı” kaydı tek başına yeterli değildir.
+  - Sahip olmayan stratejinin aynı yön sinyali net pozisyona ekleme yapmaz; karşıt sinyali kapatma veya tersine dönüş başlatmaz. Her iki durumda da Engellendi: Başka Strateji Sahibi sonucu ve gerekçe kaydedilir.
+  - Engellenen sinyal sıraya alınmaz, sonradan otomatik çalıştırılmaz ve alan açılınca eski doğru durum emir üretmez. İlgili strateji sahiplik bırakıldıktan sonra önce yanlış, ardından yeni doğru durum göstermelidir; `DEC-0048`/`DEC-0049` Tek Geçiş kuralları korunur.
+  - Sahip stratejinin kendi açık pozisyonuna ilave giriş yapıp yapamayacağı bu kararla belirlenmez; Q-104 ayrıca onaylanacaktır.
+  - Yalnız sahip stratejinin onaylı kâr alma, normal çıkış, zarar durdurma ve tersine dönüş niyetleri strateji düzeyinde pozisyonu değiştirebilir. Kullanıcı tarafından yetkili manuel kapatma ile hesap/strateji düzeyi zarar sınırı, acil durdurma ve sistem güvenlik motoru riski azaltmak için bu kısıtı aşabilir; yeni risk açamaz ve denetim kaydı üretir.
+  - Borsada yerel sahiplikle eşleşmeyen manuel, harici veya kaynağı belirsiz pozisyon/emir görülürse sahiplik Bilinmiyor durumuna alınır; hiçbir strateji yeni giriş yapamaz. Net pozisyon ve kaynak uzlaştırılmadan otomatik sahip ataması veya tersine dönüş yapılmaz.
+  - Manuel kapatma, tasfiye veya borsa müdahalesi sonrası sahiplik kendiliğinden serbest varsayılmaz; net sıfır, emir son durumları, gerçekleşmeler, ücret ve fonlama uzlaştırılır.
+  - Kullanıcı arayüzü hesap–çift sahibini, strateji sürümünü, kilit başlangıcını, borsa net pozisyonunu, açık emirleri, engellenen sinyalleri ve serbest bırakma engellerini gösterir.
+  - Yeniden başlatmada sahiplik kalıcı kayıttan yüklenir ve borsa gerçeğiyle karşılaştırılır; eksik kilit bulunursa ilgili kapsam güvenli biçimde Bilinmiyor/Kilitli durumuna alınır, açık pozisyon sahipsiz bırakılmaz.
+  - Geçmiş sınama, deneme ve gerçek mod aynı tek sahip/engellenen-sinyal kuralını uygular; eşzamanlı sinyaller kararlı ve tekrarlanabilir bir öncelik sırasıyla işlenir ve kazanan/kaybeden raporda görünür olur.
+  - Kabul testleri eşzamanlı aynı/karşıt sinyal, bekleyen giriş, kısmi gerçekleşme, kapanma yarışı, ağ belirsizliği, manuel pozisyon, acil kapatma, yeniden başlatma, net-sıfır ve kilit serbest bırakma durumlarını kapsar.
+- Gerekçe: Borsanın tek net vadeli pozisyonunu birden fazla stratejinin birbirinden habersiz büyütmesini, azaltmasını veya tersine çevirmesini önlemek ve işlem sahipliğini açık tutmak.
+- Ödünleşimler: Aynı işlem çiftinde bağımsız stratejiler eşzamanlı fırsat kullanamaz ve engellenen sinyaller kaçırılır; buna karşılık pozisyon miktarı, kâr-zarar, koruyucu emirler ve kapatma yetkisi daha güvenilir olur.
+- Önceki karar: DEC-0005, DEC-0006, DEC-0010, DEC-0016, DEC-0017, DEC-0032, DEC-0033, DEC-0048, DEC-0049, DEC-0061 ve DEC-0064 ile birlikte uygulanır
+
 <!--
 ### DEC-XXXX — Karar başlığı
 

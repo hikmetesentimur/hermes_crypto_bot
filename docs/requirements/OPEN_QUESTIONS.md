@@ -791,10 +791,18 @@ Bu dosya, özgün senaryodaki belirsizlikleri, çelişkileri ve eklenmesi öneri
 - Önerilen varsayılan: İlk sürümde kapsam dışı; yalnız normal spot ve vadeli işlemler; gelecekte yalnız ayrı onayla değerlendirme.
 
 ### Q-103 — Tek yönlü vadeli pozisyonda çoklu strateji sahipliği nasıl yönetilecek?
+- Durum: CEVAPLANDI
+- Öncelik: P0
+- Karar: `DEC-0065`
+- Cevap: İlk sürümde her hesap–vadeli işlem çiftinde yalnız bir sahip strateji olacak; sahiplik sürerken diğer stratejilerin aynı/karşıt sinyalleri engellenecek, sıraya alınmayacak ve alan boşaldıktan sonra yeni bir yanlış→doğru sinyali gerekecek.
+- Soru: Aynı hesap ve vadeli işlem çiftinde birden fazla strateji aynı veya karşıt yönde sinyal üretirse tek net pozisyon kime ait sayılacak; bir strateji diğerinin payını kapatabilecek mi?
+- Önerilen varsayılan: Tek sahip strateji; diğer stratejileri engelle ve sıraya alma; hiçbir strateji diğerinin pozisyonunu otomatik büyütmesin veya kapatmasın.
+
+### Q-104 — Sahip strateji açık vadeli pozisyona ilave giriş yapabilir mi?
 - Durum: AÇIK
 - Öncelik: P0
-- Soru: Aynı hesap ve vadeli işlem çiftinde birden fazla strateji aynı veya karşıt yönde sinyal üretirse tek net pozisyon kime ait sayılacak; bir strateji diğerinin payını kapatabilecek mi?
-- Önerilen varsayılan: İlk sürümde aynı hesap–vadeli işlem çiftinde yalnız bir etkin pozisyon sahibi strateji; sahiplik sona ermeden diğer stratejilerin aynı/karşıt girişlerini engelle, hiçbir strateji diğerinin pozisyonunu otomatik kapatmasın.
+- Soru: Aynı stratejide pozisyon açıkken yeni giriş sinyali oluşursa pozisyon büyütülebilecek mi; izin varsa azami kademe, toplam risk ve ortalama giriş/koruyucu emirler nasıl yönetilecek?
+- Önerilen varsayılan: İlk sürümde ilave giriş ve ortalama düşürme yok; sahip strateji mevcut pozisyon tamamen kapanıp yeni yanlış→doğru sinyali oluşmadan yeni risk ekleyemez.
 
 ---
 
