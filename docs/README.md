@@ -23,6 +23,7 @@ Bu klasör, projenin kalıcı ve sürüm kontrollü hafızasıdır. Sohbetlerde 
 - `decisions/`: Kullanıcı tarafından onaylanmış kararların günlüğü
 - `architecture/`: Sistem mimarisi, veri modeli ve entegrasyon kararları
 - `operations/`: Dağıtım, yedekleme, izleme ve olay müdahalesi
+  - `operations/HOSTING_PROVIDER_RESEARCH.md`: Türkiye’deki yerli VPS/VDS sağlayıcılarının fiyat, teknik yeterlilik ve sözleşme uygunluğu araştırması
 - `security/`: Tehdit modeli, anahtar yönetimi ve canlı işlem güvenlik kapıları
 
 ## Değişiklik disiplini
