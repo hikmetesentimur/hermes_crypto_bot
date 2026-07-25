@@ -781,10 +781,12 @@ Bu dosya, özgün senaryodaki belirsizlikleri, çelişkileri ve eklenmesi öneri
 - Önerilen varsayılan: Borsa/ürün emir defteri ölçümlerine dayalı az sayıda kısa basamak; her basamakta mutabakat; platform düzeyinde aşılamaz üst sınır ve sonrasında yalnız önceden onaylı son çare piyasa kapatması.
 
 ### Q-102 — Borçlanmalı spot işlemleri ürün kapsamına girecek mi?
-- Durum: AÇIK
+- Durum: CEVAPLANDI
 - Öncelik: P1
-- Soru: Borsadan varlık borçlanılan marjin spot işlemleri desteklenmeyecek mi, ilk sürüme mi girecek, yoksa ayrı ve sonraki bir modül olarak mı planlanacak?
-- Önerilen varsayılan: Faiz, teminat çağrısı ve otomatik geri ödeme riskleri nedeniyle ilk sürümde kapsam dışı; yalnız normal spot ve vadeli işlemler.
+- Karar: `DEC-0063`
+- Cevap: İlk sürümde kapsam dışı olacak; ileride eklenmesi otomatik olmayacak ve ancak ayrı gereksinim, güvenlik incelemesi, testler ve kullanıcının yeni açık onayıyla değerlendirilebilecek.
+- Soru: Borsadan varlık borçlanılan marjin spot işlemleri ilk sürümde desteklenecek mi?
+- Önerilen varsayılan: İlk sürümde kapsam dışı; yalnız normal spot ve vadeli işlemler; gelecekte yalnız ayrı onayla değerlendirme.
 
 ---
 

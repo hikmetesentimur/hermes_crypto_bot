@@ -1339,6 +1339,27 @@ Bu dosya yalnızca kullanıcı tarafından açıkça onaylanmış kalıcı karar
 - Ödünleşimler: Spot varlıklar borsada fiziksel olarak ayrışmadığı için sanal defter ve mutabakat gerekir; manuel cüzdan işlemleri tutarsızlık çözülene kadar otomasyonu durdurabilir.
 - Önceki karar: DEC-0016, DEC-0017, DEC-0032, DEC-0033, DEC-0053–DEC-0061 ile birlikte uygulanır
 
+### DEC-0063 — Borçlanmalı spotu ilk sürümden çıkar, geleceği ayrı onaya bağla
+
+- Tarih: 2026-07-23
+- Durum: ONAYLANDI
+- Karar sahibi: Hikmet Esentimur
+- İlgili sorular: Q-001–Q-003, Q-028–Q-031, Q-051, Q-073, Q-074, Q-102; DEC-0001–DEC-0003, DEC-0011–DEC-0013, DEC-0018, DEC-0032, DEC-0062
+- Karar: Borçlanmalı/marjin spot işlemleri ilk sürümün ürün, uygulama ve canlı işlem kapsamı dışındadır. İlk sürüm yalnız onaylı normal spot ve vadeli işlem kapsamını destekler. Borçlanmalı spotun gelecekte eklenmesi otomatik değildir; yeni gereksinimler, ayrı güvenlik/risk incelemesi, testler ve kullanıcının yeni açık onayı olmadan uygulanamaz veya etkinleştirilemez.
+- Uygulama sonuçları:
+  - İlk sürümde çapraz marjin spot, izole marjin spot, varlık borç alma, faiz tahakkuku, borç geri ödeme, otomatik geri ödeme, marjin teminat aktarımı ve marjin tasfiye iş akışları bulunmaz.
+  - Kullanıcı arayüzü, API ve strateji şeması borçlanmalı spot piyasa/hesap türünü seçilebilir veya gizli bir seçenek olarak sunmaz; desteklenmeyen istek açık Türkçe hatayla reddedilir.
+  - Borsa bağdaştırıcıları yalnız onaylı normal spot ve vadeli uç noktaları/yetkileri kullanır. Mümkün olan borsalarda API anahtarının marjin/borçlanma yetkisi kapalı olmalıdır; para çekme yetkisi her durumda yasaktır.
+  - Normal spot miktar defteri `DEC-0062` uyarınca yalnız botun doğrulanmış, borçsuz strateji payını yönetir; borç bakiyesi veya marjin teminatı normal spot varlığı gibi içeri alınamaz.
+  - Vadeli işlem desteğinin bulunması borçlanmalı spotu dolaylı olarak etkinleştirmez; iki ürünün bakiye, teminat, emir, risk ve tasfiye kayıtları ayrı kalır.
+  - Kaynak belge veya borsa API’si marjin spot özelliği içerse bile bu karar daha yüksek önceliklidir; kapsam dışı özellik için sessiz varsayılan, kısmi uygulama veya deneysel canlı yol oluşturulamaz.
+  - İlk sürüm kabul testleri borçlanma/marjin spot isteklerinin istemci ve sunucu tarafında reddedildiğini, marjin uç noktalarına çağrı yapılmadığını ve yetki kapsamının en az ayrıcalıkla sınırlandığını doğrular.
+  - Gelecekte değerlendirme talebi oluşursa ayrı kapsam kararı; faiz ve ücret muhasebesi, teminat çağrısı, izole/çapraz risk, otomatik geri ödeme, tasfiye, borsa mutabakatı, geçmiş sınama modeli, kullanıcı uyarıları ve arıza testleri tamamlanmadan uygulamaya geçilemez.
+  - Gelecekte değerlendirme bir yol haritası, teslim tarihi veya etkinleştirme sözü değildir. Ayrı karar ve açık onay yoksa ilk sürümdeki kapsam dışı durum korunur.
+- Gerekçe: Borçlanmalı spotun normal spottan farklı faiz, geri ödeme, teminat ve tasfiye risklerini ilk sürümün güvenlik ve uygulama yüküne eklememek; mevcut normal spot ve vadeli kapsamına odaklanmak.
+- Ödünleşimler: İlk sürüm borçlanmalı spot stratejilerini çalıştıramaz; buna karşılık ürün kapsamı, muhasebe ve risk yüzeyi daha küçük ve sınanabilir kalır.
+- Önceki karar: DEC-0001–DEC-0003, DEC-0011–DEC-0013, DEC-0018, DEC-0032 ve DEC-0062 ile birlikte uygulanır
+
 <!--
 ### DEC-XXXX — Karar başlığı
 
