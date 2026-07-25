@@ -799,10 +799,12 @@ Bu dosya, özgün senaryodaki belirsizlikleri, çelişkileri ve eklenmesi öneri
 - Önerilen varsayılan: Tek sahip strateji; diğer stratejileri engelle ve sıraya alma; hiçbir strateji diğerinin pozisyonunu otomatik büyütmesin veya kapatmasın.
 
 ### Q-104 — Sahip strateji açık vadeli pozisyona ilave giriş yapabilir mi?
-- Durum: AÇIK
+- Durum: CEVAPLANDI
 - Öncelik: P0
-- Soru: Aynı stratejide pozisyon açıkken yeni giriş sinyali oluşursa pozisyon büyütülebilecek mi; izin varsa azami kademe, toplam risk ve ortalama giriş/koruyucu emirler nasıl yönetilecek?
-- Önerilen varsayılan: İlk sürümde ilave giriş ve ortalama düşürme yok; sahip strateji mevcut pozisyon tamamen kapanıp yeni yanlış→doğru sinyali oluşmadan yeni risk ekleyemez.
+- Karar: `DEC-0066`
+- Cevap: İlk sürümde açık vadeli pozisyona ilave giriş, kademeli büyütme veya ortalama düşürme yapılmayacak; ilk girişin özgün onaylı miktarına kadar olan kısmi gerçekleşmeler dışında pozisyon tamamen kapanmadan yeni risk eklenmeyecek.
+- Soru: Aynı stratejide pozisyon açıkken yeni giriş sinyali oluşursa pozisyon büyütülebilecek mi?
+- Önerilen varsayılan: İlk sürümde ilave giriş ve ortalama düşürme yok; tamamen kapanma ve yeni yanlış→doğru sinyali gerekir.
 
 ---
 

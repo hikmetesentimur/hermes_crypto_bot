@@ -1411,6 +1411,52 @@ Bu dosya yalnızca kullanıcı tarafından açıkça onaylanmış kalıcı karar
 - Ödünleşimler: Aynı işlem çiftinde bağımsız stratejiler eşzamanlı fırsat kullanamaz ve engellenen sinyaller kaçırılır; buna karşılık pozisyon miktarı, kâr-zarar, koruyucu emirler ve kapatma yetkisi daha güvenilir olur.
 - Önceki karar: DEC-0005, DEC-0006, DEC-0010, DEC-0016, DEC-0017, DEC-0032, DEC-0033, DEC-0048, DEC-0049, DEC-0061 ve DEC-0064 ile birlikte uygulanır
 
+### DEC-0066 — İlk sürümde vadeli pozisyona ilave giriş yok
+
+- Tarih: 2026-07-23
+- Durum: ONAYLANDI
+- Karar sahibi: Hikmet Esentimur
+- İlgili sorular: Q-018, Q-026, Q-029–Q-032, Q-094, Q-096, Q-103, Q-104; DEC-0005, DEC-0006, DEC-0048, DEC-0049, DEC-0053, DEC-0054, DEC-0060, DEC-0064, DEC-0065
+- Karar: İlk sürümde sahip strateji açık vadeli pozisyona ilave giriş, kademeli büyütme veya zarar ederken ortalama düşürme yapamaz. İlk giriş niyetinin onaylı özgün miktarına kadar olan kısmi gerçekleşmeler aynı giriş sayılır; bunun dışında pozisyon ve ilgili emirler tamamen sonlanıp sahiplik bırakılmadan yeni risk artırılamaz.
+- Uygulama sonuçları:
+  - Bir hesap–vadeli işlem çiftinde giriş emri beklerken, kısmi gerçekleşme varken, net pozisyon açıkken, çıkış sürerken veya durum araştırılırken sahip stratejiden gelen yeni aynı yön giriş sinyalleri emir oluşturmaz.
+  - İlk emir niyetinde değişmez biçimde onaylanan toplam miktarın parça parça gerçekleşmesi ilave giriş değildir; toplam gerçekleşme ve açık kalan miktar bu üst sınırı aşamaz.
+  - İlk niyet tamamlandıktan, iptal edildikten veya kalan miktarı sonlandıktan sonra aynı açık pozisyon için yeni giriş emri, fiyat kovalama, kaldıraç artırma veya ortalama maliyet değiştirme yapılmaz.
+  - Engellenen ilave giriş sinyali sıraya alınmaz ve daha sonra otomatik uygulanmaz; Engellendi: Açık Pozisyona İlave Giriş Yok nedeni, sinyal zamanı ve mevcut risk görünür biçimde kaydedilir.
+  - Pozisyonun bir kısmının kâr alma veya başka çıkışla azalması yeni giriş kapasitesi yaratmaz. Net pozisyon ve bütün ilgili emirler sıfır/son durumda doğrulanmadan yeniden büyütme yapılamaz.
+  - Pozisyon tamamen kapandıktan, borsada net sıfır ve açık emir yokluğu uzlaştırıldıktan, sahiplik bırakıldıktan sonra yeni giriş için koşulun önce yanlış, sonra yeni doğru duruma geçmesi gerekir; eski veya engellenmiş sinyal kullanılamaz.
+  - Karşıt sinyal ilave giriş sayılmaz; yalnız `DEC-0064` güvenli tam kapatma ve net-sıfır sonrası tersine dönüş akışını başlatabilir.
+  - Kullanıcının borsada manuel miktar eklemesi botun giriş kademesi sayılmaz; yerel niyetle borsa net pozisyonu uyuşmazsa sahiplik Bilinmiyor durumuna alınır, yeni giriş engellenir ve mutabakat/uyarı uygulanır.
+  - Zarar sınırı, acil durdurma, zarar durdurma ve kullanıcı tarafından yetkili kapatma yalnız riski azaltabilir; sahiplik veya ilave giriş yasağını kullanarak yeni risk açamaz.
+  - Kullanıcı arayüzü İlk Giriş Üst Sınırı, gerçekleşen miktar, kalan özgün emir miktarı, net pozisyon ve engellenen ilave sinyalleri ayrı gösterir.
+  - Geçmiş sınama, deneme ve gerçek mod aynı ilave giriş yasağını uygular; ortalama düşürme veya kademeli büyütme varsayımı rapora gizlice eklenemez.
+  - Gelecekte ilave giriş değerlendirilirse azami kademe, her kademe koşulu, toplam risk/teminat/tasfiye sınırı, maliyet ve koruyucu emir yeniden boyutlandırması ayrı karar ve yeni açık kullanıcı onayı gerektirir; otomatik yol haritası yoktur.
+  - Kabul testleri ilk emrin çoklu kısmi gerçekleşmesi, yeni aynı yön sinyali, kısmi kâr alma sonrası sinyal, yeniden başlatma, manuel ekleme, karşıt sinyal ve net-sıfır sonrası yeni giriş durumlarını kapsar.
+- Gerekçe: Kaldıraçlı pozisyon riskinin yeni sinyallerle sessizce büyümesini, ortalama düşürme kaynaklı tasfiye riskini ve koruyucu emir miktarı uyuşmazlığını ilk sürümde önlemek.
+- Ödünleşimler: Güçlü eğilimde pozisyon büyütme fırsatı kullanılamaz ve kademeli giriş stratejileri çalışmaz; buna karşılık azami risk ilk girişte bilinir ve pozisyon yaşam döngüsü daha güvenilir olur.
+- Önceki karar: DEC-0005, DEC-0006, DEC-0048, DEC-0049, DEC-0053, DEC-0054, DEC-0060, DEC-0064 ve DEC-0065 ile birlikte uygulanır
+
+### DEC-0067 — Açık güvenlik önerilerini ayrıca onay beklemeden uygulama yetkisi
+
+- Tarih: 2026-07-23
+- Durum: ONAYLANDI
+- Karar sahibi: Hikmet Esentimur
+- İlgili kapsam: Kalan gereksinim sorularının netleştirilmesi ve proje kararlarının sürüm kontrollü kaydı
+- Karar: Kullanıcı, kalan gereksinim sorularında güvenlik ve güvenilirlik açısından açık, sorumlu ve mevcut proje kararlarıyla uyumlu tek bir öneri bulunduğunda asistanın ayrıca soru başına onay beklemeden kendi önerisini uygulamasına, Türkçe açıklamasına ve Git deposuna karar olarak kaydetmesine yetki vermiştir.
+- Uygulama sonuçları:
+  - Bu yetki yalnız gereksinim netleştirme sürecini hızlandırır; asistan her uygulanan kararı ayrı ve izlenebilir karar kimliğiyle açıklar, ilgili soruyu günceller, belgeleri denetler, commit eder, GitHub’a gönderir ve uzak kaydı doğrular.
+  - Birden fazla bağımsız ve açık güvenlik önerisi toplu işlenebilir; her biri ayrı karar kimliği, kapsam, gerekçe, ödünleşim ve izlenebilirlik taşır. Gizli veya açıklanmayan ürün kararı alınamaz.
+  - Ölçüm gerektiren fiyat kayması yüzdesi, gecikme, kapasite, borsa/ürün eşiği veya benzeri sayılar gerçek veri olmadan uydurulamaz. Q-089 ve Q-101 gibi kalibrasyon soruları ölçüm, test ve gerekirse kullanıcı onayı tamamlanana kadar açık/canlı engelleyici kalır.
+  - Kişisel tercih, marka/tasarım zevki, hukuk/vergi yorumu, ticari fiyatlandırma, bütçe, barındırma sağlayıcısı veya sorumlu tek önerisi olmayan önemli ödünleşimlerde kullanıcıya soru sorulur.
+  - Bu yetki gerçek para ile canlı işlemi etkinleştirme, borsa anahtarı/kimlik bilgisi kullanma, para transferi, üretim dağıtımı, alan adı/harcama, geri döndürülemez dış işlem veya güvenlik kapısını atlama yetkisi değildir; bunlar kendi açık onay ve ön koşullarına tabidir.
+  - Mevcut onaylı kararla çelişen yeni öneri sessizce uygulanamaz; çelişki kullanıcıya gösterilir veya eski karar tarihçesi korunarak açık bir değiştirme kararı gerekir.
+  - Sorumlu tek öneri bulunmuyorsa, kullanıcı tercihi belirleyiciyse veya eksik bilgi araçlarla elde edilemiyorsa asistan varsayım yapmaz ve kullanıcıya sade Türkçe seçeneklerle sorar.
+  - Kullanıcı bu yetkiyi her zaman daraltabilir, durdurabilir veya daha önce alınmış kararı yeni bir kararla değiştirebilir; geçmiş kararlar silinmez.
+  - Canlı işlem güvenlik kapısı, test zorunlulukları, gizli bilgi yasağı ve en az ayrıcalık ilkeleri bu süreç yetkisinden etkilenmez.
+- Gerekçe: Kullanıcının güvenilir teknik önerileri tekrar tekrar onaylama yükünü azaltarak gereksinim çalışmasını hızlandırmak ve yine de kararları şeffaf, geri izlenebilir ve güvenlik sınırları içinde tutmak.
+- Ödünleşimler: Kullanıcı her teknik ayrıntıyı karar öncesi görmeyebilir; bunu azaltmak için kararlar sonrasında açıkça raporlanır, Git geçmişinde ayrı izlenir ve kullanıcı her zaman değiştirebilir.
+- Önceki karar: Bütün onaylı proje kararları ve canlı işlem güvenlik kapısı korunur
+
 <!--
 ### DEC-XXXX — Karar başlığı
 
