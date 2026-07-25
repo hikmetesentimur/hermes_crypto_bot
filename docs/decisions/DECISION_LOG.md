@@ -1360,6 +1360,31 @@ Bu dosya yalnızca kullanıcı tarafından açıkça onaylanmış kalıcı karar
 - Ödünleşimler: İlk sürüm borçlanmalı spot stratejilerini çalıştıramaz; buna karşılık ürün kapsamı, muhasebe ve risk yüzeyi daha küçük ve sınanabilir kalır.
 - Önceki karar: DEC-0001–DEC-0003, DEC-0011–DEC-0013, DEC-0018, DEC-0032 ve DEC-0062 ile birlikte uygulanır
 
+### DEC-0064 — İlk sürümde tek yönlü vadeli pozisyon ve güvenli tersine dönüş
+
+- Tarih: 2026-07-23
+- Durum: ONAYLANDI
+- Karar sahibi: Hikmet Esentimur
+- İlgili sorular: Q-002, Q-003, Q-027, Q-029–Q-031, Q-037, Q-050, Q-073, Q-074, Q-078, Q-079, Q-095–Q-101, Q-103; DEC-0002, DEC-0003, DEC-0009, DEC-0010, DEC-0012, DEC-0013, DEC-0020, DEC-0032, DEC-0055–DEC-0061
+- Karar: İlk sürümde vadeli işlemler tek yönlü pozisyon modunda çalışacak. Aynı borsa hesabı ve işlem çiftinde aynı anda uzun ve kısa pozisyon tutulamayacak; karşıt giriş sinyalinde mevcut doğrulanmış pozisyon tamamen kapatılıp net pozisyonun sıfır ve çakışan açık emirlerin sonlanmış olduğu borsadan doğrulanmadan yeni yönde giriş yapılamayacaktır.
+- Uygulama sonuçları:
+  - Sistem uzun ve kısa yönlerin ikisini de destekler; kısıt yalnız aynı hesap–vadeli işlem çifti kapsamındaki eşzamanlı karşıt pozisyondur.
+  - Hesap bağlama, başlangıç ve her canlı etkinleştirmede borsadaki pozisyon modu sorgulanır. Hesap çift yönlü/koruma modundaysa gerçek emir yolu açılmaz ve kullanıcıya açık Türkçe düzeltme bilgisi gösterilir.
+  - Sistem borsa pozisyon modunu sessizce veya açık pozisyon/emir varken değiştirmez. Mod değişikliği kullanıcı tarafından borsa kurallarına uygun yapılır; sonrasında sistem yeniden doğrular.
+  - Aynı kapsamda karşıt giriş sinyali geldiğinde doğrudan karşı emir gönderilmez. Mevcut doğrulanmış bot pozisyonu için kalıcı ve yinelenmeyen Tam Kapatma niyeti oluşturulur; `DEC-0057` normal çıkış ve `DEC-0059` sıfır-gerçekleşme politikaları uygulanır.
+  - Mevcut pozisyon, gerçekleşmeler, açık giriş/çıkış ve koruyucu emirler borsayla uzlaştırılır. Net pozisyon sıfır olmadan, eski emirler kesinleşmeden veya durum belirsizken karşı yönde risk artırıcı emir gönderilemez.
+  - Tam kapanma sonrası ilk karşıt sinyalin giriş niyeti yeniden doğrulanır. Koşul artık geçerli değilse, risk/veri sınırı aşıldıysa veya kullanıcı stratejiyi durdurduysa yeni yönde giriş yapılmaz; eski sinyal körlemesine uygulanmaz.
+  - Koşul hâlâ geçerliyse aynı karşıt sinyal olayı için tek giriş niyeti oluşturulur; kapanma boyunca gelen yinelenen değerlendirmeler ikinci tersine dönüş veya çift giriş üretemez.
+  - Tersine dönüş tamamlanana kadar aynı kapsamda yeni girişler kilitlenir; risk azaltan kapatma ve mutabakat işlemleri devam eder.
+  - Borsada manuel, kaynağı belirsiz veya başka stratejiye ait olabilecek pozisyon saptanırsa otomatik tersine dönüş yapılmaz. Sahiplik/çatışma Q-103 kapsamında kesinleşene kadar ilgili hesap–çiftte yeni giriş engellenir ve kullanıcı bilgilendirilir.
+  - Yalnız-azaltan emirler doğrulanmış net pozisyon miktarını aşamaz ve ters yönde yeni pozisyon oluşturamaz. Kısmi kapanma, zaman aşımı, fiyat kayması, son çare ve ağ belirsizliği `DEC-0055`–`DEC-0061` kurallarına uyar.
+  - Tek yönlü mod kâr garantisi veya zararı yok etme yöntemi olarak sunulmaz. Kullanıcı arayüzü karşıt sinyali, kapanan yönü, gerçekleşmiş sonucu, ücret/fonlamayı, bekleyen net-sıfır doğrulamasını ve yeni yönün durumunu ayrı gösterir.
+  - Çift yönlü/koruma modu ilk sürümde gizli veya deneysel olarak etkinleştirilemez. Gelecekte değerlendirilmesi ayrı ürün kararı, strateji bazlı iki taraflı miktar defteri, birleşik risk/kâr-zarar, fonlama, tasfiye, emir tarafı ve arıza testleri ile yeni açık kullanıcı onayı gerektirir; otomatik yol haritası taahhüdü yoktur.
+  - Deneme ve resmî borsa deneme ortamında karşıt sinyal, kısmi kapanma, kapanma sırasında yeni sinyal, iptal yarışı, mod uyuşmazlığı, yeniden başlatma, net-sıfır doğrulaması ve ters pozisyonu önleme test edilmeden gerçek vadeli yol etkinleştirilemez.
+- Gerekçe: Eşzamanlı iki taraflı pozisyonun ücret, fonlama, tasfiye, yanlış tarafı kapatma ve strateji sahipliği karmaşıklığını ilk sürümden çıkarırken uzun ve kısa işlemlerin güvenli sıralı biçimde yapılmasını sağlamak.
+- Ödünleşimler: Mevcut pozisyon kapanırken karşı yöndeki fiyat hareketinin bir kısmı kaçabilir; eşzamanlı koruma stratejileri ilk sürümde çalışmaz. Buna karşılık net pozisyon, çıkış ve mutabakat davranışı daha güvenilir olur.
+- Önceki karar: DEC-0002, DEC-0003, DEC-0009, DEC-0010, DEC-0012, DEC-0013, DEC-0020, DEC-0032 ve DEC-0055–DEC-0061 ile birlikte uygulanır
+
 <!--
 ### DEC-XXXX — Karar başlığı
 

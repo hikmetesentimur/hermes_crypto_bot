@@ -234,11 +234,13 @@ Bu dosya, özgün senaryodaki belirsizlikleri, çelişkileri ve eklenmesi öneri
 - Soru: Spot çıkış cüzdanın tamamını mı, yalnız ilgili stratejiye doğrulanmış bot miktarını mı satabilir?
 - Önerilen varsayılan: Yalnız ilgili stratejinin bot tarafından doğrulanmış ve ayrılmış miktarını yönet; kullanıcı varlıklarını koru.
 
-### Q-029 — Futures pozisyon modu nedir?
-- Durum: AÇIK
+### Q-029 — Vadeli işlemlerde pozisyon modu nedir?
+- Durum: CEVAPLANDI
 - Öncelik: P0
-- Soru: One-way mi hedge mode mu? Aynı sembolde aynı anda Long ve Short tutulabilir mi?
-- Önerilen varsayılan: MVP one-way; hedge mode sonraki faz.
+- Karar: `DEC-0064`
+- Cevap: İlk sürüm tek yönlü pozisyon modunu kullanacak; aynı hesap ve işlem çiftinde eşzamanlı uzun/kısa tutulmayacak, ters girişten önce mevcut pozisyonun ve çakışan emirlerin güvenli biçimde kapanıp net sıfır olduğu doğrulanacak.
+- Soru: Aynı vadeli işlem çiftinde eşzamanlı uzun ve kısa pozisyon tutulabilecek mi?
+- Önerilen varsayılan: İlk sürüm tek yönlü; karşıt sinyalde önce tam kapatma ve borsa mutabakatı; çift yönlü mod yalnız gelecekte ayrı onayla değerlendirme.
 
 ### Q-030 — Marjin ve kaldıraç sınırları nasıl uygulanacak?
 - Durum: AÇIK
@@ -787,6 +789,12 @@ Bu dosya, özgün senaryodaki belirsizlikleri, çelişkileri ve eklenmesi öneri
 - Cevap: İlk sürümde kapsam dışı olacak; ileride eklenmesi otomatik olmayacak ve ancak ayrı gereksinim, güvenlik incelemesi, testler ve kullanıcının yeni açık onayıyla değerlendirilebilecek.
 - Soru: Borsadan varlık borçlanılan marjin spot işlemleri ilk sürümde desteklenecek mi?
 - Önerilen varsayılan: İlk sürümde kapsam dışı; yalnız normal spot ve vadeli işlemler; gelecekte yalnız ayrı onayla değerlendirme.
+
+### Q-103 — Tek yönlü vadeli pozisyonda çoklu strateji sahipliği nasıl yönetilecek?
+- Durum: AÇIK
+- Öncelik: P0
+- Soru: Aynı hesap ve vadeli işlem çiftinde birden fazla strateji aynı veya karşıt yönde sinyal üretirse tek net pozisyon kime ait sayılacak; bir strateji diğerinin payını kapatabilecek mi?
+- Önerilen varsayılan: İlk sürümde aynı hesap–vadeli işlem çiftinde yalnız bir etkin pozisyon sahibi strateji; sahiplik sona ermeden diğer stratejilerin aynı/karşıt girişlerini engelle, hiçbir strateji diğerinin pozisyonunu otomatik kapatmasın.
 
 ---
 
