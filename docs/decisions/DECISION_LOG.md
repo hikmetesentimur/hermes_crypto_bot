@@ -1312,6 +1312,33 @@ Bu dosya yalnızca kullanıcı tarafından açıkça onaylanmış kalıcı karar
 - Ödünleşimler: Belirsiz durum çözülene kadar yeni işlemler gecikebilir veya engellenebilir; buna karşılık kör yeniden denemeden kaynaklanan çift emir ve kontrolsüz risk azaltılır.
 - Önceki karar: DEC-0009, DEC-0010, DEC-0014–DEC-0017, DEC-0020, DEC-0021, DEC-0032, DEC-0033, DEC-0035, DEC-0041, DEC-0042 ve DEC-0053–DEC-0060 ile birlikte uygulanır
 
+### DEC-0062 — Spotta yalnız stratejiye ayrılmış bot varlığını sat
+
+- Tarih: 2026-07-23
+- Durum: ONAYLANDI
+- Karar sahibi: Hikmet Esentimur
+- İlgili sorular: Q-026–Q-028, Q-035–Q-038, Q-074, Q-078, Q-079, Q-095–Q-100, Q-102; DEC-0016, DEC-0017, DEC-0032, DEC-0033, DEC-0053–DEC-0061
+- Karar: Spot çıkış emirleri yalnız botun doğrulanmış işlemleriyle ilgili strateji için aldığı ve stratejiye ayırdığı net miktarı satabilir. Kullanıcının önceden sahip olduğu, sonradan yatırdığı veya başka stratejiye ayrılmış varlıklar otomatik satış kapsamı dışındadır; cüzdanın tamamını satan otomatik bir seçenek bulunmayacaktır.
+- Uygulama sonuçları:
+  - Spot hesap bağlandığında mevcut varlıklar varsayılan olarak Korunan Kullanıcı Varlığı kabul edilir; bot strateji miktarı sayılmaz ve otomatik çıkışa konu olamaz.
+  - Her borsa hesabı–varlık–strateji sürümü için ayrı sanal miktar kaydı tutulur: doğrulanmış alım gerçekleşmeleri, varlık cinsinden kesilen ücretler, satışlar, açık emir rezervleri ve satılabilir net miktar.
+  - Yalnız borsadan doğrulanmış bot alım gerçekleşmesi ilgili stratejinin miktarını artırabilir. Dış yatırma, iç transfer, ödül, faiz, hediye veya kaynağı doğrulanamayan artış korunan kullanıcı varlığıdır.
+  - Varlık cinsinden alınan ücret bot miktarından düşülür; karşı/ücret para birimindeki ücret ayrı maliyet kaydıdır. İkili kayan nokta kullanılmaz; borsa miktar adımı ve hassasiyetine ondalık aritmetikle uyulur.
+  - Bir spot satış emrinin miktarı; stratejinin doğrulanmış net miktarı, bu strateji için rezerve edilmemiş miktar ve korunan kullanıcı/diğer strateji payları çıkarıldıktan sonra borsada gerçekten kullanılabilir miktar sınırlarının en küçüğünü aşamaz.
+  - Aynı varlıkta birden fazla strateji bulunursa her strateji yalnız kendi sanal payını yönetir. Bir strateji başka stratejinin miktarını, açık emir rezervini veya kullanıcı payını ödünç alamaz.
+  - Açık satış emri miktarı aynı strateji payında rezerve edilir; kâr alma, normal çıkış, zarar durdurma ve acil kapatma emirlerinin toplamı doğrulanmış net miktarı aşamaz.
+  - Kullanıcı borsa dışında satış/çekim yapar ve gerçek toplam, korunan kullanıcı miktarı ile bot/strateji paylarının tutarlı toplamının altına düşerse hangi payın eksildiği varsayılmaz. İlgili hesap–varlıkta otomatik satış ve yeni girişler durdurulur, mutabakat ve yüksek öncelikli bildirim uygulanır.
+  - Eksiklik halinde sistem cüzdanda kalan kullanıcı varlığını bot payı sayıp satamaz. Açık risk, bekleyen emirler, korunan miktar ve strateji payları kullanıcıya ayrı gösterilir.
+  - Spot zarar durdurma veya acil kapatma da yalnız doğrulanmış strateji payını hedefler. Borsa alt sınırı altında kalan artık miktar gizlenmez; mümkün değilse satılmış gösterilmez ve sonsuz emir döngüsü oluşturulmaz.
+  - Stratejiler arası miktar aktarımı ancak ileride tanımlanacak açık, yetkili ve denetlenebilir tahsis işlemiyle yapılabilir; otomatik yeniden sınıflandırma yoktur.
+  - Kullanıcı arayüzü toplam borsa varlığını, korunan kullanıcı miktarını, her stratejiye ayrılan miktarı, açık emir rezervini, ücretleri, satılabilir miktarı ve tutarsızlık durumunu ayrı gösterir.
+  - Yeniden başlatmada sanal defter kalıcı kayıttan yüklenir ve borsayla karşılaştırılır; mutabakat tamamlanmadan önceki miktarlar kesin satılabilir sayılmaz.
+  - Deneme ve resmî borsa deneme ortamında başlangıç bakiyesi, yatırma/çekme, varlık cinsinden ücret, iki strateji çakışması, açık emir rezervi, manuel satış, küçük artık ve yeniden başlatma test edilmeden gerçek spot satış yolu etkinleştirilemez.
+  - Borçlanmalı/marjin spot işlemlerinin ürün kapsamı bu kararla belirlenmez; Q-102 kapsamında ayrıca onaylanacaktır.
+- Gerekçe: Botun kullanıcıya ait uzun vadeli varlıkları veya başka stratejilerin payını yanlışlıkla satmasını önlemek ve strateji bazında doğru miktar/kâr-zarar hesabı sağlamak.
+- Ödünleşimler: Spot varlıklar borsada fiziksel olarak ayrışmadığı için sanal defter ve mutabakat gerekir; manuel cüzdan işlemleri tutarsızlık çözülene kadar otomasyonu durdurabilir.
+- Önceki karar: DEC-0016, DEC-0017, DEC-0032, DEC-0033, DEC-0053–DEC-0061 ile birlikte uygulanır
+
 <!--
 ### DEC-XXXX — Karar başlığı
 

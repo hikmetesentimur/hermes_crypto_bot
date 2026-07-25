@@ -226,11 +226,13 @@ Bu dosya, özgün senaryodaki belirsizlikleri, çelişkileri ve eklenmesi öneri
 - Soru: Zaman aşımı sonrası emrin borsaya ulaşıp ulaşmadığı belirsizse nasıl mutabakat yapılacak?
 - Önerilen varsayılan: Kalıcı istemci emir kimliği ve yinelenmeme anahtarı; sorgula-uzlaştır; belirsizlikte yeniden gönderme yapma.
 
-### Q-028 — Spot işlemlerde satış/çıkış kapsamı nedir?
-- Durum: AÇIK
+### Q-028 — Spot çıkışta hangi varlık miktarı satılabilir?
+- Durum: CEVAPLANDI
 - Öncelik: P1
-- Soru: Spot “Long” yalnızca yeni alımı mı ifade eder; bot önceden elde bulunan varlığı satabilir mi; borçlu/margin spot tamamen kapsam dışı mı?
-- Önerilen varsayılan: Yalnızca botun açtığı miktarı yönet; margin spot kapsam dışı.
+- Karar: `DEC-0062`
+- Cevap: Bot yalnız kendi doğrulanmış işlemleriyle ilgili strateji için aldığı ve ayırdığı spot miktarı satabilecek; kullanıcının mevcut/sonradan yatırılan varlıkları ve diğer stratejilerin payları korunacak.
+- Soru: Spot çıkış cüzdanın tamamını mı, yalnız ilgili stratejiye doğrulanmış bot miktarını mı satabilir?
+- Önerilen varsayılan: Yalnız ilgili stratejinin bot tarafından doğrulanmış ve ayrılmış miktarını yönet; kullanıcı varlıklarını koru.
 
 ### Q-029 — Futures pozisyon modu nedir?
 - Durum: AÇIK
@@ -777,6 +779,12 @@ Bu dosya, özgün senaryodaki belirsizlikleri, çelişkileri ve eklenmesi öneri
 - Öncelik: P0
 - Soru: Normal fiyat kayması sınırından son çare piyasa kapatmasına geçmeden önce kaç basamak, hangi bekleme aralıkları, hangi artış yöntemi ve hangi mutlak üst sınır uygulanacak?
 - Önerilen varsayılan: Borsa/ürün emir defteri ölçümlerine dayalı az sayıda kısa basamak; her basamakta mutabakat; platform düzeyinde aşılamaz üst sınır ve sonrasında yalnız önceden onaylı son çare piyasa kapatması.
+
+### Q-102 — Borçlanmalı spot işlemleri ürün kapsamına girecek mi?
+- Durum: AÇIK
+- Öncelik: P1
+- Soru: Borsadan varlık borçlanılan marjin spot işlemleri desteklenmeyecek mi, ilk sürüme mi girecek, yoksa ayrı ve sonraki bir modül olarak mı planlanacak?
+- Önerilen varsayılan: Faiz, teminat çağrısı ve otomatik geri ödeme riskleri nedeniyle ilk sürümde kapsam dışı; yalnız normal spot ve vadeli işlemler.
 
 ---
 
