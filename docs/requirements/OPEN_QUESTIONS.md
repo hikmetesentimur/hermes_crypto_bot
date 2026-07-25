@@ -267,16 +267,20 @@ Bu dosya, özgün senaryodaki belirsizlikleri, çelişkileri ve eklenmesi öneri
 - Önerilen varsayılan: Stratejiye ayrılmış bütçe içindeki kullanılabilir bakiye; açık emirler ve güvenlik rezervi düşülür.
 
 ### Q-033 — Borsa miktar/fiyat kurallarında yuvarlama nasıl olacak?
-- Durum: AÇIK
+- Durum: CEVAPLANDI
 - Öncelik: P0
-- Soru: tick size, step size, minimum quantity ve minimum notional için yönlü yuvarlama ve reddetme politikası nedir?
-- Önerilen varsayılan: Decimal; riski artırmayacak yönde normalize et; minimumları karşılamıyorsa emir üretme ve açıklayıcı hata ver.
+- Karar: `DEC-0069`
+- Cevap: Para/fiyat/miktarda ondalık aritmetik kullanılacak; değerler emir amacına göre riski artırmayan ve koruyucu tetiği geciktirmeyen yönde borsa adımlarına indirgenecek; minimumu karşılamayan emir otomatik büyütülmeyip gerekçeli olarak engellenecek.
+- Soru: Fiyat adımı, miktar adımı, asgari miktar ve asgari işlem değeri için yuvarlama/reddetme politikası nedir?
+- Önerilen varsayılan: Ondalık aritmetik; risk artırmayan yön; minimumu karşılamıyorsa emir üretme.
 
 ### Q-034 — Aynı sembolde birden fazla strateji nasıl etkileşecek?
-- Durum: AÇIK
+- Durum: CEVAPLANDI
 - Öncelik: P0
-- Soru: Pozisyonlar borsa tarafında netleştiğinde strateji sahipliği, çıkış emri ve risk hesabı nasıl ayrılacak?
-- Önerilen varsayılan: MVP'de hesap+ürün+sembol başına tek aktif strateji/pozisyon; daha sonra sanal lot muhasebesi.
+- Karar: `DEC-0070`
+- Cevap: Normal spotta her strateji yalnız kendi doğrulanmış sanal varlık payını yönetebilecek; tek yönlü vadeli işlemlerde aynı hesap–çift için yalnız bir sahip strateji bulunacak ve diğer stratejilerin girişleri engellenecek.
+- Soru: Aynı işlem çiftinde strateji sahipliği, çıkış ve risk hesabı ürün türüne göre nasıl ayrılacak?
+- Önerilen varsayılan: Spotta ayrılmış sanal pay; vadeli işlemlerde tek sahip strateji.
 
 ### Q-035 — Strateji durdurma/silme/mod değiştirmede açık pozisyon ne olacak?
 - Durum: AÇIK
@@ -289,22 +293,28 @@ Bu dosya, özgün senaryodaki belirsizlikleri, çelişkileri ve eklenmesi öneri
 ## E. Take Profit, Stop Loss ve kademeli alım
 
 ### Q-036 — Kademeli TP yüzdeleri toplamı nasıl doğrulanacak?
-- Durum: AÇIK
+- Durum: CEVAPLANDI
 - Öncelik: P0
-- Soru: Kapanış dilimleri tam olarak %100 etmek zorunda mı; aynı kâr oranları ve sırasız hedefler kabul edilir mi?
-- Önerilen varsayılan: Toplam tam %100; hedefler yön bazında monoton; miktarlar borsa adımına yuvarlanıp son dilim kalan miktarı kapatır.
+- Karar: `DEC-0071`
+- Cevap: Kâr alma kapanış dilimleri tam `%100` olacak; hedefler pozisyon yönünde sıkı artan ve tekrarsız sıralanacak; miktarlar borsa adımına indirgenecek ve son dilim doğrulanmış kalan miktarı kapatacak.
+- Soru: Kapanış dilimleri tam `%100` etmek zorunda mı; aynı veya sırasız hedefler kabul edilir mi?
+- Önerilen varsayılan: Toplam tam `%100`; hedefler sıkı sıralı; son dilim yuvarlama artığını kapatır.
 
 ### Q-037 — TP/SL hesaplaması hangi giriş fiyatını kullanacak?
-- Durum: AÇIK
+- Durum: CEVAPLANDI
 - Öncelik: P0
-- Soru: İlk fill, ağırlıklı ortalama fill, kademeli alım sonrası yeni ortalama maliyet veya mark price mı?
-- Önerilen varsayılan: Fill'lerden hesaplanan güncel ağırlıklı ortalama giriş; tetikleme fiyat kaynağı ürün türüne göre ayrıca tanımlanır.
+- Karar: `DEC-0072`
+- Cevap: Kâr alma ve zarar durdurma fiyatlarının maliyet tabanı, borsadan doğrulanmış gerçekleşmelerin miktar ağırlıklı ortalama giriş fiyatı olacak; adil fiyat yalnız ürünün onaylı tetik/risk kaynağıdır ve giriş maliyetinin yerine geçmeyecek.
+- Soru: İlk gerçekleşme, ağırlıklı ortalama gerçekleşme veya adil fiyat mı kullanılacak?
+- Önerilen varsayılan: Doğrulanmış gerçekleşmelerden miktar ağırlıklı ortalama giriş; tetik kaynağını ayrı tut.
 
 ### Q-038 — Trailing stop ne zaman aktive olacak?
-- Durum: AÇIK
+- Durum: CEVAPLANDI
 - Öncelik: P0
-- Soru: Pozisyon açılır açılmaz mı, belirli kâr eşiğinden sonra mı; callback oranı hangi fiyatı takip eder; borsanın native emri mi sunucu takibi mi?
-- Önerilen varsayılan: Aktivasyon eşiği + callback oranı ayrı; mümkünse native koruma, değilse yüksek erişilebilir sunucu takibi.
+- Karar: `DEC-0073`
+- Cevap: Aktivasyon eşiği ve geri çekilme oranı ayrı strateji alanları olacak; gerçek işlemlerde yalnız borsanın doğrulanmış yerel takip eden zarar durdurma emri kullanılacak, bağdaştırıcı gerekli davranışı güvenilir desteklemiyorsa özellik canlıda kullanılamayacak.
+- Soru: Aktivasyon eşiği, geri çekilme oranı, takip fiyatı ve borsa/sunucu sorumluluğu nasıl belirlenecek?
+- Önerilen varsayılan: Ayrı eşik/oran; gerçek modda yerel borsa koruması; destek yoksa canlıda reddet.
 
 ### Q-039 — Kademeli alım tetikleri kümülatif mi?
 - Durum: AÇIK
@@ -325,10 +335,12 @@ Bu dosya, özgün senaryodaki belirsizlikleri, çelişkileri ve eklenmesi öneri
 - Önerilen varsayılan: Kademeli alım tek başına sınırsız zarar koruması değildir; zorunlu nihai stop veya hard risk limiti ekle.
 
 ### Q-042 — Çıkış emirleri reduce-only olacak mı?
-- Durum: AÇIK
+- Durum: CEVAPLANDI
 - Öncelik: P0
-- Soru: Futures TP/SL emirlerinin ters pozisyon açmasını nasıl engelleyeceğiz?
-- Önerilen varsayılan: Tüm futures çıkışları reduce-only/close-position semantiğiyle ve gerçekleşmiş miktarla sınırlandırılır.
+- Karar: `DEC-0074`
+- Cevap: Bütün vadeli kâr alma, zarar durdurma, normal çıkış ve acil kapatma emirleri yalnız pozisyonu azaltan/kapatma anlamıyla ve borsada doğrulanmış net miktarla sınırlandırılacak; hiçbir çıkış ters veya daha büyük pozisyon açamayacak.
+- Soru: Vadeli çıkış emirlerinin ters pozisyon açması nasıl engellenecek?
+- Önerilen varsayılan: Bütün vadeli çıkışları yalnız-azaltan/kapatma anlamı ve doğrulanmış miktarla sınırla.
 
 ---
 

@@ -1483,6 +1483,132 @@ Bu dosya yalnızca kullanıcı tarafından açıkça onaylanmış kalıcı karar
 - Ödünleşimler: Borsa sınırı/verisi doğrulanamazsa fırsat kaçabilir ve strateji düzeltmesi gerekebilir; buna karşılık sistem tahmine veya eski sabit değere dayanarak kontrolsüz risk açmaz.
 - Önceki karar: DEC-0002, DEC-0003, DEC-0005, DEC-0006, DEC-0020, DEC-0032, DEC-0035, DEC-0041, DEC-0064–DEC-0067 ile birlikte uygulanır
 
+### DEC-0069 — Borsa adımlarında ondalık ve risk azaltan yönlü normalleştirme
+
+- Tarih: 2026-07-23
+- Durum: ONAYLANDI
+- Karar sahibi: Hikmet Esentimur
+- Onay dayanağı: DEC-0067 kapsamındaki açık güvenlik/güvenilirlik önerisi
+- İlgili sorular: Q-009, Q-010, Q-025–Q-027, Q-033, Q-050, Q-074, Q-078, Q-089, Q-094–Q-101; DEC-0009, DEC-0010, DEC-0020, DEC-0032, DEC-0050, DEC-0053–DEC-0061, DEC-0068
+- Karar: Para, fiyat, miktar, oran ve ücret hesaplarında ikili kayan nokta yerine ondalık aritmetik kullanılacak. Değerler emir amacı ve yönüne göre riski artırmayan, koruyucu tetiği geciktirmeyen biçimde güncel borsa adımlarına normalleştirilecek; asgari koşulu karşılamayan emir otomatik büyütülmeyip gerekçeli olarak engellenecektir.
+- Uygulama sonuçları:
+  - Borsanın fiyat adımı, miktar adımı, asgari miktar, asgari işlem değeri, azami miktar ve hassasiyet kuralları sürümlü olarak alınır; emir niyetinde kullanılan kural görüntüsü saklanır.
+  - Risk artıran giriş miktarı her zaman izin verilen adıma aşağı indirilir; asgariyi karşılamak için yukarı büyütülmez. Normalleştirme sonrası sıfır veya asgari altı kalan giriş gönderilmez.
+  - Alış limit giriş fiyatı kullanıcının onayladığı üst fiyatı aşmayacak, satış/short limit giriş fiyatı onaylanan alt fiyatın altına inmeyecek yönde adımlanır.
+  - Zarar durdurma tetikleri borsa adımına çevrilirken planlanan korumayı daha geç çalıştıracak yöne yuvarlanamaz; takip emir fiyatı ayrıca onaylı fiyat kayması ve uygulanabilirlik kurallarına uyar.
+  - Yalnız-azaltan çıkış miktarı doğrulanmış net pozisyon/strateji payını aşamaz. Tam kapatma için borsanın güvenli kapatma anlamı varsa kullanılır; adım/asgari altında kalan artık satılmış veya kapanmış gösterilmez ve kullanıcıya açık risk olarak bildirilir.
+  - Kâr alma dilimlerinde aşağı yuvarlamadan kalan miktar `DEC-0071` uyarınca son dilime aktarılır; toplam çıkış hiçbir anda doğrulanmış miktarı aşamaz.
+  - Borsa kural verisi eksik, eski veya çelişkiliyse yeni risk artırıcı emir engellenir. Risk azaltan çıkış, yalnız güncel net miktar ve güvenli borsa semantiği doğrulanabiliyorsa devam eder.
+  - Arayüz özgün değer, normalleştirilmiş değer, fark ve uygulanan borsa kuralını emir gönderilmeden önce gösterir; sessiz miktar/fiyat değişimi yapılmaz.
+  - Kabul testleri bütün yön/emir amaçları, sınır tam değeri, bir adım altı/üstü, ücret sonrası küçük artık, kısmi gerçekleşme, kural değişimi ve yeniden başlatmayı kapsar.
+- Gerekçe: Borsa reddi, fazla pozisyon, geç çalışan koruma ve kayan nokta hatalarını önlemek.
+- Ödünleşimler: Bazı küçük emirler veya hedefler gerçekleşmeden engellenebilir; buna karşılık sistem emri gizlice büyütmez veya riski artıran yuvarlama yapmaz.
+- Önceki karar: DEC-0009, DEC-0010, DEC-0020, DEC-0032, DEC-0050, DEC-0053–DEC-0061 ve DEC-0068 ile birlikte uygulanır
+
+### DEC-0070 — Aynı işlem çiftinde ürüne göre spot payı veya vadeli tek sahip
+
+- Tarih: 2026-07-23
+- Durum: ONAYLANDI
+- Karar sahibi: Hikmet Esentimur
+- Onay dayanağı: DEC-0067 kapsamındaki mevcut kararları birleştiren güvenlik önerisi
+- İlgili sorular: Q-028, Q-029, Q-034, Q-073, Q-074, Q-078, Q-079, Q-103, Q-104; DEC-0032, DEC-0033, DEC-0062, DEC-0064–DEC-0066
+- Karar: Aynı işlem çiftindeki çoklu stratejiler ürün türüne göre ayrılacaktır: normal spotta her strateji yalnız kendi doğrulanmış ve ayrılmış sanal varlık payını yönetir; tek yönlü vadeli işlemlerde aynı hesap–çift için yalnız bir etkin sahip strateji bulunur ve diğer stratejilerin girişleri engellenir.
+- Uygulama sonuçları:
+  - Spot stratejileri `DEC-0062` sanal miktar defteri, rezerv ve kullanıcı varlığı korumasına tabidir; bir strateji başka stratejinin veya kullanıcının varlığını satamaz.
+  - Vadeli stratejiler `DEC-0065` tek sahip kilidine tabidir; sahip olmayan strateji aynı veya karşıt yönde net pozisyonu değiştiremez ve sinyali sıraya alınmaz.
+  - Spot ve vadeli hesaplar, farklı borsalar ve farklı hesaplar tek sahiplik alanında birleştirilmez; risk limitleri ayrıca en sıkı kapsamda uygulanır.
+  - Manuel veya kaynağı belirsiz pozisyon/bakiye farkı otomatik olarak bir stratejiye atanmaz; ilgili kapsam uzlaştırılana kadar yeni risk engellenir.
+  - Arayüz ürün türünü, spot sanal paylarını veya vadeli sahibi, rezervleri, engellenen sinyalleri ve mutabakat durumunu açıkça ayırır.
+  - Geçmiş sınama, deneme ve gerçek mod aynı ürün-temelli sahiplik modelini kullanır; raporda hangi stratejinin hangi miktara sahip olduğu izlenebilir.
+- Gerekçe: Spotun değiştirilebilir cüzdan varlığı ile vadeli işlemin tek net pozisyon yapısını aynı hatalı sahiplik modeline zorlamamak.
+- Ödünleşimler: İki ayrı muhasebe/sahiplik yolu gerekir; buna karşılık stratejilerin birbirinin varlığını veya pozisyonunu yanlışlıkla değiştirmesi önlenir.
+- Önceki karar: DEC-0032, DEC-0033, DEC-0062 ve DEC-0064–DEC-0066 ile birlikte uygulanır
+
+### DEC-0071 — Kâr alma dilimlerinde tam yüzde yüz ve son dilim artığı
+
+- Tarih: 2026-07-23
+- Durum: ONAYLANDI
+- Karar sahibi: Hikmet Esentimur
+- Onay dayanağı: DEC-0067 kapsamındaki açık güvenlik/güvenilirlik önerisi
+- İlgili sorular: Q-009, Q-010, Q-026, Q-033, Q-036, Q-037, Q-095, Q-097; DEC-0009, DEC-0010, DEC-0053, DEC-0055, DEC-0056, DEC-0069
+- Karar: Kademeli kâr alma kapanış yüzdeleri toplamı tam `%100` olacak; hedefler pozisyon yönünde sıkı sıralı ve tekrarsız olacak; adım normalleştirmesinden doğan miktar artığı son dilimde doğrulanmış kalan miktarı kapatacaktır.
+- Uygulama sonuçları:
+  - Yüzdeler ondalık aritmetikle doğrulanır; toplam `%100` değilse strateji sürümü kaydedilemez veya başlatılamaz.
+  - Uzun pozisyonda hedef fiyatlar yükselen, kısa pozisyonda düşen sırada olmalıdır; eşit, ters veya erişilemez hedef açık hatayla reddedilir.
+  - Her dilim ilk onaylı/gerçekleşmiş net miktar üzerinden hesaplanır ve miktar adımına aşağı indirilir; yuvarlama farkı ara dilimlere dağıtılmaz, son dilime aktarılır.
+  - Kısmi giriş, ücret veya manuel/borsa değişikliği sonrası gerçek net miktar değişirse açık çıkış rezervleri mutabakatla yeniden boyutlandırılır; toplam yalnız-azaltan çıkış net miktarı aşamaz.
+  - Son dilim yalnız borsada gerçekten kalan miktarı hedefler; asgari altı artık kapanamıyorsa tam kapanmış gösterilmez ve kullanıcıya bildirilir.
+  - Aynı hedefin yinelenmesi, sırasız çalıştırma ve iki dilimin aynı miktarı kapatması yinelenmeme anahtarlarıyla engellenir.
+  - Geçmiş sınama ücret, adım ve küçük artık davranışını gerçek modla aynı şekilde raporlar; modelleyemediği borsa sınırını açıklar.
+- Gerekçe: Eksik/çifte çıkış, sırasız hedef ve yuvarlama nedeniyle açıkta unutulan miktarı önlemek.
+- Ödünleşimler: Kasıtlı olarak süresiz açık bırakılan bir “koşucu” dilimi desteklenmez; bunun için ayrıca tanımlı ve korumalı farklı bir çıkış modeli gerekir.
+- Önceki karar: DEC-0009, DEC-0010, DEC-0053, DEC-0055, DEC-0056 ve DEC-0069 ile birlikte uygulanır
+
+### DEC-0072 — Kâr alma ve zarar durdurmada doğrulanmış ağırlıklı ortalama giriş
+
+- Tarih: 2026-07-23
+- Durum: ONAYLANDI
+- Karar sahibi: Hikmet Esentimur
+- Onay dayanağı: DEC-0067 kapsamındaki açık güvenlik/güvenilirlik önerisi
+- İlgili sorular: Q-019, Q-026, Q-033, Q-036, Q-037, Q-044, Q-095; DEC-0011, DEC-0012, DEC-0050, DEC-0053, DEC-0055, DEC-0069, DEC-0071
+- Karar: Fiyat yüzdesiyle tanımlanan kâr alma ve zarar durdurma seviyelerinin maliyet tabanı, borsadan doğrulanmış giriş gerçekleşmelerinin miktar ağırlıklı ortalama fiyatıdır. İlk gerçekleşme veya vadeli adil fiyat giriş maliyeti yerine kullanılamaz; tetik fiyat kaynağı ürün/amaç politikasına göre ayrı tutulur.
+- Uygulama sonuçları:
+  - Ortalama giriş yalnız kesinleşmiş gerçekleşme miktarı ve fiyatlarından ondalık aritmetikle hesaplanır; bekleyen emir miktarı ortalamaya katılmaz.
+  - İlk girişin kısmi gerçekleşmeleri geldikçe ortalama ve doğrulanmış miktar güncellenir; koruyucu seviyeler borsa kuralları ve güvenli değiştirme sırasıyla yeniden kurulur.
+  - Spotta varlık cinsinden ücret satılabilir miktarı azaltır; ücret ve diğer maliyetler net kâr-zarar hesabına katılır ancak ham gerçekleşme fiyatı gizlice değiştirilmez. Kullanıcı maliyet dâhil başa baş değerini ayrıca görür.
+  - Vadeli işlemlerde borsanın ortalama giriş değeri yerel gerçekleşme defteriyle karşılaştırılır; fark varsa yeni risk engellenir ve mutabakat yapılır.
+  - Adil/işaret fiyatı vadeli tasfiye ve onaylı koruyucu tetik hesabında kullanılabilir; maliyet tabanı ve gerçekleşmiş giriş olarak etiketlenemez.
+  - Her yeniden hesaplama strateji sürümü, kullanılan gerçekleşmeler, ortalama, tetik kaynağı ve üretilen hedeflerle denetim kaydına yazılır.
+  - Geçmiş sınama aynı ağırlıklı ortalama formülünü ve maliyet ayrımını kullanır; gerçekleşme modeli sınırlamasını raporlar.
+- Gerekçe: Kısmi gerçekleşmelerde yanlış hedef, yanıltıcı maliyet ve canlı/geçmiş sınama uyumsuzluğunu önlemek.
+- Ödünleşimler: Kısmi gerçekleşme geldikçe koruyucu emirlerin güvenli biçimde güncellenmesi gerekir; buna karşılık hedefler gerçek edinme maliyetine dayanır.
+- Önceki karar: DEC-0011, DEC-0012, DEC-0050, DEC-0053, DEC-0055, DEC-0069 ve DEC-0071 ile birlikte uygulanır
+
+### DEC-0073 — Gerçek modda yalnız borsanın yerel takip eden zarar durdurması
+
+- Tarih: 2026-07-23
+- Durum: ONAYLANDI
+- Karar sahibi: Hikmet Esentimur
+- Onay dayanağı: DEC-0067 kapsamındaki açık güvenlik/güvenilirlik önerisi
+- İlgili sorular: Q-009, Q-010, Q-019, Q-033, Q-037, Q-038, Q-050, Q-073, Q-074, Q-078, Q-089; DEC-0009, DEC-0010, DEC-0020, DEC-0032, DEC-0050, DEC-0069, DEC-0072
+- Karar: Takip eden zarar durdurmada aktivasyon eşiği ve geri çekilme oranı ayrı strateji alanları olacak. Gerçek işlemlerde yalnız borsanın, bot kapalı veya bağlantı kesik olsa da çalışmaya devam eden ve bağdaştırıcı tarafından doğrulanmış yerel takip emri kullanılacak; gerekli davranış güvenilir biçimde desteklenmiyorsa özellik canlıda kullanılamayacaktır.
+- Uygulama sonuçları:
+  - Aktivasyon eşiği ve geri çekilme oranı borsanın sözleşme/ürün sınırları içinde ayrı doğrulanır; kesin sayı borsadan alınır ve kullanıcıya etkin değer gösterilir.
+  - Takip fiyat kaynağı ürün ve borsa yeteneğine göre sistemin onaylı güvenli kaynağıdır; kaynak strateji sürümünde, emir niyetinde ve sonuçta görünür olur.
+  - Aktivasyon öncesinde pozisyon korumasız bırakılamaz; borsada çalışan bağımsız nihai zarar durdurma veya eşdeğer yerel koruma bulunmalıdır. Emirlerin birlikte güvenli çalıştığı doğrulanamıyorsa canlı takip özelliği reddedilir.
+  - Sunucu tarafında fiyat izleyip bağlantı varken çıkış gönderme yöntemi gerçek modda yerel takip emri yerine kullanılamaz. Deneme/geçmiş sınamada canlandırılabilir ancak canlı destekmiş gibi gösterilemez.
+  - Borsa yerel emrinin yalnız-azaltan/kapatma davranışı, tetik kaynağı, aktivasyon, geri çekilme, miktar, eşzamanlı koruma ve iptal/değiştirme semantiği bağdaştırıcı yetenek matrisi ve resmî deneme testleriyle doğrulanır.
+  - Bağdaştırıcı veya hesap gerekli özelliği desteklemiyorsa strateji kaydedilebilir taslak olarak tutulabilir fakat gerçek moda geçirilemez; kullanıcıya hangi yeteneğin eksik olduğu gösterilir.
+  - Kısmi gerçekleşme ve kısmi çıkışta takip miktarı net pozisyona göre güvenli biçimde yeniden boyutlandırılır; eski emir kesinleşmeden yenisi gönderilmez.
+  - Borsa emrinin kaybolması/reddi/değişmesi mutabakatla saptanır; yeni girişler durdurulur, kalan yerel koruma doğrulanır ve yüksek öncelikli bildirim oluşturulur.
+  - Kabul testleri aktivasyon öncesi/sonrası, fiyat boşluğu, kısmi gerçekleşme, bağlantı kesintisi, sunucu kapanması, borsa reddi, yeniden başlatma ve eşzamanlı koruyucu emirleri kapsar.
+- Gerekçe: Sunucu veya ağ arızasında takip korumasının kaybolmasını önlemek ve gerçek para riskini borsa üzerinde çalışan korumaya bağlamak.
+- Ödünleşimler: Yerel takip emrini güvenilir desteklemeyen borsa/ürünlerde özellik canlı kullanılamaz; buna karşılık sunucu kesintisinde korumasız pozisyon bırakılmaz.
+- Önceki karar: DEC-0009, DEC-0010, DEC-0020, DEC-0032, DEC-0050, DEC-0069 ve DEC-0072 ile birlikte uygulanır
+
+### DEC-0074 — Bütün vadeli çıkışlarda yalnız-azaltan ve doğrulanmış miktar
+
+- Tarih: 2026-07-23
+- Durum: ONAYLANDI
+- Karar sahibi: Hikmet Esentimur
+- Onay dayanağı: DEC-0067 kapsamındaki açık güvenlik/güvenilirlik önerisi
+- İlgili sorular: Q-026, Q-027, Q-033–Q-038, Q-042, Q-050, Q-074, Q-078, Q-079, Q-095–Q-101, Q-103, Q-104; DEC-0009, DEC-0010, DEC-0020, DEC-0032, DEC-0053–DEC-0061, DEC-0064–DEC-0073
+- Karar: Vadeli kâr alma, zarar durdurma, takip eden zarar durdurma, normal çıkış, tersine dönüş kapatması ve acil kapatma dâhil bütün çıkışlar borsanın yalnız pozisyonu azaltan veya pozisyonu kapatan semantiğiyle ve borsadan doğrulanmış net miktarla sınırlandırılacaktır. Hiçbir çıkış ters yönde yeni veya daha büyük pozisyon açamaz.
+- Uygulama sonuçları:
+  - Bağdaştırıcı her emir türünde borsanın `reduce-only`/kapatma davranışını yetenek matrisiyle açıklar; istemci arayüzündeki bir işarete güvenmek yerine borsa yanıtı ve net pozisyonla doğrular.
+  - Çıkış niyeti gönderilmeden önce yön, net miktar, pozisyon modu, açık çıkış rezervleri ve mevcut emirler uzlaştırılır. Toplam açık çıkış miktarı doğrulanmış net pozisyonu aşamaz.
+  - Borsanın “tüm pozisyonu kapat” anlamı kullanılıyorsa miktar alanıyla çelişen birleşim gönderilmez; sözleşmeye özgü kurala bağdaştırıcı uyar.
+  - Kısmi gerçekleşme, manuel kapatma, tasfiye veya başka risk azaltımı sonrası kalan çıkış emirleri yeniden uzlaştırılır; fazla miktarlı eski emir iptal/değiştirme yarışı tamamlanmadan yenisi gönderilmez.
+  - Borsa güvenilir yalnız-azaltan/kapatma semantiği sunmuyorsa ilgili vadeli çıkış türü gerçek işlem için desteklenmez ve canlı işlem kapısı açılmaz.
+  - İstemci, kullanıcı veya eklenti yalnız-azaltan korumayı kapatamaz; sunucu bu alanı amaçtan türetir ve değişmez emir niyetine yazar.
+  - Emir reddi veya ağ belirsizliğinde pozisyon kapanmış varsayılmaz; `DEC-0061` mutabakatı ve ilgili normal/risk çıkış politikası çalışır.
+  - Net pozisyon sıfır olduğunda kalan çıkış emirleri güvenli biçimde sonlandırılır; yeni ters pozisyon oluşmadığı borsadan doğrulanmadan Tam Kapandı kaydı üretilmez.
+  - Spot çıkışlar borsada yalnız-azaltan işareti bulunmasa bile `DEC-0062` strateji payı ve gerçek kullanılabilir miktar sınırına tabidir; bu karar spot kullanıcı varlığı korumasını gevşetmez.
+  - Kabul testleri fazla miktar, yanlış yön, kısmi kapanma, iki eşzamanlı çıkış, manuel müdahale, tasfiye, ağ zaman aşımı, yeniden başlatma ve ters pozisyon önlemeyi kapsar.
+- Gerekçe: Çıkış adı altında yanlış yönde yeni pozisyon açılmasını veya mevcut pozisyonun tersine çevrilmesini önlemek.
+- Ödünleşimler: Güvenli yalnız-azaltan davranışı doğrulanamayan borsa/emir türü canlıda kullanılamaz; buna karşılık çıkış emirleri yeni risk kaynağına dönüşmez.
+- Önceki karar: DEC-0009, DEC-0010, DEC-0020, DEC-0032, DEC-0053–DEC-0061 ve DEC-0064–DEC-0073 ile birlikte uygulanır
+
 <!--
 ### DEC-XXXX — Karar başlığı
 
