@@ -1457,6 +1457,32 @@ Bu dosya yalnızca kullanıcı tarafından açıkça onaylanmış kalıcı karar
 - Ödünleşimler: Kullanıcı her teknik ayrıntıyı karar öncesi görmeyebilir; bunu azaltmak için kararlar sonrasında açıkça raporlanır, Git geçmişinde ayrı izlenir ve kullanıcı her zaman değiştirebilir.
 - Önceki karar: Bütün onaylı proje kararları ve canlı işlem güvenlik kapısı korunur
 
+### DEC-0068 — Etkin kaldıraçta bütün sınırların en düşüğünü uygula
+
+- Tarih: 2026-07-23
+- Durum: ONAYLANDI
+- Karar sahibi: Hikmet Esentimur
+- Onay dayanağı: DEC-0067 kapsamındaki açık güvenlik/güvenilirlik önerisi
+- İlgili sorular: Q-002, Q-003, Q-030–Q-032, Q-050, Q-073, Q-074, Q-078, Q-089, Q-101; DEC-0002, DEC-0003, DEC-0005, DEC-0006, DEC-0020, DEC-0032, DEC-0035, DEC-0041, DEC-0064–DEC-0067
+- Karar: Vadeli işlemlerde sabit 1–100 kaldıraç aralığı yürütme gerçeği sayılmayacak. Etkin azami kaldıraç; platformun değişmez güvenlik tavanı, kullanıcının/hesabın risk sınırı, borsanın hesap ve sözleşme sınırı ile pozisyonun itibari büyüklük kademesi dâhil uygulanabilir bütün sınırların en düşük değeridir. Uygun olmayan yeni giriş sessizce değiştirilmek yerine açık gerekçeyle engellenecek; risk azaltan çıkışlar kaldıraç sınırı nedeniyle durdurulmayacaktır.
+- Uygulama sonuçları:
+  - `100x` yalnız kaynak belgedeki tasarım üst sınırıdır; borsanın veya platformun daha düşük güncel sınırını aşma hakkı vermez.
+  - Kullanıcı yalnız o an doğrulanmış desteklenen kaldıraç değerlerinden birini seçebilir. Arayüz seçilen değeri, etkin üst sınırı ve üst sınırı belirleyen kaynağı Türkçe gösterir.
+  - Sunucu arayüz doğrulamasına güvenmez; strateji kaydetme, deneme başlatma ve her gerçek giriş öncesinde aynı kuralı yeniden doğrular.
+  - Borsa sözleşme bilgisi, hesap uygunluğu, bölgesel/hesap düzeyi kısıt ve risk/pozisyon büyüklüğü kademesi bağdaştırıcıdan alınır. Veri eksik, eski veya çelişkiliyse yeni risk artırıcı girişe izin verilmez.
+  - Pozisyon büyüklüğü ile azami kaldıraç birbirine bağlıysa emir öncesi fiyat, amaçlanan miktar ve mevcut net pozisyonla oluşacak toplam itibari büyüklük hesaplanır; ilgili borsa kademesi buna göre seçilir.
+  - Seçili kaldıraç etkin sınırı aşarsa sistem bunu sessizce aşağı yuvarlayıp farklı bir işlem açmaz. Giriş Engellendi olarak kaydedilir; kullanıcıdan strateji sürümünü açıkça düzeltmesi istenir.
+  - Borsa yalnız belirli kaldıraç adımlarını destekliyorsa seçim borsanın geçerli adımına uymalıdır; otomatik normalleştirme yalnız kullanıcıya önizlemede gösterilip kaydetmeden önce açıkça kabul edilen değer olabilir.
+  - Strateji kaydedildikten sonra borsa sınırı düşerse mevcut açık pozisyon otomatik büyütülmez veya kaldıraç artırılmaz; yeni girişler ve ilave risk engellenir, kullanıcı uyarılır. Risk azaltan yalnız-azaltan çıkış, zarar durdurma ve acil kapatma devam eder.
+  - Açık pozisyon varken kaldıraç değişimi borsanın teminat/tasfiye riskini değiştirebileceği için sessizce yapılmaz. Pozisyon yaşam döngüsü ve Q-104 ilave giriş yasağı korunur.
+  - Kaldıraç, marjin tutarı, itibari pozisyon büyüklüğü, tahmini tasfiye fiyatı, ücret, fonlama ve güvenlik rezervi emir önizlemesinde birlikte gösterilir; kâr garantisi veya doğrusal kazanç vaadi yapılmaz.
+  - Borsa sınırı bellekte önbelleğe alınabilir ancak her gerçek girişte kabul edilebilir veri yaşı ve sürüm doğrulanır; Q-089 kapsamındaki ölçülmüş veri yaşı sınırı belirlenmeden gerçek işlem kapısı açılmaz.
+  - Geçmiş sınama, deneme ve gerçek mod işlem zamanındaki sözleşme/kademe sınırını kullanır. Tarihsel sınır verisi yoksa bugünkü sınırın kullanıldığı veya model sınırlaması raporda açıkça yazılır.
+  - Kabul testleri borsa tavanı, kullanıcı tavanı, platform tavanı, pozisyon büyüklüğü kademesi geçişi, eski veri, sınırın strateji kaydından sonra düşmesi, sessiz düzeltme yasağı ve risk azaltan çıkışın devamını kapsar.
+- Gerekçe: Borsanın izin vermediği veya hesabın risk sınırını aşan kaldıraçla emir reddi, yanlış önizleme ve aşırı tasfiye riski oluşmasını önlemek.
+- Ödünleşimler: Borsa sınırı/verisi doğrulanamazsa fırsat kaçabilir ve strateji düzeltmesi gerekebilir; buna karşılık sistem tahmine veya eski sabit değere dayanarak kontrolsüz risk açmaz.
+- Önceki karar: DEC-0002, DEC-0003, DEC-0005, DEC-0006, DEC-0020, DEC-0032, DEC-0035, DEC-0041, DEC-0064–DEC-0067 ile birlikte uygulanır
+
 <!--
 ### DEC-XXXX — Karar başlığı
 

@@ -243,10 +243,12 @@ Bu dosya, özgün senaryodaki belirsizlikleri, çelişkileri ve eklenmesi öneri
 - Önerilen varsayılan: İlk sürüm tek yönlü; karşıt sinyalde önce tam kapatma ve borsa mutabakatı; çift yönlü mod yalnız gelecekte ayrı onayla değerlendirme.
 
 ### Q-030 — Marjin ve kaldıraç sınırları nasıl uygulanacak?
-- Durum: AÇIK
+- Durum: CEVAPLANDI
 - Öncelik: P0
-- Soru: Belgede 1–100 sabit aralık var; borsa/sembol/notional katmanına göre daha düşük maksimum varsa ne olacak?
-- Önerilen varsayılan: UI ve sunucu etkin maksimumu borsa verisinden alır; sabit 100'e güvenmez.
+- Karar: `DEC-0068`
+- Cevap: Sabit 1–100 aralığına güvenilmeyecek; etkin azami kaldıraç platform, kullanıcı, borsa, hesap, sözleşme ve pozisyon büyüklüğü kademelerindeki sınırların en düşüğü olacak, uygun olmayan yeni giriş sessiz düzeltme yerine gerekçeli olarak engellenecek.
+- Soru: Belgede 1–100 sabit aralık var; borsa/sembol/pozisyon büyüklüğü katmanına göre daha düşük azami değer varsa ne olacak?
+- Önerilen varsayılan: Güncel borsa sınırlarını al; bütün sınırların en düşüğünü uygula; risk azaltan çıkışları engelleme.
 
 ### Q-031 — Pozisyon büyüklüğündeki “tutar” marjin mi, notional mı?
 - Durum: CEVAPLANDI
