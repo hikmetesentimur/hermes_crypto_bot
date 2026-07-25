@@ -1609,6 +1609,399 @@ Bu dosya yalnızca kullanıcı tarafından açıkça onaylanmış kalıcı karar
 - Ödünleşimler: Güvenli yalnız-azaltan davranışı doğrulanamayan borsa/emir türü canlıda kullanılamaz; buna karşılık çıkış emirleri yeni risk kaynağına dönüşmez.
 - Önceki karar: DEC-0009, DEC-0010, DEC-0020, DEC-0032, DEC-0053–DEC-0061 ve DEC-0064–DEC-0073 ile birlikte uygulanır
 
+### DEC-0075 — Dil, zaman ve sayı biçimi standardı
+
+- Tarih: 2026-07-23
+- Durum: ONAYLANDI
+- Karar sahibi: Hikmet Esentimur
+- Onay dayanağı: DEC-0067 ve kullanıcının yalnız kendisine sorulması gereken soruları açık bırakma talimatı
+- İlgili soru: Q-006
+- Karar: Arayüz Türkçe olacak; kalıcı zamanlar UTC saklanıp Europe/Istanbul olarak gösterilecek; sayı girişinde virgül veya nokta kabul edilerek ondalık değere dönüştürülecek, belirsiz karışık biçimler reddedilecek.
+- Uygulama ve kabul ölçütleri: API ve denetim zamanı UTC ve açık saat dilimli olur; ondalık değerler ikili kayan nokta kullanmaz; karışık ayırıcı testi reddedilir.
+- Gerekçe: Tutarlı yerelleştirme ve zaman hesabı sağlar.
+- Ödünleşimler: Başka dil ve saat dilimi ilk sürümde ek yapılandırma gerektirir.
+- Önceki karar: İlgili bütün onaylı kararlar ve canlı işlem güvenlik kapısı korunur
+
+### DEC-0076 — İşlem çifti evreninin güvenli yenilenmesi
+
+- Tarih: 2026-07-23
+- Durum: ONAYLANDI
+- Karar sahibi: Hikmet Esentimur
+- Onay dayanağı: DEC-0067 ve kullanıcının yalnız kendisine sorulması gereken soruları açık bırakma talimatı
+- İlgili soru: Q-007
+- Karar: Çiftler başlangıçta, borsa durum olaylarında, hız sınırına uyan dönemsel yenilemede ve her emir öncesi doğrulanacak; askıya alınan/delist çiftte yeni giriş yasaklanıp açık risk güvenli çıkış ve alarm ile yönetilecek.
+- Uygulama ve kabul ölçütleri: İşlem durumu ve güncel filtreler emir öncesi kontrol edilir; askıda çiftin bekleyen girişleri iptal edilir; yalnız doğrulanmış risk azaltımı sürer.
+- Gerekçe: Eski sembol durumuyla emir verilmesini önler.
+- Ödünleşimler: Yenileme aralığı borsa yeteneğine göre değişir.
+- Önceki karar: İlgili bütün onaylı kararlar ve canlı işlem güvenlik kapısı korunur
+
+### DEC-0077 — Hacim alanlarının kesin veri sözleşmesi
+
+- Tarih: 2026-07-23
+- Durum: ONAYLANDI
+- Karar sahibi: Hikmet Esentimur
+- Onay dayanağı: DEC-0067 ve kullanıcının yalnız kendisine sorulması gereken soruları açık bırakma talimatı
+- İlgili soru: Q-008
+- Karar: “Para birimi olarak hacim” seçili mumun karşı-varlık hacmi; “24 saatlik para birimi olarak hacim” kayan 24 saatlik karşı-varlık hacmi olacak; temel-varlık hacmi ayrı adla gösterilecek.
+- Uygulama ve kabul ölçütleri: Kaynak alan, birim ve pencere strateji sürümünde saklanır; veri yoksa koşul geçmez; sentetik birim dönüşümü açıkça etiketlenir.
+- Gerekçe: Birim ve zaman penceresi karışıklığını önler.
+- Ödünleşimler: Borsa alanı yoksa güvenilir türetim gerekir veya metrik desteklenmez.
+- Önceki karar: İlgili bütün onaylı kararlar ve canlı işlem güvenlik kapısı korunur
+
+### DEC-0078 — Hacim filtresi sınır semantiği
+
+- Tarih: 2026-07-23
+- Durum: ONAYLANDI
+- Karar sahibi: Hikmet Esentimur
+- Onay dayanağı: DEC-0067 ve kullanıcının yalnız kendisine sorulması gereken soruları açık bırakma talimatı
+- İlgili soru: Q-009
+- Karar: Alt ve üst sınır ayrı ayrı boş bırakılabilecek ve dâhil olacak; negatif değer, alt sınırın üstü aşması ve sonlu olmayan değer reddedilecek; gerekli hacim yoksa koşul geçmeyecek.
+- Uygulama ve kabul ölçütleri: Sıfır geçerli değerdir; sınır eşitliği geçer; eksik/eski veri neden koduyla engellenir.
+- Gerekçe: Filtre davranışını öngörülebilir yapar.
+- Ödünleşimler: Eksik veri fırsatı engelleyebilir.
+- Önceki karar: İlgili bütün onaylı kararlar ve canlı işlem güvenlik kapısı korunur
+
+### DEC-0079 — Standart ve Japon mumunu birleştirme
+
+- Tarih: 2026-07-23
+- Durum: ONAYLANDI
+- Karar sahibi: Hikmet Esentimur
+- Onay dayanağı: DEC-0067 ve kullanıcının yalnız kendisine sorulması gereken soruları açık bırakma talimatı
+- İlgili soru: Q-011
+- Karar: “Normal Mum” ve “Japon Mum” tek “Standart/Japon Mum” seçeneği olacak; aynı OHLC verisi için iki farklı davranış sunulmayacak.
+- Uygulama ve kabul ölçütleri: Eski kayıtlar tek türe göç eder; aynı veri iki ayrı sinyal türü üretmez.
+- Gerekçe: Aynı kavramın farklı davranış sanılmasını önler.
+- Ödünleşimler: Eski arayüz adı değişir.
+- Önceki karar: İlgili bütün onaylı kararlar ve canlı işlem güvenlik kapısı korunur
+
+### DEC-0080 — Sentetik grafik verisinin deterministik üretimi
+
+- Tarih: 2026-07-23
+- Durum: ONAYLANDI
+- Karar sahibi: Hikmet Esentimur
+- Onay dayanağı: DEC-0067 ve kullanıcının yalnız kendisine sorulması gereken soruları açık bırakma talimatı
+- İlgili soru: Q-012
+- Karar: Heikin Ashi, Renko ve çizgi serileri ham borsa verisinden sunucuda deterministik üretilecek; çizgide hazır kaynak kapanış, Renko’da sabit tutar/yüzde/ATR seçimi zorunlu olacak; sentetik fiyat emir gerçekleşmesi sayılmayacak.
+- Uygulama ve kabul ölçütleri: Yalnız kesinleşmiş ham veri ve sürümlü algoritma kullanılır; geçmiş/canlı aynı sonucu verir; emir yürütme ham borsa fiyatındadır.
+- Gerekçe: Gelecek veri sızıntısını ve istemci farkını önler.
+- Ödünleşimler: Renko parametresi kullanıcı tarafından açıkça girilmelidir.
+- Önceki karar: İlgili bütün onaylı kararlar ve canlı işlem güvenlik kapısı korunur
+
+### DEC-0081 — Limit emir süre türü ve yaşam süresi
+
+- Tarih: 2026-07-23
+- Durum: ONAYLANDI
+- Karar sahibi: Hikmet Esentimur
+- Onay dayanağı: DEC-0067 ve kullanıcının yalnız kendisine sorulması gereken soruları açık bırakma talimatı
+- İlgili soru: Q-024
+- Karar: Borsanın desteklediği GTC/IOC/FOK/süreli türler sunulacak; limit için hazır seçim GTC olacak fakat DEC-0054/DEC-0060 yaşam süresi dolunca güvenli iptal uygulanacak; otomatik yeniden fiyatlama olmayacak.
+- Uygulama ve kabul ölçütleri: IOC/FOK borsa sonucuyla sonlanır; GTC süre sonunda iptal-mutabakat görür; desteklenmeyen tür gösterilmez.
+- Gerekçe: Süresiz eski emir ve gizli fiyat kovalamayı önler.
+- Ödünleşimler: GTC emir bot yaşam süresinde iptal olabilir.
+- Önceki karar: İlgili bütün onaylı kararlar ve canlı işlem güvenlik kapısı korunur
+
+### DEC-0082 — Post-only reddinde pasif kalma
+
+- Tarih: 2026-07-23
+- Durum: ONAYLANDI
+- Karar sahibi: Hikmet Esentimur
+- Onay dayanağı: DEC-0067 ve kullanıcının yalnız kendisine sorulması gereken soruları açık bırakma talimatı
+- İlgili soru: Q-025
+- Karar: Post-only ret taker emrine dönüştürülmeyecek; güncel defter ve özgün fiyat sınırı doğrulanarak en yakın pasif fiyatta en fazla bir bağlı yeniden deneme yapılacak, ikinci rette iptal edilecek.
+- Uygulama ve kabul ölçütleri: Yeniden deneme aynı niyet/yinelenmeme zincirindedir; süre, sinyal ve fiyat sınırı yeniden doğrulanır.
+- Gerekçe: Beklenmeyen taker ücreti ve kaymayı önler.
+- Ödünleşimler: Pasif emir gerçekleşmeyebilir.
+- Önceki karar: İlgili bütün onaylı kararlar ve canlı işlem güvenlik kapısı korunur
+
+### DEC-0083 — Strateji yaşam döngüsünde açık risk yönetimi
+
+- Tarih: 2026-07-23
+- Durum: ONAYLANDI
+- Karar sahibi: Hikmet Esentimur
+- Onay dayanağı: DEC-0067 ve kullanıcının yalnız kendisine sorulması gereken soruları açık bırakma talimatı
+- İlgili soru: Q-035
+- Karar: Duraklatma girişleri kesip korumayı sürdürecek; durdurma onaylı “koru veya güvenli kapat” seçimini kullanacak; açık riskte silme arşivle sınırlı olacak, mod değişimi yeni sürüm oluşturacak.
+- Uygulama ve kabul ölçütleri: Bekleyen girişler iptal edilir; açık risk sahipsiz kalmaz; güvenli göç dışında çalışan pozisyonun sürümü değişmez.
+- Gerekçe: Yaşam döngüsü eylemlerinin korumayı kaybetmesini önler.
+- Ödünleşimler: Silme veya mod geçişi açık risk bitene kadar gecikebilir.
+- Önceki karar: İlgili bütün onaylı kararlar ve canlı işlem güvenlik kapısı korunur
+
+### DEC-0084 — İlk sürümde kademeli alım tetiklerinin olmaması
+
+- Tarih: 2026-07-23
+- Durum: ONAYLANDI
+- Karar sahibi: Hikmet Esentimur
+- Onay dayanağı: DEC-0067 ve kullanıcının yalnız kendisine sorulması gereken soruları açık bırakma talimatı
+- İlgili soru: Q-039
+- Karar: İlk sürümde spot veya vadeli açık pozisyona kademeli alım/ortalama düşürme yapılmayacak; kümülatif ya da ortalama maliyete bağlı kademe tetiği bulunmayacak.
+- Uygulama ve kabul ölçütleri: İlk emrin kısmi gerçekleşmesi tek giriştir; sonradan risk artıran kademe emri üretilemez.
+- Gerekçe: Sessiz risk büyümesini önler.
+- Ödünleşimler: Kademeli alım stratejileri ilk sürümde çalışmaz.
+- Önceki karar: İlgili bütün onaylı kararlar ve canlı işlem güvenlik kapısı korunur
+
+### DEC-0085 — Kademeli alım kaynaklı ek riskin kapatılması
+
+- Tarih: 2026-07-23
+- Durum: ONAYLANDI
+- Karar sahibi: Hikmet Esentimur
+- Onay dayanağı: DEC-0067 ve kullanıcının yalnız kendisine sorulması gereken soruları açık bırakma talimatı
+- İlgili soru: Q-040
+- Karar: Kademeli alım kapalı olduğundan kademe kaynaklı ek itibari tutar/marjin oluşmayacak; gelecekte ancak en kötü durum toplam risk, teminat ve tasfiye mesafesi sert sınırlarla doğrulanırsa değerlendirilecek.
+- Uygulama ve kabul ölçütleri: İlk sürüm kademe alanlarını kabul etmez; gelecekte ön hesap sınırı aşarsa kayıt/canlı başlangıç reddedilir.
+- Gerekçe: Geometrik büyüyen riski engeller.
+- Ödünleşimler: Gelecekteki özellik kapsamlı risk motoru gerektirir.
+- Önceki karar: İlgili bütün onaylı kararlar ve canlı işlem güvenlik kapısı korunur
+
+### DEC-0086 — Kademeli alımın zarar durdurma sayılmaması
+
+- Tarih: 2026-07-23
+- Durum: ONAYLANDI
+- Karar sahibi: Hikmet Esentimur
+- Onay dayanağı: DEC-0067 ve kullanıcının yalnız kendisine sorulması gereken soruları açık bırakma talimatı
+- İlgili soru: Q-041
+- Karar: Kademeli alım ilk sürümde olmayacak ve gelecekte de zarar durdurmanın yerine sayılmayacak; eklenirse borsa-yerel nihai zarar durdurma ve sert tasfiye mesafesi sınırı zorunlu olacak.
+- Uygulama ve kabul ölçütleri: Korumasız kademe modeli gerçek moda geçemez; risk motoru kapatılamaz.
+- Gerekçe: Ortalama düşürmenin sınırsız zarar koruması sanılmasını önler.
+- Ödünleşimler: Agresif stratejileri sınırlar.
+- Önceki karar: İlgili bütün onaylı kararlar ve canlı işlem güvenlik kapısı korunur
+
+### DEC-0087 — Strateji kopyasında temiz kimlik ve geçmiş
+
+- Tarih: 2026-07-23
+- Durum: ONAYLANDI
+- Karar sahibi: Hikmet Esentimur
+- Onay dayanağı: DEC-0067 ve kullanıcının yalnız kendisine sorulması gereken soruları açık bırakma talimatı
+- İlgili soru: Q-055
+- Karar: Kopya yeni kimlik/benzersiz adla, sıfır istatistikle ve taslak/test durumunda oluşturulacak; canlı yetki, çalışan örnek, açık risk ve geçmiş kopyalanmayacak.
+- Uygulama ve kabul ölçütleri: Gizli bağlar ve canlı onay taşınmaz; tüm ayarlar yeniden doğrulanır.
+- Gerekçe: Eski performans veya canlı yetkinin yanlış mirasını önler.
+- Ödünleşimler: Kopya yeniden etkinleştirme gerektirir.
+- Önceki karar: İlgili bütün onaylı kararlar ve canlı işlem güvenlik kapısı korunur
+
+### DEC-0088 — Strateji arşivleme ve geçmiş koruma
+
+- Tarih: 2026-07-23
+- Durum: ONAYLANDI
+- Karar sahibi: Hikmet Esentimur
+- Onay dayanağı: DEC-0067 ve kullanıcının yalnız kendisine sorulması gereken soruları açık bırakma talimatı
+- İlgili soru: Q-056
+- Karar: Silme yumuşak silme/arşivleme olacak; açık emir, pozisyon veya araştırılan durum varken tamamlanmayacak; işlem ve denetim geçmişi değişmez bağlantıyla korunacak.
+- Uygulama ve kabul ölçütleri: Arşivli strateji yeni sinyal üretmez; geçmiş kayıtlar kimliğini korur; kalıcı silme saklama politikasına uyar.
+- Gerekçe: Denetim zinciri ve açık risk sahipliğini korur.
+- Ödünleşimler: Kalıcı silme hukuki süreye kadar mümkün olmayabilir.
+- Önceki karar: İlgili bütün onaylı kararlar ve canlı işlem güvenlik kapısı korunur
+
+### DEC-0089 — KMS destekli borsa anahtarı saklama
+
+- Tarih: 2026-07-23
+- Durum: ONAYLANDI
+- Karar sahibi: Hikmet Esentimur
+- Onay dayanağı: DEC-0067 ve kullanıcının yalnız kendisine sorulması gereken soruları açık bırakma talimatı
+- İlgili soru: Q-057
+- Karar: Tercih barındırma gizli bilgi yöneticisi/KMS olacak; veritabanında yalnız zarf şifreli değer bulunacak, ana anahtar veritabanı/Git/log dışında kalacak; sağlayıcı dağıtım kararıyla seçilecek.
+- Uygulama ve kabul ölçütleri: TLS, en kısa bellek süresi, log/yedek maskeleme, sürümlü rotasyon ve iptal zorunludur.
+- Gerekçe: Tek veritabanı sızıntısında anahtarların açılmasını önler.
+- Ödünleşimler: Dağıtım ortamı KMS entegrasyonu gerektirir.
+- Önceki karar: İlgili bütün onaylı kararlar ve canlı işlem güvenlik kapısı korunur
+
+### DEC-0090 — Borsa anahtarında en az ayrıcalık
+
+- Tarih: 2026-07-23
+- Durum: ONAYLANDI
+- Karar sahibi: Hikmet Esentimur
+- Onay dayanağı: DEC-0067 ve kullanıcının yalnız kendisine sorulması gereken soruları açık bırakma talimatı
+- İlgili soru: Q-058
+- Karar: Para çekme izni değişmez biçimde yasak olacak; yalnız gereken okuma ve spot/vadeli işlem izinleri kabul edilecek; destekleniyorsa IP izin listesi ve ayrı alt hesap kullanılacak.
+- Uygulama ve kabul ölçütleri: İzinler bağlantıda ve dönemsel doğrulanır; fazla yetkili anahtarda canlı kapalıdır.
+- Gerekçe: Anahtar ele geçirilmesinin etkisini sınırlar.
+- Ödünleşimler: Bazı borsa/hostinglerde IP veya alt hesap desteği olmayabilir.
+- Önceki karar: İlgili bütün onaylı kararlar ve canlı işlem güvenlik kapısı korunur
+
+### DEC-0091 — Canlı etkinleştirmede sunucu güvenlik kapısı
+
+- Tarih: 2026-07-23
+- Durum: ONAYLANDI
+- Karar sahibi: Hikmet Esentimur
+- Onay dayanağı: DEC-0067 ve kullanıcının yalnız kendisine sorulması gereken soruları açık bırakma talimatı
+- İlgili soru: Q-059
+- Karar: Arayüz düğmesi yalnız talep oluşturacak; sunucu teknik/risk kontrolleri, yakın güçlü doğrulama ve açık risk özeti onayı olmadan canlı yolu açmayacak.
+- Uygulama ve kabul ölçütleri: Onay hesap+strateji sürümü+yetki kapsamına bağlı ve değişiklikte geçersizdir; bütün sonuçlar denetlenir.
+- Gerekçe: Tek tıklama veya istemci manipülasyonuyla gerçek emir açılmasını önler.
+- Ödünleşimler: Canlıya geçiş ek adım gerektirir.
+- Önceki karar: İlgili bütün onaylı kararlar ve canlı işlem güvenlik kapısı korunur
+
+### DEC-0092 — Telegram ve uygulama içi bildirim kapsamı
+
+- Tarih: 2026-07-23
+- Durum: ONAYLANDI
+- Karar sahibi: Hikmet Esentimur
+- Onay dayanağı: DEC-0067 ve kullanıcının yalnız kendisine sorulması gereken soruları açık bırakma talimatı
+- İlgili soru: Q-060
+- Karar: İlk sürüm Telegram ve uygulama içi bildirim kullanacak; emir/gerçekleşme, ret-belirsizlik, veri kesintisi, risk, koruma kaybı, canlı mod, acil durdurma ve kurtarma olayları önem düzeyiyle bildirilecek.
+- Uygulama ve kabul ölçütleri: Bildirim sır içermez; teslim durumu ve kanal hatası kaydedilir; kritik olay uygulama içinde kalıcı görünür.
+- Gerekçe: Kritik olayları bir dış ve bir yerel kanalda görünür kılar.
+- Ödünleşimler: E-posta/web push ilk sürümde yoktur.
+- Önceki karar: İlgili bütün onaylı kararlar ve canlı işlem güvenlik kapısı korunur
+
+### DEC-0093 — Değişmez ve maskeli denetim kaydı
+
+- Tarih: 2026-07-23
+- Durum: ONAYLANDI
+- Karar sahibi: Hikmet Esentimur
+- Onay dayanağı: DEC-0067 ve kullanıcının yalnız kendisine sorulması gereken soruları açık bırakma talimatı
+- İlgili soru: Q-061
+- Karar: Kimlik doğrulama, ayar/sürüm, anahtar, mod, sinyal/karar/emir, risk ve manuel işlemler eklemeli ve bütünlük korumalı kayda yazılacak; kesin saklama süresi Q-105’e bırakılacak.
+- Uygulama ve kabul ölçütleri: Kim/ne/zaman/önce-sonra/sonuç/ilişki kimliği UTC ile tutulur; sırlar maskelenir; erişim en az ayrıcalıklıdır.
+- Gerekçe: Olay inceleme ve hesap verebilirlik sağlar.
+- Ödünleşimler: Saklama süresi hukuk ve işletme kararı gerektirir.
+- Önceki karar: İlgili bütün onaylı kararlar ve canlı işlem güvenlik kapısı korunur
+
+### DEC-0094 — Veri sınıflı saklama ve silme
+
+- Tarih: 2026-07-23
+- Durum: ONAYLANDI
+- Karar sahibi: Hikmet Esentimur
+- Onay dayanağı: DEC-0067 ve kullanıcının yalnız kendisine sorulması gereken soruları açık bırakma talimatı
+- İlgili soru: Q-062
+- Karar: Ham piyasa, türetilmiş, taslak, işlem, denetim, kullanıcı ve sır verileri ayrı yaşam döngüsüne sahip olacak; aktif risk ve hukuki kayıt silinmeyecek; kesin süreler Q-106’ya bırakılacak.
+- Uygulama ve kabul ölçütleri: Silme yetkili/auditli ve yedeklere yayılır; anonimleştirme tercih edilir; sırlar rotasyonla yok edilir.
+- Gerekçe: Gereksiz veriyi sınırsız tutmadan bütünlük sağlar.
+- Ödünleşimler: Kesin süreler depolama ve hukuk kararı gerektirir.
+- Önceki karar: İlgili bütün onaylı kararlar ve canlı işlem güvenlik kapısı korunur
+
+### DEC-0095 — Şifreli yedek ve doğrulanmış kurtarma
+
+- Tarih: 2026-07-23
+- Durum: ONAYLANDI
+- Karar sahibi: Hikmet Esentimur
+- Onay dayanağı: DEC-0067 ve kullanıcının yalnız kendisine sorulması gereken soruları açık bırakma talimatı
+- İlgili soru: Q-063
+- Karar: Şifreli tam+artımlı/noktasal kurtarma, ayrı arıza alanı ve düzenli geri yükleme testi zorunlu olacak; sayısal RPO/RTO Q-107’ye bırakılacak.
+- Uygulama ve kabul ölçütleri: Yedek anahtarı ayrı; şema/bütünlük ve borsa mutabakatı tamamlanmadan yeni giriş yoktur.
+- Gerekçe: Geri yüklenemeyen yedek ve eski durumdan emir riskini azaltır.
+- Ödünleşimler: Yedek sıklığı hedef ve maliyete bağlıdır.
+- Önceki karar: İlgili bütün onaylı kararlar ve canlı işlem güvenlik kapısı korunur
+
+### DEC-0096 — Yeniden başlatmada borsa mutabakatı
+
+- Tarih: 2026-07-23
+- Durum: ONAYLANDI
+- Karar sahibi: Hikmet Esentimur
+- Onay dayanağı: DEC-0067 ve kullanıcının yalnız kendisine sorulması gereken soruları açık bırakma talimatı
+- İlgili soru: Q-064
+- Karar: Gerçekleşme, açık emir, pozisyon ve bakiye için borsa yürütme gerçeği; niyet/sahiplik/audit için yerel değişmez kayıt birlikte uzlaştırılacak.
+- Uygulama ve kabul ölçütleri: Uyuşmazlık Araştırılıyor olur; yeni risk kapalı; risk azaltımı doğrulanmış net miktarla sürer; tutarlılık olmadan devam yoktur.
+- Gerekçe: Eski yerel durumdan çift veya yanlış emir üretimini önler.
+- Ödünleşimler: Mutabakat stratejiyi geciktirebilir.
+- Önceki karar: İlgili bütün onaylı kararlar ve canlı işlem güvenlik kapısı korunur
+
+### DEC-0097 — Katmanlı acil durdurma
+
+- Tarih: 2026-07-23
+- Durum: ONAYLANDI
+- Karar sahibi: Hikmet Esentimur
+- Onay dayanağı: DEC-0067 ve kullanıcının yalnız kendisine sorulması gereken soruları açık bırakma talimatı
+- İlgili soru: Q-065
+- Karar: Global, borsa, hesap, strateji ve işlem çifti düzeyi durdurma bulunacak; “yeni girişleri durdur” ile “acil kapat” ayrı eylem olacak.
+- Uygulama ve kabul ölçütleri: Giriş kesme korumayı sürdürür; acil kapatma yalnız-azaltan ön-onaylı akıştır; tekrar açma mutabakat ve güçlü doğrulama gerektirir.
+- Gerekçe: Panikte kapsamı belli risk azaltımı sağlar.
+- Ödünleşimler: Acil kapatma kötü fiyata yol açabilir.
+- Önceki karar: İlgili bütün onaylı kararlar ve canlı işlem güvenlik kapısı korunur
+
+### DEC-0098 — Ölçülebilir hizmet metrikleri
+
+- Tarih: 2026-07-23
+- Durum: ONAYLANDI
+- Karar sahibi: Hikmet Esentimur
+- Onay dayanağı: DEC-0067 ve kullanıcının yalnız kendisine sorulması gereken soruları açık bırakma talimatı
+- İlgili soru: Q-066
+- Karar: Veri yaşı, hesaplama, emir hazırlama/yanıt, hata, mutabakat, bildirim ve hizmet sürekliliği ölçülecek; sayısal hedef ve alarm eşikleri Q-089 ölçümleriyle belirlenecek.
+- Uygulama ve kabul ölçütleri: Her metrik birim/kapsam/pencere/ölçüm noktası taşır; kritik alarm Telegram ve uygulama içine gider.
+- Gerekçe: Ölçmeden hedef uydurmayı önler.
+- Ödünleşimler: Q-089 tamamlanana kadar sayısal kabul eşiği yoktur.
+- Önceki karar: İlgili bütün onaylı kararlar ve canlı işlem güvenlik kapısı korunur
+
+### DEC-0099 — Duyarlı ve erişilebilir web arayüzü
+
+- Tarih: 2026-07-23
+- Durum: ONAYLANDI
+- Karar sahibi: Hikmet Esentimur
+- Onay dayanağı: DEC-0067 ve kullanıcının yalnız kendisine sorulması gereken soruları açık bırakma talimatı
+- İlgili soru: Q-067
+- Karar: İlk sürüm duyarlı mobil web ve WCAG 2.2 AA hedefleyecek.
+- Uygulama ve kabul ölçütleri: Klavye, ekran okuyucu, kontrast, odak, dokunma hedefi, metinle durum, hata ilişkisi ve hareket azaltma test edilir.
+- Gerekçe: Mobil ve engelli erişimini güvenli kılar.
+- Ödünleşimler: Tasarım ve test yükünü artırır.
+- Önceki karar: İlgili bütün onaylı kararlar ve canlı işlem güvenlik kapısı korunur
+
+### DEC-0100 — Sunucu taraflı sürümlü taslak
+
+- Tarih: 2026-07-23
+- Durum: ONAYLANDI
+- Karar sahibi: Hikmet Esentimur
+- Onay dayanağı: DEC-0067 ve kullanıcının yalnız kendisine sorulması gereken soruları açık bırakma talimatı
+- İlgili soru: Q-068
+- Karar: Taslaklar sunucuda sürümlü otomatik kaydedilecek; durum görünür olacak, eşzamanlı çakışma sessiz ezilmeyecek ve taslak kendiliğinden başlamayacak.
+- Uygulama ve kabul ölçütleri: Oturum/cihaz değişiminde yetkili kullanıcı kurtarır; gizli değer kopyalanmaz; saklama Q-106’ya uyar.
+- Gerekçe: Tarayıcı kapanması ve çakışmada emeği korur.
+- Ödünleşimler: Sunucu depolama ve çakışma arayüzü gerekir.
+- Önceki karar: İlgili bütün onaylı kararlar ve canlı işlem güvenlik kapısı korunur
+
+### DEC-0101 — İlk sürümde güvenli CSV dışa aktarma
+
+- Tarih: 2026-07-23
+- Durum: ONAYLANDI
+- Karar sahibi: Hikmet Esentimur
+- Onay dayanağı: DEC-0067 ve kullanıcının yalnız kendisine sorulması gereken soruları açık bırakma talimatı
+- İlgili soru: Q-069
+- Karar: İşlem, gerçekleşme, ücret, fonlama ve kâr-zarar kayıtları ilk sürümde UTF-8 CSV olarak dışa aktarılacak; Excel/PDF sonraya bırakılacak.
+- Uygulama ve kabul ölçütleri: Kapsam, para birimi, UTC ve strateji sürümü bulunur; Decimal kayıpsızdır; formül enjeksiyonu kaçışlı; yetki/audit zorunludur.
+- Gerekçe: Taşınabilir ve denetlenebilir en basit formatı sağlar.
+- Ödünleşimler: Hazır PDF ve yerel Excel biçimi yoktur.
+- Önceki karar: İlgili bütün onaylı kararlar ve canlı işlem güvenlik kapısı korunur
+
+### DEC-0102 — Lightweight Charts grafik bileşeni
+
+- Tarih: 2026-07-23
+- Durum: ONAYLANDI
+- Karar sahibi: Hikmet Esentimur
+- Onay dayanağı: DEC-0067 ve kullanıcının yalnız kendisine sorulması gereken soruları açık bırakma talimatı
+- İlgili soru: Q-070
+- Karar: İlk sürümde resmî kaynakta Apache 2.0 lisanslı olduğu doğrulanan TradingView Lightweight Charts kullanılacak; NOTICE/atıf ve TradingView bağlantısı korunacak.
+- Kaynak doğrulaması: TradingView resmî ürün sayfası (`https://www.tradingview.com/lightweight-charts/`) ve resmî GitHub lisans dosyası (`https://github.com/tradingview/lightweight-charts/blob/master/LICENSE`), 2026-07-23 tarihinde doğrulandı.
+- Uygulama ve kabul ölçütleri: Sürüm sabitlenir; lisans/SBOM/güvenlik taranır; marka ayrı kullanılmaz; veri lisansı borsa şartlarına ayrıca uyar.
+- Gerekçe: Lisansı açık ve performanslı finansal grafik sağlar.
+- Ödünleşimler: Atıf yükümlülüğü ve üçüncü taraf bağımlılığı vardır.
+- Önceki karar: İlgili bütün onaylı kararlar ve canlı işlem güvenlik kapısı korunur
+
+### DEC-0103 — Yayın öncesi hukuk ve risk belgeleri
+
+- Tarih: 2026-07-23
+- Durum: ONAYLANDI
+- Karar sahibi: Hikmet Esentimur
+- Onay dayanağı: DEC-0067 ve kullanıcının yalnız kendisine sorulması gereken soruları açık bırakma talimatı
+- İlgili soru: Q-072
+- Karar: Dış, çok kullanıcılı veya ticari yayın öncesi kullanım koşulları, gizlilik politikası ve risk bildirimi hukuk uzmanı onayından geçecek.
+- Uygulama ve kabul ölçütleri: Yatırım/vergi tavsiyesi, garanti veya saklama iddiası yoktur; sürüm/onay ve yeniden kabul tutulur; uzman onayı olmadan dış yayın kapalıdır.
+- Gerekçe: Yanlış vaat ve mevzuat riskini azaltır.
+- Ödünleşimler: Uzman maliyeti ve yayın gecikmesi yaratır.
+- Önceki karar: İlgili bütün onaylı kararlar ve canlı işlem güvenlik kapısı korunur
+
+
+### DEC-0104 — Yalnız kullanıcı, uzman veya ölçüm gerektiren soruları açık bırakma
+
+- Tarih: 2026-07-23
+- Durum: ONAYLANDI
+- Karar sahibi: Hikmet Esentimur
+- Onay dayanağı: Kullanıcının kendi önerilerimle cevaplayabildiğim bütün soruları kapatma ve yalnız kendisine sorulması gerekenleri en sona bırakma talimatı
+- İlgili sorular: Q-002, Q-006–Q-012, Q-024, Q-025, Q-035, Q-039–Q-041, Q-055–Q-070, Q-072, Q-089, Q-101, Q-105–Q-107
+- Karar: Açık güvenlik/güvenilirlik önerisiyle sorumlu biçimde çözülebilen bütün sorular DEC-0075–DEC-0103 ile kapatılacak; yalnız dağıtım/kişisel tercih, gerçek ölçüm, hukuk/mali müşavir, depolama maliyeti ve iş sürekliliği bütçesi gerektiren sorular açık olarak belgenin son bölümünde tutulacaktır.
+- Uygulama ve kabul ölçütleri: Açık soru kümesi yalnız Q-002, Q-089, Q-101 ve Q-105–Q-107 olur; her birinde neden kullanıcı/uzman/ölçüm gerektiği yazılır; bu sorular tamamlanmadan ilgili üretim veya canlı işlem kapıları açılmaz; yeni teknik soru ortaya çıkarsa DEC-0067 yetkisi önce değerlendirilir.
+- Gerekçe: Kullanıcıdan gereksiz onay istemeden gereksinim netleştirmesini hızlandırmak ve ölçülmemiş/kişisel değerleri uydurmamak.
+- Ödünleşimler: Son altı konu gerekli altyapı, ölçüm veya uzman girdisi gelene kadar açık ve engelleyici kalır.
+- Önceki karar: DEC-0067 ve DEC-0075–DEC-0103 ile birlikte uygulanır
+
+
 <!--
 ### DEC-XXXX — Karar başlığı
 

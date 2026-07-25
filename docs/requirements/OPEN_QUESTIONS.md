@@ -22,14 +22,6 @@ Bu dosya, özgün senaryodaki belirsizlikleri, çelişkileri ve eklenmesi öneri
 - Neden gerekli: Kimlik doğrulama, tenant izolasyonu, mevzuat, destek, faturalandırma ve güvenlik mimarisini değiştirir.
 - Önerilen varsayılan: İlk sürüm tek kullanıcı ve özel erişim; çok kullanıcılı SaaS sonraki faz.
 
-### Q-002 — Uygulama nasıl erişilebilir olacak?
-- Durum: ERTELENDİ
-- Öncelik: P0
-- Karar: `DEC-0004`
-- Erteleme gerekçesi: Erişim modeli, hosting altyapısı ve güvenlik yetenekleri görüldükten sonra belirlenecek.
-- Soru: Yalnızca özel ağ/VPN üzerinden mi, internete açık alan adı üzerinden mi, yoksa yerel bilgisayarda mı çalışacak?
-- Önerilen varsayılan: TLS, kimlik doğrulama ve IP/VPN kısıtı olan özel dağıtım.
-
 ### Q-003 — İlk sürümde hangi borsalar ve ürünler desteklenecek?
 - Durum: CEVAPLANDI
 - Öncelik: P0
@@ -55,8 +47,10 @@ Bu dosya, özgün senaryodaki belirsizlikleri, çelişkileri ve eklenmesi öneri
 - Önerilen varsayılan: Parola yolu ikinci doğrulama kodunu zorunlu kılar; cihaz/güvenlik anahtarı yolu ve tek kullanımlık kurtarma kodları da desteklenir.
 
 ### Q-006 — Dil, saat dilimi ve sayı biçimi nedir?
-- Durum: AÇIK
+- Durum: CEVAPLANDI
 - Öncelik: P1
+- Karar: `DEC-0075`
+- Cevap: Arayüz Türkçe olacak; kalıcı zamanlar UTC saklanıp Europe/Istanbul olarak gösterilecek; sayı girişinde virgül veya nokta kabul edilerek ondalık değere dönüştürülecek, belirsiz karışık biçimler reddedilecek.
 - Soru: Arayüz yalnızca Türkçe mi olacak? Veritabanı UTC, gösterim Europe/Istanbul mı? Ondalık ayırıcı hem virgül hem nokta kabul edecek mi?
 - Önerilen varsayılan: UI Türkçe; saklama UTC; gösterim Europe/Istanbul; kullanıcı girişinde virgül/nokta kabul edilip Decimal'a normalize edilir.
 
@@ -65,20 +59,26 @@ Bu dosya, özgün senaryodaki belirsizlikleri, çelişkileri ve eklenmesi öneri
 ## B. Piyasa evreni, veri ve indikatörler
 
 ### Q-007 — İşlem çifti evreni ne zaman yenilenecek?
-- Durum: AÇIK
+- Durum: CEVAPLANDI
 - Öncelik: P1
+- Karar: `DEC-0076`
+- Cevap: Çiftler başlangıçta, borsa durum olaylarında, hız sınırına uyan dönemsel yenilemede ve her emir öncesi doğrulanacak; askıya alınan/delist çiftte yeni giriş yasaklanıp açık risk güvenli çıkış ve alarm ile yönetilecek.
 - Soru: Borsadaki yeni, askıya alınmış veya delist olmuş çiftler hangi sıklıkta yeniden alınacak; açık stratejiler nasıl etkilenecek?
 - Önerilen varsayılan: Başlangıçta ve periyodik yenileme; durdurulmuş/delist çiftte yeni emir yasak, açık risk için alarm ve güvenli kapatma politikası.
 
 ### Q-008 — Hacim alanlarının kesin tanımı nedir?
-- Durum: AÇIK
+- Durum: CEVAPLANDI
 - Öncelik: P1
+- Karar: `DEC-0077`
+- Cevap: “Para birimi olarak hacim” seçili mumun karşı-varlık hacmi; “24 saatlik para birimi olarak hacim” kayan 24 saatlik karşı-varlık hacmi olacak; temel-varlık hacmi ayrı adla gösterilecek.
 - Soru: “Para birimi olarak hacim” ve “24 saatlik para birimi olarak hacim” hangi borsa alanlarına karşılık geliyor? İlki mum/periyot hacmi mi, anlık ticker hacmi mi, yoksa farklı bir metrik mi?
 - Önerilen varsayılan: Birincisini ayrıca tanımlamadan uygulama; 24 saatlik metrik için quoteVolume kullan.
 
 ### Q-009 — Hacim filtrelerinde sınırlar nasıl davranacak?
-- Durum: AÇIK
+- Durum: CEVAPLANDI
 - Öncelik: P1
+- Karar: `DEC-0078`
+- Cevap: Alt ve üst sınır ayrı ayrı boş bırakılabilecek ve dâhil olacak; negatif değer, alt sınırın üstü aşması ve sonlu olmayan değer reddedilecek; gerekli hacim yoksa koşul geçmeyecek.
 - Soru: Minimum/maksimum boş olabilir mi; sınırlar dahil mi; sıfır ve negatif değerler reddedilecek mi?
 - Önerilen varsayılan: İkisi de opsiyonel, sınırlar dahil, negatif reddedilir, minimum maksimumdan büyük olamaz.
 
@@ -91,14 +91,18 @@ Bu dosya, özgün senaryodaki belirsizlikleri, çelişkileri ve eklenmesi öneri
 - Önerilen varsayılan: Varsayılan yalnızca kapanmış mum; kullanıcı açıkça seçerse intrabar ve repaint uyarısı.
 
 ### Q-011 — “Normal Mum” ve “Japon Mum” farkı nedir?
-- Durum: AÇIK
+- Durum: CEVAPLANDI
 - Öncelik: P1
+- Karar: `DEC-0079`
+- Cevap: “Normal Mum” ve “Japon Mum” tek “Standart/Japon Mum” seçeneği olacak; aynı OHLC verisi için iki farklı davranış sunulmayacak.
 - Soru: Belgede ayrı seçenekler olarak geçiyorlar fakat genel kullanımda aynı OHLC mumunu ifade edebilirler. Farklı davranış bekleniyor mu?
 - Önerilen varsayılan: Tek seçenek olarak “Japon/Standart Mum”.
 
 ### Q-012 — Heikin Ashi, Renko ve çizgi verisi nasıl üretilecek?
-- Durum: AÇIK
+- Durum: CEVAPLANDI
 - Öncelik: P1
+- Karar: `DEC-0080`
+- Cevap: Heikin Ashi, Renko ve çizgi serileri ham borsa verisinden sunucuda deterministik üretilecek; çizgide hazır kaynak kapanış, Renko’da sabit tutar/yüzde/ATR seçimi zorunlu olacak; sentetik fiyat emir gerçekleşmesi sayılmayacak.
 - Soru: Borsa verisinden istemci/sunucu tarafında mı türetilecek? Renko kutu boyutu ve çizgi kaynağı hangi ayarlara sahip olacak?
 - Önerilen varsayılan: Sunucuda deterministik üretim; Renko için ATR/sabit kutu seçimi ve parametreleri; çizgi için varsayılan kapanış.
 
@@ -199,14 +203,18 @@ Bu dosya, özgün senaryodaki belirsizlikleri, çelişkileri ve eklenmesi öneri
 - Önerilen varsayılan: Maksimum bekleme süresi ve sapma toleranslı “protected market”; süre dolarsa iptal.
 
 ### Q-024 — Limit emir ne kadar açık kalacak?
-- Durum: AÇIK
+- Durum: CEVAPLANDI
 - Öncelik: P0
+- Karar: `DEC-0081`
+- Cevap: Borsanın desteklediği GTC/IOC/FOK/süreli türler sunulacak; limit için hazır seçim GTC olacak fakat DEC-0054/DEC-0060 yaşam süresi dolunca güvenli iptal uygulanacak; otomatik yeniden fiyatlama olmayacak.
 - Soru: GTC/IOC/FOK seçenekleri, son kullanma süresi, yeniden fiyatlama ve iptal kuralları nedir?
 - Önerilen varsayılan: Kullanıcı seçilebilir time-in-force; varsayılan GTC + açık süre limiti + alarm.
 
 ### Q-025 — Post-only emir reddedilirse ne olacak?
-- Durum: AÇIK
+- Durum: CEVAPLANDI
 - Öncelik: P0
+- Karar: `DEC-0082`
+- Cevap: Post-only ret taker emrine dönüştürülmeyecek; güncel defter ve özgün fiyat sınırı doğrulanarak en yakın pasif fiyatta en fazla bir bağlı yeniden deneme yapılacak, ikinci rette iptal edilecek.
 - Soru: Borsa emri piyasa alacak diye reddettiğinde iptal mi, bir tick geriden yeniden fiyatlama mı, post-only kapatma mı?
 - Önerilen varsayılan: Otomatik taker emrine dönüşme yok; sınırlı yeniden fiyatlama veya iptal, ikisi de açık ayar.
 
@@ -283,8 +291,10 @@ Bu dosya, özgün senaryodaki belirsizlikleri, çelişkileri ve eklenmesi öneri
 - Önerilen varsayılan: Spotta ayrılmış sanal pay; vadeli işlemlerde tek sahip strateji.
 
 ### Q-035 — Strateji durdurma/silme/mod değiştirmede açık pozisyon ne olacak?
-- Durum: AÇIK
+- Durum: CEVAPLANDI
 - Öncelik: P0
+- Karar: `DEC-0083`
+- Cevap: Duraklatma girişleri kesip korumayı sürdürecek; durdurma onaylı “koru veya güvenli kapat” seçimini kullanacak; açık riskte silme arşivle sınırlı olacak, mod değişimi yeni sürüm oluşturacak.
 - Soru: Açık emirler iptal mi, pozisyon kapatılır mı, yönetim devam mı eder, kullanıcıya seçim mi sunulur?
 - Önerilen varsayılan: Sessizce bırakma yok; kullanıcı açıkça “yalnız yeni girişleri durdur”, “emirleri iptal et ve yönetmeye devam et” veya “güvenli kapat” seçer.
 
@@ -317,20 +327,26 @@ Bu dosya, özgün senaryodaki belirsizlikleri, çelişkileri ve eklenmesi öneri
 - Önerilen varsayılan: Ayrı eşik/oran; gerçek modda yerel borsa koruması; destek yoksa canlıda reddet.
 
 ### Q-039 — Kademeli alım tetikleri kümülatif mi?
-- Durum: AÇIK
+- Durum: CEVAPLANDI
 - Öncelik: P0
+- Karar: `DEC-0084`
+- Cevap: İlk sürümde spot veya vadeli açık pozisyona kademeli alım/ortalama düşürme yapılmayacak; kümülatif ya da ortalama maliyete bağlı kademe tetiği bulunmayacak.
 - Soru: Her kademe güncel ortalama maliyetin aynı zarar yüzdesinde mi, ilk girişten sabit seviyelerde mi tetiklenecek?
 - Önerilen varsayılan: Belgede söylendiği gibi her dolumdan sonra güncellenen ortalama maliyete göre; seviyeler ve maksimum toplam exposure önceden gösterilir.
 
 ### Q-040 — Kademeli alımın maksimum risk sınırı nedir?
-- Durum: AÇIK
+- Durum: CEVAPLANDI
 - Öncelik: P0
+- Karar: `DEC-0085`
+- Cevap: Kademeli alım kapalı olduğundan kademe kaynaklı ek itibari tutar/marjin oluşmayacak; gelecekte ancak en kötü durum toplam risk, teminat ve tasfiye mesafesi sert sınırlarla doğrulanırsa değerlendirilecek.
 - Soru: Çarpan ve kademe sayısı geometrik büyümeyle bakiyeyi aşarsa ne olacak? Maksimum notional/marjin ve liquidation buffer nedir?
 - Önerilen varsayılan: Önceden worst-case exposure hesapla; strateji/cüzdan limitini aşan ayarı kaydetme; hard liquidation-distance kontrolü.
 
 ### Q-041 — Stop loss ile kademeli alım birlikte kullanılabilir mi?
-- Durum: AÇIK
+- Durum: CEVAPLANDI
 - Öncelik: P0
+- Karar: `DEC-0086`
+- Cevap: Kademeli alım ilk sürümde olmayacak ve gelecekte de zarar durdurmanın yerine sayılmayacak; eklenirse borsa-yerel nihai zarar durdurma ve sert tasfiye mesafesi sınırı zorunlu olacak.
 - Soru: Belge üç seçeneği alternatif gösteriyor. Aynı stratejide kademeli alımdan sonra nihai stop loss zorunlu mu?
 - Önerilen varsayılan: Kademeli alım tek başına sınırsız zarar koruması değildir; zorunlu nihai stop veya hard risk limiti ekle.
 
@@ -447,14 +463,18 @@ Bu dosya, özgün senaryodaki belirsizlikleri, çelişkileri ve eklenmesi öneri
 - Önerilen varsayılan: Sunucu taraflı checklist, 2FA/re-auth, özet risk ekranı, yazılı onay ve başlangıçta capped pilot.
 
 ### Q-055 — Kopyalanan stratejinin geçmişi nasıl davranacak?
-- Durum: AÇIK
+- Durum: CEVAPLANDI
 - Öncelik: P1
+- Karar: `DEC-0087`
+- Cevap: Kopya yeni kimlik/benzersiz adla, sıfır istatistikle ve taslak/test durumunda oluşturulacak; canlı yetki, çalışan örnek, açık risk ve geçmiş kopyalanmayacak.
 - Soru: Ayarlar kopyalanırken işlem istatistikleri sıfırdan mı başlamalı? İsim çakışmaları nasıl çözülmeli?
 - Önerilen varsayılan: Yeni kimlik ve sıfır istatistik; güvenli benzersiz ad; her zaman taslak/test modu.
 
 ### Q-056 — Strateji silme soft-delete mi olacak?
-- Durum: AÇIK
+- Durum: CEVAPLANDI
 - Öncelik: P0
+- Karar: `DEC-0088`
+- Cevap: Silme yumuşak silme/arşivleme olacak; açık emir, pozisyon veya araştırılan durum varken tamamlanmayacak; işlem ve denetim geçmişi değişmez bağlantıyla korunacak.
 - Soru: Denetim ve işlem geçmişi için kayıt korunacak mı? Açık pozisyon varken silmeye izin verilecek mi?
 - Önerilen varsayılan: Soft-delete/arşiv; işlem/audit geçmişi korunur; açık risk çözülmeden kalıcı silme yok.
 
@@ -463,62 +483,82 @@ Bu dosya, özgün senaryodaki belirsizlikleri, çelişkileri ve eklenmesi öneri
 ## H. Güvenlik, gözlemlenebilirlik ve operasyon
 
 ### Q-057 — API anahtarları nerede ve nasıl saklanacak?
-- Durum: AÇIK
+- Durum: CEVAPLANDI
 - Öncelik: P0
+- Karar: `DEC-0089`
+- Cevap: Tercih barındırma gizli bilgi yöneticisi/KMS olacak; veritabanında yalnız zarf şifreli değer bulunacak, ana anahtar veritabanı/Git/log dışında kalacak; sağlayıcı dağıtım kararıyla seçilecek.
 - Soru: Hosting sağlayıcının secret manager'ı mı, şifreli veritabanı mı? Ana şifre/KMS nerede olacak?
 - Önerilen varsayılan: Platform secret manager/KMS; veritabanında yalnız şifreli değer; log ve Git'te asla secret yok.
 
 ### Q-058 — Borsa anahtarı izin politikası nedir?
-- Durum: AÇIK
+- Durum: CEVAPLANDI
 - Öncelik: P0
+- Karar: `DEC-0090`
+- Cevap: Para çekme izni değişmez biçimde yasak olacak; yalnız gereken okuma ve spot/vadeli işlem izinleri kabul edilecek; destekleniyorsa IP izin listesi ve ayrı alt hesap kullanılacak.
 - Soru: Trade-only, IP allowlist ve sub-account zorunlu mu?
 - Önerilen varsayılan: Para çekme kapalı, yalnız gereken ürünlerde işlem, IP allowlist, mümkünse ayrı sub-account.
 
 ### Q-059 — Canlı moda geçişte UI dışında hangi güvenlik olacak?
-- Durum: AÇIK
+- Durum: CEVAPLANDI
 - Öncelik: P0
+- Karar: `DEC-0091`
+- Cevap: Arayüz düğmesi yalnız talep oluşturacak; sunucu teknik/risk kontrolleri, yakın güçlü doğrulama ve açık risk özeti onayı olmadan canlı yolu açmayacak.
 - Soru: Toggle tek başına yeterli mi; 2FA, tekrar parola, yazılı risk özeti ve bekleme süresi gerekli mi?
 - Önerilen varsayılan: Toggle yalnız talep oluşturur; sunucu doğrulaması + re-auth/2FA + açık onay olmadan aktif olmaz.
 
 ### Q-060 — Bildirim kanalları neler olacak?
-- Durum: AÇIK
+- Durum: CEVAPLANDI
 - Öncelik: P1
+- Karar: `DEC-0092`
+- Cevap: İlk sürüm Telegram ve uygulama içi bildirim kullanacak; emir/gerçekleşme, ret-belirsizlik, veri kesintisi, risk, koruma kaybı, canlı mod, acil durdurma ve kurtarma olayları önem düzeyiyle bildirilecek.
 - Soru: Telegram, e-posta veya web push ile hangi olaylar bildirilecek?
 - Önerilen varsayılan: Telegram + uygulama içi; emir/fill, hata, veri kesintisi, limit ihlali, live mode ve kill switch olayları.
 
 ### Q-061 — Audit log kapsamı ve saklama süresi nedir?
-- Durum: AÇIK
+- Durum: CEVAPLANDI
 - Öncelik: P0
+- Karar: `DEC-0093`
+- Cevap: Kimlik doğrulama, ayar/sürüm, anahtar, mod, sinyal/karar/emir, risk ve manuel işlemler eklemeli ve bütünlük korumalı kayda yazılacak; kesin saklama süresi Q-105’e bırakılacak.
 - Soru: Ayar değişiklikleri, girişler, anahtar işlemleri, mod değişimleri, sinyal/emir kararları ve manuel müdahaleler kaç yıl saklanacak?
 - Önerilen varsayılan: Append-only audit; hassas veri maskeli; süre hukuki/operasyonel gereksinime göre, ilk varsayım 1 yıl.
 
 ### Q-062 — Veri saklama ve silme politikası nedir?
-- Durum: AÇIK
+- Durum: CEVAPLANDI
 - Öncelik: P1
+- Karar: `DEC-0094`
+- Cevap: Ham piyasa, türetilmiş, taslak, işlem, denetim, kullanıcı ve sır verileri ayrı yaşam döngüsüne sahip olacak; aktif risk ve hukuki kayıt silinmeyecek; kesin süreler Q-106’ya bırakılacak.
 - Soru: Mum/tick/order-book, strateji, işlem ve kullanıcı verileri ne kadar tutulacak?
 - Önerilen varsayılan: Veri sınıfı bazlı süre; ham yüksek frekans verisi kısa, işlem/audit verisi uzun; kullanıcı talebi ve yasal yükümlülükler belgelenir.
 
 ### Q-063 — Yedekleme ve felaket kurtarma hedefleri nedir?
-- Durum: AÇIK
+- Durum: CEVAPLANDI
 - Öncelik: P0
+- Karar: `DEC-0095`
+- Cevap: Şifreli tam+artımlı/noktasal kurtarma, ayrı arıza alanı ve düzenli geri yükleme testi zorunlu olacak; sayısal RPO/RTO Q-107’ye bırakılacak.
 - Soru: Kabul edilen veri kaybı (RPO) ve hizmet dönüş süresi (RTO) nedir?
 - Önerilen varsayılan: Günlük şifreli tam + sık artımlı yedek; düzenli restore testi; canlı işlemde RPO/RTO daha sıkı.
 
 ### Q-064 — Sistem yeniden başlarken nasıl uzlaşacak?
-- Durum: AÇIK
+- Durum: CEVAPLANDI
 - Öncelik: P0
+- Karar: `DEC-0096`
+- Cevap: Gerçekleşme, açık emir, pozisyon ve bakiye için borsa yürütme gerçeği; niyet/sahiplik/audit için yerel değişmez kayıt birlikte uzlaştırılacak.
 - Soru: Açık emir/pozisyonlar borsadan çekilip yerel durumla uyuşmazsa hangi kaynak kazanacak?
 - Önerilen varsayılan: Borsa execution gerçeği kazanır; strateji sahipliği ve audit ile reconcile; belirsizlikte yeni emir fail-closed.
 
 ### Q-065 — Kill switch kapsamı nedir?
-- Durum: AÇIK
+- Durum: CEVAPLANDI
 - Öncelik: P0
+- Karar: `DEC-0097`
+- Cevap: Global, borsa, hesap, strateji ve işlem çifti düzeyi durdurma bulunacak; “yeni girişleri durdur” ile “acil kapat” ayrı eylem olacak.
 - Soru: Global, hesap, borsa ve strateji bazlı düğmeler olacak mı; açık pozisyonu kapatmak ayrı seçenek mi?
 - Önerilen varsayılan: Katmanlı kill switch; “yeni girişi durdur” ile “acil kapat” ayrı ve açıkça etiketli.
 
 ### Q-066 — İzleme/SLO hedefleri nedir?
-- Durum: AÇIK
+- Durum: CEVAPLANDI
 - Öncelik: P1
+- Karar: `DEC-0098`
+- Cevap: Veri yaşı, hesaplama, emir hazırlama/yanıt, hata, mutabakat, bildirim ve hizmet sürekliliği ölçülecek; sayısal hedef ve alarm eşikleri Q-089 ölçümleriyle belirlenecek.
 - Soru: Veri gecikmesi, emir gecikmesi, hata oranı, bakiye mutabakatı ve uptime için eşikler nedir?
 - Önerilen varsayılan: İlk yük testlerinden sonra ölçülebilir SLO; kritik alarm Telegram'a.
 
@@ -527,26 +567,34 @@ Bu dosya, özgün senaryodaki belirsizlikleri, çelişkileri ve eklenmesi öneri
 ## I. UX, raporlama ve mevzuat
 
 ### Q-067 — Mobil ve erişilebilirlik kapsamı nedir?
-- Durum: AÇIK
+- Durum: CEVAPLANDI
 - Öncelik: P1
+- Karar: `DEC-0099`
+- Cevap: İlk sürüm duyarlı mobil web ve WCAG 2.2 AA hedefleyecek.
 - Soru: Responsive mobil web, klavye erişimi ve WCAG seviyesi gerekli mi?
 - Önerilen varsayılan: Responsive web + temel WCAG 2.1 AA.
 
 ### Q-068 — Taslak ve otomatik kaydetme olacak mı?
-- Durum: AÇIK
+- Durum: CEVAPLANDI
 - Öncelik: P1
+- Karar: `DEC-0100`
+- Cevap: Taslaklar sunucuda sürümlü otomatik kaydedilecek; durum görünür olacak, eşzamanlı çakışma sessiz ezilmeyecek ve taslak kendiliğinden başlamayacak.
 - Soru: Sekmeler arası state korunmasına ek olarak tarayıcı kapanması/oturum süresi dolmasında taslak kurtarılacak mı?
 - Önerilen varsayılan: Sunucu taraflı sürümlü taslak + belirgin kaydedildi durumu.
 
 ### Q-069 — Rapor dışa aktarma gerekli mi?
-- Durum: AÇIK
+- Durum: CEVAPLANDI
 - Öncelik: P1
+- Karar: `DEC-0101`
+- Cevap: İşlem, gerçekleşme, ücret, fonlama ve kâr-zarar kayıtları ilk sürümde UTF-8 CSV olarak dışa aktarılacak; Excel/PDF sonraya bırakılacak.
 - Soru: İşlemler ve PnL CSV/Excel/PDF olarak dışa aktarılacak mı?
 - Önerilen varsayılan: CSV MVP; diğer formatlar sonraki faz.
 
 ### Q-070 — Grafik sağlayıcısı ve veri lisansı nedir?
-- Durum: AÇIK
+- Durum: CEVAPLANDI
 - Öncelik: P1
+- Karar: `DEC-0102`
+- Cevap: İlk sürümde resmî kaynakta Apache 2.0 lisanslı olduğu doğrulanan TradingView Lightweight Charts kullanılacak; NOTICE/atıf ve TradingView bağlantısı korunacak.
 - Soru: TradingView bileşeni mi, açık kaynak grafik mi; ticari kullanım/lisans koşulları kabul ediliyor mu?
 - Önerilen varsayılan: Lisansı doğrulanmış açık kaynak grafik; TradingView kullanılacaksa lisans kararı kaydedilir.
 
@@ -559,8 +607,10 @@ Bu dosya, özgün senaryodaki belirsizlikleri, çelişkileri ve eklenmesi öneri
 - Önerilen varsayılan: Yalnız kullanıcının kendi hesabında kişisel araç; üçüncü kişi fonu/saklama/yatırım tavsiyesi kapsam dışı.
 
 ### Q-072 — Risk açıklaması ve kullanım koşulları gerekli mi?
-- Durum: AÇIK
+- Durum: CEVAPLANDI
 - Öncelik: P1
+- Karar: `DEC-0103`
+- Cevap: Dış, çok kullanıcılı veya ticari yayın öncesi kullanım koşulları, gizlilik politikası ve risk bildirimi hukuk uzmanı onayından geçecek.
 - Soru: İnternete açık/çok kullanıcılı üründe kullanıcı sözleşmesi, gizlilik politikası, risk bildirimi ve mevzuat incelemesi yapılacak mı?
 - Önerilen varsayılan: Çok kullanıcılı veya ticari yayından önce hukuk uzmanı incelemesi zorunlu.
 
@@ -696,12 +746,6 @@ Bu dosya, özgün senaryodaki belirsizlikleri, çelişkileri ve eklenmesi öneri
 - Soru: Deneme ve gerçek moddaki stratejiler sunucu yeniden açıldığında otomatik devam mı etmeli, yoksa emirler, işlemler ve bakiyeler borsayla karşılaştırılıp kullanıcı onayı mı beklenmeli?
 - Önerilen varsayılan: Deneme modu kayıtlı durumdan devam eder; gerçek modda borsa hesabı karşılaştırması ve kullanıcı onayı tamamlanmadan yeni giriş üretilmez.
 
-### Q-089 — İlk sürümün sayısal hız ve hizmet sürekliliği sınırları nedir?
-- Durum: AÇIK
-- Öncelik: P1
-- Soru: Gerçek hosting ve Binance/MEXC denemelerinde kabul edilecek en yüksek piyasa verisi yaşı, sinyal hesaplama süresi, sistem içi emir hazırlama süresi, borsa yanıt bekleme süresi ve aylık hizmet sürekliliği hedefleri ne olmalı?
-- Önerilen varsayılan: Önce ölçüm yapılır; normal hız kapsamına uygun gerçekçi sınırlar ölçüm sonuçlarıyla önerilir ve canlı işlem açılmadan önce kullanıcı tarafından ayrıca onaylanır. Eski veri güvenlik sınırı performans hedefinden bağımsız ve atlanamaz olur.
-
 ### Q-090 — Oturum süresi ve hassas işlemlerde yeniden doğrulama nasıl olacak?
 - Durum: CEVAPLANDI
 - Öncelik: P0
@@ -790,12 +834,6 @@ Bu dosya, özgün senaryodaki belirsizlikleri, çelişkileri ve eklenmesi öneri
 - Soru: Normal çıkış, zarar durdurma veya acil kapatma emrinde sıfır miktar gerçekleşirse hangi süre ve başlangıç olayı uygulanacak?
 - Önerilen varsayılan: Kısmi çıkışlarla aynı süreler; başlangıç borsa kabulünün doğrulandığı an.
 
-### Q-101 — Acil risk çıkışının fiyat kayması basamakları nedir?
-- Durum: AÇIK
-- Öncelik: P0
-- Soru: Normal fiyat kayması sınırından son çare piyasa kapatmasına geçmeden önce kaç basamak, hangi bekleme aralıkları, hangi artış yöntemi ve hangi mutlak üst sınır uygulanacak?
-- Önerilen varsayılan: Borsa/ürün emir defteri ölçümlerine dayalı az sayıda kısa basamak; her basamakta mutabakat; platform düzeyinde aşılamaz üst sınır ve sonrasında yalnız önceden onaylı son çare piyasa kapatması.
-
 ### Q-102 — Borçlanmalı spot işlemleri ürün kapsamına girecek mi?
 - Durum: CEVAPLANDI
 - Öncelik: P1
@@ -822,15 +860,55 @@ Bu dosya, özgün senaryodaki belirsizlikleri, çelişkileri ve eklenmesi öneri
 
 ---
 
-## Önce cevaplanacak karar sırası
+## K. En sona bırakılan kullanıcı/ölçüm soruları
 
-1. Q-001 — Tek kullanıcı mı, SaaS mı?
-2. Q-003 — İlk borsa ve ürünler
-3. Q-071 — Kişisel araç mı, üçüncü kişilere hizmet mi?
-4. Q-002 — Dağıtım/erişim modeli
-5. Q-031 — Futures tutarının marjin/notional anlamı
-6. Q-010 — Kapanmış mum/intrabar sinyali
-7. Q-015 — Koşul gruplama modeli
-8. Q-023 — Market emir fiyat filtresi
-9. Q-043 — PnL metriklerinin tanımı
-10. Q-053/Q-054 — Strateji sürümü ve canlı moda geçiş
+Bu bölüm yalnız asistanın ölçmeden veya kullanıcının/uzmanın tercihi olmadan sorumlu biçimde cevaplayamayacağı konuları içerir. Bunlar tamamlanana kadar ilgili canlı/üretim kapıları kapalı kalır.
+
+### Q-002 — Uygulama nasıl erişilebilir olacak?
+- Durum: AÇIK
+- Öncelik: P0
+- Önceki süreç kararı: `DEC-0004`
+- Neden sona bırakıldı: Erişim modeli, hosting altyapısı, bütçe ve kişisel kullanım tercihi görüldükten sonra kullanıcı tarafından belirlenecek.
+- Soru: Yalnızca özel ağ/VPN üzerinden mi, internete açık alan adı üzerinden mi, yoksa yerel bilgisayarda mı çalışacak?
+- Önerilen varsayılan: TLS, kimlik doğrulama ve IP/VPN kısıtı olan özel dağıtım.
+
+### Q-089 — İlk sürümün sayısal hız ve hizmet sürekliliği sınırları nedir?
+- Durum: AÇIK
+- Öncelik: P1
+- Soru: Gerçek hosting ve Binance/MEXC denemelerinde kabul edilecek en yüksek piyasa verisi yaşı, sinyal hesaplama süresi, sistem içi emir hazırlama süresi, borsa yanıt bekleme süresi ve aylık hizmet sürekliliği hedefleri ne olmalı?
+- Önerilen varsayılan: Önce ölçüm yapılır; normal hız kapsamına uygun gerçekçi sınırlar ölçüm sonuçlarıyla önerilir ve canlı işlem açılmadan önce kullanıcı tarafından ayrıca onaylanır. Eski veri güvenlik sınırı performans hedefinden bağımsız ve atlanamaz olur.
+- Neden sona bırakıldı: Gerçek hosting ile Binance/MEXC deneme ölçümleri olmadan güvenilir sayısal eşik seçilemez.
+
+### Q-101 — Acil risk çıkışının fiyat kayması basamakları nedir?
+- Durum: AÇIK
+- Öncelik: P0
+- Soru: Normal fiyat kayması sınırından son çare piyasa kapatmasına geçmeden önce kaç basamak, hangi bekleme aralıkları, hangi artış yöntemi ve hangi mutlak üst sınır uygulanacak?
+- Önerilen varsayılan: Borsa/ürün emir defteri ölçümlerine dayalı az sayıda kısa basamak; her basamakta mutabakat; platform düzeyinde aşılamaz üst sınır ve sonrasında yalnız önceden onaylı son çare piyasa kapatması.
+- Neden sona bırakıldı: Borsa, ürün ve emir defteri ölçümleri olmadan fiyat kayması basamakları güvenilir biçimde belirlenemez.
+
+### Q-105 — Denetim ve finansal kayıtların kesin saklama süresi nedir?
+- Durum: AÇIK
+- Öncelik: P1
+- Soru: Hukuki, vergi, güvenlik ve işletme ihtiyaçları dikkate alındığında denetim, emir, gerçekleşme ve finansal rapor kayıtları kaç yıl saklanmalı?
+- Neden sona bırakıldı: Hukuk/mali müşavir görüşü ve ürünün faaliyet modeli gerekir; rastgele süre seçilemez.
+
+### Q-106 — Ham piyasa ve kullanıcı verilerinin kesin saklama/silme süreleri nedir?
+- Durum: AÇIK
+- Öncelik: P1
+- Soru: Ham mum/tick/emir defteri, türetilmiş gösterge, taslak ve kullanıcı verileri depolama maliyeti, gizlilik ve araştırma ihtiyacına göre ne kadar tutulmalı?
+- Neden sona bırakıldı: Barındırma kapasitesi, maliyet, gizlilik ve kullanım ihtiyacı gerekir.
+
+### Q-107 — Kabul edilebilir veri kaybı ve hizmet dönüş hedefleri nedir?
+- Durum: AÇIK
+- Öncelik: P0
+- Soru: Üretim barındırması seçildikten sonra kabul edilebilir en yüksek veri kaybı süresi (RPO) ve hizmeti geri getirme süresi (RTO) ne olmalı?
+- Neden sona bırakıldı: Barındırma mimarisi, bütçe ve işletme tercihi olmadan güvenilir sayı seçilemez.
+
+## En son ele alınacak sıra
+
+1. `Q-002` — Dağıtım ve erişim modeli (barındırma/kişisel tercih)
+2. `Q-089` — Sayısal hız ve hizmet sürekliliği eşikleri (gerçek ölçüm)
+3. `Q-101` — Acil fiyat kayması basamakları (borsa/ürün ölçümü)
+4. `Q-105` — Denetim ve finansal kayıt saklama süresi (hukuk/mali müşavir)
+5. `Q-106` — Ham piyasa ve kullanıcı verisi saklama süresi (maliyet/gizlilik)
+6. `Q-107` — Veri kaybı ve hizmet dönüş hedefleri (barındırma/bütçe)
