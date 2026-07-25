@@ -2002,6 +2002,23 @@ Bu dosya yalnızca kullanıcı tarafından açıkça onaylanmış kalıcı karar
 - Önceki karar: DEC-0067 ve DEC-0075–DEC-0103 ile birlikte uygulanır
 
 
+### DEC-0105 — Sağlayıcı seçimini beklemeden bağımsız geliştirmeye devam
+
+- Tarih: 2026-07-25
+- Durum: ONAYLANDI
+- Karar sahibi: Hikmet Esentimur
+- İlgili sorular: Q-002, Q-057, Q-063, Q-066, Q-089, Q-105–Q-107; ADR-0001
+- Karar: OVHcloud veya Alastyr seçimi kesinleşmeden sağlayıcıdan bağımsız uygulama çekirdeği, testler, Docker geliştirme ortamı, PostgreSQL/Redis sözleşmeleri ve yönetim API'si geliştirilmeye devam edecek. Sağlayıcıya bağlı ağ, gizli bilgi yöneticisi, yedekleme, gözlemleme ve sayısal hizmet hedefleri dağıtım katmanında daha sonra bağlanacak.
+- Uygulama sonuçları:
+  - İlk sürüm modüler monolit ve ayrı worker süreç sınırlarıyla geliştirilecek; çekirdek alan mantığı sağlayıcı SDK'sı veya web çerçevesine bağımlı olmayacak.
+  - Backend Python `>=3.12,<3.14` ve FastAPI; kalıcı kayıt PostgreSQL; Redis yalnız yeniden üretilebilir kuyruk/önbellek/kilit görevleri; yönetim paneli React + TypeScript temeline sahip olacak.
+  - Docker Compose yerel/test ortamını yeniden üretecek; canlı emir ve gerçek borsa anahtarı bu başlangıç paketinde bulunmayacak.
+  - Q-002, Q-089, Q-101 ve Q-105–Q-107 açık kalacak; bu konuların gerektirdiği üretim/canlı kapıları sağlayıcı, ölçüm veya uzman girdisi gelmeden açılmayacak.
+  - Sağlayıcı seçildiğinde KMS/secret manager, sabit çıkış IP'si, TLS/DNS/firewall, şifreli dış yedek, RPO/RTO ve izleme adaptörleri ayrıca doğrulanacak.
+- Gerekçe: Uygulama çekirdeği ve kalite altyapısı iki aday sunucuda da taşınabilirdir; sağlayıcı kararını beklemek gereksiz geliştirme gecikmesi oluşturur.
+- Ödünleşimler: Üretim dağıtımı, kaynak boyutlandırma ve canlı gecikme/yedekleme hedefleri sağlayıcı seçilene ve gerçek ölçümler yapılana kadar tamamlanmış sayılamaz.
+- Önceki karar: DEC-0004'ün dağıtım topolojisi ertelemesini korur; DEC-0067 ve DEC-0104 ile uyumludur
+
 <!--
 ### DEC-XXXX — Karar başlığı
 

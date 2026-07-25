@@ -22,6 +22,8 @@ Bu klasör, projenin kalıcı ve sürüm kontrollü hafızasıdır. Sohbetlerde 
   - `requirements/audits/`: Üç bağımsız denetimin eksiksiz ham raporları
 - `decisions/`: Kullanıcı tarafından onaylanmış kararların günlüğü
 - `architecture/`: Sistem mimarisi, veri modeli ve entegrasyon kararları
+  - `architecture/ADR-0001-provider-independent-foundation.md`: Sağlayıcıdan bağımsız teknoloji ve modüler monolit kararı
+  - `architecture/SYSTEM_CONTEXT.md`: Sistem bağlamı, bileşen sınırları ve kalıcı veri ilkeleri
 - `operations/`: Dağıtım, yedekleme, izleme ve olay müdahalesi
   - `operations/HOSTING_PROVIDER_RESEARCH.md`: Türkiye’deki yerli VPS/VDS sağlayıcılarının fiyat, teknik yeterlilik ve sözleşme uygunluğu araştırması
 - `security/`: Tehdit modeli, anahtar yönetimi ve canlı işlem güvenlik kapıları

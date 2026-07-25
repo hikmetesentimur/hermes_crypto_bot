@@ -1,0 +1,50 @@
+name: Kalite Kapıları
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  quality:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Depoyu al
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          persist-credentials: false
+
+      - name: uv ve Python kur
+        uses: astral-sh/setup-uv@d0cc045d04ccac9d8b7881df0226f9e82c39688e # v6
+        with:
+          version: "0.11.6"
+          python-version: "3.13"
+          enable-cache: true
+
+      - name: Kilit dosyasını doğrula
+        run: uv lock --check
+
+      - name: Kilitli bağımlılıkları kur
+        run: uv sync --frozen --all-groups
+
+      - name: Ruff lint
+        run: uv run ruff check .
+
+      - name: Ruff biçim kontrolü
+        run: uv run ruff format --check .
+
+      - name: Mypy tip kontrolü
+        run: uv run mypy
+
+      - name: Python güvenlik taraması
+        run: uv run bandit -q -r src
+
+      - name: Bağımlılık güvenlik taraması
+        run: uv run pip-audit
+
+      - name: Test ve kapsama
+        run: uv run pytest

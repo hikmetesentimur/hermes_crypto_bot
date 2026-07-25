@@ -1,0 +1,1 @@
+"""Altyapıdan bağımsız alan modeli."""
