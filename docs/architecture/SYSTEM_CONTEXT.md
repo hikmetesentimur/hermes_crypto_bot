@@ -40,7 +40,9 @@ Hermes Crypto Bot; tek kullanıcıyla başlayan, Binance ve MEXC Spot/Vadeli ür
 
 Uygulama imajları, PostgreSQL ve Redis standart Docker ağında çalışır. TLS sonlandırma, güvenlik duvarı, sabit çıkış IP'si, gizli bilgi yöneticisi, yedekleme ve izleme sağlayıcı seçildiğinde dağıtım adaptörleriyle bağlanır. Çekirdek modüller sağlayıcı SDK'sı içe aktaramaz.
 
-## Bu ilk paketin kapsamı
+## Tamamlanan sağlayıcıdan bağımsız paketler
+
+### Paket 1 — Uygulama temeli
 
 - Python proje ve kalite iskeleti;
 - güvenli ondalık kullanıcı girdisi ayrıştırması;
@@ -48,4 +50,11 @@ Uygulama imajları, PostgreSQL ve Redis standart Docker ağında çalışır. TL
 - otomatik testler ve CI;
 - geliştirme amaçlı Docker Compose.
 
-Borsa bağlantısı, kullanıcı kimlik doğrulaması, kalıcı veri şeması ve canlı emir yolu sonraki dikey paketlerde ele alınacaktır. Canlı emir yolu varsayılan kapalı kalır.
+### Paket 2 — Borsa yetenek güvenlik sınırı
+
+- sürümlü ve değişmez adaptör yetenek manifesti;
+- ürün → ortam → emir biçiminde tam bağlı ve ortamlar arası sızıntıyı önleyen yetenek matrisi;
+- mum aralığının ortam; süre türü, post-only, borsa-yerel koruma, yalnız-azaltan emir ve pozisyon modunun emir profili düzeyinde denetimi;
+- bildirilmeyen yetenekte kararlı neden koduyla güvenli ret.
+
+Gerçek Binance/MEXC bağlantısı, kullanıcı kimlik doğrulaması, kalıcı veri şeması ve canlı emir yolu sonraki dikey paketlerde ele alınacaktır. Somut borsa yetenekleri resmî kaynak ve adaptör sözleşme testleri olmadan varsayılmaz. Canlı emir yolu varsayılan kapalı kalır.

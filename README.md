@@ -12,6 +12,7 @@ Modüler borsa ve indikatör desteğine sahip, strateji oluşturma, simülasyon 
 | [`docs/source/KRIPTO_TRADING_BOT_SITE_SENARYOSU.docx`](docs/source/KRIPTO_TRADING_BOT_SITE_SENARYOSU.docx) | Kullanıcı tarafından sağlanan özgün senaryo |
 | [`docs/source/KRIPTO_TRADING_BOT_SITE_SENARYOSU_RAW.md`](docs/source/KRIPTO_TRADING_BOT_SITE_SENARYOSU_RAW.md) | Özgün senaryonun aranabilir ham metni |
 | [`docs/requirements/REQUIREMENTS_AUDIT.md`](docs/requirements/REQUIREMENTS_AUDIT.md) | Birleşik işlevsel, trading ve güvenlik denetimi |
+| [`docs/requirements/EXCHANGE_ADAPTER_CAPABILITIES.md`](docs/requirements/EXCHANGE_ADAPTER_CAPABILITIES.md) | Sürümlü borsa yetenek sözleşmesi ve güvenli ret kriterleri |
 | [`docs/requirements/OPEN_QUESTIONS.md`](docs/requirements/OPEN_QUESTIONS.md) | Kullanıcıyla karara bağlanacak konular |
 | [`docs/decisions/DECISION_LOG.md`](docs/decisions/DECISION_LOG.md) | Onaylanan ürün ve teknik kararlar |
 | [`docs/architecture/ADR-0001-provider-independent-foundation.md`](docs/architecture/ADR-0001-provider-independent-foundation.md) | Sağlayıcıdan bağımsız teknoloji ve mimari temeli |

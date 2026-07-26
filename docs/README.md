@@ -19,6 +19,7 @@ Bu klasör, projenin kalıcı ve sürüm kontrollü hafızasıdır. Sohbetlerde 
 - `source/`: Özgün belgeler ve anlamı değiştirilmemiş metin çıkarımları
 - `requirements/`: Gereksinimler, kapsam denetimi, açık sorular ve kabul kriterleri
   - `requirements/REQUIREMENTS_AUDIT.md`: Birleşik denetim ve düzeltme özeti
+  - `requirements/EXCHANGE_ADAPTER_CAPABILITIES.md`: Borsa adaptörü yetenek manifesti ve güvenli ret kabul kriterleri
   - `requirements/audits/`: Üç bağımsız denetimin eksiksiz ham raporları
 - `decisions/`: Kullanıcı tarafından onaylanmış kararların günlüğü
 - `architecture/`: Sistem mimarisi, veri modeli ve entegrasyon kararları
