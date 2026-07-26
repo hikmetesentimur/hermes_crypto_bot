@@ -2019,6 +2019,29 @@ Bu dosya yalnızca kullanıcı tarafından açıkça onaylanmış kalıcı karar
 - Ödünleşimler: Üretim dağıtımı, kaynak boyutlandırma ve canlı gecikme/yedekleme hedefleri sağlayıcı seçilene ve gerçek ölçümler yapılana kadar tamamlanmış sayılamaz.
 - Önceki karar: DEC-0004'ün dağıtım topolojisi ertelemesini korur; DEC-0067 ve DEC-0104 ile uyumludur
 
+### DEC-0106 — Paket 3 sağlayıcıdan bağımsız metadata ve değer güvenliği çekirdeği
+
+- Tarih: 2026-07-26
+- Durum: ONAYLANDI
+- Karar sahibi: Hikmet Esentimur
+- Onay dayanağı: Kullanıcının Paket 3 açıklamasından sonra “Tamam geliştirmeye devam edebiliriz” talimatı
+- İlgili gereksinimler: REQ-META-001–REQ-META-006; DEC-0002, DEC-0036, DEC-0040, DEC-0050, DEC-0069, DEC-0076, DEC-0105
+- Karar: Bir sonraki sağlayıcıdan bağımsız dikey paket; salt-okunur borsa metadata portu, borsa/ürün/ortam/emir türüne bağlı değişmez sembol ve filtre modeli ile Decimal tabanlı fiyat–miktar–işlem değeri normalizasyonunu geliştirecek.
+- Uygulama sonuçları:
+  - Filtreler sembol genelinde birleştirilmeyecek; seçilen ürün ve ortam içindeki emir türü profiline bağlı kalacak.
+  - Miktar riski artırmamak için aşağı adımlanacak; minimumu karşılamayan değer otomatik büyütülmeden reddedilecek.
+  - Fiyat adımlama yönü sessiz varsayılmayacak; çağıran açıkça yukarı veya aşağı yön seçecek.
+  - Spot ve Vadeli işlem değeri hesabı ayrılacak; Vadeli sözleşme büyüklüğü ile lineer veya sabit karşıt-değerli notional formülü açık ve doğrulanmış olmak zorunda olacak; bilinmeyen sözleşme semantiği reddedilecek.
+  - Decimal adımlama ve çarpım mevcut 128 basamak güvenlik sınırında, varsayılan bağlam hassasiyetine bağlı kalmadan kayıpsız yapılacak; türetilmiş değer sınırı aşarsa türüne özgü neden koduyla reddedilecek.
+  - Metadata capability şema sürümü, tek snapshot kimliği ve UTC gözlem zamanına bağlanacak; yalnız sınırlı list/tuple koleksiyonları tüketilecek ve birleşik ihlaller kayıt sırasından bağımsız dönecek.
+  - `valuation_price` ve `EXIT` amacı yalnız aritmetik hazırlık girdisidir; piyasa verisi freshness/side/source kanıtı ve pozisyon/reduce-only yetkisi sonraki güvenlik kapılarında zorunlu olacaktır.
+  - Sembol durumu yeni giriş ve risk azaltan çıkış için ayrı değerlendirilecek.
+  - Paket gerçek Binance/MEXC ağı, özel hesap, API anahtarı, bakiye, emir gönderimi, barındırma adaptörü veya canlı işlem içermeyecek.
+  - Q-002, Q-089, Q-101 ve Q-105–Q-107 açık kalacak; bu paketin geliştirilmesini engellemeyecek ve ilgili üretim/canlı kapıları aşılmayacak.
+- Gerekçe: Somut borsa bağlantılarından önce fiyat/miktar filtreleri ile ürün–ortam–emir bağını tek, test edilebilir ve fail-closed çekirdekte güvenceye almak.
+- Ödünleşimler: Gerçek borsa uyumluluğu ve halka açık piyasa verisi bağlantısı sonraki pakete kalır; bu paket tek başına çalışır adaptör veya canlı hazır sistem değildir.
+- Önceki karar: DEC-0002, DEC-0040, DEC-0069 ve DEC-0105 ile birlikte uygulanır
+
 <!--
 ### DEC-XXXX — Karar başlığı
 

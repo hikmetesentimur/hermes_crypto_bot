@@ -22,6 +22,7 @@ Hermes Crypto Bot; tek kullanıcıyla başlayan, Binance ve MEXC Spot/Vadeli ür
 | Gösterge motoru | Sürümlü, deterministik gösterge hesapları | Kullanıcı kodunu doğrudan çalıştırmaz |
 | Risk motoru | Katmanlı limitler, rezervasyon, kill switch | Canlı hard limitler atlanamaz |
 | Emir niyeti ve yürütme | İdempotent niyet, borsa adaptörü, zaman aşımı ve mutabakat | Bilinmeyen sonuçta kör tekrar yoktur |
+| Borsa metadata ve değer güvenliği | Ürün/ortam/emir bağlı sembol filtreleri, Decimal adımlama, salt-okunur port | Minimumu otomatik büyütmez; başka profilden yetenek veya filtre tahmin etmez |
 | Simülasyon/geçmiş sınama | Ayrı sanal hesap, deterministic replay, maliyet modelleri | Sonuçlar canlı hesapla birleşmez |
 | Muhasebe | Gerçekleşme defteri, pozisyon, ücret, fonlama, PnL | Decimal/NUMERIC ve değişmez olaylar kullanır |
 | Mutabakat worker'ı | Borsa ile yerel niyet/sahipliği uzlaştırır | Uyuşmazlıkta yeni risk kapalıdır |
@@ -56,5 +57,16 @@ Uygulama imajları, PostgreSQL ve Redis standart Docker ağında çalışır. TL
 - ürün → ortam → emir biçiminde tam bağlı ve ortamlar arası sızıntıyı önleyen yetenek matrisi;
 - mum aralığının ortam; süre türü, post-only, borsa-yerel koruma, yalnız-azaltan emir ve pozisyon modunun emir profili düzeyinde denetimi;
 - bildirilmeyen yetenekte kararlı neden koduyla güvenli ret.
+
+### Paket 3 — Sembol metadata ve Decimal değer güvenliği
+
+- borsa → ürün → ortam → emir türüne bağlı değişmez sembol filtreleri;
+- Spot/Vadeli sözleşme büyüklüğü ile Spot/lineer/sabit karşıt-değerli notional formülü ayrımı ve kesin Decimal işlem değeri hesabı;
+- 128 basamak/exponent sınırı içinde bağlamdan bağımsız tam adımlama ve çarpım; türetilmiş değer sınır aşımında türüne özgü güvenli ret;
+- capability sürümüne bağlı tek snapshot kimliği ve UTC gözlem zamanı; sınırlı list/tuple görüntüsü ve kayıt sırasından bağımsız ihlal kodları;
+- aşağı yönlü miktar adımlama, açık yön seçilen fiyat adımlama ve minimumu otomatik büyütmeden güvenli ret;
+- giriş/çıkış amacını ayıran sembol durum matrisi;
+- yetenek manifestine bağlı metadata görüntüsü doğrulaması;
+- gerçek ağ, özel hesap veya emir metodu içermeyen salt-okunur `ExchangeMetadataPort`.
 
 Gerçek Binance/MEXC bağlantısı, kullanıcı kimlik doğrulaması, kalıcı veri şeması ve canlı emir yolu sonraki dikey paketlerde ele alınacaktır. Somut borsa yetenekleri resmî kaynak ve adaptör sözleşme testleri olmadan varsayılmaz. Canlı emir yolu varsayılan kapalı kalır.

@@ -13,10 +13,12 @@ Modüler borsa ve indikatör desteğine sahip, strateji oluşturma, simülasyon 
 | [`docs/source/KRIPTO_TRADING_BOT_SITE_SENARYOSU_RAW.md`](docs/source/KRIPTO_TRADING_BOT_SITE_SENARYOSU_RAW.md) | Özgün senaryonun aranabilir ham metni |
 | [`docs/requirements/REQUIREMENTS_AUDIT.md`](docs/requirements/REQUIREMENTS_AUDIT.md) | Birleşik işlevsel, trading ve güvenlik denetimi |
 | [`docs/requirements/EXCHANGE_ADAPTER_CAPABILITIES.md`](docs/requirements/EXCHANGE_ADAPTER_CAPABILITIES.md) | Sürümlü borsa yetenek sözleşmesi ve güvenli ret kriterleri |
+| [`docs/requirements/EXCHANGE_SYMBOL_METADATA.md`](docs/requirements/EXCHANGE_SYMBOL_METADATA.md) | Sembol metadata, emir filtreleri ve Decimal değer normalizasyonu |
 | [`docs/requirements/OPEN_QUESTIONS.md`](docs/requirements/OPEN_QUESTIONS.md) | Kullanıcıyla karara bağlanacak konular |
 | [`docs/decisions/DECISION_LOG.md`](docs/decisions/DECISION_LOG.md) | Onaylanan ürün ve teknik kararlar |
 | [`docs/architecture/ADR-0001-provider-independent-foundation.md`](docs/architecture/ADR-0001-provider-independent-foundation.md) | Sağlayıcıdan bağımsız teknoloji ve mimari temeli |
 | [`docs/architecture/SYSTEM_CONTEXT.md`](docs/architecture/SYSTEM_CONTEXT.md) | Bileşen sınırları ve kalıcı veri ilkeleri |
+| [`docs/architecture/DATA_MODEL.md`](docs/architecture/DATA_MODEL.md) | Yetenek, sembol metadata ve Decimal normalizasyon alan modeli |
 | [`.hermes/plans/2026-07-23_001041-requirements-foundation.md`](.hermes/plans/2026-07-23_001041-requirements-foundation.md) | Gereksinimden ürüne geçiş planı |
 
 ## Yerel geliştirme
